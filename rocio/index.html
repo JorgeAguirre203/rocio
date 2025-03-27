@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Contratista</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Servi Now</h1>
+        <div class="trabaja-container">
+            <h3>Trabaja para nosotros</h3>
+            <button>Afíliate Aquí</button>
+        </div>
+        <button id="login-btn" onclick="window.location.href='login.html'">Iniciar Sesión</button>
+    </header>
+
+    <main>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Que tipo servicio necesita?">
+            <button id="search-btn">🔍</button>
+        </div>
+            
+        <div class="specialty-filter">
+            <select id="specialty-select">
+                <option value="">Especialidades disponibles</option>
+                <option value="electricista">Electricista</option>
+                <option value="plomeria">Plomería</option>
+                <option value="carpintero">Carpintero</option>
+                <option value="albanil">Albañil</option>
+                <option value="pintor">Pintor</option>
+                <option value="herreria">Herrería</option>
+                <option value="aire">Aire acondicionado</option>
+                <option value="jardineria">Jardinería</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        
+
+        <nav class="filters">
+            <button class="filter-btn">Recomendados</button>
+            <button class="filter-btn">Servicio Rápido</button>
+            <button class="filter-btn" id="filter-toggle">Filtros <span id="filter-arrow">▼</span></button>
+        </nav>
+
+        <!-- Menú de filtros -->
+        <div id="filter-menu" class="filter-menu">
+            <h3>Rango de precio</h3>
+            <div class="filter-options">
+                <button>$</button>
+                <button>$$</button>
+                <button>$$$</button>
+            </div>
+            <h3>Promociones</h3>
+            <div class="filter-options">
+                <button>Descuentos en entrega</button>
+                <button>Compra $X, ahorra $Y</button>
+                <button>Lleva más (2x1)</button>
+                <button>Productos</button>
+                <button>Combos</button>
+                <button>Cupones de tienda</button>
+            </div>
+            <div class="filter-actions">
+                <button id="close-filters">Cerrar</button>
+                <button id="apply-filters">Confirmar</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
