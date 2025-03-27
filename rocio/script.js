@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
+    
+    
+    let tiempoRestante = 5;
+
+    // Obtiene el elemento donde se mostrará el contador
+    const contadorElement = document.getElementById('contador');
+    
+    // Función para actualizar el contador cada segundo
+    const intervalo = setInterval(function() {
+      // Actualiza el texto con el tiempo restante
+      contadorElement.textContent = `Redirigiendo en: ${tiempoRestante} segundos`;
+    
+      // Resta 1 al tiempo restante
+      tiempoRestante--;
+    
+      // Si el contador llega a 0, redirige y detiene el intervalo
+      if (tiempoRestante < 0) {
+        clearInterval(intervalo);
+        window.location.href = "index.html"; // Cambia esto por la URL que deseas
+      }
+    }, 1000); // Actualiza cada 1000 milisegundos (1 segundo)
+    
     // Botón de búsqueda
     const searchBtn = document.getElementById("search-btn");
     if (searchBtn) {

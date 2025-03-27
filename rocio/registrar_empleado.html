@@ -4,45 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet "href="style2.css">
 </head>
+<header>
+    <h1>Servi Now</h1>
+  
+</header>
+
 <body>
     <div class="auth-container">
-        <h2>Registrate como prestados de servicios
-        </h2>
-        <label for="telefono">Número de Teléfono</label>
-        <input type="text" id="telef" placeholder="+52 Número de teléfono">
+        <div class="form-group">
+            <label for="telefono">Número de Teléfono</label>
+            <input type="text" id="telef" placeholder="+52 Número de teléfono">
+        </div>
+    
+        <div class="form-group">
+            <label for="Nombre1">Primer Nombre</label>
+            <input type="text" id="nomb1" placeholder="Ingresa tu primer Nombre">
+        </div>
+    
+        <div class="form-group">
+            <label for="apellidoP">Apellido Paterno</label>
+            <input type="text" id="apeP" placeholder="Ingresa tu Apellido Paterno">
+        </div>
+    
+        <div class="form-group">
+            <label for="Nombre2">Segundo Nombre</label>
+            <input type="text" id="nomb2" placeholder="Ingresa tu Segundo Nombre">
+        </div>
+    
+        <div class="form-group">
+            <label for="apellidoM">Apellido Materno</label>
+            <input type="text" id="apeM" placeholder="Ingresa tu Apellido Materno">
+        </div>
+    
+        <div class="form-group">
+            <label for="correo1">Correo Electrónico</label>
+            <input type="text" id="correo1" placeholder="Ej: newuser@gmail.com">
+        </div>
+    
+        <div class="checkbox-container">
+            <label for="checkbox-container">Servicios a brindar:</label>
+
+            <label><input type="checkbox" value="Plomería"> Plomería</label>
+            <label><input type="checkbox" value="Electricidad"> Electricidad</label>
+            <label><input type="checkbox" value="Carpintería"> Carpintería</label>
+            <label><input type="checkbox" value="Jardinería"> Jardinería</label>
+            <label><input type="checkbox" value="Pintura"> Pintura</label>
+        </div>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="file">Agregar imagen personal:</label>
+            <input type="file" name="file" id="file" accept="image/*" required>
+            <button type="submit">Subir Imagen</button>
+        </form>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="file">Agregar imagen de INE:</label>
+            <input type="file" name="file" id="file" accept="image/*" required>
+            <button type="submit">Subir Imagen</button>
+        </form>
         
-        <label for="Nombre1"> Primer Nombre</label>
-        <input type="text" id="nomb1" placeholder="Ingresa tu primer Nombre">
-        <label for="Nombre2">Segundo Nombre</label>
-        <input type="text" id="nomb2" placeholder="Ingresa tu Segundo Nombre">
-
-        <label for="apellidoP">Apellido Paterno</label>
-        <input type="text" id="apeP" placeholder="Ingresa tu Apellido Paterno">
-        <label for="apellidoM">Apellido Materno</label>
-        <input type="text" id="apeM" placeholder="Ingresa tu Apellido Materno ">
-       
-        <label for="servicios">Servicios a brindar:</label><br>
-
-<input type="checkbox" id="servicio1" name="servicio" value="Plomería">
-<label for="servicio1">Plomería</label><br>
-<input type="checkbox" id="servicio2" name="servicio" value="Electricidad">
-<label for="servicio2">Electricidad</label><br>
-<input type="checkbox" id="servicio3" name="servicio" value="Carpintería">
-<label for="servicio3">Carpintería</label><br>
-<input type="checkbox" id="servicio4" name="servicio" value="Jardinería">
-<label for="servicio4">Jardinería</label><br>
-<input type="checkbox" id="servicio5" name="servicio" value="Pintura">
-<label for="servicio5">Pintura</label><br>
-<button id="login-btn">Darte de alta</button>
-        <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
+        <button1 id="finalizar-registro-btn" onclick="window.location.href='redirigir.html'">Aplicar vacante</button1>
         <a href="index.html" class="back-link">← Volver</a>
     </div>
+    
 
     <script>
         document.getElementById("login-btn").addEventListener("click", function() {
-            alert("Inicio de sesión exitoso");
+            alert("Solicitud de trabajo enviada ");
             window.location.href = "index.html";
         });
     </script>
