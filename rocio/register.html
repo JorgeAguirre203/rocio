@@ -14,12 +14,26 @@
         <div id="success-message" class="success-message"></div>
         <div id="error-message" class="error-message"></div>
         
-        <form id="register-form" method="POST" action="javascript:void(0);">
+        <form id="register-form" method="POST" action="register.php">
             <div class="form-group">
-                <label for="name">Nombre Completo</label>
-                <input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo" required>
+                <label for="name">Nombre(s)</label>
+                <input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo (Nombre ApellidoP ApellidoM)" required>
                 <div id="name-error" class="error"></div>
             </div>
+
+            <form id="register-form" method="POST" action="register.php">
+                <div class="form-group">
+                    <label for="name">Apellido paterno</label>
+                    <input type="text" id="apellido_paterno" name="apellido_paterno" placeholder="Ingresa tu apellido paterno" required>
+                    <div id="name-error" class="error"></div>
+                </div>
+
+                <form id="register-form" method="POST" action="register.php">
+                    <div class="form-group">
+                        <label for="name">Apellido materno</label>
+                        <input type="text" id="apellido_materno" name="apellido_materno" placeholder="Ingresa tu apellido materno" required>
+                        <div id="name-error" class="error"></div>
+                    </div>
             
             <div class="form-group">
                 <label for="email">Correo Electrónico</label>
@@ -48,6 +62,10 @@
                 <div id="confirm-error" class="error"></div>
             </div>
             
+            <div class="form-group" style="display: none;">
+                <input type="hidden" name="rol" value="cliente">
+            </div>
+            
             <button type="submit" class="submit-btn">Registrarse</button>
         </form>
         
@@ -55,6 +73,72 @@
         <a href="index.html" class="back-link">← Volver al inicio</a>
     </div>
 
-    <script src="validations.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Limpiar mensajes de error anteriores
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+            document.getElementById('success-message').textContent = '';
+            document.getElementById('error-message').textContent = '';
+            
+            // Validación básica del lado del cliente
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirm-error').textContent = 'Las contraseñas no coinciden';
+                return;
+            }
+            
+            // Enviar datos al servidor
+            const formData = new FormData(this);
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Mostrar mensaje de éxito
+                    document.getElementById('success-message').textContent = data.message;
+                    document.getElementById('error-message').textContent = '';
+                    
+                    // Opcional: Redirigir después de 2 segundos
+                    setTimeout(() => {
+                        window.location.href = 'login.html'; // Redirige a login
+                    }, 2000);
+                    
+                    // Opcional: Resetear el formulario
+                    this.reset();
+                } else {
+                    // Mostrar mensaje de error general
+                    if (data.message) {
+                        document.getElementById('error-message').textContent = data.message;
+                    }
+                    
+                    // Mostrar errores específicos de campos
+                    if (data.errors) {
+                        for (const [field, message] of Object.entries(data.errors)) {
+                            const errorElement = document.getElementById(`${field}-error`);
+                            if (errorElement) {
+                                errorElement.textContent = message;
+                            }
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('error-message').textContent = 'Ocurrió un error al procesar tu solicitud. Por favor intenta nuevamente.';
+            });
+        });
+    </script>
 </body>
 </html>
