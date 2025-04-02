@@ -5,13 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Contratista</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Barra lateral/menú (nuevo) -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Menú de Usuario</h3>
+            <button id="close-sidebar" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-user"></i> Datos del Usuario</a></li>
+            <li><a href="modificar_perfil.html"><i class="fas fa-user-edit"></i> Modificar Perfil</a></li>
+            <li><a href="#"><i class="fas fa-trash-alt"></i> Eliminar Perfil</a></li>
+            <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+            
+        </ul>
+    </div>
+
+    <!-- Contenido original (sin cambios en la estructura) -->
     <header>
+        <button id="menu-toggle" class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
         <h1>Servi Now</h1>
         <div class="trabaja-container">
             <h3>Trabaja para nosotros</h3>
-            
             <button id="alifiate-btn" onclick="window.location.href='registrar_empleado.html'">Afiliate Aqui</button>
         </div>
         <button id="login-btn" onclick="window.location.href='login.html'">Iniciar Sesión</button>
@@ -38,14 +60,12 @@
             </select>
         </div>
         
-
         <nav class="filters">
             <button class="filter-btn">Recomendados</button>
             <button class="filter-btn">Servicio Rápido</button>
             <button class="filter-btn" id="filter-toggle">Filtros <span id="filter-arrow">▼</span></button>
         </nav>
 
-        <!-- Menú de filtros -->
         <div id="filter-menu" class="filter-menu">
             <h3>Rango de precio</h3>
             <div class="filter-options">
@@ -72,6 +92,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-

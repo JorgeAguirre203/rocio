@@ -110,3 +110,76 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Uno o más elementos del menú de filtros no se encontraron en el DOM.");
     }
 });
+// Funcionalidad ORIGINAL (conservada)
+document.getElementById('filter-toggle').addEventListener('click', function() {
+    const filterMenu = document.getElementById('filter-menu');
+    const arrow = document.getElementById('filter-arrow');
+    if (filterMenu.style.display === 'block') {
+        filterMenu.style.display = 'none';
+        arrow.textContent = '▼';
+    } else {
+        filterMenu.style.display = 'block';
+        arrow.textContent = '▲';
+    }
+});
+
+document.getElementById('close-filters').addEventListener('click', function() {
+    document.getElementById('filter-menu').style.display = 'none';
+    document.getElementById('filter-arrow').textContent = '▼';
+});
+
+// Funcionalidad NUEVA (barra lateral)
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeSidebar = document.getElementById('close-sidebar');
+
+    // Abrir menú
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.add('active');
+    });
+
+    // Cerrar menú
+    closeSidebar.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+    });
+
+    // Evitar que el clic en el menú lo cierre
+    sidebar.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+});
+// Funcionalidad para el formulario de modificación
+document.getElementById('guardar-cambios').addEventListener('click', function() {
+    // Validación básica
+    const telefono = document.getElementById('telefono').value;
+    if (!telefono || telefono.length < 10) {
+        alert('Por favor ingresa un número de teléfono válido');
+        return;
+    }
+
+    // Simular guardado (en un caso real, aquí iría una petición AJAX)
+    alert('Cambios guardados exitosamente');
+    window.location.href = 'index.html';
+});
+
+// Funcionalidad del menú lateral (la misma que ya tenías)
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeSidebar = document.getElementById('close-sidebar');
+
+    menuToggle.addEventListener('click', function() {
+        sidebar.classList.add('active');
+    });
+
+    closeSidebar.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+    });
+});

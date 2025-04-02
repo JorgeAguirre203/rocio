@@ -1,23 +1,98 @@
+/* Estilos generales (originales) */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
+    overflow-x: hidden; /* Previene scroll horizontal */
 }
 
+/* Header (original) */
 header {
     display: flex;
     justify-content: space-between;
     padding: 15px;
     background: #007bff;
     color: white;
-   
-
+    position: relative; /* Para posicionar el botón del menú */
 }
+
 header h3 {
     margin-left: 0%;
 }
 
+/* Barra lateral (nuevo) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #2c3e50;
+    color: white;
+    transition: all 0.3s;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-menu li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-menu li:hover {
+    background: #34495e;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Search bar (original) */
 .search-bar {
     margin: 20px;
     display: flex;
@@ -25,9 +100,9 @@ header h3 {
 }
 
 .search-bar input {
-    width: 60%; /* esto cambia la anchura */
-    padding: 10px; /*  */
-    font-size: 16px; /* cambia el numero de la letra  */
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
 }
 
 .search-bar button {
@@ -36,6 +111,7 @@ header h3 {
     cursor: pointer;
 }
 
+/* Filtros (original) */
 .filters {
     display: flex;
     justify-content: center;
@@ -54,9 +130,8 @@ header h3 {
     background: #bbb;
 }
 
-/* estilo para el btoton de filtro */
 .filter-menu {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: absolute;
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -64,20 +139,7 @@ header h3 {
     border-radius: 8px;
     width: 300px;
     text-align: left;
-    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
-}
-
-/* Asegurar que el botón de filtros esté bien posicionado */
-#filter-toggle {
-    position: relative;
-    cursor: pointer;
-}
-
-
-.filter-menu.visible {
-    position: absolute;
-    top: 100%; /* Se coloca justo debajo del botón */
-    left: 0;
+    z-index: 1000;
 }
 
 .filter-options {
@@ -109,7 +171,7 @@ header h3 {
     font-weight: bold;
 }
 
-/* Estilo para formularios de login y registro */
+/* Auth (original) */
 .auth-container {
     width: 300px;
     margin: 50px auto;
@@ -157,4 +219,103 @@ header h3 {
     display: block;
     margin-top: 15px;
     color: #555;
+}
+
+/* Responsive (nuevo) */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        left: -200px;
+    }
+    
+    .search-bar input {
+        width: 70%;
+    }
+}
+/* Estilos para el formulario de modificación */
+.auth-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.checkbox-container {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.checkbox-container label {
+    display: block;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.file-upload {
+    margin: 15px 0;
+}
+
+.file-upload small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.file-upload small a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+    text-decoration: none;
 }
