@@ -4,7 +4,7 @@
 header('Content-Type: application/json');
 
 // Configuración de la base de datos
-$host = 'localhost';
+$host = '192.168.199.137';
 $dbname = 'servinowbd';
 $username = 'root';
 $password = '140223';
