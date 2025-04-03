@@ -1,7 +1,7 @@
 <?php
 // Configuración de la base de datos
 define('DB_HOST', '192.168.199.137');
-define('DB_USER', 'root');
+define('DB_USER', 'phpmyadmin');
 define('DB_PASS', '140223');
 define('DB_NAME', 'servinowbd');
 
