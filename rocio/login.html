@@ -32,5 +32,19 @@
             alert("Teléfono o contraseña incorrectos!");
         }
     </script>
+    
+     <!-- Script para verificar conexión al cargar la página -->
+     <script>
+        // Verifica la conexión al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('check_db.php')  // Archivo que crearemos después
+                .then(response => response.json())
+                .then(data => {
+                    const messageDiv = document.getElementById('db-message');
+                    messageDiv.className = data.success ? 'message success' : 'message error';
+                    messageDiv.textContent = data.message;
+                });
+        });
+    </script>
 </body>
 </html>
