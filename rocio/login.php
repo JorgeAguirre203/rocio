@@ -31,7 +31,7 @@
         'rol'=>$usurario['rol'],
         'Telefono'=>$telefono
     ];
-    header("Location:/index.php"); //redirigir al inicio
+    header("Location:/index.html"); //redirigir al inicio
     exit;
 
         }
