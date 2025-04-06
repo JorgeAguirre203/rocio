@@ -110,3 +110,24 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Uno o más elementos del menú de filtros no se encontraron en el DOM.");
     }
 });
+
+const logo = document.getElementById("logo");
+const repairButton = document.getElementById("repairButton");
+
+// Al hacer clic en el logo se ejecuta la animación de "caída rota"
+logo.addEventListener("click", () => {
+  logo.classList.remove("fall"); // Reinicia la animación si se vuelve a hacer clic
+  void logo.offsetWidth; // Forzar reflow para reiniciar la animación
+  logo.classList.add("fall");
+});
+
+// Una vez finalizada la animación, se muestra el botón Reparar
+logo.addEventListener("animationend", () => {
+  repairButton.style.display = "inline-block";
+});
+
+// Al hacer clic en Reparar, se restablece el estado original del logo y se oculta el botón
+repairButton.addEventListener("click", () => {
+  logo.classList.remove("fall");
+  repairButton.style.display = "none";
+});
