@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   
     // ============================
-    // Formulario de modificación
+    // Formulario de modificació
     // ============================
     const guardarCambiosBtn = document.getElementById("guardar-cambios");
     if (guardarCambiosBtn) {
