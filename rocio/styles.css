@@ -1,6 +1,17 @@
-/* Tipografía base */
-/* NAVBAR */
-.navbar {
+/* ============================
+   Reset y Tipografía Base
+   ============================ */
+   body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  /* ============================
+     Navbar
+     ============================ */
+  .navbar {
     position: fixed;
     top: 0;
     width: 100%;
@@ -18,7 +29,6 @@
     align-items: center;
   }
   
- 
   .nav-links a {
     margin-left: 15px;
     padding: 8px 16px;
@@ -34,24 +44,16 @@
     background: #333;
   }
   
+  /* ============================
+     Hero
+     ============================ */
   /* Ajuste para evitar que el hero se esconda debajo del navbar */
   .hero {
-    padding-top: 140px;
-  }
-  
-body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    color: #333;
-    background-color: #fff;
-  }
-  
-  /* Encabezado hero */
-  .hero {
+    padding-top: 140px; /* Ajuste para compensar el navbar fijo */
     background: url('klipartz.com.png') center/cover no-repeat;
     color: rgb(0, 0, 0);
     text-align: center;
-    padding: 100px 20px;
+    padding: 100px 20px; /* Puedes combinar o ajustar estos paddings */
   }
   
   .hero-title {
@@ -80,7 +82,9 @@ body {
     background: #444;
   }
   
-  /* Sección servicios */
+  /* ============================
+     Sección Servicios
+     ============================ */
   .servicios {
     padding: 60px 20px;
     background: #f9f9f9;
@@ -123,7 +127,9 @@ body {
     margin: 0.5rem 0;
   }
   
-  /* Footer */
+  /* ============================
+     Footer
+     ============================ */
   .footer {
     background: #000;
     color: white;
@@ -131,21 +137,10 @@ body {
     padding: 20px;
   }
   
-  /* Responsive */
-  @media (max-width: 768px) {
-    .servicio-grid {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .hero-title {
-      font-size: 2.2rem;
-    }
-  }
-
-  
- /* Estilo del logo */
-.logo {
+  /* ============================
+     Logo y Botón Reparar
+     ============================ */
+  .logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     font-weight: bold;
@@ -154,7 +149,6 @@ body {
     display: inline-block;
   }
   
-  /* Botón Reparar */
   #repairButton {
     display: none;
     margin-top: 10px;
@@ -192,5 +186,17 @@ body {
     pointer-events: none;
   }
   
-  /* Aquí puedes agregar otros estilos para navbar, hero, footer, etc. */
+  /* ============================
+     Responsive
+     ============================ */
+  @media (max-width: 768px) {
+    .servicio-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .hero-title {
+      font-size: 2.2rem;
+    }
+  }
   
