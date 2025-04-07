@@ -10,7 +10,7 @@ $password = $_POST['password']; // Cambié de 'Password' a 'password'
 $db = new Conexion();
 $conexion = $db->getConexion();
 
-$sql = "SELECT id, nombre, password, rol FROM Usuarios WHERE telefono = ?";
+$sql = "SELECT id, nombre, password, rol FROM usuarios WHERE telefono = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $telefono); // Añadí esta línea faltante
 $stmt->execute(); // Corregí $stmt = $execute() por $stmt->execute()

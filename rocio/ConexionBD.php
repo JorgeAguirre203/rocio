@@ -1,30 +1,41 @@
 <?php
-// Configuración de la base de datos
-define('DB_HOST', '192.168.199.137');
-define('DB_USER', 'phpmyadmin');
-define('DB_PASS', '140223');
-define('DB_NAME', 'servinowbd');
-
+// conexionBD.php - Versión segura
 class Conexion {
     private $conexion;
+    private static $instancia = null;
 
-    public function __construct() {
-        $this->conexion = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    private function __construct() {
+        // Configuración (mejor mover a un archivo .env o config.php)
+        $host = '192.168.199.137';
+        $user = 'phpmyadmin';
+        $pass = '140223';
+        $db   = 'servinowbd';
+
+        $this->conexion = new mysqli($host, $user, $pass, $db);
         
         if ($this->conexion->connect_error) {
-            die("Error de conexión: " . $this->conexion->connect_error);
-        } else {
-            echo "¡Conexión exitosa a la base de datos!"; // Mensaje de éxito
+            error_log("Error de conexión BD: " . $this->conexion->connect_error);
+            throw new Exception("Error al conectar con la base de datos");
         }
         
         $this->conexion->set_charset("utf8");
     }
 
+    public static function obtenerInstancia() {
+        if (self::$instancia === null) {
+            self::$instancia = new self();
+        }
+        return self::$instancia;
+    }
+
     public function getConexion() {
         return $this->conexion;
     }
-}
 
-// Prueba instantánea
-$test = new Conexion(); // Esto mostrará el mensaje si la conexión es exitosa
+    public function __destruct() {
+        if ($this->conexion) {
+            $this->conexion->close();
+        }
+    }
+}
 ?>
