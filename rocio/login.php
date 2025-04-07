@@ -1,6 +1,7 @@
 <?php
-session_start();
 require_once 'conexionBD.php';
+session_start();
+
 
 // Correcciones básicas (mínimo para que funcione):
 $telefono = $_POST['telefono']; // Cambié de 'Telefono' a 'telefono'
@@ -24,7 +25,7 @@ if ($resultado->num_rows === 1) {
             'rol' => $usuario['rol'], // Corregí typo de $usurario
             'telefono' => $telefono
         ];
-        header("Location: index.php"); // Cambié a ruta relativa
+        header("Location: index.html"); // Cambié a ruta relativa
         exit;
     }
 }
