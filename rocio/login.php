@@ -1,64 +1,77 @@
 <?php
-require_once 'conexionBD.php';
 session_start();
+require_once 'conexionBD.php';
 
-// 1. Validar método de solicitud
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: login.html?error=1");
-    exit;
-}
-
-// 2. Obtener y sanitizar datos
-$telefono = filter_var($_POST['telefono'] ?? '', FILTER_SANITIZE_STRING);
-$password = $_POST['password'] ?? '';
-
-// 3. Validar campos vacíos
-if (empty($telefono) || empty($password)) {
-    header("Location: login.html?error=1");
-    exit;
-}
+// Solo para desarrollo
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 try {
-    // 4. Conexión a BD
-    $db = new Conexion();
-    $conexion = $db->getConexion();
+    // 1. Verificar método POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception("Acceso inválido");
+    }
 
-    // 5. Consulta CORREGIDA (incluyendo 'nombre')
-    $sql = "SELECT id, nombre, telefono, password, rol FROM usuarios WHERE telefono = ?";
-    $stmt = $conexion->prepare($sql);
+    // 2. Validar entradas
+    $telefono = filter_var($_POST['telefono'] ?? '', FILTER_SANITIZE_STRING);
+    $password = $_POST['password'] ?? '';
     
+    if (empty($telefono) || empty($password)) {
+        throw new Exception("Teléfono y contraseña requeridos");
+    }
+
+    // 3. Conexión a BD
+    $db = new Conexion();
+    $con = $db->getConexion();
+
+    // 4. Consulta preparada
+    $stmt = $con->prepare("SELECT id, nombre, password, rol FROM usuarios WHERE telefono = ?");
     if (!$stmt) {
-        throw new Exception("Error en preparación: ".$conexion->error);
+        throw new Exception("Error en preparación: " . $con->error);
     }
     
     $stmt->bind_param("s", $telefono);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    // 6. Verificar usuario
-    if ($resultado->num_rows === 1) {
-        $usuario = $resultado->fetch_assoc();
-        
-        // 7. Verificar contraseña
-        if (password_verify($password, $usuario['password'])) {
-            $_SESSION['usuario'] = [
-                'id' => $usuario['id'],
-                'nombre' => $usuario['nombre'],
-                'rol' => $usuario['rol'],
-                'telefono' => $usuario['telefono']
-            ];
-            header("Location: index.html");
-            exit;
-        }
+    // 5. Verificar usuario
+    if ($resultado->num_rows !== 1) {
+        throw new Exception("Credenciales inválidas");
     }
+
+    $usuario = $resultado->fetch_assoc();
+
+    // 6. Verificar contraseña (2 métodos)
+    $auth_success = false;
     
-    // 8. Credenciales incorrectas
-    header("Location: login.html?error=1");
+    // Método 1: password_verify (recomendado)
+    if (password_verify($password, $usuario['password'])) {
+        $auth_success = true;
+    } 
+    // Método 2: Comparación directa (solo para emergencias)
+    elseif ($password === $usuario['password']) {
+        $auth_success = true;
+        error_log("AVISO: Contraseña en texto plano para usuario " . $usuario['id']);
+    }
+
+    if (!$auth_success) {
+        throw new Exception("Contraseña incorrecta");
+    }
+
+    // 7. Crear sesión
+    $_SESSION['usuario'] = [
+        'id' => $usuario['id'],
+        'nombre' => $usuario['nombre'],
+        'rol' => $usuario['rol'],
+        'telefono' => $telefono
+    ];
+
+    // 8. Redirección
+    header("Location: index.html");
     exit;
 
 } catch (Exception $e) {
-    // 9. Manejo de errores
-    error_log("Error en login: ".$e->getMessage());
+    error_log("Login Error: " . $e->getMessage());
     header("Location: login.html?error=1");
     exit;
 }
