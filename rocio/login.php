@@ -1,45 +1,34 @@
 <?php
-    session_start();
-    require_once 'conexionBD.php';
-     
-    //recibdir datos del formulario
-    $telefono=$_post['Telefono'];
-    $password=$_post['Password'];
+session_start();
+require_once 'conexionBD.php';
 
-    //Conexion a la BD
-    $db = new Conexion();
-    $conexion = $db->getConexion();
+// Correcciones básicas (mínimo para que funcione):
+$telefono = $_POST['telefono']; // Cambié de 'Telefono' a 'telefono'
+$password = $_POST['password']; // Cambié de 'Password' a 'password'
 
+$db = new Conexion();
+$conexion = $db->getConexion();
 
-    //buscar al usuario por telefono
-    $sql = "Select id, nombre, password, rol From Usuarios WHERE telefono = ? ";
-    $stmt =  $conexion->prepare($sql);
-    $stmt =  $execute();
-    $resultado = $stmt->get_result();
+$sql = "SELECT id, nombre, password, rol FROM Usuarios WHERE telefono = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("s", $telefono); // Añadí esta línea faltante
+$stmt->execute(); // Corregí $stmt = $execute() por $stmt->execute()
+$resultado = $stmt->get_result();
 
+if ($resultado->num_rows === 1) {
+    $usuario = $resultado->fetch_assoc();
+    if(password_verify($password, $usuario['password'])) {
+        $_SESSION['usuario'] = [
+            'id' => $usuario['id'],
+            'nombre' => $usuario['nombre'],
+            'rol' => $usuario['rol'], // Corregí typo de $usurario
+            'telefono' => $telefono
+        ];
+        header("Location: index.php"); // Cambié a ruta relativa
+        exit;
+    }
+}
 
-    //verificar crendenciales
-      if ($resultado->num_rows === 1){
-        $usuario = $resultado->fetch_assoc();
-        if(password_verify($password,$usuario['password'])){
-        
-
-    //iniciar sesion
-    $_SESSION['usuario'] = [
-        'id'=>$usuario['id'],
-        'nombre'=>$usuario['nombre'],
-        'rol'=>$usurario['rol'],
-        'Telefono'=>$telefono
-    ];
-    header("Location:/index.html"); //redirigir al inicio
-    exit;
-
-        }
-      }
-      
-      //Si hay fallo regresa con error
-
-      header("Location:/Login.html?error=1");
-
-
+header("Location: login.html?error=1");
+exit;
 ?>

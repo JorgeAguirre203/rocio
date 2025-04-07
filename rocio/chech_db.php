@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 $config = [
-    'host' => 'localhost',
+    'host' => '192.168.199.137',
     'dbname' => 'servinowbd',
     'user' => 'phpmyadmin',
     'pass' => '140223'
