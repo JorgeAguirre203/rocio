@@ -1,6 +1,7 @@
 <?php
-require 'conexion_jorge.php';
 session_start();
+require 'conexion_jorge.php';
+
 
 
 if (!isset($_SESSION['usuario_id'])) {
