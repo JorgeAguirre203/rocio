@@ -54,7 +54,7 @@ try {
     ];
 
     // 8. Redirección
-    header("Location: index.html");
+    header("Location: menu_principal.php");
     exit;
 
 } catch (Exception $e) {
