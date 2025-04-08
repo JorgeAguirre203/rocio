@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'nombre' => $usuario['nombre']
             ];
             // Redirige al usuario a la página de inicio
-            header("Location: index.html");
+            header("Location: menu_principal.php");
             exit;
         } else {
             // Si la contraseña es incorrecta
