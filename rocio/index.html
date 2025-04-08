@@ -10,18 +10,30 @@
 <body>
 
   <nav class="navbar">
-    <div class="nav-container">
-      <!-- Logo -->
-      <div id="logo" class="logo">Servi Now</div>
-      <!-- Botón Reparar -->
-      <button id="repairButton">Reparar</button>
-      
-      <div class="nav-links">
-        <a href="#afiliate" class="nav-btn" onclick="window.location.href='registrar_empleado.html'">Afíliate aquí</a>
-        <a href="#login" class="nav-btn" onclick="window.location.href='login.html'">Iniciar sesión</a>
-      </div>
+  <div class="nav-container">
+    <!-- Logo -->
+    <div id="logo" class="logo">Servi Now</div>
+    <!-- Botón Reparar -->
+    <button id="repairButton">Reparar</button>
+    
+    <!-- Contenedor para el botón de la barra lateral -->
+    <div class="nav-container2">
+      <button id="sidebarButton" class="sidebar-btn">☰</button> <!-- Símbolo de menú -->
     </div>
-  </nav>
+
+    <div class="nav-links">
+      <a href="#afiliate" class="nav-btn" onclick="window.location.href='register_jorge.html'">Afíliate aquí</a>
+      <a href="#login" class="nav-btn" onclick="window.location.href='login.html'">Iniciar sesión</a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Barra lateral -->
+  <div id="sidebar" class="sidebar">
+    <button class="close-btn" id="closeSidebar">Cerrar</button>
+    <button class="sidebar-btn">Botón 1</button>
+    <button class="sidebar-btn">Botón 2</button>
+  </div>
 
   <header class="hero">
     <div class="container">
@@ -56,3 +68,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+

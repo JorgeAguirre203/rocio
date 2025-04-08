@@ -183,3 +183,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   
+// Abrir la barra lateral al hacer clic en el botón
+document.getElementById("sidebarButton").addEventListener("click", function() {
+  document.getElementById("sidebar").style.right = "0";
+});
+
+// Cerrar la barra lateral al hacer clic en el botón de cierre
+document.getElementById("closeSidebar").addEventListener("click", function() {
+  document.getElementById("sidebar").style.right = "-250px";
+});

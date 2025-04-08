@@ -199,4 +199,108 @@
       font-size: 2.2rem;
     }
   }
-  
+  /* ============================
+   Formularios Estilo Tarjeta
+   ============================ */
+.form-main {
+  padding-top: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f5f5f5;
+}
+
+.form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.form-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.form-card button {
+  width: 100%;
+  margin-top: 15px;
+}
+
+ /* Barra lateral */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Inicialmente oculta */
+  width: 250px;
+  height: 100%;
+  background-color: #111;
+  padding-top: 20px;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.sidebar-btn {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar-btn:hover {
+  background-color: #555;
+}
+
+.close-btn {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #444;
+}
+
+#sidebarButton {
+  background-color: black;
+  color: white;  /* Color del texto */
+  border: none;
+  font-size: 15px; /* Tamaño del ícono */
+  cursor: pointer;
+  width: 30px;  /* Establece el ancho */
+  height: 30px; /* Establece la altura */
+  display: flex; /* Para poder usar flexbox */
+  justify-content: flex-start; /* Alinea el contenido hacia la izquierda */
+  align-items: center; /* Centra verticalmente el ícono */
+  border-radius: 5px; /* Bordes redondeados (opcional) */
+}
+.nav-container {
+  display: flex;
+  justify-content: flex-start; /* Esto alinea los elementos dentro del contenedor a la izquierda */
+  align-items: center;
+}
+/* Nuevo contenedor para el botón del sidebar */
+.nav-container2 {
+  display: flex;
+  justify-content: flex-end; /* Alinea el botón hacia la derecha */
+  align-items: center; /* Centra verticalmente */
+}
+
+
+#sidebarButton:hover {
+  background-color: transparent;
+}

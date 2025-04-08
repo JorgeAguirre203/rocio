@@ -4,10 +4,10 @@
 header('Content-Type: application/json');
 
 // Configuración de la base de datos
-$host = '192.168.199.137';
-$dbname = 'servinowbd';
+$host = 'localhost';
+$dbname = 'servinow_jorge';
 $username = 'root';
-$password = '140223';
+$password = '1234';
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

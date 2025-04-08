@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once 'conexionBD.php';
+require_once 'conexion_jorge.php';
 
-// Solo para desarrollo
+// Habilitar la visualización de errores para depuración
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -13,11 +13,11 @@ try {
     }
 
     // 2. Validar entradas
-    $telefono = filter_var($_POST['telefono'] ?? '', FILTER_SANITIZE_STRING);
+    $nombre = filter_var($_POST['nombre'] ?? '', FILTER_SANITIZE_STRING);
     $password = $_POST['password'] ?? '';
     
-    if (empty($telefono) || empty($password)) {
-        throw new Exception("Teléfono y contraseña requeridos");
+    if (empty($nombre) || empty($password)) {
+        throw new Exception("Nombre de usuario y contraseña son requeridos");
     }
 
     // 3. Conexión a BD
@@ -25,12 +25,12 @@ try {
     $con = $db->getConexion();
 
     // 4. Consulta preparada
-    $stmt = $con->prepare("SELECT id, nombre, password, rol FROM usuarios WHERE telefono = ?");
+    $stmt = $con->prepare("SELECT id, nombre, password, rol FROM usuarios2 WHERE nombre = ?");
     if (!$stmt) {
         throw new Exception("Error en preparación: " . $con->error);
     }
     
-    $stmt->bind_param("s", $telefono);
+    $stmt->bind_param("s", $nombre);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
@@ -41,20 +41,8 @@ try {
 
     $usuario = $resultado->fetch_assoc();
 
-    // 6. Verificar contraseña (2 métodos)
-    $auth_success = false;
-    
-    // Método 1: password_verify (recomendado)
-    if (password_verify($password, $usuario['password'])) {
-        $auth_success = true;
-    } 
-    // Método 2: Comparación directa (solo para emergencias)
-    elseif ($password === $usuario['password']) {
-        $auth_success = true;
-        error_log("AVISO: Contraseña en texto plano para usuario " . $usuario['id']);
-    }
-
-    if (!$auth_success) {
+    // 6. Verificar contraseña
+    if (!password_verify($password, $usuario['password'])) {
         throw new Exception("Contraseña incorrecta");
     }
 
@@ -62,8 +50,7 @@ try {
     $_SESSION['usuario'] = [
         'id' => $usuario['id'],
         'nombre' => $usuario['nombre'],
-        'rol' => $usuario['rol'],
-        'telefono' => $telefono
+        'rol' => $usuario['rol']
     ];
 
     // 8. Redirección
@@ -71,8 +58,10 @@ try {
     exit;
 
 } catch (Exception $e) {
+    // Mostrar error
     error_log("Login Error: " . $e->getMessage());
-    header("Location: login.html?error=1");
+    echo "<h3>Error: " . $e->getMessage() . "</h3>";
     exit;
 }
 ?>
+
