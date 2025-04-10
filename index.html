@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servi Now</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div id="logo" class="logo">Servi Now</div>
+    <!-- Botón Reparar -->
+    <button id="repairButton">Reparar</button>
+    
+    <!-- Contenedor para el botón de la barra lateral -->
+    <div class="nav-container2">
+      <button id="sidebarButton" class="sidebar-btn">☰</button> <!-- Símbolo de menú -->
+    </div>
+
+    <div class="nav-links">
+      <a href="#afiliate" class="nav-btn" onclick="window.location.href='register_jorge.html'">Afíliate aquí</a>
+      <a href="#login" class="nav-btn" onclick="window.location.href='login.html'">Iniciar sesión</a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Barra lateral -->
+  <div id="sidebar" class="sidebar">
+    <button class="close-btn" id="closeSidebar">Cerrar</button>
+    <button class="sidebar-btn">Botón 1</button>
+    <button class="sidebar-btn">Botón 2</button>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <h1 class="hero-title">Bienvenido a Servi Now</h1>
+      <p class="hero-subtitle">Conecta con los mejores profesionales para tus necesidades</p>
+      <a href="#servicios" class="btn">Explorar Servicios</a>
+    </div>
+  </header>
+
+  <section id="servicios" class="servicios">
+    <h2 class="section-title">Servicios más solicitados</h2>
+    <div class="servicio-grid">
+      <div class="servicio-card">
+        <img src="plomeria.jpg" alt="Plomería" />
+        <h3>Plomería</h3>
+      </div>
+      <div class="servicio-card">
+        <img src="electrico.jpg" alt="Electricista" />
+        <h3>Electricista</h3>
+      </div>
+      <div class="servicio-card">
+        <img src="pintor.jpg" alt="Limpieza" />
+        <h3>Pintor</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Servi Now. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
