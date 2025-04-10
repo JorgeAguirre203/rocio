@@ -1,39 +1,36 @@
 <?php
+session_start();
+require_once 'conexion_jorge.php';
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
 // Habilitar errores (solo para desarrollo)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-// Conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "1234";
-$dbname = "servinow_jorge";
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
 
 // Variables iniciales
 $error = '';
 $success = '';
 $usuario = [];
 
-// 1. Cargar datos del usuario al abrir el formulario (GET)
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM usuarios WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $usuario = $result->fetch_assoc();
-    $stmt->close();
-}
+// Obtener ID del usuario desde la sesión
+$id = $_SESSION['usuario']['id'];
 
-// 2. Procesar actualización (POST)
+// Cargar datos del usuario actual
+$sql = "SELECT * FROM usuarios2 WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$usuario = $result->fetch_assoc();
+$stmt->close();
+
+// Procesar actualización (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $apellidoPaterno = $_POST['apellido_paterno'];
     $apellidoMaterno = $_POST['apellido_materno'];
@@ -51,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Actualizar con/sin contraseña
         if (!empty($password)) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "UPDATE usuarios SET 
+            $sql = "UPDATE usuarios2 SET 
                     nombre=?, apellido_paterno=?, apellido_materno=?, 
                     email=?, telefono=?, password=? 
                     WHERE id=?";
@@ -59,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssssssi", $nombre, $apellidoPaterno, $apellidoMaterno, 
                              $email, $telefono, $hashedPassword, $id);
         } else {
-            $sql = "UPDATE usuarios SET 
+            $sql = "UPDATE usuarios2 SET 
                     nombre=?, apellido_paterno=?, apellido_materno=?, 
                     email=?, telefono=? 
                     WHERE id=?";
@@ -69,9 +66,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if ($stmt->execute()) {
-            $success = "Usuario actualizado correctamente";
+            $success = "Perfil actualizado correctamente";
+            // Actualizar datos en sesión
+            $_SESSION['usuario']['nombre'] = $nombre;
             // Recargar datos actualizados
-            $sql = "SELECT * FROM usuarios WHERE id = ?";
+            $sql = "SELECT * FROM usuarios2 WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -83,9 +82,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 }
-
-// Incluir la vista HTML
-require 'editar_usuario_view.php';
-
-$conn->close();
 ?>
