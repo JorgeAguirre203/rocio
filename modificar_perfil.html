@@ -3,97 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Perfil - Servi Now</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Iconos de FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Modificar Perfil</title>
+    <link rel="stylesheet" href="css_modificarperdil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Barra lateral/menú -->
-    <div id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <h3>Menú de Usuario</h3>
-            <button id="close-sidebar" class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="modificar_perfil.html"><i class="fas fa-user-edit"></i> Modificar Perfil</a></li>
-            <li><a href="#"><i class="fas fa-trash-alt"></i> Eliminar Perfil</a></li>
-            <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
-        </ul>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <button id="menu-toggle" class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        <h1>Servi Now</h1>
-        <div class="header-actions">
-            <!-- Espacio reservado para otros botones del header si los necesitas -->
-        </div>
-    </header>
-
-    <!-- Formulario de Modificación -->
-    <div class="auth-container">
-        <h2><i class="fas fa-user-edit"></i> Modificar Perfil</h2>
+    <div class="profile-container">
+        <h2>Modificar Perfil</h2>
         
-        <div class="form-group">
-            <label for="telefono">Número de Teléfono</label>
-            <input type="tel" id="telefono" placeholder="+52 123 456 7890" value="+52 123 456 7890">
-        </div>
+        <?php if (!empty($error)): ?>
+            <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+        <?php elseif (!empty($success)): ?>
+            <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
+        <?php endif; ?>
 
-        <div class="form-group">
-            <label for="nombre1">Primer Nombre</label>
-            <input type="text" id="nombre1" placeholder="Juan" value="Juan">
-        </div>
-
-        <div class="form-group">
-            <label for="nombre2">Segundo Nombre</label>
-            <input type="text" id="nombre2" placeholder="Carlos" value="Carlos">
-        </div>
-
-        <div class="form-group">
-            <label for="apellidoP">Apellido Paterno</label>
-            <input type="text" id="apellidoP" placeholder="Pérez" value="Pérez">
-        </div>
-
-        <div class="form-group">
-            <label for="apellidoM">Apellido Materno</label>
-            <input type="text" id="apellidoM" placeholder="Gómez" value="Gómez">
-        </div>
-
-        <div class="form-group">
-            <label for="correo">Correo Electrónico</label>
-            <input type="email" id="correo" placeholder="juan@example.com" value="juan@example.com">
-        </div>
-
-        <div class="checkbox-container">
-            <label>Servicios que ofreces:</label>
-            <label><input type="checkbox" name="servicios" value="Plomería" checked> Plomería</label>
-            <label><input type="checkbox" name="servicios" value="Electricidad"> Electricidad</label>
-            <label><input type="checkbox" name="servicios" value="Carpintería" checked> Carpintería</label>
-            <label><input type="checkbox" name="servicios" value="Jardinería"> Jardinería</label>
-            <label><input type="checkbox" name="servicios" value="Pintura"> Pintura</label>
-        </div>
-
-        <div class="file-upload">
-            <label for="foto-perfil">Foto de Perfil:</label>
-            <input type="file" id="foto-perfil" accept="image/*">
-            <small>Actual: <a href="#" target="_blank">perfil_actual.jpg</a></small>
-        </div>
-
-        <div class="file-upload">
-            <label for="ine">INE/Identificación:</label>
-            <input type="file" id="ine" accept="image/*">
-            <small>Actual: <a href="#" target="_blank">ine_actual.jpg</a></small>
-        </div>
-
-        <button id="guardar-cambios" class="btn-primary">Guardar Cambios</button>
-        <a href="index.html" class="back-link">← Cancelar</a>
+        <form method="post" action="" class="profile-form">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuario['id'] ?? ''); ?>">
+            
+            <div class="form-group">
+                <label for="nombre" class="required">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" 
+                       value="<?php echo htmlspecialchars($usuario['nombre'] ?? ''); ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido_paterno" class="required">Apellido Paterno:</label>
+                <input type="text" id="apellido_paterno" name="apellido_paterno" 
+                       value="<?php echo htmlspecialchars($usuario['apellido_paterno'] ?? ''); ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido_materno">Apellido Materno:</label>
+                <input type="text" id="apellido_materno" name="apellido_materno" 
+                       value="<?php echo htmlspecialchars($usuario['apellido_materno'] ?? ''); ?>">
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="required">Email:</label>
+                <input type="email" id="email" name="email" 
+                       value="<?php echo htmlspecialchars($usuario['email'] ?? ''); ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono" class="required">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" 
+                       value="<?php echo htmlspecialchars($usuario['telefono'] ?? ''); ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Nueva Contraseña:</label>
+                <input type="password" id="password" name="password">
+                <small class="form-note">(Dejar en blanco para no cambiar)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirmar Contraseña:</label>
+                <input type="password" id="confirm-password" name="confirm-password">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Guardar Cambios</button>
+                <a href="perfil.php" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
