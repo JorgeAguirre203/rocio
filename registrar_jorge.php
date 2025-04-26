@@ -20,15 +20,14 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recuperar los datos del formulario
     $nombre = $_POST['nombre'];
-    $apellidoPaterno = $_POST['apellido_paterno'];
-    $apellidoMaterno = $_POST['apellido_materno'];
-    $email = $_POST['email'];
+    $nickname = $_POST['nickname'];  // Asegurarnos de que se obtiene el 'nickname'
     $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
-
+    
     // Validar que los campos requeridos no estén vacíos
-    if (empty($nombre) || empty($apellidoPaterno) || empty($apellidoMaterno) || empty($email) || empty($telefono) || empty($password) || empty($confirmPassword)) {
+    if (empty($nombre) || empty($nickname) || empty($telefono) || empty($email) || empty($password) || empty($confirmPassword)) {
         echo "Todos los campos son obligatorios.";
         exit;
     }
@@ -42,9 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hashear la contraseña antes de guardarla
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Preparar la consulta para insertar los datos
-    $sql = "INSERT INTO usuarios (nombre, apellido_paterno, apellido_materno, email, telefono, password) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+    // Preparar la consulta para insertar los datos (incluyendo el 'nickname')
+    $sql = "INSERT INTO usuarios2 (nombre, nickname, telefono, email, password) 
+            VALUES (?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
@@ -53,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vincular los parámetros a la consulta
-    $stmt->bind_param("ssssss", $nombre, $apellidoPaterno, $apellidoMaterno, $email, $telefono, $hashedPassword);
+    $stmt->bind_param("sssss", $nombre, $nickname, $telefono, $email, $hashedPassword);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {

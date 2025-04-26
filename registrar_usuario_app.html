@@ -66,34 +66,35 @@
 
   <main class="form-container">
     <h2>Registro de usuario</h2>
-    <form action="registrar_usuario2.php" method="POST">
+   <form action="registrar_usuario2.php" method="POST">
 
-      <label for="nombre">Nombre de usuario</label>
-      <input type="text" id="nombre" name="nombre" required>
+  <label for="nombre">Nombre de usuario</label>
+  <input type="text" id="nombre" name="nombre" required>
 
+  <label for="nickname">Nickname:</label>
+  <input type="text" id="nickname" name="nickname" maxlength="15" required>
 
+  <label for="telefono">Teléfono:</label>
+  <input type="text" id="telefono" name="telefono" required>
 
-      <label for="telefono">Teléfono:</label>
-      <input type="text" id="telefono" name="telefono" required>
+  <label for="email">Correo electrónico:</label>
+  <input type="email" id="email" name="email" required>
 
-      <label for="email">Correo electrónico:</label> <!-- CORREGIDO -->
-      <input type="email" id="email" name="email" required>
+  <label for="password">Contraseña:</label>
+  <input type="password" id="password" name="password" required>
 
-      <label for="password">Contraseña:</label> <!-- CORREGIDO -->
-      <input type="password" id="password" name="password" required>
+  <label for="confirm-password">Confirmar Contraseña:</label>
+  <input type="password" id="confirm-password" name="confirm-password" required>
 
-      <label for="confirm-password">Confirmar Contraseña:</label> <!-- NUEVO -->
-      <input type="password" id="confirm-password" name="confirm-password" required>
+  <button type="submit" class="btn">Registrarse</button>
+</form>
 
-    
-
-      <button type="submit" class="btn">Registrarse</button>
-    </form>
   </main>
 
   <footer class="footer">
     <p>&copy; 2025 Servi Now. Todos los derechos reservados.</p>
   </footer>
+  <script src="validaciones_registro.js"></script>
 
   
 </body>

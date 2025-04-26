@@ -304,4 +304,18 @@
 #sidebarButton:hover {
   background-color: transparent;
 }
+.input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+button:disabled {
+  background-color: #cccccc; /* Gris claro */
+  color: #666666; /* Gris oscuro para el texto */
+  cursor: not-allowed; /* Cambia el cursor a una mano bloqueada */
+  border: 1px solid #999999; /* Gris para el borde */
+}
 

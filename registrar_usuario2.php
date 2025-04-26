@@ -1,31 +1,32 @@
 <?php
-// Mostrar errores (solo durante desarrollo)
+
+// Habilitar la visualización de errores
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Conexión a la base de datos
-$servidor = "localhost";
-$usuario = "root";
-$contrasena = "1234";
-$base_datos = "servinow_jorge";
+$servername = "localhost";
+$username = "root";  // Asegúrate de que este usuario tenga acceso
+$password = "1234";  // Asegúrate de que esta contraseña sea la correcta
+$dbname = "servinow_jorge";
 
-// Establecer la conexión
-$conn = new mysqli($servidor, $usuario, $contrasena, $base_datos);
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar la conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Verifica si el formulario fue enviado
+// Validar que el formulario se haya enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Limpiar y escapar entradas
-    $nombre = trim(mysqli_real_escape_string($conn, $_POST['nombre'] ?? ''));
-    $telefono = trim(mysqli_real_escape_string($conn, $_POST['telefono'] ?? ''));
-    $email = trim(mysqli_real_escape_string($conn, $_POST['email'] ?? ''));
-    $password = $_POST['password'] ?? '';
-    $confirmPassword = $_POST['confirm-password'] ?? '';
-
+    // Recuperar los datos del formulario
+    $nombre = $_POST['nombre'];
+    $nickname = $_POST['nickname'];  // Asegurarnos de que se obtiene el 'nickname'
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm-password'];
+    
     // Validar campos obligatorios
     if (empty($nombre) || empty($telefono) || empty($email) || empty($password) || empty($confirmPassword)) {
         echo "Todos los campos son obligatorios.";
@@ -50,13 +51,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    // Verificar si el nickname ya está registrado en usuarios2
+    $sql_check_nickname = "SELECT * FROM usuarios2 WHERE nickname = ?";
+    $stmt = $conn->prepare($sql_check_nickname);
+    $stmt->bind_param("s", $nickname);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado->num_rows > 0) {
+        echo "El nickname ya está registrado.";
+        exit();
+    }
+
+    // Verificar si el telefono ya está registrado en usuarios2
+    $sql_check_telefono = "SELECT * FROM usuarios2 WHERE telefono = ?";
+    $stmt = $conn->prepare($sql_check_telefono);
+    $stmt->bind_param("s", $telefono);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado->num_rows > 0) {
+        echo "El teléfono ya está registrado.";
+        exit();
+    }
+
     // Encriptar la contraseña
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insertar nuevo usuario en usuarios2
-    $sql_insert = "INSERT INTO usuarios2 (nombre, telefono, email, password) VALUES (?, ?, ?, ?)";
+    $sql_insert = "INSERT INTO usuarios2 (nombre, telefono, email, password, nickname) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql_insert);
-    $stmt->bind_param("ssss", $nombre, $telefono, $email, $hashedPassword);
+    $stmt->bind_param("sssss", $nombre, $telefono, $email, $hashedPassword, $nickname);
 
     if ($stmt->execute()) {
         // Redireccionar al login si el registro fue exitoso
