@@ -14,6 +14,7 @@ $stmt->bind_param("i", $_SESSION['usuario']['id']);
 $stmt->execute();
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +59,10 @@ $usuario = $resultado->fetch_assoc();
             text-decoration: none;
             border-radius: 4px;
             margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
