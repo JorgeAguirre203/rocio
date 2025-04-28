@@ -14,7 +14,7 @@
       background: white;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .form-container h2 {
@@ -29,7 +29,8 @@
       font-weight: bold;
     }
 
-    form input, form select {
+    form input,
+    form select {
       width: 100%;
       padding: 10px;
       border-radius: 5px;
@@ -51,6 +52,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <nav class="navbar">
@@ -59,43 +61,42 @@
       <button id="repairButton">Reparar</button>
       <div class="nav-links">
         <a href="index.html" class="nav-btn">Inicio</a>
-       
       </div>
     </div>
   </nav>
 
   <main class="form-container">
     <h2>Registro de usuario</h2>
-   <form action="registrar_usuario2.php" method="POST">
+    <form id="registroForm" action="registrar_usuario2.php" method="POST">
 
-  <label for="nombre">Nombre de usuario</label>
-  <input type="text" id="nombre" name="nombre" required>
+      <label for="nombre">Nombre de usuario</label>
+      <input type="text" id="nombre" name="nombre" required>
 
-  <label for="nickname">Nickname:</label>
-  <input type="text" id="nickname" name="nickname" maxlength="15" required>
+      <label for="nickname">Nickname:</label>
+      <input type="text" id="nickname" name="nickname" maxlength="15" required>
 
-  <label for="telefono">Teléfono:</label>
-  <input type="text" id="telefono" name="telefono" required>
+      <label for="telefono">Teléfono:</label>
+      <input type="text" id="telefono" name="telefono" required>
 
-  <label for="email">Correo electrónico:</label>
-  <input type="email" id="email" name="email" required>
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" required>
 
-  <label for="password">Contraseña:</label>
-  <input type="password" id="password" name="password" required>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required>
 
-  <label for="confirm-password">Confirmar Contraseña:</label>
-  <input type="password" id="confirm-password" name="confirm-password" required>
+      <label for="confirm-password">Confirmar Contraseña:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
 
-  <button type="submit" class="btn">Registrarse</button>
-</form>
-
+      <button type="submit" class="btn">Registrarse</button>
+    </form>
   </main>
 
   <footer class="footer">
     <p>&copy; 2025 Servi Now. Todos los derechos reservados.</p>
   </footer>
-  <script src="validaciones_registro.js"></script>
 
-  
+  <script src="validaciones_intento1.js"></script>
 </body>
+
 </html>
+

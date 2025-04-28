@@ -22,25 +22,26 @@ $nickname = $_SESSION['usuario']['nickname'];
 </head>
 <body>
 
-  <!-- Cabecera -->
+
   <div class="header">
     <button class="menu-button" onclick="toggleSidebar()">☰</button>
     <h1>Bienvenido a ServiNow</h1>
   </div>
 
- <!-- Sidebar -->
+
 <div id="sidebar" class="sidebar">
   <div class="sidebar-content" onclick="event.stopPropagation();">
     <h2>Perfil</h2>
     <p><strong>Nombre:</strong> <?php echo htmlspecialchars($nombre); ?></p>
     <p><strong>Nickname:</strong> <?php echo htmlspecialchars($nickname); ?></p>
     <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+    <a href="ELiminar_perfiles.php" class="nav-btn">Eliminar cuenta</a>
     <button onclick="window.location.href='logout.php'" class="nav-btn">Cerrar sesión</button>
   </div>
 </div>
 
 
-  <!-- Overlay -->
+
 <script>
   function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
@@ -56,10 +57,10 @@ $nickname = $_SESSION['usuario']['nickname'];
   }
 </script>
 
-  <!-- Contenido principal -->
+
   <div class="main-content">
     <h2>¡Hola <?php echo htmlspecialchars($nombre); ?>!</h2>
-    <p>Bienvenido a tu espacio personal.</p>
+    <p>¡Bienvenido a la seleccion de servicios!</p>
   </div>
 
   <script>

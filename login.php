@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt = $conexion->prepare("SELECT id, nombre, email, password FROM usuarios2 WHERE email = ?");
+    $stmt = $conexion->prepare("SELECT id, nombre, email, password, nickname FROM usuarios2 WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -23,11 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $resultado->fetch_assoc();
 
         if (password_verify($password, $usuario['password'])) {
-            $_SESSION['usuario'] = [
-                'id' => $usuario['id'],
-                'nombre' => $usuario['nombre'],
-                'email' => $usuario['email']
-            ];
+           $_SESSION['usuario'] = [
+    'id' => $usuario['id'],
+    'nombre' => $usuario['nombre'],
+    'nickname' => $usuario['nickname'], // ✅ ahora sí
+    'email' => $usuario['email']
+];
+
 
             // Mostrar mensaje de éxito
             echo '<script>
