@@ -297,112 +297,31 @@
     animation: fall-apart 1s forwards;
     pointer-events: none;
   }
-  
- /* === RESPONSIVE === */
-@media (max-width: 1024px) {
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-principal {
+    padding: 40px 20px; /* Reducir el padding para no dar tanto espacio a los lados */
+    height: auto; /* No forzar un alto fijo, se ajusta al contenido */
+  }
+
   .contenido-hero {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column; /* Cambia la distribución a columna en pantallas pequeñas */
+    text-align: center; /* Alinea el texto al centro */
   }
 
   .texto-hero {
-    margin-top: 0;
-    margin-bottom: 20px;
+    flex: 1 1 100%; /* Hace que el texto ocupe el 100% del ancho */
+    margin-top: 0; /* Elimina márgenes adicionales */
   }
 
-  .texto-hero h2 {
-    margin-top: 100px;
-    font-size: 2.5rem;
-  }
-
-  .texto-hero p {
-    font-size: 1rem;
-    margin-top: 20px;
+  .imagen-hero {
+    flex: 1 1 100%; /* Hace que la imagen también ocupe el 100% del ancho disponible */
+    margin-top: 20px; /* Añade un pequeño margen superior */
   }
 
   .imagen-hero img {
-    max-width: 90%;
-    margin-top: 20px;
-  }
-
-  .contenido-nosotros {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .contenido-nosotros h2,
-  .contenido-nosotros p {
-    flex: none;
-    margin: 10px 0;
-  }
-
-  .contenido-nosotros p {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .texto-hero h2 {
-    font-size: 2rem;
-    margin-top: 80px;
-  }
-
-  .texto-hero p {
-    font-size: 0.95rem;
-  }
-
-  .imagen-hero img {
-    max-width: 100%;
-  }
-
-  .servicio-grid {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .servicio-card {
-    width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  .texto-hero h2 {
-    font-size: 1.8rem;
-    margin-top: 50px;
-  }
-
-  .texto-hero p {
-    font-size: 0.9rem;
-  }
-
-  .navbar {
-    padding: 10px 20px;
-  }
-
-  .nav-links a {
-    margin-left: 10px;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .contenido-hero {
-    padding: 20px;
-  }
-
-  .contenido-nosotros {
-    padding: 20px;
-  }
-
-  .servicio-card {
-    width: 100%;
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho */
+    height: auto; /* Mantiene las proporciones */
   }
 }
 
