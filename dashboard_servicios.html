@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servi now</title>
+    <link rel="stylesheet" href="diseño_dashboardservicios.css">
+</head>
+<body>
+    <header>
+        <h1>Servi now</h1>
+    </header>
+
+    <div class="container">
+        <!-- Barra lateral de filtros -->
+        <aside class="sidebar">
+            <h3>Filtrar servicios</h3>
+
+            <div class="filtro-bloque">
+                <h4>Categoría</h4>
+                <ul>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="albanileria" checked> Albañilería</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="electricidad" checked> Electricidad</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="plomeria" checked> Plomería</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="carpinteria" checked> Carpintería</li>
+                </ul>
+            </div>
+
+            <div class="filtro-bloque">
+                <h4>Calificación</h4>
+                <select id="filtro-estrellas">
+                    <option value="0">Cualquier calificación</option>
+                    <option value="3">3 estrellas o más</option>
+                    <option value="4">4 estrellas o más</option>
+                    <option value="5">Solo 5 estrellas</option>
+                </select>
+            </div>
+
+            <div class="filtro-bloque">
+                <h4>Precio estimado</h4>
+                <select id="filtro-precio">
+                    <option value="0">Cualquier precio</option>
+                    <option value="1">$ - Económico</option>
+                    <option value="2">$$ - Medio</option>
+                    <option value="3">$$$ - Alto</option>
+                </select>
+            </div>
+
+            <div class="filtro-bloque">
+                <h4>Disponibilidad</h4>
+                <ul>
+                    <li><input type="checkbox" class="filtro-disponibilidad" data-dia="hoy"> Disponible hoy</li>
+                    <li><input type="checkbox" class="filtro-disponibilidad" data-dia="semana"> Esta semana</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="servicios">
+            <section id="albanileria" class="servicio" data-estrellas="5" data-precio="2" data-disponibilidad="hoy,semana">
+                <img src="albanileria.jpg" alt="Albañilería">
+                <div>
+                    <h2>Albañilería</h2>
+                    <p>Construcción y remodelación con precisión profesional.</p>
+                    <button onclick="mostrarDetalles('albanileria')">Ver más</button>
+                    <div id="albanileria-detalles" class="detalles">
+                        <p>Muros, pisos, acabados, losas, y más.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="electricidad" class="servicio" data-estrellas="4" data-precio="1" data-disponibilidad="semana">
+                <img src="electricidad.jpg" alt="Electricidad">
+                <div>
+                    <h2>Electricidad</h2>
+                    <p>Instalaciones eléctricas seguras y eficientes.</p>
+                    <button onclick="mostrarDetalles('electricidad')">Ver más</button>
+                    <div id="electricidad-detalles" class="detalles">
+                        <p>Instalación, reparación de cortos y mantenimiento general.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="plomeria" class="servicio" data-estrellas="3" data-precio="2" data-disponibilidad="hoy">
+                <img src="plomeria.jpg" alt="Plomería">
+                <div>
+                    <h2>Plomería</h2>
+                    <p>Reparaciones y sistemas de agua confiables.</p>
+                    <button onclick="mostrarDetalles('plomeria')">Ver más</button>
+                    <div id="plomeria-detalles" class="detalles">
+                        <p>Fugas, instalación de sanitarios, calefones y más.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="carpinteria" class="servicio" data-estrellas="5" data-precio="3" data-disponibilidad="semana">
+                <img src="carpinteria.jpg" alt="Carpintería">
+                <div>
+                    <h2>Carpintería</h2>
+                    <p>Muebles y estructuras de madera a medida.</p>
+                    <button onclick="mostrarDetalles('carpinteria')">Ver más</button>
+                    <div id="carpinteria-detalles" class="detalles">
+                        <p>Pérgolas, puertas, closets, muebles personalizados.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Servicios Profesionales</p>
+    </footer>
+
+    <script src="interactividad_dashboardservicios.js"></script>
+</body>
+</html>

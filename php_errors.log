@@ -1,0 +1,446 @@
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:30 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f8e734dd8_41136082 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:31 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f8fa21917_69738759 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:40 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f983c2c59_87305282 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f990d5cb1_62424723 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f99559a20_37303602 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:41 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f99b1fd80_91543923 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:43 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f9bddce74_58562289 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f9c57c016_69964975 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f9c895c76_97596606 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:44 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:44 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f9cc479a7_64218220 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f9d0782f7_54074833 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 11:48:45 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 11:48:45 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68135f9d3d6557_78745549 en /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_writefile.php línea 60
+[01-May-2025 12:03:13 UTC] PHP Fatal error:  Uncaught Error: Class "Smarty\Smarty" not found in /var/www/html/mi_proyecto/dashboard_servicios.php:24
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/mi_proyecto/dashboard_servicios.php on line 24
+[01-May-2025 12:05:05 UTC] PHP Fatal error:  Uncaught Error: Class "Smarty\Smarty" not found in /var/www/html/mi_proyecto/dashboard_servicios.php:24
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/mi_proyecto/dashboard_servicios.php on line 24
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:34 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:35 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:09:36 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:13:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:13:59 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:14:23 UTC] PHP Fatal error:  Uncaught Error: Class "Smarty\Smarty" not found in /var/www/html/mi_proyecto/dashboard_servicios.php:24
+Stack trace:
+#0 {main}
+  thrown in /var/www/html/mi_proyecto/dashboard_servicios.php on line 24
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiled is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Template::$compiler is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_template.php on line 719
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:17:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:17:41 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:21:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:34 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:21:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_codeFrame is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$addLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$setLiterals is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$getTemplateVars is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$loadPlugin is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 182
+[01-May-2025 12:21:35 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:22:47 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 8
+[01-May-2025 12:23:40 UTC] PHP Fatal error:  Cannot redeclare SmartyCompilerException::$line in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 26
+[01-May-2025 12:25:42 UTC] PHP Fatal error:  Cannot redeclare SmartyCompilerException::$source in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 32
+[01-May-2025 12:25:43 UTC] PHP Fatal error:  Cannot redeclare SmartyCompilerException::$source in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 32
+[01-May-2025 12:30:05 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 6
+[01-May-2025 12:30:06 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 6
+[01-May-2025 12:30:06 UTC] PHP Fatal error:  Type of SmartyCompilerException::$line must be int (as in class Exception) in /var/www/html/mi_proyecto/libs/sysplugins/smartycompilerexception.php on line 6
+[01-May-2025 12:31:50 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:17 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:18 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:18 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:18 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:18 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:19 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:19 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:19 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:19 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:20 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:20 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:20 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:35:20 UTC] Error: Syntax error in template "file:/var/www/html/mi_proyecto/templates/dashboard_servicios.tpl"  on line 92 "const detalles = document.getElementById(`${servicioId}-detalles`);" unknown tag 'servicioId'
+[01-May-2025 12:39:22 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:22 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:22 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7ae58fd2_87150313
+[01-May-2025 12:39:23 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:23 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:23 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7bd8f280_87675554
+[01-May-2025 12:39:24 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:24 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:24 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7c740085_25467786
+[01-May-2025 12:39:24 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:24 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:24 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7cf3a4d7_81192449
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:25 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7d42fa49_24767819
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:25 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7d7be352_35500972
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:25 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7db7f376_63868925
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:25 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:25 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7dec8111_47311302
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:26 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7e37b660_02510020
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:26 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7e750dc2_05329841
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:26 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7eb53514_45028867
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:26 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:26 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7ef08ea4_77277940
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:27 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7f32f5d7_09512238
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:27 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7f69aff1_12320815
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:27 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7fa500f4_82397784
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:27 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:27 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b7fde7b50_46091646
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:28 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b801fce88_27554074
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:28 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8052a6a2_05324796
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:28 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b80842c11_85620190
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:28 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b80ba1ea6_82153240
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:28 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:28 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b80ec2574_99474383
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:29 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b812b9e56_42193204
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:29 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b81640324_76760443
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:29 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b81934261_44282803
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:29 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:29 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b81c4c9e0_14959841
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:30 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b820bcfc1_20225257
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:30 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b823c8ea4_75963104
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:30 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b829f8b28_67335858
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:30 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:30 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b82d500d0_15395514
+[01-May-2025 12:39:31 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:31 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b83125f89_45337971
+[01-May-2025 12:39:31 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:31 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b837199b2_46719386
+[01-May-2025 12:39:31 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:31 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:31 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b83a5a6e4_67567712
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:32 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b840cf811_27007328
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:32 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8444d691_59571305
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:32 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b847682c6_07467891
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:32 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:32 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b84d173a0_44991339
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:33 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8513f511_85938976
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:33 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8576b777_23499301
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:33 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b85adaa59_01510911
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:33 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:33 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b85df66f1_26972905
+[01-May-2025 12:39:34 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:34 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8651e231_57395161
+[01-May-2025 12:39:34 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:34 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b868a4c62_45519259
+[01-May-2025 12:39:34 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:34 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b86bfcea0_58712875
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:35 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8702b4f1_62693101
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:35 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b87425240_05170439
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:35 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b877ff604_79740464
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:35 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:35 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b87b8c3e2_59766829
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:36 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8806ee79_08542142
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:36 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b883fd101_06706737
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:36 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b88833841_99466751
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:36 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:36 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b88c62115_60971053
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:37 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b891b46f1_07860472
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:37 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b895a8294_48474190
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:37 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8997b100_45786830
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:37 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:37 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b89ceb170_27440757
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:38 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8a0d54a4_79915461
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:38 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8a44e7a3_40717157
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:38 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8a75dd24_31925783
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:38 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8aa8d950_81020498
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:38 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:38 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8ae147c5_06800310
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:39 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8b2b53f3_50404582
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:39 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8b67c5c6_22741923
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:39 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8ba6cad5_45916706
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:39 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:39 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8be9db45_45148300
+[01-May-2025 12:39:40 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:40 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:40 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8c7484e4_48702308
+[01-May-2025 12:39:41 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:41 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8d162f30_59664543
+[01-May-2025 12:39:41 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:41 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:41 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8de88c65_00349662
+[01-May-2025 12:39:42 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:42 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:42 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8e841d85_00524723
+[01-May-2025 12:39:43 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:43 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8f11bb58_10057492
+[01-May-2025 12:39:43 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:39:43 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:39:43 UTC] Error: unable to write file /var/www/html/mi_proyecto/templates_c/wrt68136b8fc713b8_42065349
+[01-May-2025 12:41:34 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:41:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:41:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_foreach is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:41:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Variable::$do_else is deprecated in /var/www/html/mi_proyecto/templates_c/51784f5cb7910742929a7052ec195b659005810a_2.file.dashboard_servicios.tpl.php on line 51
+[01-May-2025 12:41:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Variable::$do_else is deprecated in /var/www/html/mi_proyecto/templates_c/51784f5cb7910742929a7052ec195b659005810a_2.file.dashboard_servicios.tpl.php on line 93
+[01-May-2025 12:41:34 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Variable::$do_else is deprecated in /var/www/html/mi_proyecto/templates_c/51784f5cb7910742929a7052ec195b659005810a_2.file.dashboard_servicios.tpl.php on line 119
+[01-May-2025 12:42:59 UTC] PHP Deprecated:  Function strftime() is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_runtime_codeframe.php on line 48
+[01-May-2025 12:42:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_writeFile is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:42:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Internal_Extension_Handler::$_foreach is deprecated in /var/www/html/mi_proyecto/libs/sysplugins/smarty_internal_extension_handler.php on line 190
+[01-May-2025 12:42:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Variable::$do_else is deprecated in /var/www/html/mi_proyecto/templates_c/51784f5cb7910742929a7052ec195b659005810a_2.file.dashboard_servicios.tpl.php on line 51
+[01-May-2025 12:42:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Variable::$do_else is deprecated in /var/www/html/mi_proyecto/templates_c/51784f5cb7910742929a7052ec195b659005810a_2.file.dashboard_servicios.tpl.php on line 93
+[01-May-2025 12:42:59 UTC] PHP Deprecated:  Creation of dynamic property Smarty_Variable::$do_else is deprecated in /var/www/html/mi_proyecto/templates_c/51784f5cb7910742929a7052ec195b659005810a_2.file.dashboard_servicios.tpl.php on line 119
