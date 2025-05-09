@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servi now</title>
     <link rel="stylesheet" href="diseño_dashboardservicios.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Servi now</h1>
+        <h1><i class="fas fa-tools"></i> Servi now</h1>
     </header>
 
     <div class="container">
         <!-- Barra lateral de filtros -->
         <aside class="sidebar">
-            <h3>Filtrar servicios</h3>
+            <h3><i class="fas fa-filter"></i> Filtrar servicios</h3>
 
             <div class="filtro-bloque">
-                <h4>Categoría</h4>
+                <h4><i class="fas fa-th-list"></i> Categoría</h4>
                 <ul>
-                    <li><input type="checkbox" class="filtro-categoria" data-categoria="albanileria" checked> Albañilería</li>
-                    <li><input type="checkbox" class="filtro-categoria" data-categoria="electricidad" checked> Electricidad</li>
-                    <li><input type="checkbox" class="filtro-categoria" data-categoria="plomeria" checked> Plomería</li>
-                    <li><input type="checkbox" class="filtro-categoria" data-categoria="carpinteria" checked> Carpintería</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="albanileria" checked> <i class="fas fa-brick"></i> Albañilería</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="electricidad" checked> <i class="fas fa-bolt"></i> Electricidad</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="plomeria" checked> <i class="fas fa-faucet"></i> Plomería</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="carpinteria" checked> <i class="fas fa-hammer"></i> Carpintería</li>
+                    <li><input type="checkbox" class="filtro-categoria" data-categoria="Otros" checked> <i class="fas fa-ellipsis-h"></i> Otros</li>
                 </ul>
             </div>
 
             <div class="filtro-bloque">
-                <h4>Calificación</h4>
+                <h4><i class="fas fa-star"></i> Calificación</h4>
                 <select id="filtro-estrellas">
                     <option value="0">Cualquier calificación</option>
                     <option value="3">3 estrellas o más</option>
@@ -37,7 +39,7 @@
             </div>
 
             <div class="filtro-bloque">
-                <h4>Precio estimado</h4>
+                <h4><i class="fas fa-dollar-sign"></i> Precio estimado</h4>
                 <select id="filtro-precio">
                     <option value="0">Cualquier precio</option>
                     <option value="1">$ - Económico</option>
@@ -47,10 +49,10 @@
             </div>
 
             <div class="filtro-bloque">
-                <h4>Disponibilidad</h4>
+                <h4><i class="fas fa-calendar-check"></i> Disponibilidad</h4>
                 <ul>
-                    <li><input type="checkbox" class="filtro-disponibilidad" data-dia="hoy"> Disponible hoy</li>
-                    <li><input type="checkbox" class="filtro-disponibilidad" data-dia="semana"> Esta semana</li>
+                    <li><input type="checkbox" class="filtro-disponibilidad" data-dia="hoy"> <i class="fas fa-clock"></i> Disponible hoy</li>
+                    <li><input type="checkbox" class="filtro-disponibilidad" data-dia="semana"> <i class="fas fa-calendar-week"></i> Esta semana</li>
                 </ul>
             </div>
         </aside>
@@ -60,9 +62,9 @@
             <section id="albanileria" class="servicio" data-estrellas="5" data-precio="2" data-disponibilidad="hoy,semana">
                 <img src="albanileria.jpg" alt="Albañilería">
                 <div>
-                    <h2>Albañilería</h2>
+                    <h2><i class="fas fa-brick"></i> Albañilería</h2>
                     <p>Construcción y remodelación con precisión profesional.</p>
-                    <button onclick="mostrarDetalles('albanileria')">Ver más</button>
+                    <button onclick="mostrarDetalles('albanileria')"><i class="fas fa-eye"></i> Ver más</button>
                     <div id="albanileria-detalles" class="detalles">
                         <p>Muros, pisos, acabados, losas, y más.</p>
                     </div>
@@ -72,9 +74,9 @@
             <section id="electricidad" class="servicio" data-estrellas="4" data-precio="1" data-disponibilidad="semana">
                 <img src="electricidad.jpg" alt="Electricidad">
                 <div>
-                    <h2>Electricidad</h2>
+                    <h2><i class="fas fa-bolt"></i> Electricidad</h2>
                     <p>Instalaciones eléctricas seguras y eficientes.</p>
-                    <button onclick="mostrarDetalles('electricidad')">Ver más</button>
+                    <button onclick="mostrarDetalles('electricidad')"><i class="fas fa-eye"></i> Ver más</button>
                     <div id="electricidad-detalles" class="detalles">
                         <p>Instalación, reparación de cortos y mantenimiento general.</p>
                     </div>
@@ -84,9 +86,9 @@
             <section id="plomeria" class="servicio" data-estrellas="3" data-precio="2" data-disponibilidad="hoy">
                 <img src="plomeria.jpg" alt="Plomería">
                 <div>
-                    <h2>Plomería</h2>
+                    <h2><i class="fas fa-faucet"></i> Plomería</h2>
                     <p>Reparaciones y sistemas de agua confiables.</p>
-                    <button onclick="mostrarDetalles('plomeria')">Ver más</button>
+                    <button onclick="mostrarDetalles('plomeria')"><i class="fas fa-eye"></i> Ver más</button>
                     <div id="plomeria-detalles" class="detalles">
                         <p>Fugas, instalación de sanitarios, calefones y más.</p>
                     </div>
@@ -96,9 +98,9 @@
             <section id="carpinteria" class="servicio" data-estrellas="5" data-precio="3" data-disponibilidad="semana">
                 <img src="carpinteria.jpg" alt="Carpintería">
                 <div>
-                    <h2>Carpintería</h2>
+                    <h2><i class="fas fa-hammer"></i> Carpintería</h2>
                     <p>Muebles y estructuras de madera a medida.</p>
-                    <button onclick="mostrarDetalles('carpinteria')">Ver más</button>
+                    <button onclick="mostrarDetalles('carpinteria')"><i class="fas fa-eye"></i> Ver más</button>
                     <div id="carpinteria-detalles" class="detalles">
                         <p>Pérgolas, puertas, closets, muebles personalizados.</p>
                     </div>
@@ -108,7 +110,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Servicios Profesionales</p>
+        <p>&copy; 2025 Servi now. Todos los derechos reservados.</p>
     </footer>
 
     <script src="interactividad_dashboardservicios.js"></script>

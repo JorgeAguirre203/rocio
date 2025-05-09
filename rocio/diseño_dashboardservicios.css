@@ -11,6 +11,10 @@ header {
     padding: 15px;
 }
 
+header h1 i {
+    margin-right: 8px;
+}
+
 .container {
     display: flex;
     padding: 20px;
@@ -35,6 +39,11 @@ header {
     margin-bottom: 10px;
 }
 
+.sidebar li i {
+    margin-right: 6px;
+    color: #777;
+}
+
 .filtro-bloque {
     margin-bottom: 20px;
 }
@@ -42,6 +51,12 @@ header {
 .filtro-bloque h4 {
     margin: 10px 0 5px;
     font-size: 15px;
+}
+
+.sidebar h3 i,
+.sidebar h4 i {
+    margin-right: 6px;
+    color: #555;
 }
 
 .filtro-bloque select {
@@ -58,7 +73,7 @@ header {
 .servicio {
     display: flex;
     background: #fff;
-    margin: bottom 20;
+    margin-bottom: 20px;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
@@ -77,6 +92,11 @@ header {
     margin-top: 0;
 }
 
+.servicio h2 i {
+    margin-right: 8px;
+    color: #444;
+}
+
 button {
     background-color: #222;
     color: #fff;
@@ -84,6 +104,11 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button i {
+    margin-right: 5px;
 }
 
 button:hover {
