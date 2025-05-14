@@ -10,7 +10,8 @@ $smarty->setCacheDir('cache/');
 
 // Verificar si ya está logueado
 if (isset($_SESSION['usuario'])) {
-    header("Location: bienvenida.php");
+    // Si ya está logueado, redirigir al dashboard_servicios.php
+    header("Location: dashboard_servicios.php");
     exit;
 }
 
@@ -19,19 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     
+    // Verificar si los campos no están vacíos
     if (empty($email) || empty($password)) {
         $smarty->assign('error', 'Por favor ingresa ambos campos');
     } else {
-        // Consulta a la base de datos
+        // Consulta a la base de datos para buscar el usuario
         $stmt = $conexion->prepare("SELECT id, nombre, email, password, nickname FROM usuarios2 WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $resultado = $stmt->get_result();
         
+        // Verificar si se encontró el usuario
         if ($resultado->num_rows === 1) {
             $usuario = $resultado->fetch_assoc();
             
+            // Verificar la contraseña
             if (password_verify($password, $usuario['password'])) {
+                // Guardar la información del usuario en la sesión
                 $_SESSION['usuario'] = [
                     'id' => $usuario['id'],
                     'nombre' => $usuario['nombre'],
@@ -39,7 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'email' => $usuario['email']
                 ];
                 
-                header("Location: bienvenida.php");
+                // Redirigir a la página dashboard_servicios.php
+                header("Location: dashboard_servicios.php");
                 exit;
             } else {
                 $smarty->assign('error', 'Contraseña incorrecta');
@@ -62,3 +68,4 @@ $smarty->assign([
 // Mostrar plantilla
 $smarty->display('login.tpl');
 ?>
+

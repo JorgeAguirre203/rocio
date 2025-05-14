@@ -15,12 +15,13 @@ if (!isset($_SESSION['usuario'])) {
 
 // Asignar variables de sesión
 $smarty->assign([
-    'page_title' => 'Bienvenido',
+    'page_title' => 'Dashboard de Servicios',
     'nombre' => htmlspecialchars($_SESSION['usuario']['nombre']),
     'nickname' => htmlspecialchars($_SESSION['usuario']['nickname']),
     'logo_text' => 'Servi Now'
 ]);
 
 // Mostrar plantilla
-$smarty->display('bienvenida.tpl');
+$smarty->display('dashboard_servicios.tpl');
 ?>
+

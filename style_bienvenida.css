@@ -1,9 +1,11 @@
+/* Estilos generales */
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   background-color: #f4f4f4;
 }
 
+/* Botones de navegación */
 .nav-btn {
   display: block;
   width: 90%;
@@ -25,9 +27,9 @@ body {
 
 /* Cabecera */
 .header {
-  background-color: #000; /* Cambiado a negro */
+  background-color: #000;
   color: white;
-  padding: 15px 20px 15px 60px; 
+  padding: 15px 20px 15px 60px;
   justify-content: flex-start;
   display: flex;
   align-items: center;
@@ -53,17 +55,17 @@ body {
 }
 
 .sidebar-open .menu-button {
-  left: 270px; /* se mueve a la derecha cuando sidebar está abierto */
+  left: 270px;
 }
 
-/* Barra lateral */
+/* Barra lateral de navegación */
 .sidebar {
   height: 100%;
   width: 0;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #000; /* Cambiado a negro */
+  background-color: #000;
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
@@ -81,16 +83,60 @@ body {
   margin-top: 20px;
 }
 
+/* Barra lateral de filtros */
+.sidebar-filtros {
+  width: 220px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  position: fixed;
+  right: 0;
+  top: 60px;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.sidebar-filtros ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-filtros li {
+  margin-bottom: 10px;
+}
+
+.filtro-bloque {
+  margin-bottom: 20px;
+}
+
+.filtro-bloque h4 {
+  margin: 10px 0 5px;
+  font-size: 15px;
+}
+
+.filtro-bloque select {
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Contenido principal */
 .main-content {
   padding: 20px;
   margin-top: 60px;
   text-align: center;
+  margin-right: 240px;
 }
 
 .main-content h2 {
   color: #333;
 }
 
+/* Overlay */
 .overlay {
   position: fixed;
   display: none;
@@ -100,5 +146,114 @@ body {
   width: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 998;
+}
+
+/* Footer */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Contenedor de los servicios */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 20px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* Estilos de cada servicio */
+.servicio{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.servicios:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.servicios img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.servicios h2 {
+  font-size: 20px;
+  color: #222;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.servicios p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Botón de acción */
+.servicios button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.servicios button:hover {
+  background-color: #e64a19;
+}
+
+/* Detalles desplegables */
+.detalles {
+  display: none;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  border-left: 3px solid #ff5722;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Transiciones en el contenedor de detalles */
+.detalles p {
+  margin: 0;
+}
+
+/* Estilo para los detalles del servicio */
+.servicios .detalles p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Hacer los servicios responsivos */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .servicios {
+    width: 90%;
+    margin: 10px 0;
+  }
 }
 

@@ -1,6 +1,30 @@
 <?php
+/* Smarty version 3.1.39, created on 2025-05-10 02:57:17
+  from '/var/www/html/rocio/rocio/dashboard_servicios.php' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.39',
+  'unifunc' => 'content_681ec08da37617_05832374',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'a3c2af62edad5ed6b573bcdbbb4612a2e14c8331' => 
+    array (
+      0 => '/var/www/html/rocio/rocio/dashboard_servicios.php',
+      1 => 1746781408,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_681ec08da37617_05832374 (Smarty_Internal_Template $_smarty_tpl) {
+echo '<?php
 
 
+';?>
 try {
     // Iniciar sesión
     if (session_status() === PHP_SESSION_NONE) {
@@ -26,15 +50,7 @@ try {
         'cache_dir' => $baseDir.'cache/',
         'config_dir' => $baseDir.'configs/'
     ];
-// Asignar datos del usuario a la plantilla
-$smarty->assign([
-    'page_title' => 'Dashboard de Servicios',
-    'nombre' => htmlspecialchars($_SESSION['usuario']['nombre']),
-    'nickname' => htmlspecialchars($_SESSION['usuario']['nickname']),
-    'logo_text' => 'Servi Now',
-    'current_year' => date('Y'),
-    'company_name' => 'Servi Now'
-]);
+
     // Crear directorios si no existen
     foreach ($dirs as $key => $dir) {
         if (!is_dir($dir)) {
@@ -42,7 +58,8 @@ $smarty->assign([
                 throw new Exception("No se pudo crear el directorio: $dir");
             }
         }
-        $smarty->{$key} = $dir;
+        $smarty-><?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+ = $dir;
     }
 
     // Configuración adicional de Smarty
@@ -83,7 +100,7 @@ $smarty->assign([
             'nombre' => 'Albañilería',
             'descripcion' => 'Construcción y remodelación con precisión profesional.',
             'detalles' => 'Muros, pisos, acabados, losas, y más.',
-            'imagen' => 'albanileria.jpg',
+            'imagen' => 'images/albanileria.jpg',
             'estrellas' => 5,
             'precio' => 2,
             'disponibilidad' => 'hoy,semana'
@@ -93,7 +110,7 @@ $smarty->assign([
             'nombre' => 'Electricidad',
             'descripcion' => 'Instalaciones eléctricas seguras y eficientes.',
             'detalles' => 'Instalación, reparación de cortos y mantenimiento general.',
-            'imagen' => 'electrico.jpg',
+            'imagen' => 'images/electricidad.jpg',
             'estrellas' => 4,
             'precio' => 1,
             'disponibilidad' => 'semana'
@@ -121,4 +138,6 @@ $smarty->assign([
     die("<h2>Error en la aplicación</h2>
         <p>Ocurrió un error al procesar su solicitud.</p>
         <p><small>Detalles técnicos: " . htmlspecialchars($e->getMessage()) . "</small></p>");
+}
+<?php }
 }
