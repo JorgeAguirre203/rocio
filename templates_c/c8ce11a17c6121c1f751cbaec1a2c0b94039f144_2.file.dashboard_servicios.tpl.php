@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-10 03:48:08
+/* Smarty version 3.1.39, created on 2025-05-16 09:29:08
   from '/var/www/html/rocio/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_681ecc7884cdd7_45178425',
+  'unifunc' => 'content_682705642c73f5_07926363',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c8ce11a17c6121c1f751cbaec1a2c0b94039f144' => 
     array (
       0 => '/var/www/html/rocio/rocio/templates/dashboard_servicios.tpl',
-      1 => 1746848822,
+      1 => 1747387746,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_681ecc7884cdd7_45178425 (Smarty_Internal_Template $_smarty_tpl) {
+function content_682705642c73f5_07926363 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -67,7 +67,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/rocio/li
 
         /* Filtros */
         .filtro-bloque {
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .overlay {
@@ -84,11 +84,23 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/rocio/li
 </head>
 <body>
 
-    <!-- Cabecera -->
-    <div class="header">
-        <button class="menu-button" onclick="toggleSidebar()">☰</button>
-        <h1>Bienvenido a Servinow</h1>
-    </div>
+   <!-- Cabecera -->
+<div class="header">
+    <button class="menu-button" onclick="toggleSidebar()">☰</button>
+
+    <!-- Logo con animación -->
+    <h1 class="logo" id="logoText">Bienvenido a Servinow</h1>
+
+    <!-- Botón de reparación (oculto al inicio) -->
+    <button id="repairButton" style="display: none;">Reparar</button>
+
+    <!-- Botón de inicio funcional -->
+    <a href="index.php">
+        <button>Inicio</button>
+    </a>
+</div>
+
+
 
     <!-- Barra lateral de perfil (deslizable) -->
     <div id="sidebar" class="sidebar">
@@ -99,9 +111,13 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/rocio/li
             <p><strong>Nickname:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['nickname']->value, ENT_QUOTES, 'ISO-8859-1');?>
 </p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+            <a href="ELiminar_perfiles.php" class="nav-btn">Historial de pedidos</a>
+             <a onclick="window.location.href='logout.php'" class="nav-btn">Cerrar sesión</a>
             <a href="ELiminar_perfiles.php" class="nav-btn">Eliminar cuenta</a>
-            <button onclick="window.location.href='dashboard_servicios.php'" class="nav-btn">Ver servicios</button>
-            <button onclick="window.location.href='logout.php'" class="nav-btn">Cerrar sesión</button>
+             
+             
+           
+           
         </div>
     </div>
 
@@ -215,12 +231,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     </main>
 </div>
 
-   <!-- Contenido principal -->
-<div class="  <p>&copy; <?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['current_year']->value, ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
- <?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['company_name']->value, ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
-</p>
-    </footer>
-
+  
     <!-- Overlay -->
     <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
@@ -284,7 +295,30 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         }
     <?php echo '</script'; ?>
 >
+    <?php echo '<script'; ?>
+>
+  const logo = document.getElementById("logoText");
+  const repairBtn = document.getElementById("repairButton");
 
+  logo.addEventListener("click", () => {
+    logo.classList.add("fall");
+    repairBtn.style.display = "inline-block";
+  });
+
+  repairBtn.addEventListener("click", () => {
+    logo.classList.remove("fall");
+
+    // Para "reaparecer" el texto después de la animación
+    logo.style.opacity = "1";
+    logo.style.transform = "none";
+    repairBtn.style.display = "none";
+  });
+<?php echo '</script'; ?>
+>
+
+<?php echo '<script'; ?>
+ src="script.js"><?php echo '</script'; ?>
+>
 </body>
 </html>
 

@@ -5,24 +5,27 @@ body {
   background-color: #f4f4f4;
 }
 
-/* Botones de navegación */
 .nav-btn {
   display: block;
   width: 90%;
-  margin: 10px auto;
-  padding: 10px;
-  background-color: #444;
-  color: white;
+  margin: 15px auto;
+  padding: 12px 20px;
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  color: #fff;
   text-align: center;
   text-decoration: none;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid #333;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
-  background-color: #666;
+  background: linear-gradient(145deg, #333, #1a1a1a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* Cabecera */
@@ -69,6 +72,7 @@ body {
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar-content {
@@ -82,47 +86,44 @@ body {
   display: block;
   margin-top: 20px;
 }
-
-/* Barra lateral de filtros */
-.sidebar-filtros {
-  width: 220px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  position: fixed;
-  right: 0;
-  top: 60px;
-  height: 100%;
-  overflow-y: auto;
-  z-index: 999;
-}
-
-.sidebar-filtros ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-filtros li {
-  margin-bottom: 10px;
-}
-
-.filtro-bloque {
-  margin-bottom: 20px;
-}
-
-.filtro-bloque h4 {
-  margin: 10px 0 5px;
-  font-size: 15px;
-}
-
-.filtro-bloque select {
+.filtro-acordeon .filtro-toggle {
   width: 100%;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  border: none;
+  font-size: 16px;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
 }
+
+.filtro-acordeon .filtro-toggle:hover {
+  background-color: #e9e9e9;
+}
+
+.filtro-acordeon .icono {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.filtro-acordeon .filtro-contenido {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.filtro-acordeon.activo .filtro-contenido {
+  max-height: 500px; /* Ajusta si es necesario */
+}
+
+.filtro-acordeon.activo .icono {
+  transform: rotate(45deg); /* Cambia el + a una x/– visual */
+}
+
 
 /* Contenido principal */
 .main-content {
@@ -166,60 +167,154 @@ footer {
   margin-top: 40px;
 }
 
-/* Estilos de cada servicio */
-.servicio{
+.servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.sidebar-filtros h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: ;
+  border-bottom: 2px solid black;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.5px;
+}
+.filtro-bloque h4 {
+
+ font-size: 1rem;
+  font-weight: 600;
+  color: black;
+  border-bottom: 2px solid black;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.5px;
+
+}
+/* Contenedor del checkbox + label para mejor alineación */
+.filtro-bloque li {
   display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.servicios:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.servicios img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.servicios h2 {
-  font-size: 20px;
-  color: #222;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-
-.servicios p {
-  font-size: 15px;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-/* Botón de acción */
-.servicios button {
-  background-color: #ff5722;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 6px;
+/* Esconder el checkbox original */
+.filtro-categoria {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  border: 2px solid #3498db;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  margin-top: 10px;
+  position: relative;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.servicios button:hover {
-  background-color: #e64a19;
+/* Mostrar marca de verificación cuando está checked */
+.filtro-categoria:checked {
+  background-color: #3498db;
+  border-color: #3498db;
 }
+
+.filtro-categoria:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Label elegante */
+.filtro-bloque label {
+  font-size: 1rem;
+  color: black;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+/* Select estilizado (versión compacta y oscura) */
+.filtro-bloque select {
+  width: 100%;
+  padding: 6px 10px; /* Más pequeño */
+  font-size: 0.85rem; /* Letra más chica */
+  border: 1.5px solid #3498db; /* Azul muy oscuro */
+  border-radius: 6px;
+  background-color: #3498db; /* Fondo azul oscuro */
+  color: #ffffff; /* Texto blanco */
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+
+.filtro-bloque select:focus {
+  outline: none;
+  border-color: #576CBC; /* Azul un poco más claro para destacar */
+  box-shadow: 0 0 4px rgba(87, 108, 188, 0.6);
+}
+
+.filtro-bloque label:hover {
+  color: black;
+}
+
+.servicio {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: calc(33.333% - 20px);
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.servicio:hover {
+    transform: scale(1.02);
+}
+
+.servicio img {
+    max-width: 100%;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.servicio h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.servicio p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.servicio button {
+    background-color: #007BFF;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: center;
+}
+
+.servicio button:hover {
+    background-color: #0056b3;
+}
+
 
 /* Detalles desplegables */
 .detalles {
@@ -239,7 +334,7 @@ footer {
 }
 
 /* Estilo para los detalles del servicio */
-.servicios .detalles p {
+.servicio .detalles p {
   font-size: 14px;
   line-height: 1.5;
 }
@@ -251,9 +346,84 @@ footer {
     align-items: center;
   }
 
-  .servicios {
+  .servicio {
     width: 90%;
     margin: 10px 0;
   }
 }
+  /* ============================
+     Logo y Botón Reparar
+     ============================ */
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+ 
+  transition: all 0.3s ease;
+
+
+  }
+  
+  #repairButton {
+  display: none;
+  margin-top: 10px;
+  padding: 5px 10px;           /* Más delgado */
+  font-size: 0.8rem;           /* Un poco más pequeño */
+  cursor: pointer;
+  background-color: black;   /* Azul oscuro */
+  color: white;                 /* Texto blanco */
+  border: none;
+  border-radius: 6px;          /* Bordes redondeados */
+  border-color: white;
+  box-shadow: 0 2px 5px rgba(25, 55, 109, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid white;
+}
+ 
+  .header a {
+   
+ 
+  padding: 5px 10px;           /* Más delgado */
+  font-size: 0.8rem;           /* Un poco más pequeño */
+  cursor: pointer;
+ /* Azul oscuro */
+  color: white;                 /* Texto blanco */
+  border: none;
+  border-radius: 6px;          /* Bordes redondeados */
+  border-color: white;
+  box-shadow: 0 2px 5px rgba(25, 55, 109, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  
+  
+  }
+  /* Animación de caída rota */
+  @keyframes fall-apart {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    25% {
+      transform: translateY(20px) rotate(10deg);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(60px) rotate(-15deg);
+      opacity: 0.6;
+    }
+    75% {
+      transform: translateY(120px) rotate(25deg);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(200px) rotate(45deg);
+      opacity: 0;
+    }
+  }
+  
+  .logo.fall {
+    animation: fall-apart 1s forwards;
+    pointer-events: none;
 

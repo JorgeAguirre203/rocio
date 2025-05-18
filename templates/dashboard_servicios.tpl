@@ -41,7 +41,7 @@
 
         /* Filtros */
         .filtro-bloque {
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .overlay {
@@ -58,11 +58,23 @@
 </head>
 <body>
 
-    <!-- Cabecera -->
-    <div class="header">
-        <button class="menu-button" onclick="toggleSidebar()">☰</button>
-        <h1>Bienvenido a Servinow</h1>
-    </div>
+   <!-- Cabecera -->
+<div class="header">
+    <button class="menu-button" onclick="toggleSidebar()">☰</button>
+
+    <!-- Logo con animación -->
+    <h1 class="logo" id="logoText">Bienvenido a Servinow</h1>
+
+    <!-- Botón de reparación (oculto al inicio) -->
+    <button id="repairButton" style="display: none;">Reparar</button>
+
+    <!-- Botón de inicio funcional -->
+    <a href="index.php">
+        <button>Inicio</button>
+    </a>
+</div>
+
+
 
     <!-- Barra lateral de perfil (deslizable) -->
     <div id="sidebar" class="sidebar">
@@ -71,9 +83,13 @@
             <p><strong>Nombre:</strong> {$nombre}</p>
             <p><strong>Nickname:</strong> {$nickname}</p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+            <a href="ELiminar_perfiles.php" class="nav-btn">Historial de pedidos</a>
+             <a onclick="window.location.href='logout.php'" class="nav-btn">Cerrar sesión</a>
             <a href="ELiminar_perfiles.php" class="nav-btn">Eliminar cuenta</a>
-            <button onclick="window.location.href='dashboard_servicios.php'" class="nav-btn">Ver servicios</button>
-            <button onclick="window.location.href='logout.php'" class="nav-btn">Cerrar sesión</button>
+             
+             
+           
+           
         </div>
     </div>
 
@@ -145,10 +161,7 @@
     </main>
 </div>
 
-   <!-- Contenido principal -->
-<div class="  <p>&copy; {$current_year|escape:'html'} {$company_name|escape:'html'}</p>
-    </footer>
-
+  
     <!-- Overlay -->
     <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
@@ -210,7 +223,26 @@
             });
         }
     </script>
+    <script>
+  const logo = document.getElementById("logoText");
+  const repairBtn = document.getElementById("repairButton");
 
+  logo.addEventListener("click", () => {
+    logo.classList.add("fall");
+    repairBtn.style.display = "inline-block";
+  });
+
+  repairBtn.addEventListener("click", () => {
+    logo.classList.remove("fall");
+
+    // Para "reaparecer" el texto después de la animación
+    logo.style.opacity = "1";
+    logo.style.transform = "none";
+    repairBtn.style.display = "none";
+  });
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>
 

@@ -20,8 +20,6 @@ $smarty->assign([
     'about_text' => 'En Servi Now nos dedicamos a conectar clientes con profesionales confiables. Nuestro objetivo es ofrecer soluciones rápidas y efectivas para todo tipo de servicios en el hogar o la empresa, registrate y accede a una variedad de servicios disponibles!.'
 ]);
 
-// Mostrar la plantilla completa
-$smarty->display('index.tpl');
 
 session_destroy();
 $smarty->display('index.tpl');
