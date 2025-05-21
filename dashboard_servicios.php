@@ -1,21 +1,12 @@
 <?php
-
-
 try {
     // Iniciar sesión
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
 
-    // Verificar y cargar Smarty 4
-    $smartyPath = __DIR__.'/libs/Smarty.class.php';
-    if (!file_exists($smartyPath)) {
-        throw new Exception("Error: No se encontró la librería Smarty en $smartyPath");
-    }
-
-    require_once($smartyPath);
-
-    // Crear instancia de Smarty
+    // Cargar Smarty
+    require_once __DIR__.'/libs/Smarty.class.php';
     $smarty = new Smarty();
 
     // Configuración de directorios
@@ -26,99 +17,58 @@ try {
         'cache_dir' => $baseDir.'cache/',
         'config_dir' => $baseDir.'configs/'
     ];
-// Asignar datos del usuario a la plantilla
-$smarty->assign([
-    'page_title' => 'Dashboard de Servicios',
-    'nombre' => htmlspecialchars($_SESSION['usuario']['nombre']),
-    'nickname' => htmlspecialchars($_SESSION['usuario']['nickname']),
-    'logo_text' => 'Servi Now',
-    'current_year' => date('Y'),
-    'company_name' => 'Servi Now'
-]);
-    // Crear directorios si no existen
+
     foreach ($dirs as $key => $dir) {
         if (!is_dir($dir)) {
-            if (!mkdir($dir, 0755, true)) {
-                throw new Exception("No se pudo crear el directorio: $dir");
-            }
+            mkdir($dir, 0755, true);
         }
         $smarty->{$key} = $dir;
     }
 
-    // Configuración adicional de Smarty
-    $smarty->setEscapeHtml(true);
-    $smarty->setErrorReporting(E_ALL & ~E_NOTICE);
-    $smarty->setDebugging(false);
+    // Conexión a la base de datos
+    require_once('conexion_jorge.php');
+    
+    // Consulta para obtener afiliados verificados (ahora con email)
+    $query = "SELECT id, nombre, apellido_paterno, apellido_materno, nickname, email, especialidad, foto_perfil 
+              FROM usuarios 
+              WHERE verificado = 1";
+    $result = $conexion->query($query);
 
-    // Datos para los filtros
-    $smarty->assign([
-        'categorias' => [
-            ['id' => 'albanileria', 'nombre' => 'Albañilería', 'checked' => true],
-            ['id' => 'electricidad', 'nombre' => 'Electricidad', 'checked' => true],
-            ['id' => 'plomeria', 'nombre' => 'Plomería', 'checked' => true],
-            ['id' => 'carpinteria', 'nombre' => 'Carpintería', 'checked' => true]
-        ],
-        'opciones_estrellas' => [
-            0 => 'Cualquier calificación',
-            3 => '3 estrellas o más',
-            4 => '4 estrellas o más',
-            5 => 'Solo 5 estrellas'
-        ],
-        'opciones_precio' => [
-            0 => 'Cualquier precio',
-            1 => '$ - Económico',
-            2 => '$$ - Medio',
-            3 => '$$$ - Alto'
-        ],
-        'disponibilidades' => [
-            ['id' => 'hoy', 'nombre' => 'Disponible hoy', 'checked' => false],
-            ['id' => 'semana', 'nombre' => 'Esta semana', 'checked' => false]
-        ]
-    ]);
+    if (!$result) {
+        throw new Exception("Error en la consulta: " . $conexion->error);
+    }
 
-    // Datos de los servicios
-    $smarty->assign('servicios', [
-        [
-            'id' => 'albanileria',
-            'nombre' => 'Albañilería',
-            'descripcion' => 'Construcción y remodelación con precisión profesional.',
-            'detalles' => 'Muros, pisos, acabados, losas, y más.',
-            'imagen' => 'albanileria.jpg',
+    $servicios = [];
+    while ($afiliado = $result->fetch_assoc()) {
+        $servicios[] = [
+            'id' => $afiliado['id'],
+            'nombre' => $afiliado['nombre'] . ' ' . $afiliado['apellido_paterno'],
+            'nickname' => $afiliado['nickname'],
+            'email' => $afiliado['email'],
+            'especialidad' => $afiliado['especialidad'],
+            'foto_perfil' => 'uploads/' . $afiliado['foto_perfil'],
+            'descripcion' => 'Profesional verificad@',
+            'detalles' => 'Especialista en ' . $afiliado['especialidad'],
             'estrellas' => 5,
             'precio' => 2,
             'disponibilidad' => 'hoy,semana'
-        ],
-        [
-            'id' => 'electricidad',
-            'nombre' => 'Electricidad',
-            'descripcion' => 'Instalaciones eléctricas seguras y eficientes.',
-            'detalles' => 'Instalación, reparación de cortos y mantenimiento general.',
-            'imagen' => 'electrico.jpg',
-            'estrellas' => 4,
-            'precio' => 1,
-            'disponibilidad' => 'semana'
-        ]
-    ]);
-
-    // Variables generales
-    $smarty->assign([
-        'page_title' => 'Dashboard de Servicios',
-        'app_name' => 'Servi now',
-        'company_name' => 'Servicios Profesionales',
-        'current_year' => date('Y')
-    ]);
-
-    // Mostrar la plantilla
-    $template = 'dashboard_servicios.tpl';
-    if (!$smarty->templateExists($template)) {
-        throw new Exception("La plantilla $template no existe");
+        ];
     }
+    $result->close();
 
-    $smarty->display($template);
+    // Asignar datos a Smarty
+    $smarty->assign([
+        'page_title' => 'Afiliados Verificados',
+        'nombre' => htmlspecialchars($_SESSION['usuario']['nombre'] ?? 'Usuario'),
+        'nickname' => htmlspecialchars($_SESSION['usuario']['nickname'] ?? 'Invitado'),
+        'servicios' => $servicios,
+        // ... resto de asignaciones
+    ]);
+
+    // Mostrar plantilla
+    $smarty->display('dashboard_servicios.tpl');
 
 } catch (Exception $e) {
     error_log("Error: " . $e->getMessage());
-    die("<h2>Error en la aplicación</h2>
-        <p>Ocurrió un error al procesar su solicitud.</p>
-        <p><small>Detalles técnicos: " . htmlspecialchars($e->getMessage()) . "</small></p>");
+    die("<h2>Error</h2><p>Ocurrió un problema al cargar los afiliados</p>");
 }

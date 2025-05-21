@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-18 09:00:45
-  from '/var/www/html/rocio/rocio/templates/dashboard_servicios.tpl' */
+/* Smarty version 3.1.39, created on 2025-05-21 02:36:27
+  from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6829a1bdc16611_64356795',
+  'unifunc' => 'content_682d3c2b25bef1_76920107',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'c8ce11a17c6121c1f751cbaec1a2c0b94039f144' => 
+    'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
-      0 => '/var/www/html/rocio/rocio/templates/dashboard_servicios.tpl',
-      1 => 1747558755,
+      0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
+      1 => 1747794983,
       2 => 'file',
     ),
   ),
@@ -20,15 +20,15 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6829a1bdc16611_64356795 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
+function content_682d3c2b25bef1_76920107 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['page_title']->value, ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+    <title><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['page_title']->value, ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 </title>
     <link rel="stylesheet" href="style_bienvenida.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -106,9 +106,9 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/rocio/li
     <div id="sidebar" class="sidebar">
         <div class="sidebar-content" onclick="event.stopPropagation();">
             <h2>Perfil</h2>
-            <p><strong>Nombre:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['nombre']->value, ENT_QUOTES, 'ISO-8859-1');?>
+            <p><strong>Nombre:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['nombre']->value, ENT_QUOTES, 'UTF-8');?>
 </p>
-            <p><strong>Nickname:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['nickname']->value, ENT_QUOTES, 'ISO-8859-1');?>
+            <p><strong>Nickname:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['nickname']->value, ENT_QUOTES, 'UTF-8');?>
 </p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
             <a href="ELiminar_perfiles.php" class="nav-btn">Historial de pedidos</a>
@@ -136,13 +136,13 @@ $_smarty_tpl->tpl_vars['categoria']->do_else = false;
 ?>
                 <li>
                     <input type="checkbox" class="filtro-categoria" 
-                           id="cat_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                           id="cat_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 " 
-                           data-categoria="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                           data-categoria="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 " 
                            <?php if ($_smarty_tpl->tpl_vars['categoria']->value['checked']) {?>checked<?php }?>>
-                    <label for="cat_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
-"><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['nombre'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                    <label for="cat_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
+"><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['categoria']->value['nombre'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 </label>
                 </li>
                 <?php
@@ -178,13 +178,13 @@ $_smarty_tpl->tpl_vars['disp']->do_else = false;
 ?>
                 <li>
                     <input type="checkbox" class="filtro-disponibilidad" 
-                           id="disp_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                           id="disp_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 " 
-                           data-dia="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                           data-dia="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 "
                            <?php if ($_smarty_tpl->tpl_vars['disp']->value['checked']) {?>checked<?php }?>>
-                    <label for="disp_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
-"><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['nombre'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                    <label for="disp_<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
+"><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['nombre'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 </label>
                 </li>
                 <?php
@@ -194,42 +194,59 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         </div>
     </div>
 <!-- Contenido principal -->
-<div class="container">
-    <main class="servicios">
-        <?php
+    <div class="container">
+        <main class="servicios">
+            <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['servicios']->value, 'servicio');
 $_smarty_tpl->tpl_vars['servicio']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['servicio']->value) {
 $_smarty_tpl->tpl_vars['servicio']->do_else = false;
 ?>
-        <section id="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+            <section id="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 " class="servicio" 
-                 data-estrellas="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['estrellas'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                     data-estrellas="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['estrellas'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 " 
-                 data-precio="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['precio'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                     data-precio="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['precio'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 " 
-                 data-disponibilidad="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['disponibilidad'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                     data-disponibilidad="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['disponibilidad'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
+"
+                     data-especialidad="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['especialidad'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 ">
-            <img src="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['imagen'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
-" alt="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                <?php if ($_smarty_tpl->tpl_vars['servicio']->value['foto_perfil']) {?>
+                    <img src="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['foto_perfil'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
+" alt="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 ">
-            <h2><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                <?php } else { ?>
+                    <img src="img/default_profile.jpg" alt="Foto de perfil">
+                <?php }?>
+                <h2><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 </h2>
-            <p><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['descripcion'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                <p><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['descripcion'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 </p>
-            <button onclick="mostrarDetalles('<?php echo htmlspecialchars(strtr($_smarty_tpl->tpl_vars['servicio']->value['id'], array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" )), ENT_QUOTES, 'ISO-8859-1');?>
+                <p><strong>Especialidad:</strong> <?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['especialidad'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
+</p>
+                <button onclick="mostrarDetalles('<?php echo htmlspecialchars(strtr($_smarty_tpl->tpl_vars['servicio']->value['id'], array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" )), ENT_QUOTES, 'UTF-8');?>
 ')">Ver más</button>
-            <div id="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['id'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                <div id="<?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['id'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 -detalles" class="detalles">
-                <p><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['detalles'], ENT_QUOTES, 'ISO-8859-1', true), ENT_QUOTES, 'ISO-8859-1');?>
+                    <p><?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['detalles'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
 </p>
+                    <p><strong>Nickname:</strong> <?php echo htmlspecialchars(htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nickname'], ENT_QUOTES, 'UTF-8', true), ENT_QUOTES, 'UTF-8');?>
+</p>
+                </div>
+            </section>
+            <?php
+}
+if ($_smarty_tpl->tpl_vars['servicio']->do_else) {
+?>
+            <div class="no-resultados">
+                <p>No se encontraron afiliados verificados</p>
             </div>
-        </section>
-        <?php
+            <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-    </main>
-</div>
+        </main>
+    </div>
 
   
     <!-- Overlay -->
