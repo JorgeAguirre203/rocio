@@ -1,54 +1,104 @@
 <?php
-
-
 try {
     // Iniciar sesión
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    session_start();
 
-    // Verificar y cargar Smarty 4
-    $smartyPath = __DIR__.'/libs/Smarty.class.php';
-    if (!file_exists($smartyPath)) {
-        throw new Exception("Error: No se encontró la librería Smarty en $smartyPath");
-    }
-
-    require_once($smartyPath);
+    // Verificar y cargar Smarty
+    require_once(__DIR__ . '/libs/Smarty.class.php');
 
     // Crear instancia de Smarty
     $smarty = new Smarty();
 
     // Configuración de directorios
-    $baseDir = __DIR__.'/';
-    $dirs = [
-        'template_dir' => $baseDir.'templates/',
-        'compile_dir' => $baseDir.'templates_c/',
-        'cache_dir' => $baseDir.'cache/',
-        'config_dir' => $baseDir.'configs/'
-    ];
-// Asignar datos del usuario a la plantilla
-$smarty->assign([
-    'page_title' => 'Dashboard de Servicios',
-    'nombre' => htmlspecialchars($_SESSION['usuario']['nombre']),
-    'nickname' => htmlspecialchars($_SESSION['usuario']['nickname']),
-    'logo_text' => 'Servi Now',
-    'current_year' => date('Y'),
-    'company_name' => 'Servi Now'
-]);
-    // Crear directorios si no existen
-    foreach ($dirs as $key => $dir) {
-        if (!is_dir($dir)) {
-            if (!mkdir($dir, 0755, true)) {
-                throw new Exception("No se pudo crear el directorio: $dir");
-            }
-        }
-        $smarty->{$key} = $dir;
-    }
+    $smarty->setTemplateDir(__DIR__ . '/templates/');
+    $smarty->setCompileDir(__DIR__ . '/templates_c/');
+    $smarty->setCacheDir(__DIR__ . '/cache/');
+    $smarty->setConfigDir(__DIR__ . '/configs/');
 
-    // Configuración adicional de Smarty
+    // Configuración adicional
     $smarty->setEscapeHtml(true);
     $smarty->setErrorReporting(E_ALL & ~E_NOTICE);
     $smarty->setDebugging(false);
+
+    // Conexión a la base de datos
+    require_once('conexion_jorge.php');
+
+    // Consulta para obtener afiliados verificados
+    $query = "SELECT id, nombre, apellido_paterno, apellido_materno, nickname, especialidad, foto_perfil 
+              FROM usuarios 
+              WHERE verificado = 1";
+    $result = $conexion->query($query);
+
+    if (!$result) {
+        throw new Exception("Error en la consulta: " . $conexion->error);
+    }
+
+    $afiliados = [];
+    while ($row = $result->fetch_assoc()) {
+        $afiliados[] = $row;
+    }
+    $result->close();
+
+    // Procesar los datos de los afiliados para la vista
+    $servicios = [];
+    foreach ($afiliados as $afiliado) {
+        $especialidad = $afiliado['especialidad'];
+        
+        // Mapear especialidades a datos de servicio
+        $servicioData = [
+            'id' => 'afiliado_' . $afiliado['id'],
+            'nombre' => $afiliado['nombre'] . ' ' . $afiliado['apellido_paterno'],
+            'nickname' => $afiliado['nickname'],
+            'especialidad' => $especialidad,
+            'foto_perfil' => $afiliado['foto_perfil'],
+            'tipo' => 'afiliado',
+            'estrellas' => 5, // Valor predeterminado
+            'precio' => 2,     // Valor predeterminado
+            'disponibilidad' => 'hoy' // Valor predeterminado
+        ];
+        
+        // Añadir detalles específicos según la especialidad
+        switch ($especialidad) {
+            case 'albanileria':
+                $servicioData['descripcion'] = 'Albañil profesional';
+                $servicioData['detalles'] = 'Servicios de construcción y remodelación';
+                $servicioData['imagen'] = 'albanileria.jpg';
+                break;
+            case 'electricidad':
+                $servicioData['descripcion'] = 'Electricista certificado';
+                $servicioData['detalles'] = 'Instalaciones y reparaciones eléctricas';
+                $servicioData['imagen'] = 'electrico.jpg';
+                break;
+            case 'plomeria':
+                $servicioData['descripcion'] = 'Plomero experto';
+                $servicioData['detalles'] = 'Reparación e instalación de sistemas de plomería';
+                $servicioData['imagen'] = 'plomero.jpg';
+                break;
+            case 'carpinteria':
+                $servicioData['descripcion'] = 'Carpintero especializado';
+                $servicioData['detalles'] = 'Trabajos en madera y muebles a medida';
+                $servicioData['imagen'] = 'carpinteria.jpg';
+                break;
+            default:
+                $servicioData['descripcion'] = 'Especialista';
+                $servicioData['detalles'] = 'Servicios generales';
+                $servicioData['imagen'] = 'default.jpg';
+                break;
+        }
+        
+        $servicios[] = $servicioData;
+    }
+
+    // Asignar datos del usuario a la plantilla
+    $smarty->assign([
+        'page_title' => 'Dashboard de Servicios',
+        'nombre' => htmlspecialchars($_SESSION['usuario']['nombre'] ?? 'Usuario'),
+        'nickname' => htmlspecialchars($_SESSION['usuario']['nickname'] ?? 'Invitado'),
+        'logo_text' => 'Servi Now',
+        'current_year' => date('Y'),
+        'company_name' => 'Servi Now',
+        'servicios' => $servicios
+    ]);
 
     // Datos para los filtros
     $smarty->assign([
@@ -76,38 +126,6 @@ $smarty->assign([
         ]
     ]);
 
-    // Datos de los servicios
-    $smarty->assign('servicios', [
-        [
-            'id' => 'albanileria',
-            'nombre' => 'Albañilería',
-            'descripcion' => 'Construcción y remodelación con precisión profesional.',
-            'detalles' => 'Muros, pisos, acabados, losas, y más.',
-            'imagen' => 'albanileria.jpg',
-            'estrellas' => 5,
-            'precio' => 2,
-            'disponibilidad' => 'hoy,semana'
-        ],
-        [
-            'id' => 'electricidad',
-            'nombre' => 'Electricidad',
-            'descripcion' => 'Instalaciones eléctricas seguras y eficientes.',
-            'detalles' => 'Instalación, reparación de cortos y mantenimiento general.',
-            'imagen' => 'electrico.jpg',
-            'estrellas' => 4,
-            'precio' => 1,
-            'disponibilidad' => 'semana'
-        ]
-    ]);
-
-    // Variables generales
-    $smarty->assign([
-        'page_title' => 'Dashboard de Servicios',
-        'app_name' => 'Servi now',
-        'company_name' => 'Servicios Profesionales',
-        'current_year' => date('Y')
-    ]);
-
     // Mostrar la plantilla
     $template = 'dashboard_servicios.tpl';
     if (!$smarty->templateExists($template)) {
@@ -122,3 +140,5 @@ $smarty->assign([
         <p>Ocurrió un error al procesar su solicitud.</p>
         <p><small>Detalles técnicos: " . htmlspecialchars($e->getMessage()) . "</small></p>");
 }
+?>
+

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-01 12:50:34
-  from '/var/www/html/mi_proyecto/templates/index.tpl' */
+/* Smarty version 3.1.39, created on 2025-05-21 01:49:12
+  from '/var/www/html/rocio/templates/index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_68136e1a2b2960_70536682',
+  'unifunc' => 'content_682d311895f6c0_59852787',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'fef4329ba08789f38ad3848ce22e3cfbe01acdc1' => 
+    'e738e0b40d5c4ca1e5b70d3397e1a6ba570bfd29' => 
     array (
-      0 => '/var/www/html/mi_proyecto/templates/index.tpl',
-      1 => 1746103820,
+      0 => '/var/www/html/rocio/templates/index.tpl',
+      1 => 1747711055,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68136e1a2b2960_70536682 (Smarty_Internal_Template $_smarty_tpl) {
+function content_682d311895f6c0_59852787 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>

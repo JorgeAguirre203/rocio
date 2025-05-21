@@ -28,13 +28,17 @@
       font-weight: bold;
     }
 
-    form input, form select {
+    form input, form select, form textarea {
       width: 100%;
       padding: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
       margin-top: 5px;
       font-size: 1rem;
+    }
+
+    form .file-input {
+      padding: 5px;
     }
 
     form .btn {
@@ -56,6 +60,13 @@
       padding: 10px;
       background-color: #eeffee;
       border-radius: 5px;
+    }
+
+    .file-preview {
+      max-width: 100px;
+      max-height: 100px;
+      margin-top: 10px;
+      display: none;
     }
 
     @media (max-width: 600px) {
@@ -92,7 +103,7 @@
       <div class="success">{$success}</div>
     {/if}
     
-    <form action="{$form_action}" method="POST">
+    <form action="{$form_action}" method="POST" enctype="multipart/form-data" id="registroForm">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" value="{$form_data.nombre|default:''}" required>
 
@@ -111,11 +122,34 @@
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="{$form_data.email|default:''}" required>
 
+      <label for="email_confirm">Confirmar Correo electrónico:</label>
+      <input type="email" id="email_confirm" name="email_confirm" value="{$form_data.email_confirm|default:''}" required>
+
       <label for="password">Contraseña:</label>
       <input type="password" id="password" name="password" required>
 
       <label for="confirm-password">Confirmar Contraseña:</label>
       <input type="password" id="confirm-password" name="confirm-password" required>
+
+      <label for="especialidad">Especialidad:</label>
+      <select id="especialidad" name="especialidad" required>
+        <option value="">Seleccione una especialidad</option>
+        {foreach $especialidades as $key => $value}
+          <option value="{$key}" {if isset($form_data.especialidad) && $form_data.especialidad == $key}selected{/if}>{$value}</option>
+        {/foreach}
+      </select>
+
+      <label for="foto_perfil">Foto de perfil:</label>
+      <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" class="file-input" required>
+      <img id="foto_perfil_preview" class="file-preview" src="#" alt="Vista previa de foto de perfil">
+
+      <label for="ine_frente">INE (Frente):</label>
+      <input type="file" id="ine_frente" name="ine_frente" accept="image/*,.pdf" class="file-input" required>
+      <img id="ine_frente_preview" class="file-preview" src="#" alt="Vista previa de INE frente">
+
+      <label for="ine_reverso">INE (Reverso):</label>
+      <input type="file" id="ine_reverso" name="ine_reverso" accept="image/*,.pdf" class="file-input" required>
+      <img id="ine_reverso_preview" class="file-preview" src="#" alt="Vista previa de INE reverso">
 
       <button type="submit" class="btn">Registrarse</button>
     </form>
@@ -126,5 +160,34 @@
   </footer>
 
   <script src="validaciones_intento1.js"></script>
+  <script>
+    // Función para mostrar vista previa de imágenes
+    function mostrarVistaPrevia(input, previewId) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          const preview = document.getElementById(previewId);
+          preview.style.display = 'block';
+          preview.src = e.target.result;
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // Event listeners para las vistas previas
+    document.getElementById('foto_perfil').addEventListener('change', function() {
+      mostrarVistaPrevia(this, 'foto_perfil_preview');
+    });
+
+    document.getElementById('ine_frente').addEventListener('change', function() {
+      mostrarVistaPrevia(this, 'ine_frente_preview');
+    });
+
+    document.getElementById('ine_reverso').addEventListener('change', function() {
+      mostrarVistaPrevia(this, 'ine_reverso_preview');
+    });
+  </script>
 </body>
 </html>
