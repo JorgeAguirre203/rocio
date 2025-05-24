@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-21 03:44:58
+/* Smarty version 3.1.39, created on 2025-05-21 04:59:51
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_682d4c3a02f462_18322386',
+  'unifunc' => 'content_682d5dc7dc63d2_63978279',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1747799094,
+      1 => 1747803583,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_682d4c3a02f462_18322386 (Smarty_Internal_Template $_smarty_tpl) {
+function content_682d5dc7dc63d2_63978279 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -166,11 +166,13 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
             <p><strong>Nickname:</strong> <?php echo $_smarty_tpl->tpl_vars['nickname']->value;?>
 </p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+            <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
             <a href="logout.php" class="nav-btn">Cerrar sesión</a>
         </div>
     </div>
 
     <!-- Sidebar de filtros -->
+
     <div class="sidebar-filtros">
         <h3>Filtrar afiliados</h3>
         
@@ -202,7 +204,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
         <div class="filtro-bloque">
             <h4>Calificación</h4>
-            <select id="filtro-estrellas">
+            <select id="filtro-estrellas" class="filtro-select">
                 <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['opciones_estrellas']->value),$_smarty_tpl);?>
 
             </select>
@@ -210,7 +212,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         
         <div class="filtro-bloque">
             <h4>Precio estimado</h4>
-            <select id="filtro-precio">
+            <select id="filtro-precio" class="filtro-select">
                 <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['opciones_precio']->value),$_smarty_tpl);?>
 
             </select>
@@ -242,7 +244,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             </ul>
         </div>
     </div>
-
     <!-- Contenido principal -->
     <div class="container">
         <main class="servicios">
@@ -264,8 +265,9 @@ $_smarty_tpl->tpl_vars['servicio']->do_else = false;
 "
                          data-especialidad="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['especialidad'], ENT_QUOTES, 'UTF-8', true);?>
 ">
-                    <img src="<?php echo (($tmp = @htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['foto_perfil'], ENT_QUOTES, 'UTF-8', true))===null||$tmp==='' ? 'img/default_profile.jpg' : $tmp);?>
-" 
+                    <img src="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['imagen'], ENT_QUOTES, 'UTF-8', true);?>
+" alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
+">
                          alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
 ">
                     <h2><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
@@ -303,6 +305,30 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
     <!-- JavaScript -->
+        <?php echo '<script'; ?>
+>
+        // Función de confirmación para eliminar cuenta
+        function confirmarEliminacion() {
+            return confirm('¿Estás seguro que deseas eliminar tu cuenta?\n\nEsta acción es irreversible y se perderán todos tus datos.');
+        }
+
+        // Control de sidebars
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+            
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+        
+        // ... (resto del código JavaScript se mantiene igual) ...
+    <?php echo '</script'; ?>
+>
     <?php echo '<script'; ?>
 >
         // Control de sidebars

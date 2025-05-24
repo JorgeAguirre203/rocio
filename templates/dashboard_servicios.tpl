@@ -138,11 +138,13 @@
             <p><strong>Nombre:</strong> {$nombre}</p>
             <p><strong>Nickname:</strong> {$nickname}</p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+            <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
             <a href="logout.php" class="nav-btn">Cerrar sesión</a>
         </div>
     </div>
 
     <!-- Sidebar de filtros -->
+
     <div class="sidebar-filtros">
         <h3>Filtrar afiliados</h3>
         
@@ -163,14 +165,14 @@
         
         <div class="filtro-bloque">
             <h4>Calificación</h4>
-            <select id="filtro-estrellas">
+            <select id="filtro-estrellas" class="filtro-select">
                 {html_options options=$opciones_estrellas}
             </select>
         </div>
         
         <div class="filtro-bloque">
             <h4>Precio estimado</h4>
-            <select id="filtro-precio">
+            <select id="filtro-precio" class="filtro-select">
                 {html_options options=$opciones_precio}
             </select>
         </div>
@@ -190,7 +192,6 @@
             </ul>
         </div>
     </div>
-
     <!-- Contenido principal -->
     <div class="container">
         <main class="servicios">
@@ -202,7 +203,7 @@
                          data-precio="{$servicio.precio|escape:'html'}"
                          data-disponibilidad="{$servicio.disponibilidad|escape:'html'}"
                          data-especialidad="{$servicio.especialidad|escape:'html'}">
-                    <img src="{$servicio.foto_perfil|escape:'html'|default:'img/default_profile.jpg'}" 
+                    <img src="{$servicio.imagen|escape:'html'}" alt="{$servicio.nombre|escape:'html'}">
                          alt="{$servicio.nombre|escape:'html'}">
                     <h2>{$servicio.nombre|escape:'html'}</h2>
                     <p>{$servicio.descripcion|escape:'html'}</p>
@@ -229,6 +230,28 @@
     <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
     <!-- JavaScript -->
+        <script>
+        // Función de confirmación para eliminar cuenta
+        function confirmarEliminacion() {
+            return confirm('¿Estás seguro que deseas eliminar tu cuenta?\n\nEsta acción es irreversible y se perderán todos tus datos.');
+        }
+
+        // Control de sidebars
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+            
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+        
+        // ... (resto del código JavaScript se mantiene igual) ...
+    </script>
     <script>
         // Control de sidebars
         function toggleSidebar() {

@@ -5,8 +5,9 @@ require_once 'conexion_jorge.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit;
 }
 

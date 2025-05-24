@@ -28,7 +28,7 @@ try {
     // Conexión a la base de datos
     require_once('conexion_jorge.php');
     
-    // Consulta para obtener afiliados verificados (ahora con email)
+    // Consulta para obtener afiliados verificados
     $query = "SELECT id, nombre, apellido_paterno, apellido_materno, nickname, email, especialidad, foto_perfil 
               FROM usuarios 
               WHERE verificado = 1";
@@ -56,13 +56,34 @@ try {
     }
     $result->close();
 
-    // Asignar datos a Smarty
+    // Asignar datos a Smarty (CON LOS FILTROS COMPLETOS)
     $smarty->assign([
         'page_title' => 'Afiliados Verificados',
         'nombre' => htmlspecialchars($_SESSION['usuario']['nombre'] ?? 'Usuario'),
         'nickname' => htmlspecialchars($_SESSION['usuario']['nickname'] ?? 'Invitado'),
         'servicios' => $servicios,
-        // ... resto de asignaciones
+        'categorias' => [
+            ['id' => 'albanileria', 'nombre' => 'Albañilería', 'checked' => true],
+            ['id' => 'electricidad', 'nombre' => 'Electricidad', 'checked' => true],
+            ['id' => 'plomeria', 'nombre' => 'Plomería', 'checked' => true],
+            ['id' => 'carpinteria', 'nombre' => 'Carpintería', 'checked' => true]
+        ],
+        'opciones_estrellas' => [
+            0 => 'Cualquier calificación',
+            3 => '3 estrellas o más',
+            4 => '4 estrellas o más',
+            5 => 'Solo 5 estrellas'
+        ],
+        'opciones_precio' => [
+            0 => 'Cualquier precio',
+            1 => '$ - Económico',
+            2 => '$$ - Medio',
+            3 => '$$$ - Alto'
+        ],
+        'disponibilidades' => [
+            ['id' => 'hoy', 'nombre' => 'Disponible hoy', 'checked' => false],
+            ['id' => 'semana', 'nombre' => 'Esta semana', 'checked' => false]
+        ]
     ]);
 
     // Mostrar plantilla
