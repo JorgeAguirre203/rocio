@@ -17,34 +17,52 @@ if (isset($_SESSION['usuario'])) {
 
 // Procesar formulario de login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+
     // Verificar si los campos no están vacíos
     if (empty($email) || empty($password)) {
         $smarty->assign('error', 'Por favor ingresa ambos campos');
     } else {
-        // Consulta a la base de datos para buscar el usuario
+        // 1. Verificar si es admin
+        $stmt_admin = $conexion->prepare("SELECT id, nombre, contrasena FROM admins WHERE nombre = ?");
+        $stmt_admin->bind_param("s", $email);
+        $stmt_admin->execute();
+        $resultado_admin = $stmt_admin->get_result();
+
+        if ($resultado_admin->num_rows === 1) {
+            $admin = $resultado_admin->fetch_assoc();
+            if (
+                password_verify($password, $admin['contrasena']) ||
+                $password === $admin['contrasena']
+            ) {
+                $_SESSION['admin'] = [
+                    'id' => $admin['id'],
+                    'nombre' => $admin['nombre']
+                ];
+                header("Location: loginAfiliados.php");
+                exit;
+            }
+                } else {
+                $smarty->assign('error', 'Usuario no encontrado o contraseña incorrecta');
+        }
+
+        // 2. Si no es admin, buscar en usuarios2
         $stmt = $conexion->prepare("SELECT id, nombre, email, password, nickname FROM usuarios2 WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        
-        // Verificar si se encontró el usuario
+
         if ($resultado->num_rows === 1) {
             $usuario = $resultado->fetch_assoc();
-            
-            // Verificar la contraseña
+
             if (password_verify($password, $usuario['password'])) {
-                // Guardar la información del usuario en la sesión
                 $_SESSION['usuario'] = [
                     'id' => $usuario['id'],
                     'nombre' => $usuario['nombre'],
                     'nickname' => $usuario['nickname'],
                     'email' => $usuario['email']
                 ];
-                
-                // Redirigir a la página dashboard_servicios.php
                 header("Location: dashboard_servicios.php");
                 exit;
             } else {
