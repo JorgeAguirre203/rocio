@@ -1,7 +1,6 @@
 <?php
 require_once 'libs/Smarty.class.php';
 
-
 // Configurar Smarty
 $smarty = new Smarty();
 $smarty->setTemplateDir('templates/');
@@ -81,51 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = "El correo electrónico ya está registrado";
         }
     }
-    
-    // Procesar archivos subidos
-    $foto_perfil = '';
-    $ine_frente = '';
-    $ine_reverso = '';
-    
-    if (empty($errors)) {
-        // Directorio para subir archivos
-        $upload_dir = 'uploads/usuarios/';
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
-        }
-        
-        // Procesar foto de perfil
-        if (!empty($_FILES['foto_perfil']['name'])) {
-            $foto_perfil = procesarArchivo('foto_perfil', $upload_dir, ['jpg', 'jpeg', 'png'], 5000000);
-            if ($foto_perfil === false) {
-                $errors[] = "Error al subir la foto de perfil (solo JPG/JPEG/PNG, máximo 2MB)";
-            }
-        } else {
-            $errors[] = "La foto de perfil es requerida";
-        }
-        
-        // Procesar INE frente
-        if (!empty($_FILES['ine_frente']['name'])) {
-            $ine_frente = procesarArchivo('ine_frente', $upload_dir, ['jpg', 'jpeg', 'png', 'pdf'], 6000000);
-            if ($ine_frente === false) {
-                $errors[] = "Error al subir el INE (frente) (solo JPG/JPEG/PNG/PDF, máximo 3MB)";
-            }
-        } else {
-            $errors[] = "El INE (frente) es requerido";
-        }
-        
-        // Procesar INE reverso
-        if (!empty($_FILES['ine_reverso']['name'])) {
-            $ine_reverso = procesarArchivo('ine_reverso', $upload_dir, ['jpg', 'jpeg', 'png', 'pdf'], 6000000);
-            if ($ine_reverso === false) {
-                $errors[] = "Error al subir el INE (reverso) (solo JPG/JPEG/PNG/PDF, máximo 3MB)";
-            }
-        } else {
-            $errors[] = "El INE (reverso) es requerido";
-        }
-    }
-    
-    // Si no hay errores, registrar usuario
+
+    // Si no hay errores, registrar usuario (sin archivos aún)
+    $id_usuario = null;
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
@@ -141,11 +98,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             foto_perfil, 
             ine_frente, 
             ine_reverso
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', '', '')";
 
         $stmt = $conn->prepare($sql_insert);
         $stmt->bind_param(
-            "sssssssssss", 
+            "ssssssss", 
             $nombre, 
             $apellido_paterno, 
             $apellido_materno, 
@@ -153,25 +110,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email, 
             $telefono, 
             $hashedPassword, 
-            $especialidad, 
-            $foto_perfil, 
-            $ine_frente, 
-            $ine_reverso
+            $especialidad
         );
         
         if ($stmt->execute()) {
-            $smarty->assign('success', 'Registro exitoso. Ahora puedes iniciar sesión.');
-            // Limpiar datos del formulario después de registro exitoso
-            $_POST = array();
+            $id_usuario = $stmt->insert_id;
         } else {
             $errors[] = "Error al registrar el usuario: " . $conn->error;
         }
     }
-    
+
+    // Procesar archivos subidos y actualizar rutas en la base de datos
+    if (empty($errors) && $id_usuario) {
+        // Crear estructura de carpetas
+        $base_dir = "uploads/usuarios/$id_usuario/";
+        $perfil_dir = $base_dir . "perfil/";
+        $ine_frente_dir = $base_dir . "ine_frente/";
+        $ine_reverso_dir = $base_dir . "ine_reverso/";
+
+        foreach ([$perfil_dir, $ine_frente_dir, $ine_reverso_dir] as $dir) {
+            if (!is_dir($dir)) {
+                mkdir($dir, 0755, true);
+            }
+        }
+
+        // Procesar foto de perfil
+        $foto_perfil = '';
+        if (!empty($_FILES['foto_perfil']['name'])) {
+            $foto_perfil = procesarArchivo('foto_perfil', $perfil_dir, ['jpg', 'jpeg', 'png'], 5000000);
+            if ($foto_perfil === false) {
+                $errors[] = "Error al subir la foto de perfil (solo JPG/JPEG/PNG, máximo 5MB)";
+            }
+        } else {
+            $errors[] = "La foto de perfil es requerida";
+        }
+
+        // Procesar INE frente
+        $ine_frente = '';
+        if (!empty($_FILES['ine_frente']['name'])) {
+            $ine_frente = procesarArchivo('ine_frente', $ine_frente_dir, ['jpg', 'jpeg', 'png', 'pdf'], 6000000);
+            if ($ine_frente === false) {
+                $errors[] = "Error al subir el INE (frente) (solo JPG/JPEG/PNG/PDF, máximo 6MB)";
+            }
+        } else {
+            $errors[] = "El INE (frente) es requerido";
+        }
+
+        // Procesar INE reverso
+        $ine_reverso = '';
+        if (!empty($_FILES['ine_reverso']['name'])) {
+            $ine_reverso = procesarArchivo('ine_reverso', $ine_reverso_dir, ['jpg', 'jpeg', 'png', 'pdf'], 6000000);
+            if ($ine_reverso === false) {
+                $errors[] = "Error al subir el INE (reverso) (solo JPG/JPEG/PNG/PDF, máximo 6MB)";
+            }
+        } else {
+            $errors[] = "El INE (reverso) es requerido";
+        }
+
+        // Si no hubo errores de archivos, actualiza las rutas en la base de datos
+        if (empty($errors)) {
+            $sql_update = "UPDATE usuarios SET foto_perfil=?, ine_frente=?, ine_reverso=? WHERE id=?";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->bind_param("sssi", $foto_perfil, $ine_frente, $ine_reverso, $id_usuario);
+            $stmt_update->execute();
+            $stmt_update->close();
+
+            $smarty->assign('success', 'Registro exitoso. Ahora puedes iniciar sesión.');
+            $_POST = array();
+        }
+    }
+
     // Si hay errores, mostrarlos
     if (!empty($errors)) {
         $smarty->assign('errors', $errors);
-        // Mantener los valores del formulario para no perderlos
         $smarty->assign('form_data', $_POST);
     }
 }

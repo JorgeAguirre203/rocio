@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-21 04:59:51
+/* Smarty version 3.1.39, created on 2025-05-25 00:40:54
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_682d5dc7dc63d2_63978279',
+  'unifunc' => 'content_68326716966020_27077589',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1747803583,
+      1 => 1748133652,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_682d5dc7dc63d2_63978279 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68326716966020_27077589 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -265,11 +265,8 @@ $_smarty_tpl->tpl_vars['servicio']->do_else = false;
 "
                          data-especialidad="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['especialidad'], ENT_QUOTES, 'UTF-8', true);?>
 ">
-                    <img src="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['imagen'], ENT_QUOTES, 'UTF-8', true);?>
-" alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
-">
-                         alt="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
-">
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['servicio']->value['foto_perfil'];?>
+" alt="Foto de perfil" />
                     <h2><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
 </h2>
                     <p><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['descripcion'], ENT_QUOTES, 'UTF-8', true);?>
@@ -286,7 +283,7 @@ _detalles">
 </p>
                         <p><strong>Contacto:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['email'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                        <p><strong>Nickname:</strong> @<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nickname'], ENT_QUOTES, 'UTF-8', true);?>
+                        <p><strong>Nickname:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['nickname'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
                     </div>
                 </section>

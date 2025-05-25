@@ -203,8 +203,7 @@
                          data-precio="{$servicio.precio|escape:'html'}"
                          data-disponibilidad="{$servicio.disponibilidad|escape:'html'}"
                          data-especialidad="{$servicio.especialidad|escape:'html'}">
-                    <img src="{$servicio.imagen|escape:'html'}" alt="{$servicio.nombre|escape:'html'}">
-                         alt="{$servicio.nombre|escape:'html'}">
+                    <img src="{$servicio.foto_perfil}" alt="Foto de perfil" />
                     <h2>{$servicio.nombre|escape:'html'}</h2>
                     <p>{$servicio.descripcion|escape:'html'}</p>
                     <p><strong>Especialidad:</strong> {$servicio.especialidad|escape:'html'}</p>
@@ -214,7 +213,7 @@
                     <div class="detalles" id="afiliado_{$servicio.id|escape:'html'}_detalles">
                         <p>{$servicio.detalles|escape:'html'}</p>
                         <p><strong>Contacto:</strong> {$servicio.email|escape:'html'}</p>
-                        <p><strong>Nickname:</strong> @{$servicio.nickname|escape:'html'}</p>
+                        <p><strong>Nickname:</strong> {$servicio.nickname|escape:'html'}</p>
                     </div>
                 </section>
                 {/foreach}

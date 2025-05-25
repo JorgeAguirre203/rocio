@@ -46,7 +46,7 @@ try {
             'nickname' => $afiliado['nickname'],
             'email' => $afiliado['email'],
             'especialidad' => $afiliado['especialidad'],
-            'foto_perfil' => 'uploads/' . $afiliado['foto_perfil'],
+            'foto_perfil' => $afiliado['foto_perfil'],
             'descripcion' => 'Profesional verificad@',
             'detalles' => 'Especialista en ' . $afiliado['especialidad'],
             'estrellas' => 5,
