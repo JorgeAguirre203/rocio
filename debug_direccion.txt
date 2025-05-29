@@ -1,0 +1,13 @@
+Array
+(
+    [id] => 14
+    [POST] => Array
+        (
+            [calle] => jazmin
+            [colonia] => jardines zacatecas
+            [numero_casa] => 1608
+            [estado] => sinaloa
+            [municipio] => ahome
+        )
+
+)

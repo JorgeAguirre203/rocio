@@ -140,6 +140,7 @@
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
             <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
             <a href="logout.php" class="nav-btn">Cerrar sesión</a>
+            <a href="direccion_usuario.php" class="nav-btn">Agregar direccion</a>
         </div>
     </div>
 
@@ -207,6 +208,7 @@
                     <h2>{$servicio.nombre|escape:'html'}</h2>
                     <p>{$servicio.descripcion|escape:'html'}</p>
                     <p><strong>Especialidad:</strong> {$servicio.especialidad|escape:'html'}</p>
+                    <button onclick="contratarAfiliado('{$servicio.id|escape:'javascript'}')">Contratar</button>
                     <button onclick="mostrarDetalles('afiliado_{$servicio.id|escape:'javascript'}')">
                         Ver detalles
                     </button>
