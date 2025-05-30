@@ -227,7 +227,7 @@
             <!-- Campanita de notificaciones -->
             <div class="notificaciones-icono" onclick="toggleNotificaciones()" title="Notificaciones">
                 <span class="bell">&#128276;</span>
-                <span class="noti-badge" id="noti-badge" style="display:none;">1</span>
+                <span class="noti-badge" id="noti-badge" {if $noti_count == 0}style="display:none;"{/if}>{$noti_count}</span>
             </div>
         </div>
     </div>
@@ -239,8 +239,19 @@
             <button onclick="closeNotificaciones()" class="close-noti">&times;</button>
         </div>
         <div class="notificaciones-lista" id="notificaciones-lista">
-            <!-- Aquí puedes poner tus notificaciones dinámicamente -->
-            <p>No tienes notificaciones nuevas.</p>
+            {if $noti_count > 0}
+                <ul>
+                {foreach $notificaciones as $noti}
+                    <li>
+                        <a href="pago.php?id_cotizacion={$noti.id}">
+                            Tienes un pago pendiente de <b>{$noti.servicio|escape:'html'}</b> por <b>${$noti.total}</b>
+                        </a>
+                    </li>
+                {/foreach}
+                </ul>
+            {else}
+                <p>No tienes pagos pendientes.</p>
+            {/if}
         </div>
     </div>
     <div id="noti-overlay" class="noti-overlay" onclick="closeNotificaciones()"></div>

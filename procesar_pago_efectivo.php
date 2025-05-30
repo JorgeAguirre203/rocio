@@ -2,9 +2,9 @@
 include 'conexion_jorge.php';
 
 $id_cotizacion = $_POST['id_cotizacion'] ?? null;
-$nombre = $_POST['nombre'] ?? '';
+$total = $_POST['total'] ?? null;
+$nombre = $_POST['nombre'] ?? null;
 $detalle = $_POST['detalle'] ?? '';
-$total = $_POST['total'] ?? 0;
 
 if (!$id_cotizacion || !$nombre || $total <= 0) {
     die("Datos incompletos. Por favor, regresa e intenta de nuevo.");
@@ -23,7 +23,7 @@ try {
     $stmt_pago->execute();
     
     // Actualizar estado de la cotización
-    $stmt_cotizacion = $conexion->prepare("UPDATE cotizaciones SET estado = 'pendiente' WHERE id = ?");
+    $stmt_cotizacion = $conexion->prepare("UPDATE cotizaciones SET estado = 'aceptada' WHERE id = ?");
     $stmt_cotizacion->bind_param("i", $id_cotizacion);
     $stmt_cotizacion->execute();
     

@@ -56,6 +56,24 @@ try {
     }
     $result->close();
 
+    // --- AQUÍ AGREGA TU BLOQUE DE NOTIFICACIONES ---
+    $id_usuario = $_SESSION['usuario']['id'] ?? null;
+    $notificaciones = [];
+    $noti_count = 0;
+
+    if ($id_usuario) {
+        $sql = "SELECT id, servicio, total FROM cotizaciones WHERE id_usuario = ? AND estado = 'pendiente'";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $id_usuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $notificaciones[] = $row;
+        }
+        $noti_count = count($notificaciones);
+        $stmt->close();
+    }
+
     // Asignar datos a Smarty (CON LOS FILTROS COMPLETOS)
     $smarty->assign([
         'page_title' => 'Afiliados Verificados',
@@ -85,6 +103,10 @@ try {
             ['id' => 'semana', 'nombre' => 'Esta semana', 'checked' => false]
         ]
     ]);
+
+    // Asigna las notificaciones y el contador
+    $smarty->assign('notificaciones', $notificaciones);
+    $smarty->assign('noti_count', $noti_count);
 
     // Mostrar plantilla
     $smarty->display('dashboard_servicios.tpl');

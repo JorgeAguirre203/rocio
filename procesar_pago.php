@@ -2,14 +2,11 @@
 include 'conexion_jorge.php';
 header('Content-Type: application/json');
 
-$data = json_decode(file_get_contents('php://input'), true);
+// Leer los datos JSON del cuerpo de la solicitud
+$input = json_decode(file_get_contents('php://input'), true);
 
-$id_cotizacion = $data['id_cotizacion'] ?? null;
-$idOrden = $data['idOrden'] ?? null;
-$metodo = $data['metodo'] ?? null;
-$monto = $data['monto'] ?? null;
-
-if (!$id_cotizacion || !$idOrden || !$metodo || !$monto) {
+// Validar datos básicos
+if (empty($input['id_cotizacion']) || empty($input['idOrden']) || empty($input['monto'])) {
     echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
     exit;
 }
@@ -18,24 +15,35 @@ if (!$id_cotizacion || !$idOrden || !$metodo || !$monto) {
 $conexion->begin_transaction();
 
 try {
-    // Registrar el pago
-    $stmt_pago = $conexion->prepare("INSERT INTO pagos (id_cotizacion, id_orden, metodo_pago, monto, estado, fecha) VALUES (?, ?, ?, ?, 'completado', NOW())");
-    $stmt_pago->bind_param("issd", $id_cotizacion, $idOrden, $metodo, $monto);
-    $stmt_pago->execute();
+    // 1. Registrar el pago
+    $stmt = $conexion->prepare("INSERT INTO pagos 
+                              (id_cotizacion, id_orden, metodo_pago, monto, estado, detalle_pago, fecha) 
+                              VALUES (?, ?, ?, ?, 'completado', ?, NOW())");
+    $detalle = json_encode($input['detalles'] ?? []);
+    $stmt->bind_param("issds", $input['id_cotizacion'], $input['idOrden'], 
+                     $input['metodo'], $input['monto'], $detalle);
+    $stmt->execute();
+    $id_pago = $conexion->insert_id;
     
-    // Actualizar estado de la cotización
-    $stmt_cotizacion = $conexion->prepare("UPDATE cotizaciones SET estado = 'completada' WHERE id = ?");
-    $stmt_cotizacion->bind_param("i", $id_cotizacion);
-    $stmt_cotizacion->execute();
+    // 2. Actualizar estado de la cotización
+    $stmt = $conexion->prepare("UPDATE cotizaciones SET estado = 'completada' WHERE id = ?");
+    $stmt->bind_param("i", $input['id_cotizacion']);
+    $stmt->execute();
     
+    // 3. Confirmar transacción
     $conexion->commit();
-    echo json_encode(['success' => true]);
+    
+    echo json_encode([
+        'success' => true,
+        'id_pago' => $id_pago,
+        'message' => 'Pago registrado correctamente'
+    ]);
+    
 } catch (Exception $e) {
     $conexion->rollback();
-    echo json_encode(['success' => false, 'message' => 'Error al procesar el pago: ' . $e->getMessage()]);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error al procesar el pago: ' . $e->getMessage()
+    ]);
 }
-
-$stmt_pago->close();
-$stmt_cotizacion->close();
-$conexion->close();
 ?>

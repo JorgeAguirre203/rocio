@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 07:52:33
+/* Smarty version 3.1.39, created on 2025-05-30 09:32:19
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_683963c1d18241_67515408',
+  'unifunc' => 'content_68397b2337cdd3_90431743',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1748591551,
+      1 => 1748597354,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_683963c1d18241_67515408 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68397b2337cdd3_90431743 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -253,7 +253,8 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
             <!-- Campanita de notificaciones -->
             <div class="notificaciones-icono" onclick="toggleNotificaciones()" title="Notificaciones">
                 <span class="bell">&#128276;</span>
-                <span class="noti-badge" id="noti-badge" style="display:none;">1</span>
+                <span class="noti-badge" id="noti-badge" <?php if ($_smarty_tpl->tpl_vars['noti_count']->value == 0) {?>style="display:none;"<?php }?>><?php echo $_smarty_tpl->tpl_vars['noti_count']->value;?>
+</span>
             </div>
         </div>
     </div>
@@ -265,8 +266,29 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
             <button onclick="closeNotificaciones()" class="close-noti">&times;</button>
         </div>
         <div class="notificaciones-lista" id="notificaciones-lista">
-            <!-- Aquí puedes poner tus notificaciones dinámicamente -->
-            <p>No tienes notificaciones nuevas.</p>
+            <?php if ($_smarty_tpl->tpl_vars['noti_count']->value > 0) {?>
+                <ul>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['notificaciones']->value, 'noti');
+$_smarty_tpl->tpl_vars['noti']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['noti']->value) {
+$_smarty_tpl->tpl_vars['noti']->do_else = false;
+?>
+                    <li>
+                        <a href="pago.php?id_cotizacion=<?php echo $_smarty_tpl->tpl_vars['noti']->value['id'];?>
+">
+                            Tienes un pago pendiente de <b><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['noti']->value['servicio'], ENT_QUOTES, 'UTF-8', true);?>
+</b> por <b>$<?php echo $_smarty_tpl->tpl_vars['noti']->value['total'];?>
+</b>
+                        </a>
+                    </li>
+                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                </ul>
+            <?php } else { ?>
+                <p>No tienes pagos pendientes.</p>
+            <?php }?>
         </div>
     </div>
     <div id="noti-overlay" class="noti-overlay" onclick="closeNotificaciones()"></div>
