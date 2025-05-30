@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 require_once 'conexion_jorge.php';
 require_once __DIR__.'/libs/Smarty.class.php';
 session_start();
@@ -26,6 +24,22 @@ foreach ($dirs as $key => $dir) {
     $smarty->{$key} = $dir;
 }
 
+// --- EDICIÓN: Cargar datos si viene id_cotizacion por GET ---
+$editando = false;
+if (isset($_GET['id_cotizacion'])) {
+    $id_cotizacion = intval($_GET['id_cotizacion']);
+    $stmt = $conexion->prepare("SELECT * FROM cotizaciones WHERE id = ?");
+    $stmt->bind_param("i", $id_cotizacion);
+    $stmt->execute();
+    $datos_cotizacion = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    if ($datos_cotizacion) {
+        $editando = true;
+        $smarty->assign('cotizacion', $datos_cotizacion);
+        $smarty->assign('peticion_id', $datos_cotizacion['id_peticion'] ?? 0); // Si tienes id_peticion en cotizaciones
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $peticion_id = intval($_POST['peticion_id']);
     $servicio = $_POST['servicio'];
@@ -39,6 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Error: El servicio '$servicio' no es válido.");
     }
 
+    // --- Si es edición, actualiza la cotización ---
+    if (isset($_POST['id_cotizacion']) && $_POST['id_cotizacion']) {
+        $id_cotizacion = intval($_POST['id_cotizacion']);
+        $stmt = $conexion->prepare("UPDATE cotizaciones SET servicio=?, horas=?, detalles=?, precio_hora=?, total=? WHERE id=?");
+        $stmt->bind_param("sdssdi", $servicio, $horas, $detalles, $precio_hora, $total, $id_cotizacion);
+        $stmt->execute();
+        $stmt->close();
+        header("Location: afiliados.php");
+        exit;
+    }
+
+    // --- Si es nueva cotización, crea normalmente ---
     // Obtener id_usuario e id_afiliado de la petición
     $stmt = $conexion->prepare("SELECT id_usuario, id_afiliado FROM peticiones WHERE id = ?");
     $stmt->bind_param("i", $peticion_id);
@@ -58,8 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     // Relacionar cotización con la petición
- 
-    $stmt = $conexion->prepare("UPDATE peticiones SET id_cotizacion = ?, estado = 'aceptada' WHERE id = ?");
+    $stmt = $conexion->prepare("UPDATE peticiones SET id_cotizacion = ?, estado = 'pendiente' WHERE id = ?");
     $stmt->bind_param("ii", $id_cotizacion, $peticion_id);
     $stmt->execute();
     $stmt->close();
@@ -68,6 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-$peticion_id = isset($_GET['peticion_id']) ? intval($_GET['peticion_id']) : 0;
-$smarty->assign('peticion_id', $peticion_id);
+// Si no es edición, asigna peticion_id desde GET
+if (!$editando) {
+    $peticion_id = isset($_GET['peticion_id']) ? intval($_GET['peticion_id']) : 0;
+    $smarty->assign('peticion_id', $peticion_id);
+}
+
 $smarty->display('crear_cotizacion.tpl');

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 09:18:40
+/* Smarty version 3.1.39, created on 2025-05-30 11:14:37
   from '/var/www/html/rocio/templates/afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_683977f0236875_15718567',
+  'unifunc' => 'content_6839931d81ea55_62651912',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
     array (
       0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1748596652,
+      1 => 1748603675,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_683977f0236875_15718567 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6839931d81ea55_62651912 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -279,39 +279,47 @@ $_smarty_tpl->tpl_vars['peticion']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['peticion']->value) {
 $_smarty_tpl->tpl_vars['peticion']->do_else = false;
 ?>
-                            <li>
-                                <strong><?php echo $_smarty_tpl->tpl_vars['peticion']->value['nombre'];
+                            <?php if (!$_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion'] || $_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion'] == 'pendiente') {?>
+                                <li>
+                                    <strong><?php echo $_smarty_tpl->tpl_vars['peticion']->value['nombre'];
 if ($_smarty_tpl->tpl_vars['peticion']->value['nickname']) {?> (<?php echo $_smarty_tpl->tpl_vars['peticion']->value['nickname'];?>
 )<?php }?></strong><br>
-                                Email: <?php echo $_smarty_tpl->tpl_vars['peticion']->value['email'];?>
+                                    Email: <?php echo $_smarty_tpl->tpl_vars['peticion']->value['email'];?>
 <br>
-                                Teléfono: <?php echo $_smarty_tpl->tpl_vars['peticion']->value['telefono'];?>
+                                    Teléfono: <?php echo $_smarty_tpl->tpl_vars['peticion']->value['telefono'];?>
 <br>
-                                <strong>Dirección:</strong>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['calle']) {
+                                    <strong>Dirección:</strong>
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['calle']) {
 echo $_smarty_tpl->tpl_vars['peticion']->value['calle'];?>
  <?php }?>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['numero_casa']) {?>#<?php echo $_smarty_tpl->tpl_vars['peticion']->value['numero_casa'];?>
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['numero_casa']) {?>#<?php echo $_smarty_tpl->tpl_vars['peticion']->value['numero_casa'];?>
  <?php }?>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['codigo_postal']) {?>CP: <?php echo $_smarty_tpl->tpl_vars['peticion']->value['codigo_postal'];?>
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['codigo_postal']) {?>CP: <?php echo $_smarty_tpl->tpl_vars['peticion']->value['codigo_postal'];?>
  <?php }?>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['municipio']) {
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['municipio']) {
 echo $_smarty_tpl->tpl_vars['peticion']->value['municipio'];?>
 , <?php }?>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['estado_dir']) {
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['estado_dir']) {
 echo $_smarty_tpl->tpl_vars['peticion']->value['estado_dir'];
 }?><br>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['indicaciones']) {?><em>Indicaciones:</em> <?php echo $_smarty_tpl->tpl_vars['peticion']->value['indicaciones'];?>
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['indicaciones']) {?><em>Indicaciones:</em> <?php echo $_smarty_tpl->tpl_vars['peticion']->value['indicaciones'];?>
 <br><?php }?>
-                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion'] == 'pendiente') {?>
-                                    <span style="color: orange; font-weight: bold;">Pago pendiente</span>
-                                <?php }?>
-                                <form method="get" action="crear_cotizacion.php" style="display:inline;">
-                                    <input type="hidden" name="peticion_id" value="<?php echo $_smarty_tpl->tpl_vars['peticion']->value['peticion_id'];?>
+                                    <?php if (!$_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion']) {?>
+                                        <form method="get" action="crear_cotizacion.php" style="display:inline;">
+                                            <input type="hidden" name="peticion_id" value="<?php echo $_smarty_tpl->tpl_vars['peticion']->value['peticion_id'];?>
 ">
-                                    <button type="submit">Cotizar</button>
-                                </form>
-                            </li>
+                                            <button type="submit">Cotizar</button>
+                                        </form>
+                                    <?php } elseif ($_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion'] == 'pendiente') {?>
+                                        <span style="color: orange; font-weight: bold;">Pago pendiente</span>
+                                        <form method="get" action="crear_cotizacion.php" style="display:inline;">
+                                            <input type="hidden" name="id_cotizacion" value="<?php echo $_smarty_tpl->tpl_vars['peticion']->value['id_cotizacion'];?>
+">
+                                            <button type="submit">Editar cotización</button>
+                                        </form>
+                                    <?php }?>
+                                </li>
+                            <?php }?>
                         <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>

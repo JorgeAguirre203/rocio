@@ -217,25 +217,32 @@
                     {if $peticiones_aceptadas|@count > 0}
                         <ul>
                         {foreach $peticiones_aceptadas as $peticion}
-                            <li>
-                                <strong>{$peticion.nombre}{if $peticion.nickname} ({$peticion.nickname}){/if}</strong><br>
-                                Email: {$peticion.email}<br>
-                                Teléfono: {$peticion.telefono}<br>
-                                <strong>Dirección:</strong>
-                                {if $peticion.calle}{$peticion.calle} {/if}
-                                {if $peticion.numero_casa}#{$peticion.numero_casa} {/if}
-                                {if $peticion.codigo_postal}CP: {$peticion.codigo_postal} {/if}
-                                {if $peticion.municipio}{$peticion.municipio}, {/if}
-                                {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
-                                {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
-                                {if $peticion.estado_cotizacion == 'pendiente'}
-                                    <span style="color: orange; font-weight: bold;">Pago pendiente</span>
-                                {/if}
-                                <form method="get" action="crear_cotizacion.php" style="display:inline;">
-                                    <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
-                                    <button type="submit">Cotizar</button>
-                                </form>
-                            </li>
+                            {if !$peticion.estado_cotizacion || $peticion.estado_cotizacion == 'pendiente'}
+                                <li>
+                                    <strong>{$peticion.nombre}{if $peticion.nickname} ({$peticion.nickname}){/if}</strong><br>
+                                    Email: {$peticion.email}<br>
+                                    Teléfono: {$peticion.telefono}<br>
+                                    <strong>Dirección:</strong>
+                                    {if $peticion.calle}{$peticion.calle} {/if}
+                                    {if $peticion.numero_casa}#{$peticion.numero_casa} {/if}
+                                    {if $peticion.codigo_postal}CP: {$peticion.codigo_postal} {/if}
+                                    {if $peticion.municipio}{$peticion.municipio}, {/if}
+                                    {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
+                                    {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
+                                    {if !$peticion.estado_cotizacion}
+                                        <form method="get" action="crear_cotizacion.php" style="display:inline;">
+                                            <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
+                                            <button type="submit">Cotizar</button>
+                                        </form>
+                                    {elseif $peticion.estado_cotizacion == 'pendiente'}
+                                        <span style="color: orange; font-weight: bold;">Pago pendiente</span>
+                                        <form method="get" action="crear_cotizacion.php" style="display:inline;">
+                                            <input type="hidden" name="id_cotizacion" value="{$peticion.id_cotizacion}">
+                                            <button type="submit">Editar cotización</button>
+                                        </form>
+                                    {/if}
+                                </li>
+                            {/if}
                         {/foreach}
                         </ul>
                     {else}

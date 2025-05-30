@@ -29,7 +29,8 @@ try {
     
     $conexion->commit();
     echo "Pago en efectivo registrado. Por favor, completa el pago con el prestador.";
-    header("Refresh: 3; url=dashboard_servicios.php");
+    header("Location: calificar_afiliado.php?id_cotizacion=$id_cotizacion");
+    exit;
 } catch (Exception $e) {
     $conexion->rollback();
     echo "Error al registrar el pago: " . $e->getMessage();
