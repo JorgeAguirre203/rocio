@@ -31,6 +31,27 @@ CREATE TABLE `admins` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `peticiones`
+--
+
+DROP TABLE IF EXISTS `peticiones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `peticiones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_afiliado` int NOT NULL,
+  `estado` enum('pendiente','aceptada','rechazada') NOT NULL DEFAULT 'pendiente',
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_afiliado` (`id_afiliado`),
+  CONSTRAINT `peticiones_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios2` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `peticiones_ibfk_2` FOREIGN KEY (`id_afiliado`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -71,6 +92,14 @@ CREATE TABLE `usuarios2` (
   `telefono` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `calle` varchar(100) DEFAULT NULL,
+  `numero_casa` varchar(20) DEFAULT NULL,
+  `codigo_postal` varchar(10) DEFAULT NULL,
+  `estado` varchar(100) DEFAULT NULL,
+  `municipio` varchar(100) DEFAULT NULL,
+  `indicaciones` text,
+  `latitud` decimal(10,8) DEFAULT NULL,
+  `longitud` decimal(11,8) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -85,4 +114,4 @@ CREATE TABLE `usuarios2` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-24 18:53:57
+-- Dump completed on 2025-05-29 22:10:49

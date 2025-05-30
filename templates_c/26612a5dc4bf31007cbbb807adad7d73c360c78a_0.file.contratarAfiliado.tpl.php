@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-29 22:09:10
+/* Smarty version 3.1.39, created on 2025-05-29 23:33:12
   from '/var/www/html/rocio/templates/contratarAfiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6838db06f0d204_61659545',
+  'unifunc' => 'content_6838eeb80b6b09_72408530',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '26612a5dc4bf31007cbbb807adad7d73c360c78a' => 
     array (
       0 => '/var/www/html/rocio/templates/contratarAfiliado.tpl',
-      1 => 1748556548,
+      1 => 1748561589,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6838db06f0d204_61659545 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6838eeb80b6b09_72408530 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/modifier.escape.php','function'=>'smarty_modifier_escape',),));
 ?>
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 800px; margin: 0 auto; }
         .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
         h1 { color: #333; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -44,7 +44,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
 </head>
 <body>
     <div class="container">
-        <h1>Información del Afiliado</h1>
+        <h1>Información del Usuario</h1>
         <?php if ($_smarty_tpl->tpl_vars['mensaje']->value) {?>
             <?php echo '<script'; ?>
 >alert('<?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['mensaje']->value, "js");?>
@@ -69,13 +69,15 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
                         <h2>Dirección</h2>
                         <p><strong>Calle:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['calle'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                        <p><strong>Colonia:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['colonia'], ENT_QUOTES, 'UTF-8', true);?>
+                        <p><strong>Número de casa:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['numero_casa'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
-                        <p><strong>Número:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['numero_casa'], ENT_QUOTES, 'UTF-8', true);?>
+                        <p><strong>Código postal:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['codigo_postal'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
                         <p><strong>Municipio:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['municipio'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
                         <p><strong>Estado:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['estado'], ENT_QUOTES, 'UTF-8', true);?>
+</p>
+                        <p><strong>Indicaciones:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['usuario']->value['indicaciones'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
                     </div>
                 </div>
@@ -84,7 +86,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
                     <form method="post">
                         <input type="hidden" name="direccion_completa" value="<?php echo $_smarty_tpl->tpl_vars['usuario']->value['calle'];?>
  <?php echo $_smarty_tpl->tpl_vars['usuario']->value['numero_casa'];?>
-, <?php echo $_smarty_tpl->tpl_vars['usuario']->value['colonia'];?>
+, <?php echo $_smarty_tpl->tpl_vars['usuario']->value['codigo_postal'];?>
 , <?php echo $_smarty_tpl->tpl_vars['usuario']->value['municipio'];?>
 , <?php echo $_smarty_tpl->tpl_vars['usuario']->value['estado'];?>
 ">
@@ -106,8 +108,7 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
                 <?php }?>
             </div>
         <?php } else { ?>
-            <p>No se encontró el afiliado con ID <?php echo $_smarty_tpl->tpl_vars['id_afiliado']->value;?>
-</p>
+            <p>No se encontró el usuario.</p>
         <?php }?>
     </div>
     <?php if ($_smarty_tpl->tpl_vars['usuario']->value['latitud'] && $_smarty_tpl->tpl_vars['usuario']->value['longitud']) {?>

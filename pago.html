@@ -1,0 +1,268 @@
+<!DOCTYPE html>Add commentMore actions
+
+
+<html lang="es">
+
+
+<head>
+
+
+<meta charset="UTF-8" />
+
+
+<title>Pagar Servicio</title>
+
+
+<script src="https://www.sandbox.paypal.com/sdk/js?client-id=TU_CLIENT_ID&currency=MXN"></script>
+
+
+</head>
+
+
+<body>
+
+
+
+
+
+<h2>Total a pagar: <span id="totalPago"></span> MXN</h2>
+
+
+
+
+
+<div id="paypal-button-container"></div>
+
+
+
+
+
+<hr>
+
+
+
+
+
+<button onclick="mostrarPagoEfectivo()">Pagar en efectivo</button>
+
+
+
+
+
+<div id="pagoEfectivo" style="display:none;">
+
+
+    <form id="formPagoEfectivo" method="POST" action="pago_efectivo.php">
+
+
+        <label>Nombre:</label>
+
+
+        <input type="text" name="nombre" required><br><br>
+
+
+        <label>Confirmar pago en efectivo (detalle opcional):</label><br>
+
+
+        <textarea name="detalle" rows="3"></textarea><br>
+
+
+        <input type="hidden" name="total" id="totalPagoInput">
+
+
+        <button type="submit">Confirmar Pago en Efectivo</button>
+
+
+    </form>
+
+
+</div>
+
+
+
+
+
+<div id="mensaje" style="margin-top:20px; font-weight:bold;"></div>
+
+
+
+
+
+<script>
+
+
+let total = 0;
+
+
+
+
+
+fetch('obtener_cotizacion.php')
+
+
+.then(res => res.json())
+
+
+.then(data => {
+
+
+    if (data.success) {
+
+
+        total = parseFloat(data.total);
+
+
+        document.getElementById('totalPago').textContent = total.toFixed(2);
+
+
+        document.getElementById('totalPagoInput').value = total.toFixed(2);
+
+
+
+
+
+        paypal.Buttons({
+
+
+            createOrder: (data, actions) => {
+
+
+                return actions.order.create({
+
+
+                    purchase_units: [{
+
+
+                        amount: { value: total.toFixed(2) }
+
+
+                    }]
+
+
+                });
+
+
+            },
+
+
+            onApprove: (data, actions) => {
+
+
+                return actions.order.capture().then(details => {
+
+
+                    fetch('registrar_pago.php', {
+
+
+                        method: 'POST',
+
+
+                        headers: { 'Content-Type': 'application/json' },
+
+
+                        body: JSON.stringify({
+
+
+                            idOrden: details.purchase_units[0].payments.captures[0].id,
+
+
+                            metodo: 'paypal',
+
+
+                            monto: total
+
+
+                        })
+
+
+                    })
+
+
+                    .then(res => res.json())
+
+
+                    .then(resp => {
+
+
+                        if (resp.success) {
+
+
+                            document.getElementById('mensaje').style.color = 'green';
+
+
+                            document.getElementById('mensaje').textContent = 'Pago con PayPal registrado exitosamente.';
+
+
+                        } else {
+
+
+                            document.getElementById('mensaje').style.color = 'red';
+
+
+                            document.getElementById('mensaje').textContent = 'Error al registrar pago: ' + resp.message;
+
+
+                        }
+
+
+                    });
+
+
+                });
+
+
+            },
+
+
+            onError: err => {
+
+
+                document.getElementById('mensaje').style.color = 'red';
+
+
+                document.getElementById('mensaje').textContent = 'Error en el pago PayPal: ' + err;
+
+
+            }
+
+
+        }).render('#paypal-button-container');
+
+
+    } else {
+
+
+        document.getElementById('mensaje').style.color = 'red';
+
+
+        document.getElementById('mensaje').textContent = 'Error al obtener cotización: ' + data.message;
+
+
+    }
+
+
+});
+
+
+
+
+
+function mostrarPagoEfectivo() {
+
+
+    document.getElementById('pagoEfectivo').style.display = 'block';
+
+
+}
+
+
+</script>
+
+
+
+
+
+</body>
+
+
+</html>

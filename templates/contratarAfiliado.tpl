@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 800px; margin: 0 auto; }
         .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
         h1 { color: #333; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Información del Afiliado</h1>
+        <h1>Información del Usuario</h1>
         {if $mensaje}
             <script>alert('{$mensaje|escape:"js"}');</script>
         {/if}
@@ -36,16 +36,17 @@
                     <div>
                         <h2>Dirección</h2>
                         <p><strong>Calle:</strong> {$usuario.calle|escape:'html'}</p>
-                        <p><strong>Colonia:</strong> {$usuario.colonia|escape:'html'}</p>
-                        <p><strong>Número:</strong> {$usuario.numero_casa|escape:'html'}</p>
+                        <p><strong>Número de casa:</strong> {$usuario.numero_casa|escape:'html'}</p>
+                        <p><strong>Código postal:</strong> {$usuario.codigo_postal|escape:'html'}</p>
                         <p><strong>Municipio:</strong> {$usuario.municipio|escape:'html'}</p>
                         <p><strong>Estado:</strong> {$usuario.estado|escape:'html'}</p>
+                        <p><strong>Indicaciones:</strong> {$usuario.indicaciones|escape:'html'}</p>
                     </div>
                 </div>
                 <div class="direccion-form">
                     <h2>Geocodificar Dirección</h2>
                     <form method="post">
-                        <input type="hidden" name="direccion_completa" value="{$usuario.calle} {$usuario.numero_casa}, {$usuario.colonia}, {$usuario.municipio}, {$usuario.estado}">
+                        <input type="hidden" name="direccion_completa" value="{$usuario.calle} {$usuario.numero_casa}, {$usuario.codigo_postal}, {$usuario.municipio}, {$usuario.estado}">
                         <button type="submit" name="geocodificar">Geocodificar Dirección</button>
                     </form>
                 </div>
@@ -62,7 +63,7 @@
                 {/if}
             </div>
         {else}
-            <p>No se encontró el afiliado con ID {$id_afiliado}</p>
+            <p>No se encontró el usuario.</p>
         {/if}
     </div>
     {if $usuario.latitud && $usuario.longitud}

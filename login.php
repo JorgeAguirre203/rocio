@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'libs/Smarty.class.php';
-require_once 'conexion_jorge.php'; // Asegúrate de incluir tu archivo de conexión
+require_once 'conexion_jorge.php';
 
 $smarty = new Smarty();
 $smarty->setTemplateDir('templates/');
@@ -10,7 +10,6 @@ $smarty->setCacheDir('cache/');
 
 // Verificar si ya está logueado
 if (isset($_SESSION['usuario'])) {
-    // Si ya está logueado, redirigir al dashboard_servicios.php
     header("Location: dashboard_servicios.php");
     exit;
 }
@@ -20,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-    // Verificar si los campos no están vacíos
     if (empty($email) || empty($password)) {
         $smarty->assign('error', 'Por favor ingresa ambos campos');
     } else {
@@ -42,34 +40,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
                 header("Location: loginAfiliados.php");
                 exit;
-            }
-                } else {
-                $smarty->assign('error', 'Usuario no encontrado o contraseña incorrecta');
-        }
-
-        // 2. Si no es admin, buscar en usuarios2
-        $stmt = $conexion->prepare("SELECT id, nombre, email, password, nickname FROM usuarios2 WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-
-        if ($resultado->num_rows === 1) {
-            $usuario = $resultado->fetch_assoc();
-
-            if (password_verify($password, $usuario['password'])) {
-                $_SESSION['usuario'] = [
-                    'id' => $usuario['id'],
-                    'nombre' => $usuario['nombre'],
-                    'nickname' => $usuario['nickname'],
-                    'email' => $usuario['email']
-                ];
-                header("Location: dashboard_servicios.php");
-                exit;
             } else {
-                $smarty->assign('error', 'Contraseña incorrecta');
+                $smarty->assign('error', 'Usuario no encontrado o contraseña incorrecta');
             }
         } else {
-            $smarty->assign('error', 'Usuario no encontrado');
+            // 2. Si no es admin, buscar en usuarios2
+            $stmt = $conexion->prepare("SELECT id, nombre, email, password, nickname FROM usuarios2 WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+
+            if ($resultado->num_rows === 1) {
+                $usuario = $resultado->fetch_assoc();
+
+                if (password_verify($password, $usuario['password'])) {
+                    $_SESSION['usuario'] = [
+                        'id' => $usuario['id'],
+                        'nombre' => $usuario['nombre'],
+                        'nickname' => $usuario['nickname'],
+                        'email' => $usuario['email']
+                    ];
+                    header("Location: dashboard_servicios.php");
+                    exit;
+                } else {
+                    $smarty->assign('error', 'Contraseña incorrecta');
+                }
+            } else {
+                // 3. Si no está en usuarios2, buscar en usuarios (afiliados)
+                $stmt_afiliado = $conexion->prepare("SELECT id, nombre, apellido_paterno, apellido_materno, email, password, nickname FROM usuarios WHERE email = ?");
+                $stmt_afiliado->bind_param("s", $email);
+                $stmt_afiliado->execute();
+                $resultado_afiliado = $stmt_afiliado->get_result();
+
+                if ($resultado_afiliado->num_rows === 1) {
+                    $afiliado = $resultado_afiliado->fetch_assoc();
+
+                    if (password_verify($password, $afiliado['password'])) {
+                        $_SESSION['afiliado'] = [
+                            'id' => $afiliado['id'],
+                            'nombre' => $afiliado['nombre'],
+                            'apellido_paterno' => $afiliado['apellido_paterno'],
+                            'apellido_materno' => $afiliado['apellido_materno'],
+                            'nickname' => $afiliado['nickname'],
+                            'email' => $afiliado['email']
+                        ];
+                        // Depuración: loguea el id del afiliado
+                        error_log("Login afiliado: id=" . $afiliado['id']);
+                        header("Location: afiliados.php");
+                        exit;
+                    } else {
+                        $smarty->assign('error', 'Contraseña incorrecta');
+                    }
+                } else {
+                    $smarty->assign('error', 'Usuario no encontrado');
+                }
+            }
         }
     }
 }
@@ -86,4 +111,3 @@ $smarty->assign([
 // Mostrar plantilla
 $smarty->display('login.tpl');
 ?>
-

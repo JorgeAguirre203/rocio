@@ -12,18 +12,24 @@ $smarty->setTemplateDir('templates/');
 $smarty->setCompileDir('templates_c/');
 $smarty->setCacheDir('cache/');
 
-// Obtener el ID del usuario logueado
-if (isset($_SESSION['usuario']['id'])) {
+$mensaje = '';
+$usuario = null;
+
+// Obtener el id_usuario desde GET o POST (para afiliados)
+if (isset($_GET['id_usuario'])) {
+    $id_usuario = intval($_GET['id_usuario']);
+} elseif (isset($_POST['id_usuario'])) {
+    $id_usuario = intval($_POST['id_usuario']);
+} elseif (isset($_SESSION['usuario']['id'])) {
+    // Para usuarios logueados viendo su propia ubicación
     $id_usuario = intval($_SESSION['usuario']['id']);
 } else {
-    die('No has iniciado sesión.');
+    die('No se proporcionó el usuario.');
 }
 
 $smarty->assign('id_usuario', $id_usuario);
 
-$usuario = null;
-
-// Obtener los datos del usuario logueado
+// Obtener los datos del usuario (usuarios2)
 $stmt = $conexion->prepare("SELECT * FROM usuarios2 WHERE id = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
@@ -31,9 +37,13 @@ $result = $stmt->get_result();
 $usuario = $result->fetch_assoc();
 $stmt->close();
 
-$mensaje = '';
+if (!$usuario) {
+    $mensaje = 'No se encontró el usuario.';
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['geocodificar'])) {
-    $direccion = $_POST['direccion_completa'];
+    // Armar la dirección solo con los campos requeridos
+    $direccion = trim($usuario['calle']) . ' ' . trim($usuario['numero_casa']) . ', ' . trim($usuario['codigo_postal']) . ', ' . trim($usuario['municipio']) . ', ' . trim($usuario['estado']);
 
     // Validar que la dirección no esté vacía
     if (trim($direccion) !== ', , , ,') {

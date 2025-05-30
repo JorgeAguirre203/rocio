@@ -32,7 +32,7 @@
             right: 0;
             top: 65px;
             width: 300px;
-            height: calc(100vh - 65px); /* Corrección aquí (faltaba espacio) */
+            height: calc(100 - 65px); /* Corrección aquí (faltaba espacio) */
             background-color: #f4f4f4;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0,0,0,0.5);
@@ -208,10 +208,13 @@
                     <h2>{$servicio.nombre|escape:'html'}</h2>
                     <p>{$servicio.descripcion|escape:'html'}</p>
                     <p><strong>Especialidad:</strong> {$servicio.especialidad|escape:'html'}</p>
-                    <button onclick="window.location.href='contratarAfiliado.php?id={$servicio.id|escape:'url'}'">Contratar</button>
+                    <form method="post" action="contratar_afiliado.php" style="display:inline;">
+                        <input type="hidden" name="id_afiliado" value="{$servicio.id}">
+                        <button type="submit">Contratar</button>
+                    </form>
                     <button onclick="mostrarDetalles('afiliado_{$servicio.id|escape:'javascript'}')">
                         Ver detalles
-                    </button>
+                    </button> 
                     <div class="detalles" id="afiliado_{$servicio.id|escape:'html'}_detalles">
                         <p>{$servicio.detalles|escape:'html'}</p>
                         <p><strong>Contacto:</strong> {$servicio.email|escape:'html'}</p>

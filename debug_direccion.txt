@@ -3,6 +3,11 @@ Array
     [id] => 14
     [POST] => Array
         (
+            [calle] => chihuahua
+            [colonia] => bosque de pedegral
+            [numero_casa] => 2784
+            [estado] => sinaloa
+            [municipio] => ahome
         )
 
 )
