@@ -1,27 +1,4 @@
-<?php
-/* Smarty version 3.1.39, created on 2025-05-30 08:48:19
-  from '/var/www/html/rocio/templates/crear_cotizacion.tpl' */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '3.1.39',
-  'unifunc' => 'content_683970d3f14403_67166618',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    'af44e86e58be907a9c98030948d3534e367d1b6d' => 
-    array (
-      0 => '/var/www/html/rocio/templates/crear_cotizacion.tpl',
-      1 => 1748594880,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-  ),
-),false)) {
-function content_683970d3f14403_67166618 (Smarty_Internal_Template $_smarty_tpl) {
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -30,8 +7,7 @@ function content_683970d3f14403_67166618 (Smarty_Internal_Template $_smarty_tpl)
 <body>
     <h2>Crear Cotización</h2>
     <form method="post">
-        <input type="hidden" name="peticion_id" value="<?php echo $_smarty_tpl->tpl_vars['peticion_id']->value;?>
-">
+        <input type="hidden" name="peticion_id" value="{$peticion_id}">
         <label>Servicio:</label>
         <select name="servicio" required>
             <option value="plomeria">Plomería</option>
@@ -48,5 +24,4 @@ function content_683970d3f14403_67166618 (Smarty_Internal_Template $_smarty_tpl)
         <button type="submit">Guardar y continuar a pago</button>
     </form>
 </body>
-</html><?php }
-}
+</html>

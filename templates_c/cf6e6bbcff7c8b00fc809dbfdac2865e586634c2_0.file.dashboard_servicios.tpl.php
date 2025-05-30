@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 06:18:18
+/* Smarty version 3.1.39, created on 2025-05-30 07:52:33
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_68394daab71971_73891546',
+  'unifunc' => 'content_683963c1d18241_67515408',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1748585884,
+      1 => 1748591551,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68394daab71971_73891546 (Smarty_Internal_Template $_smarty_tpl) {
+function content_683963c1d18241_67515408 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -147,15 +147,132 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
             color: #666;
             width: 100%;
         }
+
+        /* estilo de la bara lateral de la campanita*/
+        /* Campanita de notificaciones */
+        .notificaciones-icono {
+            position: absolute;
+            top: 18px;
+            right: 30px;
+            cursor: pointer;
+            z-index: 1100;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+        }
+        .bell {
+            font-size: 28px;
+            color: #3498db;
+        }
+        .noti-badge {
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 13px;
+            padding: 2px 7px;
+            margin-left: -10px;
+            margin-top: -15px;
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            z-index: 1101;
+        }
+
+        /* Barra lateral de notificaciones */
+        .notificaciones-barra {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 320px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+            z-index: 1200;
+            transition: right 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+        .notificaciones-barra.abierta {
+            right: 0;
+        }
+        .noti-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 1199;
+        }
+        .notificaciones-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px 10px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .close-noti {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+        }
+        .notificaciones-lista {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* estilo para que no se vea e boton de inicio sobre el de la campana de notificacioens*/
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            right: 30px;
+            top: 10px;
+        }
+
+        .notificaciones-icono {
+            position: relative;
+            top: 0;
+            right: 0;
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
+
+    <!-- codigo de campana de notificaciones -->
+
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Afiliados Verificados</h1>
-        <a href="index.php"><button>Inicio</button></a>
+        <div class="header-actions">
+            <a href="index.php"><button>Inicio</button></a>
+            <!-- Campanita de notificaciones -->
+            <div class="notificaciones-icono" onclick="toggleNotificaciones()" title="Notificaciones">
+                <span class="bell">&#128276;</span>
+                <span class="noti-badge" id="noti-badge" style="display:none;">1</span>
+            </div>
+        </div>
     </div>
+
+    <!-- Barra lateral de notificaciones -->
+    <div id="notificaciones-barra" class="notificaciones-barra">
+        <div class="notificaciones-header">
+            <h2>Notificaciones</h2>
+            <button onclick="closeNotificaciones()" class="close-noti">&times;</button>
+        </div>
+        <div class="notificaciones-lista" id="notificaciones-lista">
+            <!-- Aquí puedes poner tus notificaciones dinámicamente -->
+            <p>No tienes notificaciones nuevas.</p>
+        </div>
+    </div>
+    <div id="noti-overlay" class="noti-overlay" onclick="closeNotificaciones()"></div>
+
+
+
 
     <!-- Sidebar de perfil -->
     <div id="sidebar" class="sidebar">
@@ -396,6 +513,27 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                     ? 'flex' : 'none';
             });
         }
+    <?php echo '</script'; ?>
+>
+    <!-- script de la campanita de notificaciones-->
+    <?php echo '<script'; ?>
+>
+    // Notificaciones: abrir/cerrar barra lateral
+    function toggleNotificaciones() {
+        document.getElementById('notificaciones-barra').classList.toggle('abierta');
+        document.getElementById('noti-overlay').style.display = 
+            document.getElementById('notificaciones-barra').classList.contains('abierta') ? 'block' : 'none';
+    }
+    function closeNotificaciones() {
+        document.getElementById('notificaciones-barra').classList.remove('abierta');
+        document.getElementById('noti-overlay').style.display = 'none';
+    }
+
+    // Ejemplo: mostrar badge si hay notificaciones (puedes hacerlo dinámico)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Si tienes notificaciones, muestra el badge
+        // document.getElementById('noti-badge').style.display = 'inline';
+    });
     <?php echo '</script'; ?>
 >
 </body>

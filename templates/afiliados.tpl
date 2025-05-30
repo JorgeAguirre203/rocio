@@ -187,35 +187,59 @@
                 <section class="peticiones-pendientes" style="margin-top:30px;">
                     <h3>Peticiones pendientes</h3>
                     {if $peticiones|@count > 0}
-                        <section class="peticiones-pendientes">
-                            <h3>Peticiones pendientes</h3>
-                            <ul>
-                            {foreach $peticiones as $peticion}
-                                <li>
-                                    <strong>{$peticion.nombre}{if $peticion.nickname} ({$peticion.nickname}){/if}</strong><br>
-                                    Email: {$peticion.email}<br>
-                                    Teléfono: {$peticion.telefono}<br>
-                                    <strong>Dirección:</strong>
-                                    {if $peticion.calle}{$peticion.calle} {/if}
-                                    {if $peticion.numero_casa}#{$peticion.numero_casa} {/if}
-                                    {if $peticion.codigo_postal}CP: {$peticion.codigo_postal} {/if}
-                                    {if $peticion.municipio}{$peticion.municipio}, {/if}
-                                    {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
-                                    {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
-                                    <form method="post" action="aceptar_peticion.php" style="display:inline;">
-                                        <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
-                                        <button type="submit">Aceptar</button>
-                                    </form>
-                                    <form method="get" action="contratarAfiliado.php" style="display:inline;">
-                                        <input type="hidden" name="id_usuario" value="{$peticion.id_usuario}">
-                                        <button type="submit">Ver ubicación</button>
-                                    </form>
-                                </li>
-                            {/foreach}
-                            </ul>
-                        </section>
+                        <ul>
+                        {foreach $peticiones as $peticion}
+                            <li>
+                                <strong>{$peticion.nombre}{if $peticion.nickname} ({$peticion.nickname}){/if}</strong><br>
+                                Email: {$peticion.email}<br>
+                                Teléfono: {$peticion.telefono}<br>
+                                <strong>Dirección:</strong>
+                                {if $peticion.calle}{$peticion.calle} {/if}
+                                {if $peticion.numero_casa}#{$peticion.numero_casa} {/if}
+                                {if $peticion.codigo_postal}CP: {$peticion.codigo_postal} {/if}
+                                {if $peticion.municipio}{$peticion.municipio}, {/if}
+                                {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
+                                {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
+                                <form method="post" action="aceptar_peticion.php" style="display:inline;">
+                                    <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
+                                    <button type="submit">Aceptar</button>
+                                </form>
+                            </li>
+                        {/foreach}
+                        </ul>
                     {else}
                         <p>No tienes peticiones pendientes.</p>
+                    {/if}
+                </section>
+
+                <section class="peticiones-aceptadas" style="margin-top:30px;">
+                    <h3>Peticiones aceptadas</h3>
+                    {if $peticiones_aceptadas|@count > 0}
+                        <ul>
+                        {foreach $peticiones_aceptadas as $peticion}
+                            <li>
+                                <strong>{$peticion.nombre}{if $peticion.nickname} ({$peticion.nickname}){/if}</strong><br>
+                                Email: {$peticion.email}<br>
+                                Teléfono: {$peticion.telefono}<br>
+                                <strong>Dirección:</strong>
+                                {if $peticion.calle}{$peticion.calle} {/if}
+                                {if $peticion.numero_casa}#{$peticion.numero_casa} {/if}
+                                {if $peticion.codigo_postal}CP: {$peticion.codigo_postal} {/if}
+                                {if $peticion.municipio}{$peticion.municipio}, {/if}
+                                {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
+                                {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
+                                {if $peticion.estado_cotizacion == 'pendiente'}
+                                    <span style="color: orange; font-weight: bold;">Pago pendiente</span>
+                                {/if}
+                                <form method="get" action="crear_cotizacion.php" style="display:inline;">
+                                    <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
+                                    <button type="submit">Cotizar</button>
+                                </form>
+                            </li>
+                        {/foreach}
+                        </ul>
+                    {else}
+                        <p>No tienes peticiones aceptadas.</p>
                     {/if}
                 </section>
             {else}

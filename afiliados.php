@@ -70,10 +70,32 @@ try {
     }
     $stmt2->close();
 
+    // Peticiones aceptadas
+    $sql_aceptadas = "SELECT 
+            p.id as peticion_id, 
+            p.id_usuario,
+            u.nombre, u.nickname, u.telefono, u.email, 
+            u.calle, u.numero_casa, u.codigo_postal, u.estado as estado_dir, u.municipio, u.indicaciones,
+            c.estado as estado_cotizacion
+        FROM peticiones p
+        INNER JOIN usuarios2 u ON p.id_usuario = u.id
+        LEFT JOIN cotizaciones c ON p.id_cotizacion = c.id
+        WHERE p.id_afiliado = ? AND p.estado = 'aceptada'";
+    $stmt3 = $conexion->prepare($sql_aceptadas);
+    $stmt3->bind_param("i", $afiliado_id);
+    $stmt3->execute();
+    $result3 = $stmt3->get_result();
+    $peticiones_aceptadas = [];
+    while ($row = $result3->fetch_assoc()) {
+        $peticiones_aceptadas[] = $row;
+    }
+    $stmt3->close();
+
     $smarty->assign([
         'page_title' => 'Panel de Afiliado',
         'afiliado_log' => $afiliado,
-        'peticiones' => $peticiones
+        'peticiones' => $peticiones,
+        'peticiones_aceptadas' => $peticiones_aceptadas
     ]);
 
     $smarty->display('afiliados.tpl');
