@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 02:52:16
+/* Smarty version 3.1.39, created on 2025-05-30 13:26:39
   from '/var/www/html/rocio/templates/editar_perfil_afiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_68391d6086b4a6_64296239',
+  'unifunc' => 'content_6839b20f9b41e5_45378063',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2a7f32b9f46f8aecd95b4d73478487c792528345' => 
     array (
       0 => '/var/www/html/rocio/templates/editar_perfil_afiliado.tpl',
-      1 => 1748573495,
+      1 => 1748611593,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6839b20f9b41e5_45378063 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +37,6 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
             padding: 20px;
             box-sizing: border-box;
         }
-
         .form-container {
             background: white;
             padding: 25px 30px;
@@ -46,21 +45,18 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
             width: 100%;
             max-width: 500px;
         }
-
         h2 {
             margin-top: 0;
             color: #333;
             text-align: center;
             margin-bottom: 20px;
         }
-
         label {
             display: block;
             margin-bottom: 8px;
             color: #555;
             font-weight: 500;
         }
-
         input[type="text"],
         input[type="email"],
         select,
@@ -73,22 +69,18 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
             box-sizing: border-box;
             font-size: 15px;
         }
-
         input[type="file"] {
             padding: 3px;
         }
-
         .current-photo {
             margin: 15px 0;
             text-align: center;
         }
-
         .current-photo p {
             margin-bottom: 5px;
             font-size: 14px;
             color: #666;
         }
-
         .preview-image {
             display: block;
             margin: 0 auto;
@@ -98,7 +90,6 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
             border: 1px solid #eee;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
         button {
             background-color: #4a4a4a;
             color: white;
@@ -111,19 +102,15 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
             font-size: 16px;
             transition: background-color 0.3s;
         }
-
         button:hover {
             background-color: #333;
         }
-
         .button-secondary {
             background-color: #888;
         }
-
         .button-secondary:hover {
             background-color: #555;
         }
-
         .alert {
             color: #333;
             margin-bottom: 15px;
@@ -131,24 +118,30 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
             border-radius: 5px;
             text-align: center;
         }
-
         .alert-success {
             background-color: #eeffee;
             border: 1px solid #ccffcc;
         }
-
         .alert-error {
             color: #721c24;
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
         }
-
         .form-group {
             margin-bottom: 15px;
         }
-
         .file-input-container {
             margin-bottom: 15px;
+        }
+        .error-message {
+            display: none;
+            color: red;
+            font-size: 0.9em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .input-error {
+            border-color: red;
         }
     </style>
 </head>
@@ -168,18 +161,21 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
 " required>
+                <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
             </div>
             
             <div class="form-group">
                 <label for="apellido_paterno">Apellido paterno:</label>
                 <input type="text" id="apellido_paterno" name="apellido_paterno" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['apellido_paterno'], ENT_QUOTES, 'UTF-8', true);?>
 " required>
+                <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
             </div>
             
             <div class="form-group">
                 <label for="apellido_materno">Apellido materno:</label>
                 <input type="text" id="apellido_materno" name="apellido_materno" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['apellido_materno'], ENT_QUOTES, 'UTF-8', true);?>
 " required>
+                <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
             </div>
             
             <div class="form-group">
@@ -216,6 +212,7 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
                 <div class="file-input-container">
                     <input type="file" id="foto_perfil" name="foto_perfil" accept="image/jpeg, image/png, image/gif">
                 </div>
+                <img id="foto_perfil_preview" class="preview-image" src="#" alt="Vista previa de foto de perfil" style="display:none;">
                 <?php if ($_smarty_tpl->tpl_vars['afiliado']->value['foto_perfil']) {?>
                     <div class="current-photo">
                         <p>Foto actual:</p>
@@ -231,6 +228,7 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
                 <div class="file-input-container">
                     <input type="file" id="ine_frente" name="ine_frente" accept="image/jpeg, image/png, image/gif">
                 </div>
+                <img id="ine_frente_preview" class="preview-image" src="#" alt="Vista previa INE Frente" style="display:none;">
                 <?php if ($_smarty_tpl->tpl_vars['afiliado']->value['ine_frente']) {?>
                     <div class="current-photo">
                         <p>INE Frente actual:</p>
@@ -246,6 +244,7 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
                 <div class="file-input-container">
                     <input type="file" id="ine_reverso" name="ine_reverso" accept="image/jpeg, image/png, image/gif">
                 </div>
+                <img id="ine_reverso_preview" class="preview-image" src="#" alt="Vista previa INE Reverso" style="display:none;">
                 <?php if ($_smarty_tpl->tpl_vars['afiliado']->value['ine_reverso']) {?>
                     <div class="current-photo">
                         <p>INE Reverso actual:</p>
@@ -262,31 +261,55 @@ function content_68391d6086b4a6_64296239 (Smarty_Internal_Template $_smarty_tpl)
         </form>
     </div>
 
+    
     <?php echo '<script'; ?>
 >
-    // Opcional: Puedes agregar aquí scripts para previsualizar imágenes antes de subir
     document.addEventListener('DOMContentLoaded', function() {
-        // Ejemplo de previsualización para foto de perfil
-        document.getElementById('foto_perfil').addEventListener('change', function(e) {
-            if (this.files && this.files[0]) {
-                const previewContainer = this.closest('.form-group').querySelector('.current-photo') || 
-                                       this.closest('.form-group').appendChild(document.createElement('div'));
-                
-                previewContainer.className = 'current-photo';
-                previewContainer.innerHTML = '<p>Nueva vista previa:</p><img class="preview-image">';
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewContainer.querySelector('img').src = e.target.result;
-                }
-                reader.readAsDataURL(this.files[0]);
-            }
+      // Validación en tiempo real para campos de nombre y apellidos
+      const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+      nameFields.forEach(field => {
+        const input = document.getElementById(field);
+        const error = document.getElementById(`${field}-error`);
+        input.addEventListener('input', function() {
+          const regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]*$/;
+          if (!regex.test(this.value)) {
+            this.classList.add('input-error');
+            error.style.display = 'block';
+            this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
+          } else {
+            this.classList.remove('input-error');
+            error.style.display = 'none';
+          }
         });
+      });
 
-        // Puedes agregar listeners similares para los otros campos de imagen
+      // Función para mostrar vista previa de imágenes
+      function mostrarVistaPrevia(input, previewId) {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const preview = document.getElementById(previewId);
+            preview.style.display = 'block';
+            preview.src = e.target.result;
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      // Event listeners para las vistas previas
+      document.getElementById('foto_perfil').addEventListener('change', function() {
+        mostrarVistaPrevia(this, 'foto_perfil_preview');
+      });
+      document.getElementById('ine_frente').addEventListener('change', function() {
+        mostrarVistaPrevia(this, 'ine_frente_preview');
+      });
+      document.getElementById('ine_reverso').addEventListener('change', function() {
+        mostrarVistaPrevia(this, 'ine_reverso_preview');
+      });
     });
     <?php echo '</script'; ?>
 >
+    
 </body>
 </html><?php }
 }

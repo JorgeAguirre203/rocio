@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 06:43:10
+/* Smarty version 3.1.39, created on 2025-05-30 13:42:50
   from '/var/www/html/rocio/templates/registro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6839537e7b5467_96056688',
+  'unifunc' => 'content_6839b5da37f002_85422989',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '080c066fb008db83217617e101b8d1bf3ba2b632' => 
     array (
       0 => '/var/www/html/rocio/templates/registro.tpl',
-      1 => 1747711055,
+      1 => 1748612566,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6839537e7b5467_96056688 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6839b5da37f002_85422989 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -75,6 +75,17 @@ function content_6839537e7b5467_96056688 (Smarty_Internal_Template $_smarty_tpl)
       border-radius: 5px;
     }
 
+    .input-error {
+      border-color: red !important;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+
     @media (max-width: 600px) {
       .form-container {
         margin: 120px 20px;
@@ -120,6 +131,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       <label for="nombre">Nombre de usuario</label>
       <input type="text" id="nombre" name="nombre" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['nombre'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
+      <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <label for="nickname">Nickname:</label>
       <input type="text" id="nickname" name="nickname" maxlength="15" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['nickname'])===null||$tmp==='' ? '' : $tmp);?>
@@ -128,6 +140,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       <label for="telefono">Teléfono:</label>
       <input type="text" id="telefono" name="telefono" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['telefono'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['email'])===null||$tmp==='' ? '' : $tmp);?>
@@ -148,9 +161,43 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 . Todos los derechos reservados.</p>
   </footer>
 
+  
   <?php echo '<script'; ?>
- src="validaciones_intento1.js"><?php echo '</script'; ?>
 >
+  document.addEventListener('DOMContentLoaded', function() {
+    // Validación en tiempo real para campo de nombre
+    const nombreInput = document.getElementById('nombre');
+    const nombreError = document.getElementById('nombre-error');
+    nombreInput.addEventListener('input', function() {
+      const regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]*$/;
+      if (!regex.test(this.value)) {
+        this.classList.add('input-error');
+        nombreError.style.display = 'block';
+        this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
+      } else {
+        this.classList.remove('input-error');
+        nombreError.style.display = 'none';
+      }
+    });
+
+    // Validación en tiempo real para teléfono (solo números)
+    const telInput = document.getElementById('telefono');
+    const telError = document.getElementById('telefono-error');
+    telInput.addEventListener('input', function() {
+      const regex = /^[0-9]*$/;
+      if (!regex.test(this.value)) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.replace(/[^0-9]/g, '');
+      } else {
+        this.classList.remove('input-error');
+        telError.style.display = 'none';
+      }
+    });
+  });
+  <?php echo '</script'; ?>
+>
+  
 </body>
 </html>
 <?php }

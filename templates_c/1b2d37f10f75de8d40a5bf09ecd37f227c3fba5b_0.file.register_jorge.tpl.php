@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-21 01:49:13
+/* Smarty version 3.1.39, created on 2025-05-30 13:33:36
   from '/var/www/html/rocio/templates/register_jorge.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_682d3119851f33_10810700',
+  'unifunc' => 'content_6839b3b0b17969_96810721',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1b2d37f10f75de8d40a5bf09ecd37f227c3fba5b' => 
     array (
       0 => '/var/www/html/rocio/templates/register_jorge.tpl',
-      1 => 1747262747,
+      1 => 1748612014,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_682d3119851f33_10810700 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6839b3b0b17969_96810721 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,6 +93,17 @@ function content_682d3119851f33_10810700 (Smarty_Internal_Template $_smarty_tpl)
       display: none;
     }
 
+    .input-error {
+      border-color: red !important;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+
     @media (max-width: 600px) {
       .form-container {
         margin: 120px 20px;
@@ -143,23 +154,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 " method="POST" enctype="multipart/form-data" id="registroForm">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['nombre'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
+" 
+             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <label for="apellido_paterno">Apellido Paterno:</label>
       <input type="text" id="apellido_paterno" name="apellido_paterno" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['apellido_paterno'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
+" 
+             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <label for="apellido_materno">Apellido Materno:</label>
       <input type="text" id="apellido_materno" name="apellido_materno" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['apellido_materno'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
+" 
+             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
 
+      <!-- Resto de los campos del formulario se mantienen igual -->
       <label for="nickname">Nickname:</label>
       <input type="text" id="nickname" name="nickname" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['nickname'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
 
       <label for="telefono">Teléfono:</label>
-      <input type="text" id="telefono" name="telefono" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['telefono'])===null||$tmp==='' ? '' : $tmp);?>
+
+      <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['form_data']->value['telefono'], ENT_QUOTES, 'UTF-8', true);?>
 " required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['email'])===null||$tmp==='' ? '' : $tmp);?>
@@ -213,22 +233,52 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 . Todos los derechos reservados.</p>
   </footer>
 
-  <?php echo '<script'; ?>
- src="validaciones_intento1.js"><?php echo '</script'; ?>
->
+  
   <?php echo '<script'; ?>
 >
+  document.addEventListener('DOMContentLoaded', function() {
+    // Validación en tiempo real para campos de nombre y apellidos
+    const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+    nameFields.forEach(field => {
+      const input = document.getElementById(field);
+      const error = document.getElementById(`${field}-error`);
+      input.addEventListener('input', function() {
+        const regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]*$/;
+        if (!regex.test(this.value)) {
+          this.classList.add('input-error');
+          error.style.display = 'block';
+          this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
+        } else {
+          this.classList.remove('input-error');
+          error.style.display = 'none';
+        }
+      });
+    });
+
+    // Validación en tiempo real para teléfono (solo números)
+    const telInput = document.getElementById('telefono');
+    const telError = document.getElementById('telefono-error');
+    telInput.addEventListener('input', function() {
+      const regex = /^[0-9]*$/;
+      if (!regex.test(this.value)) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.replace(/[^0-9]/g, '');
+      } else {
+        this.classList.remove('input-error');
+        telError.style.display = 'none';
+      }
+    });
+
     // Función para mostrar vista previa de imágenes
     function mostrarVistaPrevia(input, previewId) {
       if (input.files && input.files[0]) {
         const reader = new FileReader();
-        
         reader.onload = function(e) {
           const preview = document.getElementById(previewId);
           preview.style.display = 'block';
           preview.src = e.target.result;
         }
-        
         reader.readAsDataURL(input.files[0]);
       }
     }
@@ -237,17 +287,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     document.getElementById('foto_perfil').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'foto_perfil_preview');
     });
-
     document.getElementById('ine_frente').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'ine_frente_preview');
     });
-
     document.getElementById('ine_reverso').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'ine_reverso_preview');
     });
+  });
   <?php echo '</script'; ?>
 >
+  
 </body>
-</html>
-<?php }
+</html><?php }
 }

@@ -69,6 +69,17 @@
       display: none;
     }
 
+    .input-error {
+      border-color: red !important;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+
     @media (max-width: 600px) {
       .form-container {
         margin: 120px 20px;
@@ -105,19 +116,28 @@
     
     <form action="{$form_action}" method="POST" enctype="multipart/form-data" id="registroForm">
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" value="{$form_data.nombre|default:''}" required>
+      <input type="text" id="nombre" name="nombre" value="{$form_data.nombre|default:''}" 
+             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <label for="apellido_paterno">Apellido Paterno:</label>
-      <input type="text" id="apellido_paterno" name="apellido_paterno" value="{$form_data.apellido_paterno|default:''}" required>
+      <input type="text" id="apellido_paterno" name="apellido_paterno" value="{$form_data.apellido_paterno|default:''}" 
+             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <label for="apellido_materno">Apellido Materno:</label>
-      <input type="text" id="apellido_materno" name="apellido_materno" value="{$form_data.apellido_materno|default:''}" required>
+      <input type="text" id="apellido_materno" name="apellido_materno" value="{$form_data.apellido_materno|default:''}" 
+             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
 
+      <!-- Resto de los campos del formulario se mantienen igual -->
       <label for="nickname">Nickname:</label>
       <input type="text" id="nickname" name="nickname" value="{$form_data.nickname|default:''}" required>
 
       <label for="telefono">Teléfono:</label>
-      <input type="text" id="telefono" name="telefono" value="{$form_data.telefono|default:''}" required>
+
+      <input type="text" id="telefono" name="telefono" value="{$form_data.telefono|escape:'html'}" required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="{$form_data.email|default:''}" required>
@@ -159,19 +179,51 @@
     <p>&copy; 2025 {$logo_text}. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="validaciones_intento1.js"></script>
+  {literal}
   <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Validación en tiempo real para campos de nombre y apellidos
+    const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+    nameFields.forEach(field => {
+      const input = document.getElementById(field);
+      const error = document.getElementById(`${field}-error`);
+      input.addEventListener('input', function() {
+        const regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]*$/;
+        if (!regex.test(this.value)) {
+          this.classList.add('input-error');
+          error.style.display = 'block';
+          this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
+        } else {
+          this.classList.remove('input-error');
+          error.style.display = 'none';
+        }
+      });
+    });
+
+    // Validación en tiempo real para teléfono (solo números)
+    const telInput = document.getElementById('telefono');
+    const telError = document.getElementById('telefono-error');
+    telInput.addEventListener('input', function() {
+      const regex = /^[0-9]*$/;
+      if (!regex.test(this.value)) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.replace(/[^0-9]/g, '');
+      } else {
+        this.classList.remove('input-error');
+        telError.style.display = 'none';
+      }
+    });
+
     // Función para mostrar vista previa de imágenes
     function mostrarVistaPrevia(input, previewId) {
       if (input.files && input.files[0]) {
         const reader = new FileReader();
-        
         reader.onload = function(e) {
           const preview = document.getElementById(previewId);
           preview.style.display = 'block';
           preview.src = e.target.result;
         }
-        
         reader.readAsDataURL(input.files[0]);
       }
     }
@@ -180,14 +232,14 @@
     document.getElementById('foto_perfil').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'foto_perfil_preview');
     });
-
     document.getElementById('ine_frente').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'ine_frente_preview');
     });
-
     document.getElementById('ine_reverso').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'ine_reverso_preview');
     });
+  });
   </script>
+  {/literal}
 </body>
 </html>

@@ -28,10 +28,13 @@ try {
     // Conexión a la base de datos
     require_once('conexion_jorge.php');
     
-    // Consulta para obtener afiliados verificados
-    $query = "SELECT id, nombre, apellido_paterno, apellido_materno, nickname, email, especialidad, foto_perfil 
-              FROM usuarios 
-              WHERE verificado = 1";
+    // Consulta para obtener afiliados verificados con su promedio de estrellas
+    $query = "SELECT u.id, u.nombre, u.apellido_paterno, u.apellido_materno, u.nickname, u.email, u.especialidad, u.foto_perfil,
+                     IFNULL(AVG(ca.estrellas), 0) AS promedio_estrellas
+              FROM usuarios u
+              LEFT JOIN calificaciones ca ON u.id = ca.id_afiliado
+              WHERE u.verificado = 1
+              GROUP BY u.id";
     $result = $conexion->query($query);
 
     if (!$result) {
@@ -49,14 +52,14 @@ try {
             'foto_perfil' => $afiliado['foto_perfil'],
             'descripcion' => 'Profesional verificad@',
             'detalles' => 'Especialista en ' . $afiliado['especialidad'],
-            'estrellas' => 5,
+            'estrellas' => round($afiliado['promedio_estrellas'], 1), // Promedio real
             'precio' => 2,
             'disponibilidad' => 'hoy,semana'
         ];
     }
     $result->close();
 
-    // --- AQUÍ AGREGA TU BLOQUE DE NOTIFICACIONES ---
+    // --- BLOQUE DE NOTIFICACIONES ---
     $id_usuario = $_SESSION['usuario']['id'] ?? null;
     $notificaciones = [];
     $noti_count = 0;
@@ -74,7 +77,7 @@ try {
         $stmt->close();
     }
 
-    // Asignar datos a Smarty (CON LOS FILTROS COMPLETOS)
+    // Asignar datos a Smarty
     $smarty->assign([
         'page_title' => 'Afiliados Verificados',
         'nombre' => htmlspecialchars($_SESSION['usuario']['nombre'] ?? 'Usuario'),

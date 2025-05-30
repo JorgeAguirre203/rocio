@@ -51,6 +51,17 @@
       border-radius: 5px;
     }
 
+    .input-error {
+      border-color: red !important;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+
     @media (max-width: 600px) {
       .form-container {
         margin: 120px 20px;
@@ -84,12 +95,14 @@
     <form id="registroForm" action="{$form_action}" method="POST">
       <label for="nombre">Nombre de usuario</label>
       <input type="text" id="nombre" name="nombre" value="{$form_data.nombre|default:''}" required>
+      <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <label for="nickname">Nickname:</label>
       <input type="text" id="nickname" name="nickname" maxlength="15" value="{$form_data.nickname|default:''}" required>
 
       <label for="telefono">Teléfono:</label>
       <input type="text" id="telefono" name="telefono" value="{$form_data.telefono|default:''}" required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="{$form_data.email|default:''}" required>
@@ -108,6 +121,40 @@
     <p>&copy; 2025 {$logo_text}. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="validaciones_intento1.js"></script>
+  {literal}
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Validación en tiempo real para campo de nombre
+    const nombreInput = document.getElementById('nombre');
+    const nombreError = document.getElementById('nombre-error');
+    nombreInput.addEventListener('input', function() {
+      const regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]*$/;
+      if (!regex.test(this.value)) {
+        this.classList.add('input-error');
+        nombreError.style.display = 'block';
+        this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
+      } else {
+        this.classList.remove('input-error');
+        nombreError.style.display = 'none';
+      }
+    });
+
+    // Validación en tiempo real para teléfono (solo números)
+    const telInput = document.getElementById('telefono');
+    const telError = document.getElementById('telefono-error');
+    telInput.addEventListener('input', function() {
+      const regex = /^[0-9]*$/;
+      if (!regex.test(this.value)) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.replace(/[^0-9]/g, '');
+      } else {
+        this.classList.remove('input-error');
+        telError.style.display = 'none';
+      }
+    });
+  });
+  </script>
+  {/literal}
 </body>
 </html>

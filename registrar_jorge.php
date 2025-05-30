@@ -175,8 +175,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_update->execute();
             $stmt_update->close();
 
-            $smarty->assign('success', 'Registro exitoso. Ahora puedes iniciar sesión.');
-            $_POST = array();
+            header("Location: login.php?msg=Registro exitoso. Ahora puedes iniciar sesión.");
+            exit;
         }
     }
 
