@@ -204,6 +204,10 @@
                                     <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
                                     <button type="submit">Aceptar</button>
                                 </form>
+                                <form method="get" action="contratarAfiliado.php" style="display:inline;">
+                                    <input type="hidden" name="id_usuario" value="{$peticion.id_usuario}">
+                                    <button type="submit">Dirección</button>
+                                </form>
                             </li>
                         {/foreach}
                         </ul>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 11:14:37
+/* Smarty version 3.1.39, created on 2025-05-30 14:29:21
   from '/var/www/html/rocio/templates/afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6839931d81ea55_62651912',
+  'unifunc' => 'content_6839c0c1407ed7_53364524',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
     array (
       0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1748603675,
+      1 => 1748615342,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6839931d81ea55_62651912 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6839c0c1407ed7_53364524 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -258,6 +258,11 @@ echo $_smarty_tpl->tpl_vars['peticion']->value['estado_dir'];
                                     <input type="hidden" name="peticion_id" value="<?php echo $_smarty_tpl->tpl_vars['peticion']->value['peticion_id'];?>
 ">
                                     <button type="submit">Aceptar</button>
+                                </form>
+                                <form method="get" action="contratarAfiliado.php" style="display:inline;">
+                                    <input type="hidden" name="id_usuario" value="<?php echo $_smarty_tpl->tpl_vars['peticion']->value['id_usuario'];?>
+">
+                                    <button type="submit">Dirección</button>
                                 </form>
                             </li>
                         <?php
