@@ -204,6 +204,10 @@
                                     <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
                                     <button type="submit">Aceptar</button>
                                 </form>
+                                <form method="post" action="rechazar_peticion.php" style="display:inline;">
+                                    <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
+                                    <button type="submit" style="background:#e74c3c;">Rechazar</button>
+                                </form>
                                 <form method="get" action="contratarAfiliado.php" style="display:inline;">
                                     <input type="hidden" name="id_usuario" value="{$peticion.id_usuario}">
                                     <button type="submit">Dirección</button>
@@ -223,25 +227,33 @@
                         {foreach $peticiones_aceptadas as $peticion}
                             {if !$peticion.estado_cotizacion || $peticion.estado_cotizacion == 'pendiente'}
                                 <li>
-                                    <strong>{$peticion.nombre}{if $peticion.nickname} ({$peticion.nickname}){/if}</strong><br>
-                                    Email: {$peticion.email}<br>
-                                    Teléfono: {$peticion.telefono}<br>
+                                    <strong>{$peticion.nombre|default:''}{if $peticion.nickname} ({$peticion.nickname|default:''}){/if}</strong><br>
+                                    Email: {$peticion.email|default:''}<br>
+                                    Teléfono: {$peticion.telefono|default:''}<br>
                                     <strong>Dirección:</strong>
-                                    {if $peticion.calle}{$peticion.calle} {/if}
-                                    {if $peticion.numero_casa}#{$peticion.numero_casa} {/if}
-                                    {if $peticion.codigo_postal}CP: {$peticion.codigo_postal} {/if}
-                                    {if $peticion.municipio}{$peticion.municipio}, {/if}
-                                    {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
-                                    {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
+                                    {if $peticion.calle}{$peticion.calle|default:''} {/if}
+                                    {if $peticion.numero_casa}#{$peticion.numero_casa|default:''} {/if}
+                                    {if $peticion.codigo_postal}CP: {$peticion.codigo_postal|default:''} {/if}
+                                    {if $peticion.municipio}{$peticion.municipio|default:''}, {/if}
+                                    {if $peticion.estado_dir}{$peticion.estado_dir|default:''}{/if}<br>
+                                    {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones|default:''}<br>{/if}
+
+                                    {if $peticion.calle || $peticion.numero_casa || $peticion.municipio || $peticion.estado_dir}
+                                        <form method="get" action="contratarAfiliado.php" style="display:inline;">
+                                            <input type="hidden" name="id_usuario" value="{$peticion.id_usuario|default:''}">
+                                            <button type="submit">Dirección</button>
+                                        </form>
+                                    {/if}
+
                                     {if !$peticion.estado_cotizacion}
                                         <form method="get" action="crear_cotizacion.php" style="display:inline;">
-                                            <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
+                                            <input type="hidden" name="peticion_id" value="{$peticion.peticion_id|default:''}">
                                             <button type="submit">Cotizar</button>
                                         </form>
                                     {elseif $peticion.estado_cotizacion == 'pendiente'}
                                         <span style="color: orange; font-weight: bold;">Pago pendiente</span>
                                         <form method="get" action="crear_cotizacion.php" style="display:inline;">
-                                            <input type="hidden" name="id_cotizacion" value="{$peticion.id_cotizacion}">
+                                            <input type="hidden" name="id_cotizacion" value="{$peticion.id_cotizacion|default:''}">
                                             <button type="submit">Editar cotización</button>
                                         </form>
                                     {/if}

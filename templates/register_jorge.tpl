@@ -86,6 +86,38 @@
         padding: 20px;
       }
     }
+
+    .password-container {
+      position: relative;
+      width: 105%;
+      margin-bottom: 0;
+    }
+
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding-right: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 1rem;
+    }
+
+    .password-container button {
+      position: absolute;
+      right: 8px;
+      top: 0;
+      height: 40px;
+      width: 36px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
@@ -120,15 +152,10 @@
              pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
       <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
 
-      <label for="apellido_paterno">Apellido Paterno:</label>
-      <input type="text" id="apellido_paterno" name="apellido_paterno" value="{$form_data.apellido_paterno|default:''}" 
-             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
-      <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
-
-      <label for="apellido_materno">Apellido Materno:</label>
-      <input type="text" id="apellido_materno" name="apellido_materno" value="{$form_data.apellido_materno|default:''}" 
-             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
-      <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" name="apellidos" value="{$form_data.apellidos|default:''}" 
+            pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="apellidos-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <!-- Resto de los campos del formulario se mantienen igual -->
       <label for="nickname">Nickname:</label>
@@ -146,10 +173,16 @@
       <input type="email" id="email_confirm" name="email_confirm" value="{$form_data.email_confirm|default:''}" required>
 
       <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required>
+      <div class="password-container">
+        <input type="password" id="password" name="password" required>
+        <button type="button" id="togglePassword" tabindex="-1">👁️</button>
+      </div>
 
       <label for="confirm-password">Confirmar Contraseña:</label>
-      <input type="password" id="confirm-password" name="confirm-password" required>
+      <div class="password-container">
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <button type="button" id="toggleConfirmPassword" tabindex="-1">👁️</button>
+      </div>
 
       <label for="especialidad">Especialidad:</label>
       <select id="especialidad" name="especialidad" required>
@@ -181,9 +214,32 @@
 
   {literal}
   <script>
+  // Mostrar/ocultar contraseña principal
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const pwd = document.getElementById('password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      this.textContent = '🙈';
+    } else {
+      pwd.type = 'password';
+      this.textContent = '👁️';
+    }
+  });
+
+  // Mostrar/ocultar confirmar contraseña
+  document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+    const pwd = document.getElementById('confirm-password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      this.textContent = '🙈';
+    } else {
+      pwd.type = 'password';
+      this.textContent = '👁️';
+    }
+  });
   document.addEventListener('DOMContentLoaded', function() {
     // Validación en tiempo real para campos de nombre y apellidos
-    const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+    const nameFields = ['nombre', 'apellidos'];
     nameFields.forEach(field => {
       const input = document.getElementById(field);
       const error = document.getElementById(`${field}-error`);

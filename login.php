@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: loginAfiliados.php");
                 exit;
             } else {
-                $smarty->assign('error', 'Usuario no encontrado o contraseña incorrecta');
+                $smarty->assign('error', 'Contraseña incorrecta');
             }
         } else {
             // 2. Si no es admin, buscar en usuarios2
@@ -97,9 +97,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
+    // Mantener el correo en el campo si hay error
+    $smarty->assign('email_value', htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'));
 }
 
 // Asignar variables para la plantilla
+$smarty->assign('email_value', htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'));
+
 $smarty->assign([
     'page_title' => 'Iniciar Sesión',
     'logo_text' => 'Servi Now',

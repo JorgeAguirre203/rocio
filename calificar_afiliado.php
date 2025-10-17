@@ -87,15 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['estrellas'])) {
         }
 
         .star-rating {
-            direction: ltr;
+            direction: rtl;
+            unicode-bidi: bidi-override;
             display: inline-block;
             margin-bottom: 30px;
         }
-
         .star-rating input {
             display: none;
         }
-
         .star-rating label {
             font-size: 2.5em;
             color: #ccc;
@@ -103,10 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['estrellas'])) {
             transition: color 0.2s;
             padding: 0 5px;
         }
-
-        .star-rating input:checked ~ label,
         .star-rating label:hover,
         .star-rating label:hover ~ label {
+            color: #f5b301;
+        }
+        .star-rating input:checked ~ label {
             color: #f5b301;
         }
 
@@ -147,16 +147,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['estrellas'])) {
             <div class="star-rating">
                 <input type="radio" id="5-stars" name="estrellas" value="5" required>
                 <label for="5-stars" title="5 estrellas">★</label>
-
                 <input type="radio" id="4-stars" name="estrellas" value="4">
                 <label for="4-stars" title="4 estrellas">★</label>
-
                 <input type="radio" id="3-stars" name="estrellas" value="3">
                 <label for="3-stars" title="3 estrellas">★</label>
-
                 <input type="radio" id="2-stars" name="estrellas" value="2">
                 <label for="2-stars" title="2 estrellas">★</label>
-
                 <input type="radio" id="1-star" name="estrellas" value="1">
                 <label for="1-star" title="1 estrella">★</label>
             </div>

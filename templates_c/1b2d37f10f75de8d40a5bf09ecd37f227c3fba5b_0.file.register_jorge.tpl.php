@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 13:33:36
+/* Smarty version 3.1.39, created on 2025-06-11 23:57:29
   from '/var/www/html/rocio/templates/register_jorge.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6839b3b0b17969_96810721',
+  'unifunc' => 'content_684a17e9a82372_80956535',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1b2d37f10f75de8d40a5bf09ecd37f227c3fba5b' => 
     array (
       0 => '/var/www/html/rocio/templates/register_jorge.tpl',
-      1 => 1748612014,
+      1 => 1749686198,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6839b3b0b17969_96810721 (Smarty_Internal_Template $_smarty_tpl) {
+function content_684a17e9a82372_80956535 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -110,6 +110,38 @@ function content_6839b3b0b17969_96810721 (Smarty_Internal_Template $_smarty_tpl)
         padding: 20px;
       }
     }
+
+    .password-container {
+      position: relative;
+      width: 105%;
+      margin-bottom: 0;
+    }
+
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding-right: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 1rem;
+    }
+
+    .password-container button {
+      position: absolute;
+      right: 8px;
+      top: 0;
+      height: 40px;
+      width: 36px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
@@ -158,17 +190,11 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
              pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
       <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
 
-      <label for="apellido_paterno">Apellido Paterno:</label>
-      <input type="text" id="apellido_paterno" name="apellido_paterno" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['apellido_paterno'])===null||$tmp==='' ? '' : $tmp);?>
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" name="apellidos" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['apellidos'])===null||$tmp==='' ? '' : $tmp);?>
 " 
-             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
-      <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
-
-      <label for="apellido_materno">Apellido Materno:</label>
-      <input type="text" id="apellido_materno" name="apellido_materno" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['apellido_materno'])===null||$tmp==='' ? '' : $tmp);?>
-" 
-             pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
-      <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
+            pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo letras y espacios" required>
+      <div id="apellidos-error" class="error-message">Solo se permiten letras y espacios</div>
 
       <!-- Resto de los campos del formulario se mantienen igual -->
       <label for="nickname">Nickname:</label>
@@ -190,10 +216,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 " required>
 
       <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required>
+      <div class="password-container">
+        <input type="password" id="password" name="password" required>
+        <button type="button" id="togglePassword" tabindex="-1">👁️</button>
+      </div>
 
       <label for="confirm-password">Confirmar Contraseña:</label>
-      <input type="password" id="confirm-password" name="confirm-password" required>
+      <div class="password-container">
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <button type="button" id="toggleConfirmPassword" tabindex="-1">👁️</button>
+      </div>
 
       <label for="especialidad">Especialidad:</label>
       <select id="especialidad" name="especialidad" required>
@@ -236,9 +268,32 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
   
   <?php echo '<script'; ?>
 >
+  // Mostrar/ocultar contraseña principal
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const pwd = document.getElementById('password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      this.textContent = '🙈';
+    } else {
+      pwd.type = 'password';
+      this.textContent = '👁️';
+    }
+  });
+
+  // Mostrar/ocultar confirmar contraseña
+  document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+    const pwd = document.getElementById('confirm-password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      this.textContent = '🙈';
+    } else {
+      pwd.type = 'password';
+      this.textContent = '👁️';
+    }
+  });
   document.addEventListener('DOMContentLoaded', function() {
     // Validación en tiempo real para campos de nombre y apellidos
-    const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+    const nameFields = ['nombre', 'apellidos'];
     nameFields.forEach(field => {
       const input = document.getElementById(field);
       const error = document.getElementById(`${field}-error`);

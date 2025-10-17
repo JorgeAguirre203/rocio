@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 12:33:27
+/* Smarty version 3.1.39, created on 2025-06-12 00:38:29
   from '/var/www/html/rocio/templates/crear_cotizacion.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6839a597c6b715_37437272',
+  'unifunc' => 'content_684a2185388c88_68596399',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'af44e86e58be907a9c98030948d3534e367d1b6d' => 
     array (
       0 => '/var/www/html/rocio/templates/crear_cotizacion.tpl',
-      1 => 1748608402,
+      1 => 1749688254,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6839a597c6b715_37437272 (Smarty_Internal_Template $_smarty_tpl) {
+function content_684a2185388c88_68596399 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -188,32 +188,10 @@ function content_6839a597c6b715_37437272 (Smarty_Internal_Template $_smarty_tpl)
             
             <div class="form-group">
                 <label for="servicio">Servicio:</label>
-                <select name="servicio" id="servicio" required>
-                    <option value="plomeria" <?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['servicio'] == 'plomeria') {?>selected<?php }?>>
-                        <span class="service-option">
-                            <span class="service-icon">P</span>
-                            Plomería
-                        </span>
-                    </option>
-                    <option value="electricidad" <?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['servicio'] == 'electricidad') {?>selected<?php }?>>
-                        <span class="service-option">
-                            <span class="service-icon">E</span>
-                            Electricidad
-                        </span>
-                    </option>
-                    <option value="carpinteria" <?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['servicio'] == 'carpinteria') {?>selected<?php }?>>
-                        <span class="service-option">
-                            <span class="service-icon">C</span>
-                            Carpintería
-                        </span>
-                    </option>
-                    <option value="albanileria" <?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['servicio'] == 'albanileria') {?>selected<?php }?>>
-                        <span class="service-option">
-                            <span class="service-icon">A</span>
-                            Albañilería
-                        </span>
-                    </option>
-                </select>
+                <p style="margin:0 0 8px 0;"><strong><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio_afiliado']->value, ENT_QUOTES, 'UTF-8', true);?>
+</strong></p>
+                <input type="hidden" name="servicio" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio_afiliado']->value, ENT_QUOTES, 'UTF-8', true);?>
+">
             </div>
             
             <div class="form-group">

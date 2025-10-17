@@ -18,14 +18,40 @@ $conexion->begin_transaction();
 
 try {
     // Registrar el pago
-    $stmt_pago = $conexion->prepare("INSERT INTO pagos (id_cotizacion, id_orden, metodo_pago, monto, estado, detalle_pago, fecha) VALUES (?, ?, 'efectivo', ?, 'pendiente', ?, NOW())");
+    $stmt_pago = $conexion->prepare("INSERT INTO pagos (id_cotizacion, id_orden, metodo_pago, monto, estado, detalle_pago, fecha) VALUES (?, ?, 'efectivo', ?, 'completado', ?, NOW())");
     $stmt_pago->bind_param("isds", $id_cotizacion, $idOrden, $total, $detalle);
     $stmt_pago->execute();
     
     // Actualizar estado de la cotización
-    $stmt_cotizacion = $conexion->prepare("UPDATE cotizaciones SET estado = 'aceptada' WHERE id = ?");
-    $stmt_cotizacion->bind_param("i", $id_cotizacion);
-    $stmt_cotizacion->execute();
+    $stmt = $conexion->prepare("UPDATE cotizaciones SET estado = 'completado' WHERE id = ?");
+    $stmt->bind_param("i", $input['id_cotizacion']);
+    $stmt->execute();
+
+    // Obtener id_usuario e id_afiliado de la cotización
+    $stmt = $conexion->prepare("SELECT id_usuario, id_afiliado FROM cotizaciones WHERE id = ?");
+    $stmt->bind_param("i", $id_cotizacion);
+    $stmt->execute();
+    $stmt->bind_result($id_usuario, $id_afiliado);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Obtener nombre del afiliado
+    $stmt = $conexion->prepare("SELECT nombre, apellido_paterno FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $id_afiliado);
+    $stmt->execute();
+    $stmt->bind_result($nombre_afiliado, $apellido_afiliado);
+    $stmt->fetch();
+    $stmt->close();
+
+    $nombre_completo_afiliado = $nombre_afiliado . ' ' . $apellido_afiliado;
+
+    // Actualizar la notificación
+    $mensaje_pagado = "Has pagado el servicio del afiliado ($nombre_completo_afiliado).";
+    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
+    $like = "%cotizó tu servicio%";
+    $stmt->bind_param("sis", $mensaje_pagado, $id_usuario, $like);
+    $stmt->execute();
+    $stmt->close();
     
     $conexion->commit();
     echo "Pago en efectivo registrado. Por favor, completa el pago con el prestador.";

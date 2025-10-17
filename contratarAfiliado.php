@@ -63,6 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['geocodificar'])) {
             $stmt = $conexion->prepare("UPDATE usuarios2 SET latitud = ?, longitud = ? WHERE id = ?");
             $stmt->bind_param("ddi", $lat, $lon, $id_usuario);
             $stmt->execute();
+// Pega aquí el bloque de depuración:
+if ($stmt->affected_rows > 0) {
+    error_log("Notificación insertada correctamente para usuario $id_usuario");
+} else {
+    error_log("No se insertó la notificación para usuario $id_usuario");
+}
             $stmt->close();
             $mensaje = 'Dirección geocodificada correctamente.';
             // Refresca los datos del usuario

@@ -88,3 +88,16 @@ img {
 .btn-cerrar:hover {
     background: #c0392b;
 }
+
+.btn-eliminar {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-eliminar:hover {
+    background: #c0392b;
+}

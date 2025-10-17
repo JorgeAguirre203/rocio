@@ -27,6 +27,9 @@ $stmt->close();
 if (!$cotizacion) {
     die("Cotización no encontrada o no tienes permiso para verla.");
 }
+
+// Obtener nombre del usuario autenticado desde la sesión
+$nombre_usuario = $_SESSION['usuario']['nombre'] ?? 'Usuario';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +38,6 @@ if (!$cotizacion) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagar Servicio</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://www.paypal.com https://www.paypalobjects.com 'unsafe-inline'">
-    <!-- SDK PayPal con tu Client ID real -->
     <script src="https://www.paypal.com/sdk/js?client-id=AUcZh8X69tSFeppD0hTuPaPR-hquMLqHIVtlqWzmJsM68KCIx20SsoiLJwVEyuauLHIfcetpEKxC77bP&currency=MXN&intent=capture&commit=true&components=buttons"></script>
     <style>
         body {
@@ -207,12 +209,12 @@ if (!$cotizacion) {
             .payment-container {
                 padding: 20px;
             }
-            
+
             .payment-details p {
                 display: flex;
                 flex-direction: column;
             }
-            
+
             .payment-details strong {
                 margin-bottom: 5px;
             }
@@ -222,7 +224,7 @@ if (!$cotizacion) {
 <body>
     <div class="payment-container">
         <h1>Completar Pago</h1>
-        
+
         <div class="payment-details">
             <h2>Detalles del Servicio</h2>
             <p><strong>Tipo:</strong> <?= htmlspecialchars(ucfirst($cotizacion['servicio'])) ?></p>
@@ -230,30 +232,40 @@ if (!$cotizacion) {
             <p><strong>Total:</strong> $<?= number_format($cotizacion['total'], 2) ?> MXN</p>
         </div>
 
-        <div class="payment-option">
-            <h3>Pago con PayPal</h3>
-            <div id="paypal-button-container">
-                <p>Cargando opciones de pago...</p>
-            </div>
+       <div class="payment-option">
+         <h3>Pago con PayPal</h3>
+         <div class="form-group">
+        <label for="comentario_paypal">Comentarios adicionales:</label>
+        <label for="comentario_paypal">(Es necesario ingresar un comentario para poder continuar)</label>
+        <textarea id="comentario_paypal" placeholder="Ej. Horario preferido, instrucciones, etc."></textarea>
+        <small id="comentario_paypal_aviso" style="color: #dc3545; display: none;">
+            * Debes escribir un comentario para continuar con el pago.
+        </small>
         </div>
-        
+        <div id="paypal-button-container">
+        <p>Metodos de pago...</p>
+         </div>
+        </div>
+
+
         <div class="payment-option">
             <h3>Pago en efectivo</h3>
             <div class="cash-form">
                 <form action="procesar_pago_efectivo.php" method="post">
                     <input type="hidden" name="id_cotizacion" value="<?= htmlspecialchars($cotizacion['id']) ?>">
                     <input type="hidden" name="total" value="<?= htmlspecialchars($cotizacion['total']) ?>">
-                    
+                    <input type="hidden" name="nombre" value="<?= htmlspecialchars($nombre_usuario) ?>">
+
                     <div class="form-group">
-                        <label for="nombre">Tu nombre completo:</label>
-                        <input type="text" name="nombre" id="nombre" required>
+                        <label>Tu nombre completo:</label>
+                        <p><strong><?= htmlspecialchars($nombre_usuario) ?></strong></p>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="detalle">Comentarios adicionales:</label>
                         <textarea name="detalle" id="detalle" placeholder="Ej. Horario preferido para el pago, instrucciones especiales, etc."></textarea>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-cash">Confirmar Pago en Efectivo</button>
                 </form>
             </div>
@@ -266,7 +278,6 @@ if (!$cotizacion) {
     </div>
 
     <script>
-    // Configuración de PayPal
     function initPayPal() {
         try {
             if (typeof paypal === 'undefined') {
@@ -274,7 +285,7 @@ if (!$cotizacion) {
             }
 
             const totalAmount = Number(<?= json_encode($cotizacion['total']) ?>);
-            
+
             paypal.Buttons({
                 style: {
                     layout: 'vertical',
@@ -310,12 +321,17 @@ if (!$cotizacion) {
                     });
                 },
                 onApprove: function(data, actions) {
+                    var comentario = document.getElementById('comentario_paypal').value.trim();
+                    if (!comentario) {
+                        document.getElementById('payment-status').className = 'status-message error';
+                        document.getElementById('payment-status').textContent = 'Por favor, escribe un comentario antes de pagar.';
+                        return Promise.reject('Comentario requerido');
+                    }
+
                     return actions.order.capture().then(function(details) {
-                        // Mostrar mensaje de procesamiento
                         document.getElementById('payment-status').className = 'status-message';
                         document.getElementById('payment-status').textContent = 'Procesando pago...';
-                        
-                        // Enviar datos al servidor
+
                         return fetch('procesar_pago.php', {
                             method: 'POST',
                             headers: {
@@ -326,12 +342,11 @@ if (!$cotizacion) {
                                 idOrden: data.orderID,
                                 metodo: 'paypal',
                                 monto: totalAmount,
-                                detalles: details
+                                detalles: details,
+                                comentario: comentario
                             })
                         })
-                        .then(function(res) {
-                            return res.json();
-                        })
+                        .then(function(res) { return res.json(); })
                         .then(function(data) {
                             if (data.success) {
                                 document.getElementById('payment-status').className = 'status-message success';
@@ -355,7 +370,7 @@ if (!$cotizacion) {
                     document.getElementById('payment-status').textContent = 'Pago cancelado por el usuario';
                 }
             }).render('#paypal-button-container');
-            
+
         } catch (error) {
             console.error('Error inicializando PayPal:', error);
             document.getElementById('paypal-button-container').innerHTML = `
@@ -371,11 +386,9 @@ if (!$cotizacion) {
         }
     }
 
-    // Inicializar PayPal cuando el SDK esté listo
     if (typeof paypal !== 'undefined') {
         initPayPal();
     } else {
-        // Si no está cargado, esperar y reintentar
         let paypalRetries = 0;
         const paypalInterval = setInterval(function() {
             if (typeof paypal !== 'undefined') {

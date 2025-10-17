@@ -232,19 +232,35 @@ $conexion->close();
                         <span class="status <?= $statusClass ?>"><?= htmlspecialchars($trabajo['estado_peticion']) ?></span>
                     </td>
                     <td><?= date('d/m/Y H:i', strtotime($trabajo['fecha'])) ?></td>
-                    <td>
-                        <?php if (!empty($trabajo['comentarios_pago'])): ?>
-                            <ul class="comments-list">
-                            <?php foreach ($trabajo['comentarios_pago'] as $comentario): ?>
-                                <li>
-                                    <span class="comment-text"><?= htmlspecialchars($comentario['detalle_pago']) ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                            </ul>
-                        <?php else: ?>
-                            <span class="no-comments">Sin comentarios</span>
-                        <?php endif; ?>
-                    </td>
+                        <td>
+                            <?php if (!empty($trabajo['comentarios_pago'])): ?>
+                                <ul class="comments-list">
+                                <?php foreach ($trabajo['comentarios_pago'] as $comentario): ?>
+                                    <?php
+                                        $detalle = json_decode($comentario['detalle_pago'], true);
+                                        $texto_comentario = '';
+                                        if (is_array($detalle)) {
+                                            // Si es pago PayPal, el comentario está en 'comentario'
+                                            $texto_comentario = $detalle['comentario'] ?? '';
+                                            // Si es pago en efectivo antiguo, puede estar en 'detalle'
+                                            if (!$texto_comentario && isset($detalle['detalle'])) {
+                                                $texto_comentario = $detalle['detalle'];
+                                            }
+                                        }
+                                        // Si sigue vacío, mostrar el texto plano (casos antiguos)
+                                        if (!$texto_comentario && is_string($comentario['detalle_pago'])) {
+                                            $texto_comentario = $comentario['detalle_pago'];
+                                        }
+                                    ?>
+                                    <li>
+                                        <span class="comment-text"><?= htmlspecialchars($texto_comentario) ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                                </ul>
+                            <?php else: ?>
+                                <span class="no-comments">Sin comentarios</span>
+                            <?php endif; ?>
+                        </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

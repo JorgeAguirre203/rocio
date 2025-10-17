@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 13:42:50
+/* Smarty version 3.1.39, created on 2025-06-12 00:21:06
   from '/var/www/html/rocio/templates/registro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6839b5da37f002_85422989',
+  'unifunc' => 'content_684a1d7216a5f1_08823273',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '080c066fb008db83217617e101b8d1bf3ba2b632' => 
     array (
       0 => '/var/www/html/rocio/templates/registro.tpl',
-      1 => 1748612566,
+      1 => 1749687664,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6839b5da37f002_85422989 (Smarty_Internal_Template $_smarty_tpl) {
+function content_684a1d7216a5f1_08823273 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -92,6 +92,38 @@ function content_6839b5da37f002_85422989 (Smarty_Internal_Template $_smarty_tpl)
         padding: 20px;
       }
     }
+
+    .password-container {
+      position: relative;
+      width: 105%;
+      margin-bottom: 0;
+    }
+
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding-right: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 1rem;
+    }
+
+    .password-container button {
+      position: absolute;
+      right: 8px;
+      top: 0;
+      height: 40px;
+      width: 36px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
   </style>
 </head>
 
@@ -147,10 +179,16 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 " required>
 
       <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" required>
+      <div class="password-container">
+        <input type="password" id="password" name="password" required>
+        <button type="button" id="togglePassword" tabindex="-1">👁️</button>
+      </div>
 
       <label for="confirm-password">Confirmar Contraseña:</label>
-      <input type="password" id="confirm-password" name="confirm-password" required>
+      <div class="password-container">
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <button type="button" id="toggleConfirmPassword" tabindex="-1">👁️</button>
+      </div>
 
       <button type="submit" class="btn">Registrarse</button>
     </form>
@@ -164,6 +202,29 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
   
   <?php echo '<script'; ?>
 >
+  // Mostrar/ocultar contraseña principal
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const pwd = document.getElementById('password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      this.textContent = '🙈';
+    } else {
+      pwd.type = 'password';
+      this.textContent = '👁️';
+    }
+  });
+
+  // Mostrar/ocultar confirmar contraseña
+  document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+    const pwd = document.getElementById('confirm-password');
+    if (pwd.type === 'password') {
+      pwd.type = 'text';
+      this.textContent = '🙈';
+    } else {
+      pwd.type = 'password';
+      this.textContent = '👁️';
+    }
+  });
   document.addEventListener('DOMContentLoaded', function() {
     // Validación en tiempo real para campo de nombre
     const nombreInput = document.getElementById('nombre');

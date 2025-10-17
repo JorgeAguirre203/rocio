@@ -9,6 +9,8 @@ if (isset($_SESSION['usuario']['id'])) {
     die('No has iniciado sesión.');
 }
 
+
+
 $smarty = new Smarty();
 $smarty->setTemplateDir('templates/');
 $smarty->setCompileDir('templates_c/');
@@ -20,46 +22,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $calle = trim($_POST['calle'] ?? '');
     $numero_casa = trim($_POST['numero_casa'] ?? '');
     $codigo_postal = trim($_POST['codigo_postal'] ?? '');
-    $estado = trim($_POST['estado'] ?? '');
-    $municipio = trim($_POST['municipio'] ?? '');
+    $codigo_postal = preg_replace('/\s+/', '', $codigo_postal);
+    error_log("CP recibido: >" . $codigo_postal . "<"); // <-- AQUÍ
+    $estado = 'Sinaloa'; // Estado fijo
+    $municipio = 'Ahome'; // Municipio fijo
     $indicaciones = trim($_POST['indicaciones'] ?? '');
 
-    // Validación básica de campos obligatorios
-    if (empty($calle) || empty($numero_casa) || empty($estado) || empty($municipio) || empty($indicaciones)) {
-        $mensaje = 'Por favor complete todos los campos obligatorios';
-    } else {
+    // Validación básica
+    if (empty($calle) || empty($indicaciones)) {
+        $mensaje = 'Por favor complete todos los campos obligatorios (calle e indicaciones).';
+    } elseif (!preg_match('/^\d{5}$/', $codigo_postal)) {
+        $mensaje = 'El código postal debe ser de 5 dígitos numéricos.';
+    }
+
+    if (empty($mensaje)) {
         try {
-            // Prepara la consulta SQL
             $stmt = $conexion->prepare("UPDATE usuarios2 SET 
-                                        calle = ?, 
-                                        numero_casa = ?, 
-                                        codigo_postal = ?, 
-                                        estado = ?, 
-                                        municipio = ?, 
-                                        indicaciones = ? 
-                                        WHERE id = ?");
-            
-            // Vincula los parámetros
+                calle = ?, 
+                numero_casa = ?, 
+                codigo_postal = ?, 
+                estado = ?, 
+                municipio = ?, 
+                indicaciones = ? 
+                WHERE id = ?");
+
             $stmt->bind_param("ssssssi", 
-                            $calle, 
-                            $numero_casa, 
-                            $codigo_postal, 
-                            $estado, 
-                            $municipio, 
-                            $indicaciones, 
-                            $id);
-            
-            // Ejecuta la consulta
+                $calle, 
+                $numero_casa, 
+                $codigo_postal, 
+                $estado, 
+                $municipio, 
+                $indicaciones, 
+                $id);
+
             if ($stmt->execute()) {
-                if ($stmt->affected_rows > 0) {
-                    $mensaje = 'Dirección actualizada correctamente';
-                } else {
-                    $mensaje = 'No se realizaron cambios en la dirección';
-                }
+                header("Location: dashboard_servicios.php?msg=Dirección+guardada+correctamente");
+                exit;
             } else {
                 $mensaje = 'Error al actualizar la dirección: ' . $stmt->error;
             }
-            
+
             $stmt->close();
         } catch (Exception $e) {
             $mensaje = 'Error en la base de datos: ' . $e->getMessage();
@@ -67,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Obtener los datos actuales para prellenar el formulario
+// Obtener datos actuales para prellenar el formulario
 $datos_actuales = [];
 $query = $conexion->prepare("SELECT calle, numero_casa, codigo_postal, estado, municipio, indicaciones 
                             FROM usuarios2 

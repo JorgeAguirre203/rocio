@@ -16,19 +16,45 @@ $conexion->begin_transaction();
 
 try {
     // 1. Registrar el pago
+    $comentario = isset($input['comentario']) ? trim($input['comentario']) : '';
+    $detalle = json_encode([
+        'paypal' => $input['detalles'] ?? [],
+        'comentario' => $comentario
+    ]);
+
     $stmt = $conexion->prepare("INSERT INTO pagos 
-                              (id_cotizacion, id_orden, metodo_pago, monto, estado, detalle_pago, fecha) 
-                              VALUES (?, ?, ?, ?, 'completado', ?, NOW())");
-    $detalle = json_encode($input['detalles'] ?? []);
+                            (id_cotizacion, id_orden, metodo_pago, monto, estado, detalle_pago, fecha) 
+                            VALUES (?, ?, ?, ?, 'completado', ?, NOW())");
     $stmt->bind_param("issds", $input['id_cotizacion'], $input['idOrden'], 
-                     $input['metodo'], $input['monto'], $detalle);
+                    $input['metodo'], $input['monto'], $detalle);
     $stmt->execute();
     $id_pago = $conexion->insert_id;
     
-    // 2. Actualizar estado de la cotización
-    $stmt = $conexion->prepare("UPDATE cotizaciones SET estado = 'completada' WHERE id = ?");
+    // Obtener id_usuario e id_afiliado de la cotización
+    $stmt = $conexion->prepare("SELECT id_usuario, id_afiliado FROM cotizaciones WHERE id = ?");
     $stmt->bind_param("i", $input['id_cotizacion']);
     $stmt->execute();
+    $stmt->bind_result($id_usuario, $id_afiliado);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Obtener nombre del afiliado
+    $stmt = $conexion->prepare("SELECT nombre, apellido_paterno FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $id_afiliado);
+    $stmt->execute();
+    $stmt->bind_result($nombre_afiliado, $apellido_afiliado);
+    $stmt->fetch();
+    $stmt->close();
+
+    $nombre_completo_afiliado = $nombre_afiliado . ' ' . $apellido_afiliado;
+
+    // Actualizar la notificación
+    $mensaje_pagado = "Has pagado el servicio del afiliado ($nombre_completo_afiliado).";
+    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
+    $like = "%cotizó tu servicio%";
+    $stmt->bind_param("sis", $mensaje_pagado, $id_usuario, $like);
+    $stmt->execute();
+    $stmt->close();
     
     // 3. Confirmar transacción
     $conexion->commit();

@@ -20,6 +20,17 @@ if (isset($_POST['verificar_id'])) {
     exit;
 }
 
+// Eliminar afiliado
+if (isset($_POST['eliminar_id'])) {
+    $eliminar_id = intval($_POST['eliminar_id']);
+    $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $eliminar_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: loginAfiliados.php");
+    exit;
+}
+
 // Cerrar sesión admin
 if (isset($_POST['cerrar_sesion'])) {
     session_destroy();
@@ -32,19 +43,25 @@ $smarty->setTemplateDir('templates/');
 $smarty->setCompileDir('templates_c/');
 $smarty->setCacheDir('cache/');
 
-// Obtener afiliados no verificados
-$query = "SELECT * FROM usuarios WHERE verificado = 0";
+// Obtener todos los afiliados
+$query = "SELECT * FROM usuarios";
 $result = $conexion->query($query);
 
-$afiliados = [];
+$afiliados_no_verificados = [];
+$afiliados_verificados = [];
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $afiliados[] = $row;
+        if ($row['verificado'] == 1) {
+            $afiliados_verificados[] = $row;
+        } else {
+            $afiliados_no_verificados[] = $row;
+        }
     }
     $result->close();
 }
 
-$smarty->assign('afiliados', $afiliados);
+$smarty->assign('afiliados_no_verificados', $afiliados_no_verificados);
+$smarty->assign('afiliados_verificados', $afiliados_verificados);
 $smarty->assign('page_title', 'Afiliados No Verificados');
 $smarty->assign('admin_nombre', $_SESSION['admin']['nombre']);
 $smarty->display('loginAfiliados.tpl');

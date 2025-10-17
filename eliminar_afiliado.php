@@ -12,17 +12,29 @@ $id = $_SESSION['afiliado']['id'];
 $mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Eliminar afiliado
-    $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id=?");
+    // Verificar si tiene peticiones pendientes
+    $stmt = $conexion->prepare("SELECT COUNT(*) FROM peticiones WHERE id_afiliado = ? AND estado = 'pendiente'");
     $stmt->bind_param("i", $id);
-    if ($stmt->execute()) {
-        session_destroy();
-        header("Location: index.php?msg=Cuenta eliminada");
-        exit;
-    } else {
-        $mensaje = "Error al eliminar la cuenta.";
-    }
+    $stmt->execute();
+    $stmt->bind_result($pendientes);
+    $stmt->fetch();
     $stmt->close();
+
+    if ($pendientes > 0) {
+        $mensaje = "No puedes eliminar tu cuenta porque tienes peticiones pendientes.";
+    } else {
+        // Eliminar afiliado
+        $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id=?");
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            session_destroy();
+            header("Location: index.php?msg=Cuenta eliminada");
+            exit;
+        } else {
+            $mensaje = "Error al eliminar la cuenta.";
+        }
+        $stmt->close();
+    }
 }
 
 // Obtener datos para mostrar confirmación

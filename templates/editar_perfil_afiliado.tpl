@@ -123,6 +123,10 @@
     </style>
 </head>
 <body>
+
+    {if $mensaje}
+        <div class="alert alert-success" style="color:green; margin:10px 0;">{$mensaje}</div>
+    {/if}
     <div class="form-container">
         <h2>Editar Perfil de Afiliado</h2>
         
@@ -139,17 +143,13 @@
                 <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
             </div>
             
-            <div class="form-group">
-                <label for="apellido_paterno">Apellido paterno:</label>
-                <input type="text" id="apellido_paterno" name="apellido_paterno" value="{$afiliado.apellido_paterno|escape:'html'}" required>
-                <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="apellido_materno">Apellido materno:</label>
-                <input type="text" id="apellido_materno" name="apellido_materno" value="{$afiliado.apellido_materno|escape:'html'}" required>
-                <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
-            </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos"
+                value="{$afiliado.apellido_paterno|escape:'html'}{if $afiliado.apellido_materno} {$afiliado.apellido_materno|escape:'html'}{/if}"
+                required>
+            <div id="apellidos-error" class="error-message">Solo se permiten letras y espacios</div>
+        </div>
             
             <div class="form-group">
                 <label for="nickname">Nickname:</label>
@@ -232,7 +232,7 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Validación en tiempo real para campos de nombre y apellidos
-      const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+      const nameFields = ['nombre', 'apellidos'];
       nameFields.forEach(field => {
         const input = document.getElementById(field);
         const error = document.getElementById(`${field}-error`);

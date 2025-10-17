@@ -40,6 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password !== $confirmPassword) {
         $errors[] = "Las contraseñas no coinciden.";
     }
+
+    // Validar que la contraseña tenga al menos 8 caracteres, una mayúscula y un carácter especial
+    if (
+        strlen($password) < 8 ||
+        !preg_match('/[A-Z]/', $password) ||
+        !preg_match('/[\W_]/', $password)
+    ) {
+        $errors[] = "La contraseña debe tener al menos 8 caracteres, una mayúscula y un carácter especial.";
+    }
     
     // Verificar existencia en BD
     if (empty($errors)) {

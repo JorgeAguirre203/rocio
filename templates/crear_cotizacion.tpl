@@ -163,32 +163,8 @@
             
             <div class="form-group">
                 <label for="servicio">Servicio:</label>
-                <select name="servicio" id="servicio" required>
-                    <option value="plomeria" {if $cotizacion.servicio == 'plomeria'}selected{/if}>
-                        <span class="service-option">
-                            <span class="service-icon">P</span>
-                            Plomería
-                        </span>
-                    </option>
-                    <option value="electricidad" {if $cotizacion.servicio == 'electricidad'}selected{/if}>
-                        <span class="service-option">
-                            <span class="service-icon">E</span>
-                            Electricidad
-                        </span>
-                    </option>
-                    <option value="carpinteria" {if $cotizacion.servicio == 'carpinteria'}selected{/if}>
-                        <span class="service-option">
-                            <span class="service-icon">C</span>
-                            Carpintería
-                        </span>
-                    </option>
-                    <option value="albanileria" {if $cotizacion.servicio == 'albanileria'}selected{/if}>
-                        <span class="service-option">
-                            <span class="service-icon">A</span>
-                            Albañilería
-                        </span>
-                    </option>
-                </select>
+                <p style="margin:0 0 8px 0;"><strong>{$servicio_afiliado|escape}</strong></p>
+                <input type="hidden" name="servicio" value="{$servicio_afiliado|escape}">
             </div>
             
             <div class="form-group">

@@ -23,10 +23,15 @@ $afiliado = $result->fetch_assoc();
 $stmt->close();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recoger datos del formulario
     $nombre = trim($_POST['nombre']);
-    $apellido_paterno = trim($_POST['apellido_paterno']);
-    $apellido_materno = trim($_POST['apellido_materno']);
+    $apellidos = trim($_POST['apellidos']);
+    $apellido_paterno = '';
+    $apellido_materno = '';
+    if (!empty($apellidos)) {
+        $apellidos_array = preg_split('/\s+/', $apellidos, 2);
+        $apellido_paterno = $apellidos_array[0];
+        $apellido_materno = isset($apellidos_array[1]) ? $apellidos_array[1] : '';
+    }
     $nickname = trim($_POST['nickname']);
     $email = trim($_POST['email']);
     $telefono = trim($_POST['telefono']);
@@ -97,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     if ($stmt->execute()) {
-        $mensaje = "Perfil actualizado correctamente";
         // Actualizar datos en sesión
         $_SESSION['afiliado'] = array_merge($_SESSION['afiliado'], [
             'nombre' => $nombre,
@@ -107,14 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'email' => $email,
             'foto_perfil' => $ruta_foto
         ]);
-        
-        // Refrescar datos para la vista
-        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE id=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $afiliado = $result->fetch_assoc();
-        $stmt->close();
+        // Redirigir a afiliados.php con mensaje de éxito
+        header("Location: afiliados.php?msg=Perfil+actualizado+correctamente");
+        exit;
     } else {
         $mensaje = "Error al actualizar el perfil: " . $stmt->error;
     }

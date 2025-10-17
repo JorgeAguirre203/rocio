@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 09:32:19
+/* Smarty version 3.1.39, created on 2025-06-12 03:13:22
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_68397b2337cdd3_90431743',
+  'unifunc' => 'content_684a45d26a9cd2_02908629',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1748597354,
+      1 => 1749697999,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68397b2337cdd3_90431743 (Smarty_Internal_Template $_smarty_tpl) {
+function content_684a45d26a9cd2_02908629 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -241,6 +241,13 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
     </style>
 </head>
 <body>
+
+    <?php if ($_smarty_tpl->tpl_vars['direccion_incompleta']->value) {?>
+        <div style="position:fixed;top:10px;left:10px;z-index:1000;background:#ffeeba;color:#856404;padding:10px 20px;border-radius:5px;">
+            <strong>¡Atención!</strong> Primero agrega tu dirección antes de contratar un afiliado.
+            <a href="direccion_usuario.php" style="color:#007bff;text-decoration:underline;">Agregar dirección</a>
+        </div>
+    <?php }?>
     <!-- Header -->
 
     <!-- codigo de campana de notificaciones -->
@@ -275,19 +282,20 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['noti']->value) {
 $_smarty_tpl->tpl_vars['noti']->do_else = false;
 ?>
                     <li>
-                        <a href="pago.php?id_cotizacion=<?php echo $_smarty_tpl->tpl_vars['noti']->value['id'];?>
+                        <?php echo $_smarty_tpl->tpl_vars['noti']->value['mensaje'];?>
+
+                        <form method="post" action="eliminar_notificacion.php" style="display:inline;">
+                            <input type="hidden" name="id_notificacion" value="<?php echo $_smarty_tpl->tpl_vars['noti']->value['id'];?>
 ">
-                            Tienes un pago pendiente de <b><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['noti']->value['servicio'], ENT_QUOTES, 'UTF-8', true);?>
-</b> por <b>$<?php echo $_smarty_tpl->tpl_vars['noti']->value['total'];?>
-</b>
-                        </a>
+                            <button type="submit" style="background:none;border:none;color:red;cursor:pointer;" title="Eliminar notificación">&#10006;</button>
+                        </form>
                     </li>
                 <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                 </ul>
             <?php } else { ?>
-                <p>No tienes pagos pendientes.</p>
+                <p>No tienes notificaciones.</p>
             <?php }?>
         </div>
     </div>
@@ -306,8 +314,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
             <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
-            <a href="logout.php" class="nav-btn">Cerrar sesión</a>
             <a href="direccion_usuario.php" class="nav-btn">Agregar direccion</a>
+            <a href="logout.php" class="nav-btn">Cerrar sesión</a>
         </div>
     </div>
 
@@ -411,6 +419,27 @@ $_smarty_tpl->tpl_vars['servicio']->do_else = false;
 </h2>
                     <p><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['descripcion'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
+                    <p>
+                        <strong>Calificación:</strong>
+                        <?php echo $_smarty_tpl->tpl_vars['servicio']->value['estrellas'];?>
+ 
+                        <?php
+$_smarty_tpl->tpl_vars['__smarty_section_star'] = new Smarty_Variable(array());
+if (true) {
+for ($__section_star_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_star']->value['index'] = 0; $__section_star_0_iteration <= 5; $__section_star_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_star']->value['index']++){
+?>
+                            <?php if ($_smarty_tpl->tpl_vars['servicio']->value['estrellas'] >= (isset($_smarty_tpl->tpl_vars['__smarty_section_star']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_star']->value['index'] : null)+1) {?>
+                                <span style="color:gold;">&#9733;</span>
+                            <?php } elseif ($_smarty_tpl->tpl_vars['servicio']->value['estrellas'] > (isset($_smarty_tpl->tpl_vars['__smarty_section_star']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_star']->value['index'] : null)) {?>
+                                <span style="color:gold;">&#9733;</span>
+                            <?php } else { ?>
+                                <span style="color:#ccc;">&#9733;</span>
+                            <?php }?>
+                        <?php
+}
+}
+?>
+                    </p>
                     <p><strong>Especialidad:</strong> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['servicio']->value['especialidad'], ENT_QUOTES, 'UTF-8', true);?>
 </p>
                     <form method="post" action="contratar_afiliado.php" style="display:inline;">

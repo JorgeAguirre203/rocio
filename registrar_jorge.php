@@ -25,8 +25,14 @@ if ($conn->connect_error) {
 // Procesar formulario si se envió
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'] ?? '';
-    $apellido_paterno = $_POST['apellido_paterno'] ?? '';
-    $apellido_materno = $_POST['apellido_materno'] ?? '';
+    $apellidos = $_POST['apellidos'] ?? '';
+    $apellido_paterno = '';
+    $apellido_materno = '';
+    if (!empty($apellidos)) {
+        $apellidos_array = preg_split('/\s+/', trim($apellidos), 2);
+        $apellido_paterno = $apellidos_array[0];
+        $apellido_materno = isset($apellidos_array[1]) ? $apellidos_array[1] : '';
+    }
     $nickname = $_POST['nickname'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -41,8 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validar campos obligatorios
     $required_fields = [
         'nombre' => 'Nombre',
-        'apellido_paterno' => 'Apellido Paterno',
-        'apellido_materno' => 'Apellido Materno',
+        'apellidos' => 'Apellidos',
         'nickname' => 'Nickname',
         'telefono' => 'Teléfono',
         'email' => 'Correo electrónico',
@@ -66,6 +71,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validar coincidencia de contraseñas
     if ($password !== $confirmPassword) {
         $errors[] = "Las contraseñas no coinciden";
+    }
+
+    // Validar que la contraseña tenga al menos 8 caracteres, una mayúscula y un carácter especial
+    if (
+        strlen($password) < 8 ||
+        !preg_match('/[A-Z]/', $password) ||
+        !preg_match('/[\W_]/', $password)
+    ) {
+        $errors[] = "La contraseña debe tener al menos 8 caracteres, una mayúscula y un carácter especial.";
     }
     
     // Validar email único

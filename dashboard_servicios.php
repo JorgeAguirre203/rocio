@@ -1,4 +1,5 @@
 <?php
+
 try {
     // Iniciar sesión
     if (session_status() === PHP_SESSION_NONE) {
@@ -38,6 +39,12 @@ try {
     $result = $conexion->query($query);
 
     if (!$result) {
+        error_log("Error SQL: " . $query);
+        error_log("MySQL Error: " . $conexion->error);
+        throw new Exception("Error en la consulta: " . $conexion->error);
+    }
+
+    if (!$result) {
         throw new Exception("Error en la consulta: " . $conexion->error);
     }
 
@@ -65,17 +72,34 @@ try {
     $noti_count = 0;
 
     if ($id_usuario) {
-        $sql = "SELECT id, servicio, total FROM cotizaciones WHERE id_usuario = ? AND estado = 'pendiente'";
+        $sql = "SELECT id, mensaje FROM notificaciones WHERE id_usuario = ? AND leida = 0 ORDER BY id DESC";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("i", $id_usuario);
         $stmt->execute();
-        $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()) {
+        $result_notificaciones = $stmt->get_result();
+        while ($row = $result_notificaciones->fetch_assoc()) {
             $notificaciones[] = $row;
         }
         $noti_count = count($notificaciones);
         $stmt->close();
     }
+
+    // Verificar si el usuario tiene dirección completa
+    $direccion_incompleta = false;
+    if ($id_usuario) {
+        $sql_dir = "SELECT calle, numero_casa, estado, municipio FROM usuarios2 WHERE id = ?";
+        $stmt_dir = $conexion->prepare($sql_dir);
+        $stmt_dir->bind_param("i", $id_usuario);
+        $stmt_dir->execute();
+        $stmt_dir->bind_result($calle, $numero_casa, $estado, $municipio);
+        $stmt_dir->fetch();
+        $stmt_dir->close();
+
+        if (empty($calle) || empty($estado) || empty($municipio)) {
+            $direccion_incompleta = true;
+        }
+    }
+    $smarty->assign('direccion_incompleta', $direccion_incompleta);
 
     // Asignar datos a Smarty
     $smarty->assign([

@@ -1,5 +1,4 @@
 <?php
-
 require_once 'conexion_jorge.php';
 require_once __DIR__.'/libs/Smarty.class.php';
 session_start();
@@ -9,6 +8,14 @@ if (!isset($_SESSION['afiliado'])) {
     exit;
 }
 
+// Obtener el servicio del afiliado desde la base de datos
+$id_afiliado = $_SESSION['afiliado']['id'];
+$stmt = $conexion->prepare("SELECT especialidad FROM usuarios WHERE id = ?");
+$stmt->bind_param("i", $id_afiliado);
+$stmt->execute();
+$stmt->bind_result($servicio_afiliado); // El nombre de la variable puede quedarse igual, pero ahora contendrá la especialidad
+$stmt->fetch();
+$stmt->close();
 $smarty = new Smarty();
 $baseDir = __DIR__.'/';
 $dirs = [
@@ -23,6 +30,7 @@ foreach ($dirs as $key => $dir) {
     }
     $smarty->{$key} = $dir;
 }
+$smarty->assign('servicio_afiliado', $servicio_afiliado);
 
 // --- EDICIÓN: Cargar datos si viene id_cotizacion por GET ---
 $editando = false;
@@ -42,7 +50,7 @@ if (isset($_GET['id_cotizacion'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $peticion_id = intval($_POST['peticion_id']);
-    $servicio = $_POST['servicio'];
+    $servicio = $servicio_afiliado; // Usar el servicio del afiliado, no el del POST
     $horas = floatval($_POST['horas']);
     $detalles = $_POST['detalles'];
     $precio_hora = floatval($_POST['precio_hora']);
@@ -56,10 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // --- Si es edición, actualiza la cotización ---
     if (isset($_POST['id_cotizacion']) && $_POST['id_cotizacion']) {
         $id_cotizacion = intval($_POST['id_cotizacion']);
-        $stmt = $conexion->prepare("UPDATE cotizaciones SET servicio=?, horas=?, detalles=?, precio_hora=?, total=? WHERE id=?");
-        $stmt->bind_param("sdssdi", $servicio, $horas, $detalles, $precio_hora, $total, $id_cotizacion);
+        $stmt = $conexion->prepare("UPDATE cotizaciones SET servicio = ?, horas = ?, detalles = ?, precio_hora = ?, total = ? WHERE id = ?");
+        $stmt->bind_param("sdsddi", $servicio, $horas, $detalles, $precio_hora, $total, $id_cotizacion);
         $stmt->execute();
         $stmt->close();
+
         header("Location: afiliados.php");
         exit;
     }
@@ -83,9 +92,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_cotizacion = $stmt->insert_id;
     $stmt->close();
 
-    // Relacionar cotización con la petición
-    $stmt = $conexion->prepare("UPDATE peticiones SET id_cotizacion = ?, estado = 'pendiente' WHERE id = ?");
+    // Relacionar cotización con la petición y poner estado 'aceptada'
+    $stmt = $conexion->prepare("UPDATE peticiones SET id_cotizacion = ?, estado = 'aceptada' WHERE id = ?");
     $stmt->bind_param("ii", $id_cotizacion, $peticion_id);
+    $stmt->execute();
+    $stmt->close();
+
+    // --- Actualizar notificación del cliente ---
+    // Obtener nombre del afiliado
+    $stmt = $conexion->prepare("SELECT nombre, apellido_paterno FROM usuarios WHERE id = ?");
+    $stmt->bind_param("i", $id_afiliado);
+    $stmt->execute();
+    $stmt->bind_result($nombre_afiliado, $apellido_afiliado);
+    $stmt->fetch();
+    $stmt->close();
+
+    $nombre_completo_afiliado = $nombre_afiliado . ' ' . $apellido_afiliado;
+    $mensaje_pago = "El afiliado ($nombre_completo_afiliado) ya cotizó tu servicio. <a href='pago.php?id_cotizacion=$id_cotizacion'>Procede al pago</a>.";
+
+    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
+    $like = "%El afiliado ($nombre_completo_afiliado) aceptó el trabajo%";
+    $stmt->bind_param("sis", $mensaje_pago, $id_usuario, $like);
     $stmt->execute();
     $stmt->close();
 

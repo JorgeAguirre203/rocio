@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 try {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -30,28 +33,36 @@ try {
     }
 
     $afiliado_id = $_SESSION['afiliado']['id'];
-    // Depuración: muestra el id del afiliado
-    error_log("Afiliado id en sesión: " . $afiliado_id);
+    error_log("Afiliado id en sesión: " . print_r($afiliado_id, true));
 
-    // Obtener datos del afiliado
+    // Obtener datos del afiliado (usa la tabla correcta)
     $query = "SELECT id, nombre, apellido_paterno, apellido_materno, nickname, email, especialidad, foto_perfil 
-              FROM usuarios 
-              WHERE id = ?";
+            FROM usuarios 
+            WHERE id = ?";
     $stmt = $conexion->prepare($query);
+    if (!$stmt) {
+        error_log("Error al preparar la consulta de afiliado: " . $conexion->error);
+        die("Error al preparar la consulta de afiliado.");
+    }
     $stmt->bind_param("i", $afiliado_id);
     $stmt->execute();
     $result = $stmt->get_result();
     if (!$result) {
-        die("Error en la consulta: " . $conexion->error);
+        error_log("Error al obtener el resultado de afiliado: " . $conexion->error);
+        die("Error al obtener el resultado de afiliado.");
     }
     $afiliado = $result->fetch_assoc();
     $stmt->close();
 
     if (!$afiliado) {
-        die("No se encontró el afiliado con id: $afiliado_id");
+        error_log("DEBUG - No se encontró afiliado. ID buscado: $afiliado_id");
+        error_log("DEBUG - Consulta ejecutada: $query");
+        error_log("DEBUG - Error MySQL: " . $conexion->error);
+        error_log("DEBUG - Sesión: " . print_r($_SESSION, true));
+        die("Error: No se encontró el afiliado. ID buscado: $afiliado_id");
     }
 
-    // Obtener peticiones pendientes con datos completos del usuario2
+    // Obtener peticiones pendientes
     $sql_peticiones = "SELECT 
             p.id as peticion_id, 
             p.id_usuario,
@@ -61,6 +72,10 @@ try {
         INNER JOIN usuarios2 u ON p.id_usuario = u.id
         WHERE p.id_afiliado = ? AND p.estado = 'pendiente'";
     $stmt2 = $conexion->prepare($sql_peticiones);
+    if (!$stmt2) {
+        error_log("Error al preparar la consulta de peticiones: " . $conexion->error);
+        die("Error al preparar la consulta de peticiones.");
+    }
     $stmt2->bind_param("i", $afiliado_id);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
@@ -70,18 +85,30 @@ try {
     }
     $stmt2->close();
 
-    // Peticiones aceptadas
+    // Peticiones aceptadas (excluyendo las que ya tienen pago completado)
     $sql_aceptadas = "SELECT 
             p.id as peticion_id, 
             p.id_usuario,
             u.nombre, u.nickname, u.telefono, u.email, 
             u.calle, u.numero_casa, u.codigo_postal, u.estado as estado_dir, u.municipio, u.indicaciones,
-            c.estado as estado_cotizacion
+            c.estado as estado_cotizacion,
+            c.id as id_cotizacion
         FROM peticiones p
         INNER JOIN usuarios2 u ON p.id_usuario = u.id
         LEFT JOIN cotizaciones c ON p.id_cotizacion = c.id
-        WHERE p.id_afiliado = ? AND p.estado = 'aceptada'";
+        WHERE p.id_afiliado = ? 
+        AND p.estado = 'aceptada'
+        AND (
+            c.id IS NULL OR NOT EXISTS (
+                SELECT 1 FROM pagos pg 
+                WHERE pg.id_cotizacion = c.id AND pg.estado = 'completado'
+            )
+        )";
     $stmt3 = $conexion->prepare($sql_aceptadas);
+    if (!$stmt3) {
+        error_log("Error al preparar la consulta de aceptadas: " . $conexion->error);
+        die("Error al preparar la consulta de aceptadas.");
+    }
     $stmt3->bind_param("i", $afiliado_id);
     $stmt3->execute();
     $result3 = $stmt3->get_result();
@@ -91,11 +118,23 @@ try {
     }
     $stmt3->close();
 
+    // ✅ NUEVO: Agrega el enlace de dirección visible siempre en el array
+    foreach ($peticiones_aceptadas as &$peticion) {
+        $peticion['link_direccion'] = "direccion.php?id=" . $peticion['id_usuario'];
+    }
+
+    // Asegura que todas las variables sean arrays para evitar errores en Smarty
+    if (!isset($peticiones) || !is_array($peticiones)) $peticiones = [];
+    if (!isset($peticiones_aceptadas) || !is_array($peticiones_aceptadas)) $peticiones_aceptadas = [];
+    if (!isset($solicitudes) || !is_array($solicitudes)) $solicitudes = [];
+
+    // Asignar a Smarty
     $smarty->assign([
         'page_title' => 'Panel de Afiliado',
         'afiliado_log' => $afiliado,
         'peticiones' => $peticiones,
-        'peticiones_aceptadas' => $peticiones_aceptadas
+        'peticiones_aceptadas' => $peticiones_aceptadas,
+        'solicitudes' => $solicitudes
     ]);
 
     $smarty->display('afiliados.tpl');
@@ -104,3 +143,4 @@ try {
     error_log("Error: " . $e->getMessage());
     die("<h2>Error</h2><p>Ocurrió un problema al cargar el afiliado</p>");
 }
+?>

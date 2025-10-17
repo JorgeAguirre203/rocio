@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-05-30 13:26:39
+/* Smarty version 3.1.39, created on 2025-06-12 00:10:13
   from '/var/www/html/rocio/templates/editar_perfil_afiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6839b20f9b41e5_45378063',
+  'unifunc' => 'content_684a1ae5f0da71_01540218',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2a7f32b9f46f8aecd95b4d73478487c792528345' => 
     array (
       0 => '/var/www/html/rocio/templates/editar_perfil_afiliado.tpl',
-      1 => 1748611593,
+      1 => 1749686999,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6839b20f9b41e5_45378063 (Smarty_Internal_Template $_smarty_tpl) {
+function content_684a1ae5f0da71_01540218 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -146,6 +146,11 @@ function content_6839b20f9b41e5_45378063 (Smarty_Internal_Template $_smarty_tpl)
     </style>
 </head>
 <body>
+
+    <?php if ($_smarty_tpl->tpl_vars['mensaje']->value) {?>
+        <div class="alert alert-success" style="color:green; margin:10px 0;"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
+</div>
+    <?php }?>
     <div class="form-container">
         <h2>Editar Perfil de Afiliado</h2>
         
@@ -164,19 +169,15 @@ function content_6839b20f9b41e5_45378063 (Smarty_Internal_Template $_smarty_tpl)
                 <div id="nombre-error" class="error-message">Solo se permiten letras y espacios</div>
             </div>
             
-            <div class="form-group">
-                <label for="apellido_paterno">Apellido paterno:</label>
-                <input type="text" id="apellido_paterno" name="apellido_paterno" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['apellido_paterno'], ENT_QUOTES, 'UTF-8', true);?>
-" required>
-                <div id="apellido_paterno-error" class="error-message">Solo se permiten letras y espacios</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="apellido_materno">Apellido materno:</label>
-                <input type="text" id="apellido_materno" name="apellido_materno" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['apellido_materno'], ENT_QUOTES, 'UTF-8', true);?>
-" required>
-                <div id="apellido_materno-error" class="error-message">Solo se permiten letras y espacios</div>
-            </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos"
+                value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['apellido_paterno'], ENT_QUOTES, 'UTF-8', true);
+if ($_smarty_tpl->tpl_vars['afiliado']->value['apellido_materno']) {?> <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['afiliado']->value['apellido_materno'], ENT_QUOTES, 'UTF-8', true);
+}?>"
+                required>
+            <div id="apellidos-error" class="error-message">Solo se permiten letras y espacios</div>
+        </div>
             
             <div class="form-group">
                 <label for="nickname">Nickname:</label>
@@ -266,7 +267,7 @@ function content_6839b20f9b41e5_45378063 (Smarty_Internal_Template $_smarty_tpl)
 >
     document.addEventListener('DOMContentLoaded', function() {
       // Validación en tiempo real para campos de nombre y apellidos
-      const nameFields = ['nombre', 'apellido_paterno', 'apellido_materno'];
+      const nameFields = ['nombre', 'apellidos'];
       nameFields.forEach(field => {
         const input = document.getElementById(field);
         const error = document.getElementById(`${field}-error`);

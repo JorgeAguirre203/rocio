@@ -215,6 +215,13 @@
     </style>
 </head>
 <body>
+
+    {if $direccion_incompleta}
+        <div style="position:fixed;top:10px;left:10px;z-index:1000;background:#ffeeba;color:#856404;padding:10px 20px;border-radius:5px;">
+            <strong>¡Atención!</strong> Primero agrega tu dirección antes de contratar un afiliado.
+            <a href="direccion_usuario.php" style="color:#007bff;text-decoration:underline;">Agregar dirección</a>
+        </div>
+    {/if}
     <!-- Header -->
 
     <!-- codigo de campana de notificaciones -->
@@ -243,14 +250,16 @@
                 <ul>
                 {foreach $notificaciones as $noti}
                     <li>
-                        <a href="pago.php?id_cotizacion={$noti.id}">
-                            Tienes un pago pendiente de <b>{$noti.servicio|escape:'html'}</b> por <b>${$noti.total}</b>
-                        </a>
+                        {$noti.mensaje nofilter}
+                        <form method="post" action="eliminar_notificacion.php" style="display:inline;">
+                            <input type="hidden" name="id_notificacion" value="{$noti.id}">
+                            <button type="submit" style="background:none;border:none;color:red;cursor:pointer;" title="Eliminar notificación">&#10006;</button>
+                        </form>
                     </li>
                 {/foreach}
                 </ul>
             {else}
-                <p>No tienes pagos pendientes.</p>
+                <p>No tienes notificaciones.</p>
             {/if}
         </div>
     </div>
@@ -267,8 +276,8 @@
             <p><strong>Nickname:</strong> {$nickname}</p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
             <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
-            <a href="logout.php" class="nav-btn">Cerrar sesión</a>
             <a href="direccion_usuario.php" class="nav-btn">Agregar direccion</a>
+            <a href="logout.php" class="nav-btn">Cerrar sesión</a>
         </div>
     </div>
 
@@ -335,6 +344,19 @@
                     <img src="{$servicio.foto_perfil}" alt="Foto de perfil" />
                     <h2>{$servicio.nombre|escape:'html'}</h2>
                     <p>{$servicio.descripcion|escape:'html'}</p>
+                    <p>
+                        <strong>Calificación:</strong>
+                        {$servicio.estrellas} 
+                        {section name=star loop=5}
+                            {if $servicio.estrellas >= $smarty.section.star.index+1}
+                                <span style="color:gold;">&#9733;</span>
+                            {elseif $servicio.estrellas > $smarty.section.star.index}
+                                <span style="color:gold;">&#9733;</span>
+                            {else}
+                                <span style="color:#ccc;">&#9733;</span>
+                            {/if}
+                        {/section}
+                    </p>
                     <p><strong>Especialidad:</strong> {$servicio.especialidad|escape:'html'}</p>
                     <form method="post" action="contratar_afiliado.php" style="display:inline;">
                         <input type="hidden" name="id_afiliado" value="{$servicio.id}">
