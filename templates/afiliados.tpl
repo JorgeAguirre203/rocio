@@ -159,6 +159,7 @@
                 <p><strong>Nickname:</strong> {$afiliado_log.nickname}</p>
                 <a href="editar_perfil_afiliado.php" class="nav-btn">Editar perfil</a>
                 <a href="historial_afiliado.php" class="nav-btn">Historial de trabajos</a>
+                <a href="direccion_afiliado.php" class="nav-btn">Agregar direccion</a>
                 <a href="eliminar_afiliado.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
                 <a href="logout.php" class="nav-btn">Cerrar sesión</a>
             {else}

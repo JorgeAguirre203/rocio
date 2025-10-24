@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-06-12 02:03:29
+/* Smarty version 3.1.39, created on 2025-10-18 01:12:45
   from '/var/www/html/rocio/templates/afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_684a3571186313_86891078',
+  'unifunc' => 'content_68f2e98d024ef9_68960321',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
     array (
       0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1749693640,
+      1 => 1760749942,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_684a3571186313_86891078 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68f2e98d024ef9_68960321 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -189,6 +189,7 @@ function content_684a3571186313_86891078 (Smarty_Internal_Template $_smarty_tpl)
 </p>
                 <a href="editar_perfil_afiliado.php" class="nav-btn">Editar perfil</a>
                 <a href="historial_afiliado.php" class="nav-btn">Historial de trabajos</a>
+                <a href="direccion_afiliado.php" class="nav-btn">Agregar direccion</a>
                 <a href="eliminar_afiliado.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
                 <a href="logout.php" class="nav-btn">Cerrar sesión</a>
             <?php } else { ?>
