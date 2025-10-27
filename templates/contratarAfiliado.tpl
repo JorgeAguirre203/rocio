@@ -12,7 +12,7 @@
         .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
         h1 { color: #333; text-align: center; margin-bottom: 30px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        .map-container { height: 500px; margin-top: 20px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .map-container { height: 500px; margin-top: 20px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; position: relative; z-index: 1; }
         .direccion-form { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; }
         .geocodificar-section { margin: 15px 0; }
         button, .btn-link {
@@ -45,12 +45,121 @@
             margin: 10px 0;
             font-family: monospace;
         }
+        .debug-info {
+            background: #fff3cd; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+            border: 1px solid #ffeaa7;
+            font-size: 14px;
+        }
         @media (max-width: 768px) {
             .info-grid { grid-template-columns: 1fr; }
         }
-    </style>
+/* Encabezado y menú lateral afiliado */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #222;
+        color: #fff;
+        padding: 15px 30px;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 1.5em;
+    }
+    .menu-button {
+        background: #444;
+        color: #fff;
+        border: none;
+        font-size: 1.5em;
+        border-radius: 5px;
+        padding: 5px 12px;
+        cursor: pointer;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        z-index: 999;
+    }
+    .sidebar-content {
+        position: relative;
+        padding: 20px;
+        color: #fff;
+    }
+    .nav-btn {
+        display: block;
+        margin: 10px 0;
+        background: #444;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+    }
+    .nav-btn:hover {
+        background: #217dbb;
+    }
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 998;
+    }
+</style>
+<script>
+    function confirmarEliminacion() {
+        return confirm('¿Estás seguro que deseas eliminar tu cuenta?\n\nEsta acción es irreversible y se perderán todos tus datos.');
+    }
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+        if (sidebar.style.left === "0px") {
+            sidebar.style.left = "-250px";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.left = "0";
+            overlay.style.display = "block";
+        }
+    }
+    function closeSidebar() {
+        document.getElementById("sidebar").style.left = "-250px";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
 </head>
 <body>
+    <div class="header">
+        <button class="menu-button" onclick="toggleSidebar()">☰</button>
+        <h1>Dashboard de Afiliado</h1>
+        <a href="index.php" class="nav-btn">Inicio</a>
+    </div>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-content" onclick="event.stopPropagation();">
+            <h2>Dirección del Cliente</h2>
+            {if $afiliado}
+                <p><strong>Nombre:</strong> {$afiliado.nombre} {$afiliado.apellido_paterno} {$afiliado.apellido_materno}</p>
+                <p><strong>Nickname:</strong> {$afiliado.nickname}</p>
+                <a href="editar_perfil_afiliado.php" class="nav-btn">Editar perfil</a>
+                <a href="historial_afiliado.php" class="nav-btn">Historial de trabajos</a>
+                <a href="direccion_afiliado.php" class="nav-btn">Agregar direccion</a>
+                <a href="eliminar_afiliado.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
+                <a href="logout.php" class="nav-btn">Cerrar sesión</a>
+            {else}
+                <p>No has iniciado sesión.</p>
+            {/if}
+        </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
     <div class="container">
         {if $mensaje}
             <div class="mensaje {if strpos($mensaje, 'correctamente') !== false}success{else}error{/if}">{$mensaje}</div>
@@ -118,58 +227,126 @@
             </div>
             {/if}
             
-{if $usuario && $afiliado && $usuario.latitud && $usuario.longitud && $afiliado.latitud && $afiliado.longitud}
-    <div class="map-container" id="map"></div>
-    <div style="margin-top: 15px; text-align: center;">
-        <span id="distancia" style="font-size: 16px; font-weight: bold; color: #217dbb;"></span>
-    </div>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
-    {literal}
-    <script>
-        const clienteCoords = [{$usuario.latitud}, {$usuario.longitud}];
-        const afiliadoCoords = [{$afiliado.latitud}, {$afiliado.longitud}];
-        const map = L.map('map').setView(clienteCoords, 13);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-
-        const clienteMarker = L.marker(clienteCoords)
-            .addTo(map)
-            .bindPopup('Cliente').openPopup();
-
-        const afiliadoMarker = L.marker(afiliadoCoords)
-            .addTo(map)
-            .bindPopup('Afiliado');
-
-        L.Routing.control({
-            waypoints: [
-                L.latLng(afiliadoCoords[0], afiliadoCoords[1]),
-                L.latLng(clienteCoords[0], clienteCoords[1])
-            ],
-            routeWhileDragging: false,
-            language: 'es',
-            showAlternatives: false,
-            addWaypoints: false,
-            draggableWaypoints: false,
-            fitSelectedRoutes: true,
-            lineOptions: {
-                styles: [{color: '#217dbb', opacity: 0.7, weight: 5}]
-            }
-        }).on('routesfound', function(e) {
-            const routes = e.routes;
-            const distanciaKm = routes[0].summary.totalDistance / 1000;
-            const distanciaMillas = distanciaKm * 0.621371;
-            document.getElementById('distancia').innerHTML =
-                '<strong>📏 Distancia: </strong>' +
-                distanciaKm.toFixed(2) + ' km (' + distanciaMillas.toFixed(2) + ' millas) - ' +
-                '<strong>⏱️ Tiempo estimado: </strong>' +
-                (routes[0].summary.totalTime / 60).toFixed(0) + ' minutos';
-        }).addTo(map);
-    </script>
-    {/literal}
-{/if}
+            {if $usuario && $afiliado && $usuario.latitud && $usuario.longitud && $afiliado.latitud && $afiliado.longitud}
+                <!-- Debug información -->
+                <div class="debug-info">
+                    <h3>🔍 Información de Coordenadas:</h3>
+                    <p><strong>Cliente:</strong> Lat: {$usuario.latitud}, Lon: {$usuario.longitud}</p>
+                    <p><strong>Afiliado:</strong> Lat: {$afiliado.latitud}, Lon: {$afiliado.longitud}</p>
+                </div>
+                
+                <div class="map-container" id="map"></div>
+                <div style="margin-top: 15px; text-align: center;">
+                    <span id="distancia" style="font-size: 16px; font-weight: bold; color: #217dbb;"></span>
+                </div>
+                
+                <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+                <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+                
+                <script>
+                    // Coordenadas con verificación - fuera del bloque literal
+                    const clienteLat = parseFloat({$usuario.latitud});
+                    const clienteLon = parseFloat({$usuario.longitud});
+                    const afiliadoLat = parseFloat({$afiliado.latitud});
+                    const afiliadoLon = parseFloat({$afiliado.longitud});
+                    
+                    const clienteCoords = [clienteLat, clienteLon];
+                    const afiliadoCoords = [afiliadoLat, afiliadoLon];
+                    
+                    console.log('Coordenadas Cliente:', clienteCoords);
+                    console.log('Coordenadas Afiliado:', afiliadoCoords);
+                    
+                    // Verificar que las coordenadas sean válidas
+                    if (isNaN(clienteLat) || isNaN(clienteLon) || isNaN(afiliadoLat) || isNaN(afiliadoLon)) {
+                        console.error('Coordenadas inválidas');
+                        document.getElementById('distancia').innerHTML = 'Error: Coordenadas inválidas';
+                    } else {
+                        {literal}
+                        try {
+                            // Inicializar mapa
+                            const map = L.map('map').setView(clienteCoords, 13);
+                            
+                            // Capa de tiles
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                                subdomains: ['a', 'b', 'c']
+                            }).addTo(map);
+                            
+                            // Marcadores con íconos personalizados
+                            const clienteIcon = L.divIcon({
+                                className: 'custom-div-icon',
+                                html: '<div style="background-color: #217dbb; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold;">C</div>',
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            });
+                            
+                            const afiliadoIcon = L.divIcon({
+                                className: 'custom-div-icon',
+                                html: '<div style="background-color: #28a745; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>',
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            });
+                            
+                            // Marcadores en el mapa
+                            L.marker(clienteCoords, {icon: clienteIcon})
+                                .addTo(map)
+                                .bindPopup('<b>📍 Cliente</b><br>' + 'Dirección del cliente')
+                                .openPopup();
+                            
+                            L.marker(afiliadoCoords, {icon: afiliadoIcon})
+                                .addTo(map)
+                                .bindPopup('<b>👤 Afiliado</b><br>' + 'Dirección del afiliado');
+                            
+                            // Sistema de ruteo
+                            L.Routing.control({
+                                waypoints: [
+                                    L.latLng(afiliadoCoords[0], afiliadoCoords[1]),
+                                    L.latLng(clienteCoords[0], clienteCoords[1])
+                                ],
+                                routeWhileDragging: false,
+                                language: 'es',
+                                showAlternatives: false,
+                                addWaypoints: false,
+                                draggableWaypoints: false,
+                                fitSelectedRoutes: true,
+                                lineOptions: {
+                                    styles: [{color: '#217dbb', opacity: 0.7, weight: 5}]
+                                },
+                                createMarker: function(i, wp, nWps) {
+                                    if (i === 0) {
+                                        return L.marker(wp.latLng, {icon: afiliadoIcon}).bindPopup('Afiliado');
+                                    } else {
+                                        return L.marker(wp.latLng, {icon: clienteIcon}).bindPopup('Cliente');
+                                    }
+                                }
+                            }).on('routesfound', function(e) {
+                                const routes = e.routes;
+                                if (routes && routes[0]) {
+                                    const distanciaKm = routes[0].summary.totalDistance / 1000;
+                                    const distanciaMillas = distanciaKm * 0.621371;
+                                    const tiempoMinutos = (routes[0].summary.totalTime / 60).toFixed(0);
+                                    
+                                    document.getElementById('distancia').innerHTML = 
+                                        '<strong>📏 Distancia: </strong>' +
+                                        distanciaKm.toFixed(2) + ' km (' + distanciaMillas.toFixed(2) + ' millas) - ' +
+                                        '<strong>⏱️ Tiempo estimado: </strong>' +
+                                        tiempoMinutos + ' minutos';
+                                }
+                            }).addTo(map);
+                            
+                        } catch (error) {
+                            console.error('Error al cargar el mapa:', error);
+                            document.getElementById('distancia').innerHTML = 'Error al cargar el mapa: ' + error.message;
+                        }
+                        {/literal}
+                    }
+                </script>
+            {elseif $usuario && $afiliado}
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <p>❌ Para mostrar el mapa y calcular la ruta, necesitas geocodificar ambas direcciones.</p>
+                    <p>Haz clic en los botones "Geocodificar" arriba para obtener las coordenadas.</p>
+                </div>
+            {/if}
         </div>
     </div>
 </body>

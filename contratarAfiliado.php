@@ -151,6 +151,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+// Debug: verificar coordenadas
+if ($usuario && $afiliado) {
+    error_log("Cliente coords: " . $usuario['latitud'] . ", " . $usuario['longitud']);
+    error_log("Afiliado coords: " . $afiliado['latitud'] . ", " . $afiliado['longitud']);
+}
+
 $smarty->assign('usuario', $usuario);
 $smarty->assign('afiliado', $afiliado);
 $smarty->assign('mensaje', $mensaje);

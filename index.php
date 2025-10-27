@@ -1,12 +1,20 @@
 
 <?php
 require_once 'libs/Smarty.class.php';
+session_start();
+
+// Si el afiliado está logueado, redirige a su panel
+if (isset($_SESSION['afiliado'])) {
+    header("Location: afiliados.php");
+    exit;
+}
 
 // Configurar Smarty
 $smarty = new Smarty();
 $smarty->setTemplateDir('templates/');
 $smarty->setCompileDir('templates_c/');
 $smarty->setCacheDir('cache/');
+
 
 // Asignar todas las variables necesarias
 $smarty->assign([
