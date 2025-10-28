@@ -73,6 +73,7 @@
         .header h1 {
             margin: 0;
             font-size: 1.5em;
+            margin-left: 40px;
         }
         .menu-button {
             background: #444;
@@ -99,25 +100,31 @@
             padding: 20px;
             color: #fff;
         }
-        .nav-btn {
-            display: block;
-            margin: 10px 0;
-            background: #444;
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            text-align: center;
-        }
-        .nav-btn:hover {
-            background: #217dbb;
-        }
         #overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.3);
             z-index: 998;
+        }
+        .btn-home-inicio {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #000000;
+            padding: 24px 50px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            font-size: 2.2em;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-home-inicio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
     </style>
     <script>
@@ -148,7 +155,10 @@
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Mi Perfil de Afiliado</h1>
-        <a href="index.php"><button>Inicio</button></a>
+        <a href="index.php" class="btn-home-inicio">
+            <span>🏠</span>
+            Inicio
+        </a>
     </div>
 
     <div id="sidebar" class="sidebar">

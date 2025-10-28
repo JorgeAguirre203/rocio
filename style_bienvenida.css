@@ -4,7 +4,6 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f4f4f4;
 }
-
 .nav-btn {
   display: block;
   width: 90%;
@@ -27,7 +26,6 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
-
 /* Cabecera */
 .header {
   background-color: #000;

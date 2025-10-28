@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-06-12 01:45:19
+/* Smarty version 3.1.39, created on 2025-10-28 00:51:18
   from '/var/www/html/rocio/templates/login.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_684a312f9bfee8_38825633',
+  'unifunc' => 'content_69001386d8b364_56480684',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '48d58e5f79a4996a42e33971f5dc22719dc18d05' => 
     array (
       0 => '/var/www/html/rocio/templates/login.tpl',
-      1 => 1749692716,
+      1 => 1761612677,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_684a312f9bfee8_38825633 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69001386d8b364_56480684 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>

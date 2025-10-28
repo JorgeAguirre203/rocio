@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-24 17:06:24
+/* Smarty version 3.1.39, created on 2025-10-28 00:40:29
   from '/var/www/html/rocio/templates/contratarAfiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_68fbb210996a78_93439064',
+  'unifunc' => 'content_690010fd864793_34855345',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '26612a5dc4bf31007cbbb807adad7d73c360c78a' => 
     array (
       0 => '/var/www/html/rocio/templates/contratarAfiliado.tpl',
-      1 => 1761325583,
+      1 => 1761612027,
       2 => 'file',
     ),
   ),
@@ -20,39 +20,26 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68fbb210996a78_93439064 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690010fd864793_34855345 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contratar Afiliado</title>
+    <link rel="stylesheet" href="style_bienvenida.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container {
+            margin: 40px auto;
+            max-width: 700px;
+        }
         .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
-        h1 { color: #333; text-align: center; margin-bottom: 30px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
         .map-container { height: 500px; margin-top: 20px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; position: relative; z-index: 1; }
         .direccion-form { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; }
         .geocodificar-section { margin: 15px 0; }
-        button, .btn-link {
-            background: #217dbb;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-        button:hover, .btn-link:hover {
-            background: #1a6ca3;
-        }
         .mensaje { 
             padding: 10px; 
             margin: 10px 0; 
@@ -91,6 +78,7 @@ function content_68fbb210996a78_93439064 (Smarty_Internal_Template $_smarty_tpl)
     .header h1 {
         margin: 0;
         font-size: 1.5em;
+        margin-left: 40px;
     }
     .menu-button {
         background: #444;
@@ -137,6 +125,27 @@ function content_68fbb210996a78_93439064 (Smarty_Internal_Template $_smarty_tpl)
         background: rgba(0,0,0,0.3);
         z-index: 998;
     }
+        .btn-home-inicio {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #000000;
+            padding: 24px 50px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            font-size: 2.2em;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-home-inicio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+
 </style>
 <?php echo '<script'; ?>
 >
@@ -165,8 +174,11 @@ function content_68fbb210996a78_93439064 (Smarty_Internal_Template $_smarty_tpl)
 <body>
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
-        <h1>Dashboard de Afiliado</h1>
-        <a href="index.php" class="nav-btn">Inicio</a>
+        <h1>Direccion del Cliente</h1>
+        <a href="index.php" class="btn-home-inicio">
+            <span>🏠</span>
+            Inicio
+        </a>
     </div>
     <div id="sidebar" class="sidebar">
         <div class="sidebar-content" onclick="event.stopPropagation();">

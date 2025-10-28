@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-18 01:10:56
+/* Smarty version 3.1.39, created on 2025-10-28 01:01:22
   from '/var/www/html/rocio/templates/direccion_afiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_68f2e920c33b31_48860510',
+  'unifunc' => 'content_690015e2a88814_07652696',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8c11d293294600aa4d0e671f31269f3fe7a26642' => 
     array (
       0 => '/var/www/html/rocio/templates/direccion_afiliado.tpl',
-      1 => 1760749805,
+      1 => 1761613261,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68f2e920c33b31_48860510 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690015e2a88814_07652696 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -137,9 +137,17 @@ function content_68f2e920c33b31_48860510 (Smarty_Internal_Template $_smarty_tpl)
     <div class="form-container">
         <h2>Dirección del Afiliado</h2>
         <?php if ($_smarty_tpl->tpl_vars['mensaje']->value) {?>
-            <div class="error-message" style="display:block;"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
-</div>
+            <?php echo '<script'; ?>
+>
+                alert('<?php echo strtr($_smarty_tpl->tpl_vars['mensaje']->value, array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" ));?>
+');
+                <?php if ($_smarty_tpl->tpl_vars['mensaje']->value == 'Dirección guardada correctamente') {?>
+                    window.location.href = 'dashboard_servicios.php';
+                <?php }?>
+            <?php echo '</script'; ?>
+>
         <?php }?>
+        
         <form method="post" id="direccionForm" autocomplete="off">
             <div class="form-group">
                 <label for="calle">Calle:</label>
@@ -147,35 +155,40 @@ function content_68f2e920c33b31_48860510 (Smarty_Internal_Template $_smarty_tpl)
 " required>
                 <span class="error-message" id="calle-error">Solo se permiten letras y espacios</span>
             </div>
+            
             <div class="form-group">
                 <label for="numero_casa">Número de casa (opcional):</label>
                 <input type="text" id="numero_casa" name="numero_casa" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['datos_actuales']->value['numero_casa'])===null||$tmp==='' ? '' : $tmp);?>
 ">
-                <span class="error-message" id="numero-error">Solo se permiten números</span>
+                <span class="error-message" id="numero-error">Solo se permiten números y guiones</span>
             </div>
+            
             <div class="form-group">
                 <label for="codigo_postal">Código postal:</label>
                 <input type="text" id="codigo_postal" name="codigo_postal" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['datos_actuales']->value['codigo_postal'])===null||$tmp==='' ? '' : $tmp);?>
 " maxlength="5" required>
                 <span class="error-message" id="cp-error">El código postal debe ser de 5 dígitos numéricos</span>
             </div>
+            
             <div class="form-group">
                 <label for="estado">Estado:</label>
-                <input type="text" id="estado" name="estado" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['datos_actuales']->value['estado'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
+                <input type="text" id="estado" name="estado" value="Sinaloa" readonly>
             </div>
+            
             <div class="form-group">
                 <label for="municipio">Municipio:</label>
-                <input type="text" id="municipio" name="municipio" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['datos_actuales']->value['municipio'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
+                <input type="text" id="municipio" name="municipio" value="Ahome" readonly>
             </div>
+            
             <div class="form-group">
                 <label for="indicaciones">Indicaciones adicionales:</label>
-                <textarea id="indicaciones" name="indicaciones" rows="3" required><?php echo (($tmp = @$_smarty_tpl->tpl_vars['datos_actuales']->value['indicaciones'])===null||$tmp==='' ? '' : $tmp);?>
+                <textarea id="indicaciones" name="indicaciones" required><?php echo (($tmp = @$_smarty_tpl->tpl_vars['datos_actuales']->value['indicaciones'])===null||$tmp==='' ? '' : $tmp);?>
 </textarea>
+                <small>Ejemplo: Casa color azul, portón rojo, coche blanco estacionado</small>
             </div>
+            
             <button type="submit">Guardar dirección</button>
-            <a href="afiliados.php">
+            <a href="dashboard_servicios.php">
                 <button type="button" class="button-secondary">Cancelar y salir</button>
             </a>
         </form>

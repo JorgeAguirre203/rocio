@@ -4,32 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contratar Afiliado</title>
+    <link rel="stylesheet" href="style_bienvenida.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container {
+            margin: 40px auto;
+            max-width: 700px;
+        }
         .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
-        h1 { color: #333; text-align: center; margin-bottom: 30px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
         .map-container { height: 500px; margin-top: 20px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; position: relative; z-index: 1; }
         .direccion-form { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; }
         .geocodificar-section { margin: 15px 0; }
-        button, .btn-link {
-            background: #217dbb;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-        button:hover, .btn-link:hover {
-            background: #1a6ca3;
-        }
         .mensaje { 
             padding: 10px; 
             margin: 10px 0; 
@@ -68,6 +55,7 @@
     .header h1 {
         margin: 0;
         font-size: 1.5em;
+        margin-left: 40px;
     }
     .menu-button {
         background: #444;
@@ -114,6 +102,27 @@
         background: rgba(0,0,0,0.3);
         z-index: 998;
     }
+        .btn-home-inicio {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #000000;
+            padding: 24px 50px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            font-size: 2.2em;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-home-inicio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+
 </style>
 <script>
     function confirmarEliminacion() {
@@ -140,8 +149,11 @@
 <body>
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
-        <h1>Dashboard de Afiliado</h1>
-        <a href="index.php" class="nav-btn">Inicio</a>
+        <h1>Direccion del Cliente</h1>
+        <a href="index.php" class="btn-home-inicio">
+            <span>🏠</span>
+            Inicio
+        </a>
     </div>
     <div id="sidebar" class="sidebar">
         <div class="sidebar-content" onclick="event.stopPropagation();">
