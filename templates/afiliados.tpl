@@ -179,6 +179,7 @@
                 {* --- PETICIONES PENDIENTES --- *}
                 <section class="peticiones-pendientes" style="margin-top:30px;">
                     <h3>Peticiones pendientes</h3>
+                                
                     {if $peticiones|@count > 0}
                         <ul>
                         {foreach $peticiones as $peticion}
@@ -193,6 +194,12 @@
                                 {if $peticion.municipio}{$peticion.municipio}, {/if}
                                 {if $peticion.estado_dir}{$peticion.estado_dir}{/if}<br>
                                 {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones}<br>{/if}
+                                {if $peticion.servicios_contratados}
+                                    <p><strong>Servicios solicitados:</strong> {$peticion.servicios_contratados}</p>
+                                {/if}
+                                {if $peticion.tipo_cobro == 'por_hora'}
+                                    <p><strong>Tipo de servicio:</strong> Cobro por hora</p>
+                                {/if}
                                 <form method="post" action="aceptar_peticion.php" style="display:inline;">
                                     <input type="hidden" name="peticion_id" value="{$peticion.peticion_id}">
                                     <button type="submit">Aceptar</button>
@@ -230,7 +237,12 @@
                                     {if $peticion.municipio}{$peticion.municipio|default:''}, {/if}
                                     {if $peticion.estado_dir}{$peticion.estado_dir|default:''}{/if}<br>
                                     {if $peticion.indicaciones}<em>Indicaciones:</em> {$peticion.indicaciones|default:''}<br>{/if}
-
+                                    {if $peticion.servicios_contratados}
+                                        <p><strong>Servicios solicitados:</strong> {$peticion.servicios_contratados}</p>
+                                    {/if}
+                                    {if $peticion.tipo_cobro == 'por_hora'}
+                                        <p><strong>Tipo de servicio:</strong> Cobro por hora</p>
+                                    {/if}
                                     {if $peticion.calle || $peticion.numero_casa || $peticion.municipio || $peticion.estado_dir}
                                         <form method="get" action="contratarAfiliado.php" style="display:inline;">
                                             <input type="hidden" name="id_usuario" value="{$peticion.id_usuario|default:''}">

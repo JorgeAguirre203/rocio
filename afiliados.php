@@ -62,20 +62,21 @@ try {
         die("Error: No se encontró el afiliado. ID buscado: $afiliado_id");
     }
 
-    // Obtener peticiones pendientes
+    // --- CONSULTA CORREGIDA PARA PETICIONES PENDIENTES ---
     $sql_peticiones = "SELECT 
-            p.id as peticion_id, 
-            p.id_usuario,
-            u.nombre, u.nickname, u.telefono, u.email, 
-            u.calle, u.numero_casa, u.codigo_postal, u.estado as estado_dir, u.municipio, u.indicaciones
-        FROM peticiones p
-        INNER JOIN usuarios2 u ON p.id_usuario = u.id
-        WHERE p.id_afiliado = ? AND p.estado = 'pendiente'";
+        p.id as peticion_id, 
+        p.id_usuario,
+        u.nombre, u.nickname, u.telefono, u.email, 
+        u.calle, u.numero_casa, u.codigo_postal, u.estado as estado_dir, u.municipio, u.indicaciones,
+        GROUP_CONCAT(DISTINCT s.nombre_servicio SEPARATOR ', ') as servicios_contratados,
+        MAX(ct.tipo_cobro) as tipo_cobro
+    FROM peticiones p
+    INNER JOIN usuarios2 u ON p.id_usuario = u.id
+    LEFT JOIN contrataciones ct ON ct.id_peticion = p.id
+    LEFT JOIN servicios s ON ct.id_servicio = s.id
+    WHERE p.id_afiliado = ? AND p.estado = 'pendiente'
+    GROUP BY p.id";
     $stmt2 = $conexion->prepare($sql_peticiones);
-    if (!$stmt2) {
-        error_log("Error al preparar la consulta de peticiones: " . $conexion->error);
-        die("Error al preparar la consulta de peticiones.");
-    }
     $stmt2->bind_param("i", $afiliado_id);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
@@ -84,6 +85,7 @@ try {
         $peticiones[] = $row;
     }
     $stmt2->close();
+    error_log("Peticiones encontradas: " . print_r($peticiones, true));
 
     // Peticiones aceptadas (excluyendo las que ya tienen pago completado)
     $sql_aceptadas = "SELECT 
@@ -92,10 +94,14 @@ try {
             u.nombre, u.nickname, u.telefono, u.email, 
             u.calle, u.numero_casa, u.codigo_postal, u.estado as estado_dir, u.municipio, u.indicaciones,
             c.estado as estado_cotizacion,
-            c.id as id_cotizacion
+            c.id as id_cotizacion,
+            GROUP_CONCAT(DISTINCT s.nombre_servicio SEPARATOR ', ') as servicios_contratados,
+            MAX(ct.tipo_cobro) as tipo_cobro
         FROM peticiones p
         INNER JOIN usuarios2 u ON p.id_usuario = u.id
         LEFT JOIN cotizaciones c ON p.id_cotizacion = c.id
+        LEFT JOIN contrataciones ct ON ct.id_peticion = p.id
+        LEFT JOIN servicios s ON ct.id_servicio = s.id
         WHERE p.id_afiliado = ? 
         AND p.estado = 'aceptada'
         AND (
@@ -103,7 +109,8 @@ try {
                 SELECT 1 FROM pagos pg 
                 WHERE pg.id_cotizacion = c.id AND pg.estado = 'completado'
             )
-        )";
+        )
+        GROUP BY p.id";
     $stmt3 = $conexion->prepare($sql_aceptadas);
     if (!$stmt3) {
         error_log("Error al preparar la consulta de aceptadas: " . $conexion->error);
@@ -117,8 +124,9 @@ try {
         $peticiones_aceptadas[] = $row;
     }
     $stmt3->close();
+    error_log("Peticiones encontradas: " . print_r($peticiones, true));
 
-    // ✅ NUEVO: Agrega el enlace de dirección visible siempre en el array
+    // Agrega el enlace de dirección visible siempre en el array
     foreach ($peticiones_aceptadas as &$peticion) {
         $peticion['link_direccion'] = "direccion.php?id=" . $peticion['id_usuario'];
     }

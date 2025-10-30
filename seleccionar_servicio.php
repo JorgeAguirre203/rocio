@@ -53,9 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Contratación por servicios fijos
     if (!empty($servicios_seleccionados)) {
+        // 1. Insertar la petición pendiente
+        $stmt = $conexion->prepare("INSERT INTO peticiones (id_usuario, id_afiliado, estado, fecha) VALUES (?, ?, 'pendiente', NOW())");
+        $stmt->bind_param("ii", $id_usuario, $id_afiliado);
+        $stmt->execute();
+        $id_peticion = $conexion->insert_id;
+        $stmt->close();
+
+        // 2. Insertar las contrataciones relacionadas a esa petición
         foreach ($servicios_seleccionados as $servicio_id) {
-            $stmt = $conexion->prepare("INSERT INTO contrataciones (id_usuario, id_afiliado, id_servicio, tipo_cobro, fecha) VALUES (?, ?, ?, 'fijo', NOW())");
-            $stmt->bind_param("iii", $id_usuario, $id_afiliado, $servicio_id);
+            $stmt = $conexion->prepare("INSERT INTO contrataciones (id_peticion, id_usuario, id_afiliado, id_servicio, tipo_cobro, fecha) VALUES (?, ?, ?, ?, 'fijo', NOW())");
+            $stmt->bind_param("iiii", $id_peticion, $id_usuario, $id_afiliado, $servicio_id);
             $stmt->execute();
             $stmt->close();
         }
@@ -63,10 +71,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // Contratación por hora
     elseif ($tipo_cobro === 'por_hora') {
-        $stmt = $conexion->prepare("INSERT INTO contrataciones (id_usuario, id_afiliado, tipo_cobro, fecha) VALUES (?, ?, 'por_hora', NOW())");
+        // 1. Insertar la petición pendiente
+        $stmt = $conexion->prepare("INSERT INTO peticiones (id_usuario, id_afiliado, estado, fecha) VALUES (?, ?, 'pendiente', NOW())");
         $stmt->bind_param("ii", $id_usuario, $id_afiliado);
         $stmt->execute();
+        $id_peticion = $conexion->insert_id;
         $stmt->close();
+
+        // 2. Insertar la contratación por hora relacionada a esa petición
+        $stmt = $conexion->prepare("INSERT INTO contrataciones (id_peticion, id_usuario, id_afiliado, tipo_cobro, fecha) VALUES (?, ?, ?, 'por_hora', NOW())");
+        $stmt->bind_param("iii", $id_peticion, $id_usuario, $id_afiliado);
+        $stmt->execute();
+        $stmt->close();
+
         $notificacion = "Has solicitado cotización por hora a este afiliado ({$afiliado['nombre']} {$afiliado['apellido_paterno']}).";
     }
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-29 00:53:54
+/* Smarty version 3.1.39, created on 2025-10-30 03:54:17
   from '/var/www/html/rocio/templates/afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690165a2cd0f92_24838408',
+  'unifunc' => 'content_6902e169231d56_55636527',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
     array (
       0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1761699233,
+      1 => 1761796450,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690165a2cd0f92_24838408 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6902e169231d56_55636527 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -215,6 +215,7 @@ function content_690165a2cd0f92_24838408 (Smarty_Internal_Template $_smarty_tpl)
 
                                 <section class="peticiones-pendientes" style="margin-top:30px;">
                     <h3>Peticiones pendientes</h3>
+                                
                     <?php if (count($_smarty_tpl->tpl_vars['peticiones']->value) > 0) {?>
                         <ul>
                         <?php
@@ -247,6 +248,13 @@ echo $_smarty_tpl->tpl_vars['peticion']->value['estado_dir'];
 }?><br>
                                 <?php if ($_smarty_tpl->tpl_vars['peticion']->value['indicaciones']) {?><em>Indicaciones:</em> <?php echo $_smarty_tpl->tpl_vars['peticion']->value['indicaciones'];?>
 <br><?php }?>
+                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['servicios_contratados']) {?>
+                                    <p><strong>Servicios solicitados:</strong> <?php echo $_smarty_tpl->tpl_vars['peticion']->value['servicios_contratados'];?>
+</p>
+                                <?php }?>
+                                <?php if ($_smarty_tpl->tpl_vars['peticion']->value['tipo_cobro'] == 'por_hora') {?>
+                                    <p><strong>Tipo de servicio:</strong> Cobro por hora</p>
+                                <?php }?>
                                 <form method="post" action="aceptar_peticion.php" style="display:inline;">
                                     <input type="hidden" name="peticion_id" value="<?php echo $_smarty_tpl->tpl_vars['peticion']->value['peticion_id'];?>
 ">
@@ -307,7 +315,13 @@ echo (($tmp = @$_smarty_tpl->tpl_vars['peticion']->value['estado_dir'])===null||
 }?><br>
                                     <?php if ($_smarty_tpl->tpl_vars['peticion']->value['indicaciones']) {?><em>Indicaciones:</em> <?php echo (($tmp = @$_smarty_tpl->tpl_vars['peticion']->value['indicaciones'])===null||$tmp==='' ? '' : $tmp);?>
 <br><?php }?>
-
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['servicios_contratados']) {?>
+                                        <p><strong>Servicios solicitados:</strong> <?php echo $_smarty_tpl->tpl_vars['peticion']->value['servicios_contratados'];?>
+</p>
+                                    <?php }?>
+                                    <?php if ($_smarty_tpl->tpl_vars['peticion']->value['tipo_cobro'] == 'por_hora') {?>
+                                        <p><strong>Tipo de servicio:</strong> Cobro por hora</p>
+                                    <?php }?>
                                     <?php if ($_smarty_tpl->tpl_vars['peticion']->value['calle'] || $_smarty_tpl->tpl_vars['peticion']->value['numero_casa'] || $_smarty_tpl->tpl_vars['peticion']->value['municipio'] || $_smarty_tpl->tpl_vars['peticion']->value['estado_dir']) {?>
                                         <form method="get" action="contratarAfiliado.php" style="display:inline;">
                                             <input type="hidden" name="id_usuario" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['peticion']->value['id_usuario'])===null||$tmp==='' ? '' : $tmp);?>
