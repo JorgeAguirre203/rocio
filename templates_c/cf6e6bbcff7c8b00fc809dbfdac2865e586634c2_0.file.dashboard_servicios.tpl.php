@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-06-12 03:13:22
+/* Smarty version 3.1.39, created on 2025-10-28 21:29:41
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_684a45d26a9cd2_02908629',
+  'unifunc' => 'content_690135c5b07389_78916106',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1749697999,
+      1 => 1761686979,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_684a45d26a9cd2_02908629 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690135c5b07389_78916106 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -238,6 +238,18 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
             top: 0;
             right: 0;
         }
+        .servicio-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            text-decoration: none;
+        }
+
     </style>
 </head>
 <body>
@@ -445,7 +457,9 @@ for ($__section_star_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_s
                     <form method="post" action="contratar_afiliado.php" style="display:inline;">
                         <input type="hidden" name="id_afiliado" value="<?php echo $_smarty_tpl->tpl_vars['servicio']->value['id'];?>
 ">
-                        <button type="submit">Contratar</button>
+                        <a href="seleccionar_servicio.php?id_afiliado=<?php echo $_smarty_tpl->tpl_vars['servicio']->value['id'];?>
+&id_usuario=<?php echo $_smarty_tpl->tpl_vars['id_usuario']->value;?>
+" class="servicio-btn">Contratar</a>
                     </form>
                     <button onclick="mostrarDetalles('afiliado_<?php echo strtr($_smarty_tpl->tpl_vars['servicio']->value['id'], array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" ));?>
 ')">

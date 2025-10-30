@@ -212,6 +212,18 @@
             top: 0;
             right: 0;
         }
+        .servicio-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            text-decoration: none;
+        }
+
     </style>
 </head>
 <body>
@@ -360,7 +372,7 @@
                     <p><strong>Especialidad:</strong> {$servicio.especialidad|escape:'html'}</p>
                     <form method="post" action="contratar_afiliado.php" style="display:inline;">
                         <input type="hidden" name="id_afiliado" value="{$servicio.id}">
-                        <button type="submit">Contratar</button>
+                        <a href="seleccionar_servicio.php?id_afiliado={$servicio.id}&id_usuario={$id_usuario}" class="servicio-btn">Contratar</a>
                     </form>
                     <button onclick="mostrarDetalles('afiliado_{$servicio.id|escape:'javascript'}')">
                         Ver detalles

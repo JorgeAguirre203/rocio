@@ -73,6 +73,41 @@ INSERT INTO `calificaciones` VALUES (1,14,10,5,'2025-05-30 11:32:06'),(2,14,10,4
 UNLOCK TABLES;
 
 --
+-- Table structure for table `contrataciones`
+--
+
+DROP TABLE IF EXISTS `contrataciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contrataciones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_afiliado` int NOT NULL,
+  `id_servicio` int DEFAULT NULL,
+  `tipo_cobro` enum('fijo','por_hora') DEFAULT 'fijo',
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('pendiente','aceptada','rechazada','completada') DEFAULT 'pendiente',
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_afiliado` (`id_afiliado`),
+  KEY `id_servicio` (`id_servicio`),
+  CONSTRAINT `contrataciones_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios2` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `contrataciones_ibfk_2` FOREIGN KEY (`id_afiliado`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `contrataciones_ibfk_3` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contrataciones`
+--
+
+LOCK TABLES `contrataciones` WRITE;
+/*!40000 ALTER TABLE `contrataciones` DISABLE KEYS */;
+INSERT INTO `contrataciones` VALUES (14,10,3,5,NULL,'2025-10-28 15:17:50','pendiente'),(15,10,3,5,NULL,'2025-10-28 15:18:00','pendiente'),(16,10,25,8,NULL,'2025-10-28 15:18:15','pendiente'),(17,10,19,1,'fijo','2025-10-28 17:45:14','pendiente');
+/*!40000 ALTER TABLE `contrataciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cotizaciones`
 --
 
@@ -109,6 +144,31 @@ INSERT INTO `cotizaciones` VALUES (12,14,10,'plomeria',2.00,'se le descompuso el
 UNLOCK TABLES;
 
 --
+-- Table structure for table `especialidades`
+--
+
+DROP TABLE IF EXISTS `especialidades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `especialidades` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `especialidades`
+--
+
+LOCK TABLES `especialidades` WRITE;
+/*!40000 ALTER TABLE `especialidades` DISABLE KEYS */;
+INSERT INTO `especialidades` VALUES (4,'albanileria'),(3,'carpinteria'),(2,'electricidad'),(1,'plomeria');
+/*!40000 ALTER TABLE `especialidades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `notificaciones`
 --
 
@@ -125,7 +185,7 @@ CREATE TABLE `notificaciones` (
   KEY `fk_usuario_notif` (`id_usuario`),
   CONSTRAINT `fk_usuario_notif` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios2` (`id`) ON DELETE CASCADE,
   CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios2` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +194,7 @@ CREATE TABLE `notificaciones` (
 
 LOCK TABLES `notificaciones` WRITE;
 /*!40000 ALTER TABLE `notificaciones` DISABLE KEYS */;
-INSERT INTO `notificaciones` VALUES (8,20,'El afiliado (meredith rodriguez) ha rechazado tu peticion.',0,'2025-06-08 05:47:07'),(9,20,'Has pagado el servicio del afiliado (meredith rodriguez).',0,'2025-06-08 05:57:29'),(10,20,'El afiliado (carlos estrada) ya cotizó tu servicio. <a href=\'pago.php?id_cotizacion=46\'>Procede al pago</a>.',0,'2025-06-08 06:11:28'),(11,20,'El afiliado (pablo carreon) aceptó el trabajo.',0,'2025-06-08 06:15:11'),(12,14,'Has contratado a este afiliado (pablo carreon), esperando a que el afiliado le cotice.',0,'2025-06-08 06:25:26'),(13,21,'Has contratado a este afiliado (carlos estrada), esperando a que el afiliado le cotice.',0,'2025-06-08 06:47:17'),(14,21,'Has pagado el servicio del afiliado (juan perez).',0,'2025-06-08 06:48:27'),(15,14,'Has pagado el servicio del afiliado (meredith rodriguez).',0,'2025-06-11 20:49:33'),(17,22,'Has contratado a este afiliado (Luis Lopez), esperando a que el afiliado le cotice.',0,'2025-06-11 21:03:26'),(18,22,'Has pagado el servicio del afiliado (herman salinas).',0,'2025-06-11 21:04:23'),(19,23,'Has pagado el servicio del afiliado (Pancho Perea).',0,'2025-06-11 22:02:47'),(20,23,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-11 22:18:25'),(21,14,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-11 22:55:50'),(22,14,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-11 23:08:43'),(23,14,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-12 00:32:27'),(24,14,'Has pagado el servicio del afiliado (Soy Pancho Electricista Jom).',0,'2025-06-12 01:56:52'),(25,24,'El afiliado (Soy Pancho Electricista Jom) ya cotizó tu servicio. <a href=\'pago.php?id_cotizacion=56\'>Procede al pago</a>.',0,'2025-06-14 00:35:32'),(26,14,'Has pagado el servicio del afiliado (Soy Pancho Electricista Jom).',0,'2025-06-14 00:37:46'),(27,16,'Has contratado a este afiliado (jorge aguirre), esperando a que el afiliado le cotice.',0,'2025-06-14 00:57:53'),(28,16,'El afiliado (juan perez) aceptó el trabajo.',0,'2025-06-14 00:59:11'),(29,16,'Has contratado a este afiliado (pablo carreon), esperando a que el afiliado le cotice.',0,'2025-06-14 00:59:49'),(30,10,'Has contratado a este afiliado (pablo carreon), esperando a que el afiliado le cotice.',0,'2025-06-14 01:36:59');
+INSERT INTO `notificaciones` VALUES (8,20,'El afiliado (meredith rodriguez) ha rechazado tu peticion.',0,'2025-06-08 05:47:07'),(9,20,'Has pagado el servicio del afiliado (meredith rodriguez).',0,'2025-06-08 05:57:29'),(10,20,'El afiliado (carlos estrada) ya cotizó tu servicio. <a href=\'pago.php?id_cotizacion=46\'>Procede al pago</a>.',0,'2025-06-08 06:11:28'),(11,20,'El afiliado (pablo carreon) aceptó el trabajo.',0,'2025-06-08 06:15:11'),(12,14,'Has contratado a este afiliado (pablo carreon), esperando a que el afiliado le cotice.',0,'2025-06-08 06:25:26'),(13,21,'Has contratado a este afiliado (carlos estrada), esperando a que el afiliado le cotice.',0,'2025-06-08 06:47:17'),(14,21,'Has pagado el servicio del afiliado (juan perez).',0,'2025-06-08 06:48:27'),(15,14,'Has pagado el servicio del afiliado (meredith rodriguez).',0,'2025-06-11 20:49:33'),(17,22,'Has contratado a este afiliado (Luis Lopez), esperando a que el afiliado le cotice.',0,'2025-06-11 21:03:26'),(18,22,'Has pagado el servicio del afiliado (herman salinas).',0,'2025-06-11 21:04:23'),(19,23,'Has pagado el servicio del afiliado (Pancho Perea).',0,'2025-06-11 22:02:47'),(20,23,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-11 22:18:25'),(21,14,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-11 22:55:50'),(22,14,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-11 23:08:43'),(23,14,'Has pagado el servicio del afiliado (carlos estrada).',0,'2025-06-12 00:32:27'),(24,14,'Has pagado el servicio del afiliado (Soy Pancho Electricista Jom).',0,'2025-06-12 01:56:52'),(25,24,'El afiliado (Soy Pancho Electricista Jom) ya cotizó tu servicio. <a href=\'pago.php?id_cotizacion=56\'>Procede al pago</a>.',0,'2025-06-14 00:35:32'),(26,14,'Has pagado el servicio del afiliado (Soy Pancho Electricista Jom).',0,'2025-06-14 00:37:46'),(27,16,'Has contratado a este afiliado (jorge aguirre), esperando a que el afiliado le cotice.',0,'2025-06-14 00:57:53'),(28,16,'El afiliado (juan perez) aceptó el trabajo.',0,'2025-06-14 00:59:11'),(29,16,'Has contratado a este afiliado (pablo carreon), esperando a que el afiliado le cotice.',0,'2025-06-14 00:59:49'),(30,10,'Has contratado a este afiliado (pablo carreon), esperando a que el afiliado le cotice.',0,'2025-06-14 01:36:59'),(31,10,'El afiliado (juan perez) aceptó el trabajo.',0,'2025-10-27 21:26:12'),(33,10,'Has contratado a este afiliado (jorge aguirre), esperando a que el afiliado le cotice.',0,'2025-10-28 22:17:50'),(34,10,'Has contratado a este afiliado (jorge aguirre), esperando a que el afiliado le cotice.',0,'2025-10-28 22:18:00'),(35,10,'Has contratado a este afiliado (Soy Pancho Electricista Jom), esperando a que el afiliado le cotice.',0,'2025-10-28 22:18:15'),(36,10,'Has contratado a este afiliado (meredith rodriguez), esperando a que el afiliado le cotice.',0,'2025-10-29 00:45:15');
 /*!40000 ALTER TABLE `notificaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +251,7 @@ CREATE TABLE `peticiones` (
   CONSTRAINT `fk_peticion_cotizacion` FOREIGN KEY (`id_cotizacion`) REFERENCES `cotizaciones` (`id`) ON DELETE SET NULL,
   CONSTRAINT `peticiones_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios2` (`id`) ON DELETE CASCADE,
   CONSTRAINT `peticiones_ibfk_2` FOREIGN KEY (`id_afiliado`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,8 +260,64 @@ CREATE TABLE `peticiones` (
 
 LOCK TABLES `peticiones` WRITE;
 /*!40000 ALTER TABLE `peticiones` DISABLE KEYS */;
-INSERT INTO `peticiones` VALUES (1,14,10,13,'aceptada','2025-05-29 20:18:33'),(5,13,10,14,'aceptada','2025-05-29 21:40:15'),(6,14,10,15,'aceptada','2025-05-29 21:51:58'),(7,14,10,16,'aceptada','2025-05-29 22:33:06'),(8,14,10,18,'aceptada','2025-05-29 23:18:21'),(10,14,8,23,'aceptada','2025-05-29 23:36:46'),(12,14,10,17,'aceptada','2025-05-30 05:13:04'),(13,14,10,19,'aceptada','2025-05-30 05:39:39'),(14,14,10,20,'aceptada','2025-05-30 05:50:19'),(15,14,10,21,'aceptada','2025-05-30 05:51:37'),(16,14,10,22,'aceptada','2025-05-30 05:53:56'),(17,14,10,27,'aceptada','2025-05-30 07:09:04'),(18,16,10,29,'aceptada','2025-05-30 07:30:42'),(19,17,4,24,'aceptada','2025-05-30 07:59:13'),(21,17,10,NULL,'pendiente','2025-05-30 08:00:38'),(28,14,10,30,'aceptada','2025-06-07 15:37:13'),(29,14,10,31,'aceptada','2025-06-07 15:58:52'),(30,14,10,32,'aceptada','2025-06-07 16:20:14'),(31,14,10,33,'aceptada','2025-06-07 16:27:39'),(32,14,7,NULL,'pendiente','2025-06-07 16:28:27'),(34,14,8,34,'aceptada','2025-06-07 16:36:38'),(35,14,10,37,'aceptada','2025-06-07 16:51:54'),(37,14,3,36,'aceptada','2025-06-07 17:18:56'),(38,14,4,NULL,'rechazada','2025-06-07 17:19:25'),(39,14,6,35,'aceptada','2025-06-07 17:19:35'),(40,14,3,NULL,'pendiente','2025-06-07 17:46:06'),(41,14,8,NULL,'pendiente','2025-06-07 17:48:17'),(42,14,6,NULL,'aceptada','2025-06-07 17:48:50'),(43,14,10,NULL,'aceptada','2025-06-07 17:51:50'),(44,14,10,NULL,'pendiente','2025-06-07 18:36:49'),(45,14,17,38,'aceptada','2025-06-07 18:47:46'),(46,14,17,39,'aceptada','2025-06-07 19:54:41'),(47,14,17,40,'aceptada','2025-06-07 20:16:12'),(48,14,17,41,'aceptada','2025-06-07 20:26:35'),(49,14,17,42,'aceptada','2025-06-07 20:29:42'),(50,14,17,NULL,'rechazada','2025-06-07 20:58:31'),(51,14,19,NULL,'rechazada','2025-06-07 22:07:31'),(52,20,19,NULL,'rechazada','2025-06-07 22:47:07'),(53,20,19,43,'aceptada','2025-06-07 22:57:29'),(54,20,17,46,'aceptada','2025-06-07 23:11:28'),(55,20,6,NULL,'aceptada','2025-06-07 23:15:11'),(56,14,6,NULL,'pendiente','2025-06-07 23:25:26'),(57,21,17,NULL,'pendiente','2025-06-07 23:47:17'),(58,21,4,44,'aceptada','2025-06-07 23:48:27'),(59,14,19,45,'aceptada','2025-06-11 13:49:33'),(60,22,17,47,'aceptada','2025-06-11 14:00:16'),(61,22,20,NULL,'pendiente','2025-06-11 14:03:26'),(62,22,8,48,'aceptada','2025-06-11 14:04:23'),(63,23,21,49,'aceptada','2025-06-11 15:02:47'),(64,23,17,50,'aceptada','2025-06-11 15:18:25'),(65,14,17,51,'aceptada','2025-06-11 15:55:50'),(66,14,17,52,'aceptada','2025-06-11 16:08:43'),(67,14,17,53,'aceptada','2025-06-11 17:32:27'),(68,14,17,54,'aceptada','2025-06-11 18:56:52'),(69,24,25,56,'aceptada','2025-06-13 17:35:32'),(70,14,25,55,'aceptada','2025-06-13 17:37:46'),(71,16,3,NULL,'pendiente','2025-06-13 17:57:53'),(72,16,4,NULL,'aceptada','2025-06-13 17:59:11'),(73,16,6,NULL,'pendiente','2025-06-13 17:59:49'),(74,10,6,NULL,'pendiente','2025-06-13 18:36:59');
+INSERT INTO `peticiones` VALUES (1,14,10,13,'aceptada','2025-05-29 20:18:33'),(5,13,10,14,'aceptada','2025-05-29 21:40:15'),(6,14,10,15,'aceptada','2025-05-29 21:51:58'),(7,14,10,16,'aceptada','2025-05-29 22:33:06'),(8,14,10,18,'aceptada','2025-05-29 23:18:21'),(10,14,8,23,'aceptada','2025-05-29 23:36:46'),(12,14,10,17,'aceptada','2025-05-30 05:13:04'),(13,14,10,19,'aceptada','2025-05-30 05:39:39'),(14,14,10,20,'aceptada','2025-05-30 05:50:19'),(15,14,10,21,'aceptada','2025-05-30 05:51:37'),(16,14,10,22,'aceptada','2025-05-30 05:53:56'),(17,14,10,27,'aceptada','2025-05-30 07:09:04'),(18,16,10,29,'aceptada','2025-05-30 07:30:42'),(19,17,4,24,'aceptada','2025-05-30 07:59:13'),(21,17,10,NULL,'pendiente','2025-05-30 08:00:38'),(28,14,10,30,'aceptada','2025-06-07 15:37:13'),(29,14,10,31,'aceptada','2025-06-07 15:58:52'),(30,14,10,32,'aceptada','2025-06-07 16:20:14'),(31,14,10,33,'aceptada','2025-06-07 16:27:39'),(32,14,7,NULL,'pendiente','2025-06-07 16:28:27'),(34,14,8,34,'aceptada','2025-06-07 16:36:38'),(35,14,10,37,'aceptada','2025-06-07 16:51:54'),(37,14,3,36,'aceptada','2025-06-07 17:18:56'),(38,14,4,NULL,'rechazada','2025-06-07 17:19:25'),(39,14,6,35,'aceptada','2025-06-07 17:19:35'),(40,14,3,NULL,'pendiente','2025-06-07 17:46:06'),(41,14,8,NULL,'pendiente','2025-06-07 17:48:17'),(42,14,6,NULL,'aceptada','2025-06-07 17:48:50'),(43,14,10,NULL,'aceptada','2025-06-07 17:51:50'),(44,14,10,NULL,'pendiente','2025-06-07 18:36:49'),(45,14,17,38,'aceptada','2025-06-07 18:47:46'),(46,14,17,39,'aceptada','2025-06-07 19:54:41'),(47,14,17,40,'aceptada','2025-06-07 20:16:12'),(48,14,17,41,'aceptada','2025-06-07 20:26:35'),(49,14,17,42,'aceptada','2025-06-07 20:29:42'),(50,14,17,NULL,'rechazada','2025-06-07 20:58:31'),(51,14,19,NULL,'rechazada','2025-06-07 22:07:31'),(52,20,19,NULL,'rechazada','2025-06-07 22:47:07'),(53,20,19,43,'aceptada','2025-06-07 22:57:29'),(54,20,17,46,'aceptada','2025-06-07 23:11:28'),(55,20,6,NULL,'aceptada','2025-06-07 23:15:11'),(56,14,6,NULL,'pendiente','2025-06-07 23:25:26'),(57,21,17,NULL,'pendiente','2025-06-07 23:47:17'),(58,21,4,44,'aceptada','2025-06-07 23:48:27'),(59,14,19,45,'aceptada','2025-06-11 13:49:33'),(60,22,17,47,'aceptada','2025-06-11 14:00:16'),(61,22,20,NULL,'pendiente','2025-06-11 14:03:26'),(62,22,8,48,'aceptada','2025-06-11 14:04:23'),(63,23,21,49,'aceptada','2025-06-11 15:02:47'),(64,23,17,50,'aceptada','2025-06-11 15:18:25'),(65,14,17,51,'aceptada','2025-06-11 15:55:50'),(66,14,17,52,'aceptada','2025-06-11 16:08:43'),(67,14,17,53,'aceptada','2025-06-11 17:32:27'),(68,14,17,54,'aceptada','2025-06-11 18:56:52'),(69,24,25,56,'aceptada','2025-06-13 17:35:32'),(70,14,25,55,'aceptada','2025-06-13 17:37:46'),(71,16,3,NULL,'pendiente','2025-06-13 17:57:53'),(72,16,4,NULL,'aceptada','2025-06-13 17:59:11'),(73,16,6,NULL,'pendiente','2025-06-13 17:59:49'),(74,10,6,NULL,'pendiente','2025-06-13 18:36:59'),(75,10,4,NULL,'aceptada','2025-10-27 14:26:12'),(76,10,3,NULL,'pendiente','2025-10-28 12:21:07');
 /*!40000 ALTER TABLE `peticiones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `precios_hora`
+--
+
+DROP TABLE IF EXISTS `precios_hora`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `precios_hora` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_especialidad` int NOT NULL,
+  `precio_hora` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_especialidad` (`id_especialidad`),
+  CONSTRAINT `precios_hora_ibfk_1` FOREIGN KEY (`id_especialidad`) REFERENCES `especialidades` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `precios_hora`
+--
+
+LOCK TABLES `precios_hora` WRITE;
+/*!40000 ALTER TABLE `precios_hora` DISABLE KEYS */;
+INSERT INTO `precios_hora` VALUES (1,1,150.00),(2,2,180.00),(3,3,160.00),(4,4,140.00);
+/*!40000 ALTER TABLE `precios_hora` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `servicios`
+--
+
+DROP TABLE IF EXISTS `servicios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `servicios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_especialidad` int NOT NULL,
+  `nombre_servicio` varchar(100) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_especialidad` (`id_especialidad`),
+  CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`id_especialidad`) REFERENCES `especialidades` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `servicios`
+--
+
+LOCK TABLES `servicios` WRITE;
+/*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
+INSERT INTO `servicios` VALUES (1,1,'Reparación de fuga de agua','Fuga menor en tubería o llave',180.00),(2,1,'Destapar lavabo o fregadero','Con herramientas manuales',220.00),(3,1,'Instalación de sanitario','Incluye sellado y prueba',350.00),(4,1,'Cambio de mezcladora o llave','Mano de obra incluida',200.00),(5,1,'Instalación de calentador de gas','Solo mano de obra',500.00),(6,2,'Cambio de apagador o contacto','Material no incluido',150.00),(7,2,'Instalación de foco o lámpara','Mano de obra básica',180.00),(8,2,'Revisión de corto circuito','Diagnóstico básico',200.00),(9,2,'Instalación de ventilador de techo','Montaje completo',300.00),(10,2,'Cableado de un cuarto','Hasta 4 contactos y 2 apagadores',600.00),(11,3,'Reparación de puerta','Ajuste o cambio de bisagras',250.00),(12,3,'Instalación de cerradura','Mano de obra incluida',180.00),(13,3,'Armado de mueble','Mueble de tamaño mediano',300.00),(14,3,'Lijado y barnizado de puerta','Acabado básico',400.00),(15,3,'Reparación de cajonera','Ajuste o reemplazo de correderas',200.00),(16,4,'Reparación de muro con grietas','Hasta 1 m²',250.00),(17,4,'Colocación de azulejo','Por m²',280.00),(18,4,'Resanar y pintar pared','Hasta 3 m²',300.00),(19,4,'Colado de firme pequeño','Hasta 2 m²',400.00),(20,4,'Instalación de block','Por m²',300.00);
+/*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -245,7 +361,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (3,'jorge','aguirre','robles','jorgeluis','jorge@gmail.com','6682433048','$2y$10$LAFkDCFwaqVMRJUBzNY7H.ZuVaYIWrRKDml9QQXE.tAVXSvosNj2q','plomeria','uploads/usuarios/3/perfil/perfil_6844d9fc57706.png','uploads/usuarios/6827e2c72985a.jpg','uploads/usuarios/6827e2c72994f.jpg',1,'2025-05-17 01:13:43',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'juan','perez','pito','pito','perez@gmail.com','6682433048','$2y$10$FiKl52lW2tC1y6HGD1N6XeZ86ePoxhsGikQvXnHo9JfSNHlmUxsVK','plomeria','uploads/usuarios/6827e9f1406b3.jpg','uploads/usuarios/6827e9f1409be.jpg','uploads/usuarios/6827e9f140a8c.jpg',1,'2025-05-17 01:44:17','jazmin','1608','81249','sinaloa','ahome','en una casa blanca',25.81775040,-109.00102770),(6,'pablo','carreon','solis','black','pablo@gmail.com','6682433080','$2y$10$lGV3/bnXt00uUTtHlmFlTejL9kedcxZzXUbjJsp4xBnPSl9ahd2Re','electricidad','','','',1,'2025-05-25 00:09:50',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'pablo','carreon','solis','black','cachorrita@gmail.com','6682433080','$2y$10$ULEM5Zxf07LpnpsjrXtCSubc5b0sFgAWJwG0Df.tRxs8XpBviIYDO','electricidad','uploads/usuarios/7/perfil/683260c9c552a.jpeg','uploads/usuarios/7/ine_frente/683260c9c56c6.jpg','uploads/usuarios/7/ine_reverso/683260c9c59a6.jpg',1,'2025-05-25 00:14:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'herman','salinas','eolias','matador','herman@gmail.com','6684454840','$2y$10$..Ilyug8QMX8Vq7q0f6nVOh3txcWBb6sI4r4hqeNnNPezOeBwr35G','carpinteria','uploads/usuarios/8/perfil/perfil_6839527112b1e.jpeg','uploads/usuarios/8/ine_frente/6832657938c06.jpg','uploads/usuarios/8/ine_reverso/6832657938cf7.jpeg',1,'2025-05-25 00:34:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,'gabriel alejandro','rodriguez','briseno','lalo','alex@gmail.com','6682434040','$2y$10$6im.eZdSmHLdg4tymr0Jau1HKdGD9UyJ/dY8BM3DeHyV4KIKXONye','plomeria','uploads/usuarios/10/perfil/perfil_68393725979e9.jpeg','uploads/usuarios/10/ine_frente/683272d06be1e.jpg','uploads/usuarios/10/ine_reverso/683272d06bf47.jpg',1,'2025-05-25 01:30:56',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,'carlos','estrada','avalos','carlitos','carlos@gmail.com','123456782','$2y$10$oYUBtEDTT/4cmBaoHdeYf.vrfdqNxYE3zXjKFFvL6WQ0hQJUWPmdy','albanileria','uploads/usuarios/17/perfil/6844dc074aa4f.png','uploads/usuarios/17/ine_frente/6844dc074aaff.png','uploads/usuarios/17/ine_reverso/6844dc074ab3f.png',1,'2025-06-08 00:40:39',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(19,'meredith','rodriguez','briseno','mere16','mere12@gmail.com','6682433021','$2y$10$8ecDkUncSr8gDfxUl1O0MeY.JfQdS5kdU43bMprj/quSeriNk0YpC','plomeria','uploads/usuarios/19/perfil/68451a2987e8d.png','uploads/usuarios/19/ine_frente/68451a2987f34.png','uploads/usuarios/19/ine_reverso/68451a2987f6e.png',1,'2025-06-08 05:05:45',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'Luis','Lopez','Soto','luis','luis@hotmail.com','6688151415','$2y$10$PSbrCgsSgzmPxPoS12A1Je2RGNZdd6if20efwO8EFRbAPMCAkYAYu','carpinteria','uploads/usuarios/20/perfil/684536e348848.png','uploads/usuarios/20/ine_frente/684536e3488df.png','uploads/usuarios/20/ine_reverso/684536e34893a.png',1,'2025-06-08 07:08:19',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,'Pancho','Perea','Perez','pancho_pe','pancho_pe@gmail.com','6681040506','$2y$10$BmJE2VlInv1ji4rGO96i5OJsOplhhETaArTbRNPWHc26R3KniueZa','carpinteria','uploads/usuarios/21/perfil/6849f90b96316.png','uploads/usuarios/21/ine_frente/6849f90b97368.png','uploads/usuarios/21/ine_reverso/6849f90b9740b.png',1,'2025-06-11 21:45:47',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,'edgar','rodriguez','briseno','labro460','ro@gmail.com','6682433025','$2y$10$y4B3h4q76hStoNVBEc1veuqvRCCW2G4lmazpz.sl3qlh4WHe9MU8a','carpinteria','uploads/usuarios/22/perfil/684a1955422f3.jpeg','uploads/usuarios/22/ine_frente/684a195542729.jpeg','uploads/usuarios/22/ine_reverso/684a195542d6a.jpg',0,'2025-06-12 00:03:33',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,'edgar','rodriguez','brise','edgar120','ro12@gmail.com','668243325','$2y$10$hw9UMt911PiMhBsJg0NgeeeofxF4x8up/uzmrEb9T/UlbbPtl5Cem','plomeria','uploads/usuarios/23/perfil/684a19ea89e7c.jpeg','uploads/usuarios/23/ine_frente/684a19ea89fe2.jpeg','uploads/usuarios/23/ine_reverso/684a19ea8a139.jpeg',0,'2025-06-12 00:06:02',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,'Panchito','Contreras','','Panchito','correopancho@gmail.com','6681050607','$2y$10$ckqMnW7lmTGph53FGxPZu.zd6nr3S1Q66gjcpUfB5zOG9BFis7PUW','electricidad','','','',1,'2025-06-14 00:16:35',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,'Soy Pancho Electricista','Jom','Dipot','P_','panchoJom@gmail.com','6681124578','$2y$10$8hbVKsM8nuTyw0Z3NxCMeenk/R49Z4EZelxQDo5vi1FvwSBeS84Gq','electricidad','uploads/usuarios/25/perfil/684cc366c6d25.jpg','uploads/usuarios/25/ine_frente/684cc366c6dcc.jpg','uploads/usuarios/25/ine_reverso/684cc366c6e15.jpeg',1,'2025-06-14 00:33:42',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `usuarios` VALUES (3,'jorge','aguirre','robles','jorgeluis','jorge@gmail.com','6682433048','$2y$10$LAFkDCFwaqVMRJUBzNY7H.ZuVaYIWrRKDml9QQXE.tAVXSvosNj2q','plomeria','uploads/usuarios/3/perfil/perfil_6844d9fc57706.png','uploads/usuarios/6827e2c72985a.jpg','uploads/usuarios/6827e2c72994f.jpg',1,'2025-05-17 01:13:43',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'juan','perez','pito','pito','perez@gmail.com','6682433048','$2y$10$FiKl52lW2tC1y6HGD1N6XeZ86ePoxhsGikQvXnHo9JfSNHlmUxsVK','plomeria','uploads/usuarios/4/perfil/perfil_690165c3da7f4.jpeg','uploads/usuarios/6827e9f1409be.jpg','uploads/usuarios/6827e9f140a8c.jpg',1,'2025-05-17 01:44:17','Fuentes','0','81223','Sinaloa','Ahome','Fac Ingenieria mochis',25.81299460,-108.97545040),(6,'pablo','carreon','solis','black','pablo@gmail.com','6682433080','$2y$10$lGV3/bnXt00uUTtHlmFlTejL9kedcxZzXUbjJsp4xBnPSl9ahd2Re','electricidad','','','',1,'2025-05-25 00:09:50',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'pablo','carreon','solis','black','cachorrita@gmail.com','6682433080','$2y$10$ULEM5Zxf07LpnpsjrXtCSubc5b0sFgAWJwG0Df.tRxs8XpBviIYDO','electricidad','uploads/usuarios/7/perfil/683260c9c552a.jpeg','uploads/usuarios/7/ine_frente/683260c9c56c6.jpg','uploads/usuarios/7/ine_reverso/683260c9c59a6.jpg',1,'2025-05-25 00:14:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'herman','salinas','eolias','matador','herman@gmail.com','6684454840','$2y$10$..Ilyug8QMX8Vq7q0f6nVOh3txcWBb6sI4r4hqeNnNPezOeBwr35G','carpinteria','uploads/usuarios/8/perfil/perfil_6839527112b1e.jpeg','uploads/usuarios/8/ine_frente/6832657938c06.jpg','uploads/usuarios/8/ine_reverso/6832657938cf7.jpeg',1,'2025-05-25 00:34:01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,'gabriel alejandro','rodriguez','briseno','lalo','alex@gmail.com','6682434040','$2y$10$6im.eZdSmHLdg4tymr0Jau1HKdGD9UyJ/dY8BM3DeHyV4KIKXONye','plomeria','uploads/usuarios/10/perfil/perfil_68393725979e9.jpeg','uploads/usuarios/10/ine_frente/683272d06be1e.jpg','uploads/usuarios/10/ine_reverso/683272d06bf47.jpg',1,'2025-05-25 01:30:56',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,'carlos','estrada','avalos','carlitos','carlos@gmail.com','123456782','$2y$10$oYUBtEDTT/4cmBaoHdeYf.vrfdqNxYE3zXjKFFvL6WQ0hQJUWPmdy','albanileria','uploads/usuarios/17/perfil/6844dc074aa4f.png','uploads/usuarios/17/ine_frente/6844dc074aaff.png','uploads/usuarios/17/ine_reverso/6844dc074ab3f.png',1,'2025-06-08 00:40:39',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(19,'meredith','rodriguez','briseno','mere16','mere12@gmail.com','6682433021','$2y$10$8ecDkUncSr8gDfxUl1O0MeY.JfQdS5kdU43bMprj/quSeriNk0YpC','plomeria','uploads/usuarios/19/perfil/68451a2987e8d.png','uploads/usuarios/19/ine_frente/68451a2987f34.png','uploads/usuarios/19/ine_reverso/68451a2987f6e.png',1,'2025-06-08 05:05:45',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'Luis','Lopez','Soto','luis','luis@hotmail.com','6688151415','$2y$10$PSbrCgsSgzmPxPoS12A1Je2RGNZdd6if20efwO8EFRbAPMCAkYAYu','carpinteria','uploads/usuarios/20/perfil/684536e348848.png','uploads/usuarios/20/ine_frente/684536e3488df.png','uploads/usuarios/20/ine_reverso/684536e34893a.png',1,'2025-06-08 07:08:19',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,'Pancho','Perea','Perez','pancho_pe','pancho_pe@gmail.com','6681040506','$2y$10$BmJE2VlInv1ji4rGO96i5OJsOplhhETaArTbRNPWHc26R3KniueZa','carpinteria','uploads/usuarios/21/perfil/6849f90b96316.png','uploads/usuarios/21/ine_frente/6849f90b97368.png','uploads/usuarios/21/ine_reverso/6849f90b9740b.png',1,'2025-06-11 21:45:47',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,'edgar','rodriguez','briseno','labro460','ro@gmail.com','6682433025','$2y$10$y4B3h4q76hStoNVBEc1veuqvRCCW2G4lmazpz.sl3qlh4WHe9MU8a','carpinteria','uploads/usuarios/22/perfil/684a1955422f3.jpeg','uploads/usuarios/22/ine_frente/684a195542729.jpeg','uploads/usuarios/22/ine_reverso/684a195542d6a.jpg',0,'2025-06-12 00:03:33',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,'edgar','rodriguez','brise','edgar120','ro12@gmail.com','668243325','$2y$10$hw9UMt911PiMhBsJg0NgeeeofxF4x8up/uzmrEb9T/UlbbPtl5Cem','plomeria','uploads/usuarios/23/perfil/684a19ea89e7c.jpeg','uploads/usuarios/23/ine_frente/684a19ea89fe2.jpeg','uploads/usuarios/23/ine_reverso/684a19ea8a139.jpeg',0,'2025-06-12 00:06:02',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,'Panchito','Contreras','','Panchito','correopancho@gmail.com','6681050607','$2y$10$ckqMnW7lmTGph53FGxPZu.zd6nr3S1Q66gjcpUfB5zOG9BFis7PUW','electricidad','','','',1,'2025-06-14 00:16:35',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,'Soy Pancho Electricista','Jom','Dipot','P_','panchoJom@gmail.com','6681124578','$2y$10$8hbVKsM8nuTyw0Z3NxCMeenk/R49Z4EZelxQDo5vi1FvwSBeS84Gq','electricidad','uploads/usuarios/25/perfil/684cc366c6d25.jpg','uploads/usuarios/25/ine_frente/684cc366c6dcc.jpg','uploads/usuarios/25/ine_reverso/684cc366c6e15.jpeg',1,'2025-06-14 00:33:42',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +398,7 @@ CREATE TABLE `usuarios2` (
 
 LOCK TABLES `usuarios2` WRITE;
 /*!40000 ALTER TABLE `usuarios2` DISABLE KEYS */;
-INSERT INTO `usuarios2` VALUES (1,'wsdf',NULL,'345','sdf@gmail.com','$2y$10$eVAMxA3OSDNfdTpeBuE/DO328iug8tqKPu71iUkPiZZhGyPIcIbTu',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'ugyhj',NULL,'4567u','mainkindred923@gmail.com','$2y$10$cUX9fzDRbtAnmNZu4DRLYOxpCOg63V.Qtzd1RozExz6vuiKjk7ZL2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'jorgiluismr',NULL,'6682410890','mainkindred824@gmail.com','$2y$10$s.7nf.LlOfow5lMTpKlgQ.awkTfswsaD56dEzsajt0ziWG7khCBPW',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'edgar',NULL,'6682433048','labro460@gmail.com','$2y$10$pfjYmjgPFQI0J/.jOONlh.i4cXgofYVcst5dNCyrAPK15sauCyA.a',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'edgar',NULL,'6682433049','labro440@gmail.com','$2y$10$fA3A3VbXUPikAdHUadEH4Ouyd2Cwud8MBmZx8il.0tAAEJA4pLiyq',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'eduardo','eduardo','6682433050','eduardo@gmail.com','$2y$10$sTgtMRcOkK2V6.2/ITPVyucvBh1NmUbjPFW8LZjuJe/7vam/vBZcW',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,'labro','labro','6682433047','caca@gmail.com','$2y$10$oe3Tw1WYSHFB1KA0ygBVKOLnqhQCQqaqfyJi/YvQEzhOfPbsLGbnq','JAZMIN','1608','81249','Sinaloa','Ahome','en una casa azul',NULL,NULL),(11,'lalo rodriguez briseno','edgar','6682433060','labro490@gmail.com','$2y$10$pviFqoRllDy8Hu/z1zsH1.tK9AAq9tCBIeycfhyOqayOm19VKc3Aa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(13,'eduardo rodriguez briseno','labro','6682433070','lalo460@gmail.com','$2y$10$Z99xidGUypBqf0HU0Izk0OxgVK10YZKAwkysqTyJVyrxmlfVciXJm',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,'edgar edu','lalo','6682433090','edu@gmail.com','$2y$10$tgn7ZbemJXmBd7/duUjS/.O/2zLcnMhuyG4B8RNyhguL30ppIxCRG','jazmin','81249','81250','Sinaloa','Ahome','mi casa esta en un corola blanco',25.81775040,-109.00102770),(15,'Cliente Diana','LaDianaCam','1234567890','dianacamacho@uas.edu.mx','$2y$10$B09AKAbdPldwjQlywRDRPuU/0mv8sb70PGCRJW0JwU7uUPaRncGsO',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,'jorge','buki','6682433077','buki12@gmail.com','$2y$10$nXTVR4oob.3l.CmedNxAlOWd8Vc.VlhPr7eBvpiMEIGMfNZRGMhvK','jazmin','168','81249','sinaloa','ahome','en una casa con un pino enfrente',25.81775040,-109.00102770),(17,'meredith','deni12','66819295','denissebriseno@214','$2y$10$1uTrwrgNhcutgc/k2308e.RIU3IXfzOGAxj7DJ0/yXpRHP7PGRBtq',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,'edrick','drick','6682434040','edrick@gmail.com','$2y$10$g8oLhOZ8ZxugQMkQMKNbxeWOdHTEAsJk9SJi9jOQFoTO10ROJjgQW','jazmin','1608','8129','sinaloa','ahome','esta un versa blanco afuera de la casa',25.79464490,-109.01579730),(19,'Rocio','rocio','6688121212','rocio@mail.com','$2y$10$TCwE.CohMQ7yJaw3amEKwu.Wr4AF7nW1f1NzRpbAm8.jMEz7B0fAu','leyva','5','81200','dsadsa','fdsfsd','fdsfds',NULL,NULL),(20,'pedro','pedro12','668243098','perro@gmail.com','$2y$10$KhLudA8nowW1b8KSSFIvJuFiECYfzTkzP0UAbey4R8yA86yAa/Cri','jazmin','1608','81249','sinaloa','ahome','toque la puerta',25.81775040,-109.00102770),(21,'Rocio Becerra','rocio2','6688151515','rocio2@gmail.com','$2y$10$seqUJqAP17Nwb20/ynBwie9oMwmQv7Mh36n9p2EGdCI/8Fg4vcD4u','leyva','5','81200','Sinaloa','Ahome','casa con puerta y ventanas, sobre una calle',25.79508840,-108.99102010),(22,'pedrito solin','sola ester','6668345678','raguairvvazquez@gmail.com','$2y$10$tW.SM2LomlpzPS.b7QaG4.8aIOaxlMLhTw8yNjoU8WCq2KZ5xS3ue','pamplona','567','81249','sinaloa','ahome','casa con porton azul y pino verde',NULL,NULL),(23,'Diana Camacho','D_camacho','6681030405','diana90@gmail.com','$2y$10$y7gw978mA.ZOaDEHdPdP1ugYrMBAlb06C5XujIcAjRXf8lA87AqNK','morelos','1','81360','sinaloa','ahome','afuera de una tahoe dorada',25.77754190,-108.96771980),(24,'Pancho Dos','ElPancho2','6681010203','pancho02@gmail.com','$2y$10$Cp3F55GknV2oT9UxL7k.0epDcy0ngU2n5Yhb4QKyJBmpXcL27wHiG','Morelos','42','81200','Sinaloa','Ahome','Hay un vocho blanco afuera',NULL,NULL);
+INSERT INTO `usuarios2` VALUES (1,'wsdf',NULL,'345','sdf@gmail.com','$2y$10$eVAMxA3OSDNfdTpeBuE/DO328iug8tqKPu71iUkPiZZhGyPIcIbTu',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'ugyhj',NULL,'4567u','mainkindred923@gmail.com','$2y$10$cUX9fzDRbtAnmNZu4DRLYOxpCOg63V.Qtzd1RozExz6vuiKjk7ZL2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'jorgiluismr',NULL,'6682410890','mainkindred824@gmail.com','$2y$10$s.7nf.LlOfow5lMTpKlgQ.awkTfswsaD56dEzsajt0ziWG7khCBPW',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'edgar',NULL,'6682433048','labro460@gmail.com','$2y$10$pfjYmjgPFQI0J/.jOONlh.i4cXgofYVcst5dNCyrAPK15sauCyA.a',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'edgar',NULL,'6682433049','labro440@gmail.com','$2y$10$fA3A3VbXUPikAdHUadEH4Ouyd2Cwud8MBmZx8il.0tAAEJA4pLiyq',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'eduardo','eduardo','6682433050','eduardo@gmail.com','$2y$10$sTgtMRcOkK2V6.2/ITPVyucvBh1NmUbjPFW8LZjuJe/7vam/vBZcW',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,'labro','labro12','6682433047','caca@gmail.com','$2y$10$oe3Tw1WYSHFB1KA0ygBVKOLnqhQCQqaqfyJi/YvQEzhOfPbsLGbnq','brasiles','1221','81285','Sinaloa','Ahome','en una casa azul',25.76704590,-108.98178940),(11,'lalo rodriguez briseno','edgar','6682433060','labro490@gmail.com','$2y$10$pviFqoRllDy8Hu/z1zsH1.tK9AAq9tCBIeycfhyOqayOm19VKc3Aa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(13,'eduardo rodriguez briseno','labro','6682433070','lalo460@gmail.com','$2y$10$Z99xidGUypBqf0HU0Izk0OxgVK10YZKAwkysqTyJVyrxmlfVciXJm',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,'edgar edu','lalo','6682433090','edu@gmail.com','$2y$10$tgn7ZbemJXmBd7/duUjS/.O/2zLcnMhuyG4B8RNyhguL30ppIxCRG','jazmin','81249','81250','Sinaloa','Ahome','mi casa esta en un corola blanco',25.81775040,-109.00102770),(15,'Cliente Diana','LaDianaCam','1234567890','dianacamacho@uas.edu.mx','$2y$10$B09AKAbdPldwjQlywRDRPuU/0mv8sb70PGCRJW0JwU7uUPaRncGsO',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,'jorge','buki','6682433077','buki12@gmail.com','$2y$10$nXTVR4oob.3l.CmedNxAlOWd8Vc.VlhPr7eBvpiMEIGMfNZRGMhvK','jazmin','168','81249','sinaloa','ahome','en una casa con un pino enfrente',25.81775040,-109.00102770),(17,'meredith','deni12','66819295','denissebriseno@214','$2y$10$1uTrwrgNhcutgc/k2308e.RIU3IXfzOGAxj7DJ0/yXpRHP7PGRBtq',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,'edrick','drick','6682434040','edrick@gmail.com','$2y$10$g8oLhOZ8ZxugQMkQMKNbxeWOdHTEAsJk9SJi9jOQFoTO10ROJjgQW','jazmin','1608','8129','sinaloa','ahome','esta un versa blanco afuera de la casa',25.79464490,-109.01579730),(19,'Rocio','rocio','6688121212','rocio@mail.com','$2y$10$TCwE.CohMQ7yJaw3amEKwu.Wr4AF7nW1f1NzRpbAm8.jMEz7B0fAu','leyva','5','81200','dsadsa','fdsfsd','fdsfds',NULL,NULL),(20,'pedro','pedro12','668243098','perro@gmail.com','$2y$10$KhLudA8nowW1b8KSSFIvJuFiECYfzTkzP0UAbey4R8yA86yAa/Cri','jazmin','1608','81249','sinaloa','ahome','toque la puerta',25.81775040,-109.00102770),(21,'Rocio Becerra','rocio2','6688151515','rocio2@gmail.com','$2y$10$seqUJqAP17Nwb20/ynBwie9oMwmQv7Mh36n9p2EGdCI/8Fg4vcD4u','leyva','5','81200','Sinaloa','Ahome','casa con puerta y ventanas, sobre una calle',25.79508840,-108.99102010),(22,'pedrito solin','sola ester','6668345678','raguairvvazquez@gmail.com','$2y$10$tW.SM2LomlpzPS.b7QaG4.8aIOaxlMLhTw8yNjoU8WCq2KZ5xS3ue','pamplona','567','81249','sinaloa','ahome','casa con porton azul y pino verde',NULL,NULL),(23,'Diana Camacho','D_camacho','6681030405','diana90@gmail.com','$2y$10$y7gw978mA.ZOaDEHdPdP1ugYrMBAlb06C5XujIcAjRXf8lA87AqNK','morelos','1','81360','sinaloa','ahome','afuera de una tahoe dorada',25.77754190,-108.96771980),(24,'Pancho Dos','ElPancho2','6681010203','pancho02@gmail.com','$2y$10$Cp3F55GknV2oT9UxL7k.0epDcy0ngU2n5Yhb4QKyJBmpXcL27wHiG','Morelos','42','81200','Sinaloa','Ahome','Hay un vocho blanco afuera',NULL,NULL);
 /*!40000 ALTER TABLE `usuarios2` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -295,4 +411,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-24 10:48:39
+-- Dump completed on 2025-10-29 17:48:12

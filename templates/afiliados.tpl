@@ -62,28 +62,7 @@
             color: #888;
             margin-top: 40px;
         }
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #222;
-            color: #fff;
-            padding: 15px 30px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 1.5em;
-            margin-left: 40px;
-        }
-        .menu-button {
-            background: #444;
-            color: #fff;
-            border: none;
-            font-size: 1.5em;
-            border-radius: 5px;
-            padding: 5px 12px;
-            cursor: pointer;
-        }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -99,12 +78,15 @@
             position: relative;
             padding: 20px;
             color: #fff;
-        }
-        #overlay {
-            display: none;
+        }   
+        .overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.3);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
             z-index: 998;
         }
         .btn-home-inicio {

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-28 00:40:33
+/* Smarty version 3.1.39, created on 2025-10-29 00:53:54
   from '/var/www/html/rocio/templates/afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690011015021e4_09259327',
+  'unifunc' => 'content_690165a2cd0f92_24838408',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
     array (
       0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1761611992,
+      1 => 1761699233,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690011015021e4_09259327 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690165a2cd0f92_24838408 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -86,28 +86,7 @@ function content_690011015021e4_09259327 (Smarty_Internal_Template $_smarty_tpl)
             color: #888;
             margin-top: 40px;
         }
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #222;
-            color: #fff;
-            padding: 15px 30px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 1.5em;
-            margin-left: 40px;
-        }
-        .menu-button {
-            background: #444;
-            color: #fff;
-            border: none;
-            font-size: 1.5em;
-            border-radius: 5px;
-            padding: 5px 12px;
-            cursor: pointer;
-        }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -123,12 +102,15 @@ function content_690011015021e4_09259327 (Smarty_Internal_Template $_smarty_tpl)
             position: relative;
             padding: 20px;
             color: #fff;
-        }
-        #overlay {
-            display: none;
+        }   
+        .overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.3);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
             z-index: 998;
         }
         .btn-home-inicio {
