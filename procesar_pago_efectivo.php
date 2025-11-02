@@ -23,9 +23,9 @@ try {
     $stmt_pago->execute();
     
     // Actualizar estado de la cotización
-    $stmt = $conexion->prepare("UPDATE cotizaciones SET estado = 'completado' WHERE id = ?");
-    $stmt->bind_param("i", $input['id_cotizacion']);
-    $stmt->execute();
+    $stmt_cot = $conexion->prepare("UPDATE cotizaciones SET estado = 'completada' WHERE id = ?");
+    $stmt_cot->bind_param("i", $id_cotizacion);
+    $stmt_cot->execute();
 
     // Obtener id_usuario e id_afiliado de la cotización
     $stmt = $conexion->prepare("SELECT id_usuario, id_afiliado FROM cotizaciones WHERE id = ?");
@@ -47,8 +47,9 @@ try {
 
     // Actualizar la notificación
     $mensaje_pagado = "Has pagado el servicio del afiliado ($nombre_completo_afiliado).";
+    // Corrección: Actualizar solo la notificación que contiene el id_cotizacion específico.
     $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
-    $like = "%cotizó tu servicio%";
+    $like = "%pago.php?id_cotizacion=" . $id_cotizacion . "%";
     $stmt->bind_param("sis", $mensaje_pagado, $id_usuario, $like);
     $stmt->execute();
     $stmt->close();
@@ -62,7 +63,6 @@ try {
     echo "Error al registrar el pago: " . $e->getMessage();
 }
 
-$stmt_pago->close();
-$stmt_cotizacion->close();
+$stmt_pago->close(); // stmt_cotizacion ya no existe, y los otros se cierran en el bloque try
 $conexion->close();
 ?>

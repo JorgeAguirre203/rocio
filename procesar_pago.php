@@ -50,8 +50,9 @@ try {
 
     // Actualizar la notificación
     $mensaje_pagado = "Has pagado el servicio del afiliado ($nombre_completo_afiliado).";
+    // Corrección: Actualizar solo la notificación que contiene el id_cotizacion específico.
     $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
-    $like = "%cotizó tu servicio%";
+    $like = "%pago.php?id_cotizacion=" . $input['id_cotizacion'] . "%";
     $stmt->bind_param("sis", $mensaje_pagado, $id_usuario, $like);
     $stmt->execute();
     $stmt->close();

@@ -89,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Guarda la notificación
     if (isset($notificacion)) {
-        $stmt = $conexion->prepare("INSERT INTO notificaciones (id_usuario, mensaje, fecha) VALUES (?, ?, NOW())");
-        $stmt->bind_param("is", $id_usuario, $notificacion);
+        $stmt = $conexion->prepare("INSERT INTO notificaciones (id_usuario, mensaje, id_peticion, fecha) VALUES (?, ?, ?, NOW())");
+        $stmt->bind_param("isi", $id_usuario, $notificacion, $id_peticion);
         $stmt->execute();
         $stmt->close();
     }

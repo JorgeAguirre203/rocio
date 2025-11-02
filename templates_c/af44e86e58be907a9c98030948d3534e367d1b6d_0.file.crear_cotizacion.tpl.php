@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-28 00:53:38
+/* Smarty version 3.1.39, created on 2025-10-30 04:23:50
   from '/var/www/html/rocio/templates/crear_cotizacion.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_69001412e3c836_94039595',
+  'unifunc' => 'content_6902e856f1d137_19766738',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'af44e86e58be907a9c98030948d3534e367d1b6d' => 
     array (
       0 => '/var/www/html/rocio/templates/crear_cotizacion.tpl',
-      1 => 1761612815,
+      1 => 1761798229,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69001412e3c836_94039595 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6902e856f1d137_19766738 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -179,6 +179,42 @@ function content_69001412e3c836_94039595 (Smarty_Internal_Template $_smarty_tpl)
 <body>
     <div class="form-container">
         <h2><?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['id']) {?>Editar Cotización<?php } else { ?>Crear Nueva Cotización<?php }?></h2>
+                <?php if (count($_smarty_tpl->tpl_vars['servicios_solicitados']->value) > 0) {?>
+            <div class="form-group">
+                <label>Servicios solicitados:</label>
+                <ul>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['servicios_solicitados']->value, 'serv');
+$_smarty_tpl->tpl_vars['serv']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['serv']->value) {
+$_smarty_tpl->tpl_vars['serv']->do_else = false;
+?>
+                        <li><?php echo $_smarty_tpl->tpl_vars['serv']->value['nombre_servicio'];?>
+ - $ <?php echo $_smarty_tpl->tpl_vars['serv']->value['precio'];?>
+</li>
+                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                </ul>
+                <p><strong>Total servicios:</strong> $ <?php echo $_smarty_tpl->tpl_vars['total_servicios']->value;?>
+</p>
+            </div>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['distancia_km']->value > 0) {?>
+            <div class="form-group">
+                <label>Distancia estimada:</label>
+                <p><?php echo $_smarty_tpl->tpl_vars['distancia_km']->value;?>
+ km x $20 = <strong>$ <?php echo $_smarty_tpl->tpl_vars['total_distancia']->value;?>
+</strong></p>
+            </div>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['total_automatico']->value > 0) {?>
+            <div class="form-group">
+                <label>Total sugerido:</label>
+                <p style="font-size:1.2em;"><strong>$ <?php echo $_smarty_tpl->tpl_vars['total_automatico']->value;?>
+</strong></p>
+            </div>
+        <?php }?>
         
         <form method="post">
             <input type="hidden" name="peticion_id" value="<?php echo $_smarty_tpl->tpl_vars['peticion_id']->value;?>
@@ -194,28 +230,28 @@ function content_69001412e3c836_94039595 (Smarty_Internal_Template $_smarty_tpl)
 ">
             </div>
             
-            <div class="form-group">
-                <label for="horas">Horas estimadas:</label>
-                <input type="number" step="0.1" min="0.1" name="horas" id="horas" 
-                       value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['horas'])===null||$tmp==='' ? '' : $tmp);?>
+                        <?php if ($_smarty_tpl->tpl_vars['es_por_hora']->value) {?>
+                <div class="form-group">
+                    <label for="horas">Horas estimadas:</label>
+                    <input type="number" step="0.1" min="0.1" name="horas" id="horas" 
+                        value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['horas'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
-                <div class="input-hint">Ejemplo: 2.5 (para 2 horas y media)</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="precio_hora">Precio por hora ($):</label>
-                <input type="number" step="0.01" min="0.01" name="precio_hora" id="precio_hora" 
-                       value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['precio_hora'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
-                <div class="input-hint">Ingrese el precio por hora en pesos mexicanos</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="detalles">Detalles del servicio:</label>
-                <textarea name="detalles" id="detalles"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['detalles'])===null||$tmp==='' ? '' : $tmp);?>
+                    <div class="input-hint">Ejemplo: 2.5 (para 2 horas y media)</div>
+                </div>
+                <div class="form-group">
+                    <label for="precio_hora">Precio por hora ($):</label>
+                    <input type="number" step="0.01" min="0.01" name="precio_hora" id="precio_hora" 
+                        value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['precio_hora_especialidad']->value)===null||$tmp==='' ? $_smarty_tpl->tpl_vars['cotizacion']->value['precio_hora'] : $tmp);?>
+" readonly>
+                    <div class="input-hint">Precio por hora según especialidad</div>
+                </div>
+                <div class="form-group">
+                    <label for="detalles">Detalles del servicio:</label>
+                    <textarea name="detalles" id="detalles"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['detalles'])===null||$tmp==='' ? '' : $tmp);?>
 </textarea>
-                <div class="input-hint">Describa los detalles del trabajo a realizar</div>
-            </div>
+                    <div class="input-hint">Describa los detalles del trabajo a realizar</div>
+                </div>
+            <?php }?>
             
             <button type="submit"><?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['id']) {?>Actualizar cotización<?php } else { ?>Guardar y continuar a pago<?php }?></button>
         </form>

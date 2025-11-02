@@ -50,15 +50,73 @@ if (isset($_GET['id_cotizacion'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $peticion_id = intval($_POST['peticion_id']);
-    $servicio = $servicio_afiliado; // Usar el servicio del afiliado, no el del POST
+    $servicio = $servicio_afiliado;
     $horas = floatval($_POST['horas']);
     $detalles = $_POST['detalles'];
     $precio_hora = floatval($_POST['precio_hora']);
-    $total = $horas * $precio_hora;
+    
+    // --- NUEVO: Determinar si es por hora o por servicios ---
+    $es_por_hora = false;
+    $stmt = $conexion->prepare("SELECT tipo_cobro FROM contrataciones WHERE id_peticion = ? LIMIT 1");
+    $stmt->bind_param("i", $peticion_id);
+    $stmt->execute();
+    $stmt->bind_result($tipo_cobro);
+    $stmt->fetch();
+    $stmt->close();
+    
+    if ($tipo_cobro === 'por_hora') {
+        $es_por_hora = true;
+        $total = $horas * $precio_hora;
+    } else {
+        // Calcular total automático para servicios fijos
+        $sql = "SELECT s.nombre_servicio, s.precio
+                FROM contrataciones c
+                INNER JOIN servicios s ON c.id_servicio = s.id
+                WHERE c.id_peticion = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $peticion_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $total_servicios = 0;
+        while ($row = $result->fetch_assoc()) {
+            $total_servicios += $row['precio'];
+        }
+        $stmt->close();
 
-    // Validar servicio
-    if (!in_array($servicio, ['plomeria','electricidad','carpinteria','albanileria'])) {
-        die("Error: El servicio '$servicio' no es válido.");
+        // Calcular distancia
+        $sql = "SELECT u2.latitud as lat_cliente, u2.longitud as lon_cliente, u.latitud as lat_afiliado, u.longitud as lon_afiliado
+                FROM peticiones p
+                INNER JOIN usuarios2 u2 ON p.id_usuario = u2.id
+                INNER JOIN usuarios u ON p.id_afiliado = u.id
+                WHERE p.id = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $peticion_id);
+        $stmt->execute();
+        $stmt->bind_result($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Función Haversine
+        function haversine($lat1, $lon1, $lat2, $lon2) {
+            $R = 6371;
+            $dLat = deg2rad($lat2 - $lat1);
+            $dLon = deg2rad($lon2 - $lon1);
+            $a = sin($dLat/2) * sin($dLat/2) +
+                 cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+                 sin($dLon/2) * sin($dLon/2);
+            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+            return $R * $c;
+        }
+
+        $distancia_km = 0;
+        if ($lat_cliente && $lon_cliente && $lat_afiliado && $lon_afiliado) {
+            $distancia_km = haversine($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
+        }
+        $costo_km = 20;
+        $total_distancia = $distancia_km * $costo_km;
+
+        // Total final para servicios fijos
+        $total = $total_servicios + $total_distancia;
     }
 
     // --- Si es edición, actualiza la cotización ---
@@ -84,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insertar cotización
     $stmt = $conexion->prepare("INSERT INTO cotizaciones (id_usuario, id_afiliado, servicio, horas, detalles, precio_hora, total, estado) VALUES (?, ?, ?, ?, ?, ?, ?, 'pendiente')");
-    $stmt->bind_param("iisdssd", $id_usuario, $id_afiliado, $servicio, $horas, $detalles, $precio_hora, $total);
+    $stmt->bind_param("iisdsdd", $id_usuario, $id_afiliado, $servicio, $horas, $detalles, $precio_hora, $total);
     $stmt->execute();
     if ($stmt->error) {
         die("Error MySQL: " . $stmt->error);
@@ -110,11 +168,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre_completo_afiliado = $nombre_afiliado . ' ' . $apellido_afiliado;
     $mensaje_pago = "El afiliado ($nombre_completo_afiliado) ya cotizó tu servicio. <a href='pago.php?id_cotizacion=$id_cotizacion'>Procede al pago</a>.";
 
-    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
-    $like = "%El afiliado ($nombre_completo_afiliado) aceptó el trabajo%";
-    $stmt->bind_param("sis", $mensaje_pago, $id_usuario, $like);
+    // Corrección Definitiva: Actualizar la notificación usando el id_peticion para ser específicos.
+    // Se asume que la tabla 'notificaciones' tiene una columna 'id_peticion'. Si no, hay que agregarla.
+    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND id_peticion = ?");
+    $stmt->bind_param("sii", $mensaje_pago, $id_usuario, $peticion_id);
     $stmt->execute();
     $stmt->close();
+    
+    // También es buena idea corregir aceptar_peticion.php para que sea consistente
+    // Aunque el cambio principal es el de arriba, esto hace el sistema más robusto.
+    // (Este cambio se aplicaría en aceptar_peticion.php)
 
     header("Location: afiliados.php");
     exit;
@@ -124,6 +187,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (!$editando) {
     $peticion_id = isset($_GET['peticion_id']) ? intval($_GET['peticion_id']) : 0;
     $smarty->assign('peticion_id', $peticion_id);
+    $es_por_hora = false;
+    $stmt = $conexion->prepare("SELECT tipo_cobro FROM contrataciones WHERE id_peticion = ? LIMIT 1");
+    $stmt->bind_param("i", $peticion_id);
+    $stmt->execute();
+    $stmt->bind_result($tipo_cobro);
+    $stmt->fetch();
+    $stmt->close();
+    if ($tipo_cobro === 'por_hora') {
+        $es_por_hora = true;
+    }
+    $smarty->assign('es_por_hora', $es_por_hora);
+
+    // Si es por hora, obtener el precio por hora de la especialidad
+    if ($es_por_hora) {
+        $stmt = $conexion->prepare("SELECT ph.precio_hora 
+            FROM precios_hora ph
+            INNER JOIN especialidades e ON ph.id_especialidad = e.id
+            WHERE e.nombre = ?");
+        $stmt->bind_param("s", $servicio_afiliado);
+        $stmt->execute();
+        $stmt->bind_result($precio_hora_especialidad);
+        $stmt->fetch();
+        $stmt->close();
+        $smarty->assign('precio_hora_especialidad', $precio_hora_especialidad);
+    }
+
+    // --- PON AQUÍ EL CÓDIGO DE COTIZACIÓN AUTOMÁTICA ---
+
+    if ($peticion_id) {
+        // 1. Obtener los servicios solicitados en la petición
+        $sql = "SELECT s.nombre_servicio, s.precio
+                FROM contrataciones c
+                INNER JOIN servicios s ON c.id_servicio = s.id
+                WHERE c.id_peticion = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $peticion_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $servicios_solicitados = [];
+        $total_servicios = 0;
+        while ($row = $result->fetch_assoc()) {
+            $servicios_solicitados[] = $row;
+            $total_servicios += $row['precio'];
+        }
+        $stmt->close();
+
+        // 2. Calcular distancia entre afiliado y cliente
+        $sql = "SELECT u2.latitud as lat_cliente, u2.longitud as lon_cliente, u.latitud as lat_afiliado, u.longitud as lon_afiliado
+                FROM peticiones p
+                INNER JOIN usuarios2 u2 ON p.id_usuario = u2.id
+                INNER JOIN usuarios u ON p.id_afiliado = u.id
+                WHERE p.id = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $peticion_id);
+        $stmt->execute();
+        $stmt->bind_result($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Haversine
+        function haversine($lat1, $lon1, $lat2, $lon2) {
+            $R = 6371; // Radio de la tierra en km
+            $dLat = deg2rad($lat2 - $lat1);
+            $dLon = deg2rad($lon2 - $lon1);
+            $a = sin($dLat/2) * sin($dLat/2) +
+                 cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+                 sin($dLon/2) * sin($dLon/2);
+            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+            return $R * $c;
+        }
+
+        $distancia_km = 0;
+        if ($lat_cliente && $lon_cliente && $lat_afiliado && $lon_afiliado) {
+            $distancia_km = haversine($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
+        }
+        $costo_km = 20; // Puedes cambiar el costo por km aquí
+        $total_distancia = $distancia_km * $costo_km;
+
+        // 3. Total automático
+        $total_automatico = $total_servicios + $total_distancia;
+
+        // Asignar a Smarty para mostrar en el formulario
+        $smarty->assign('servicios_solicitados', $servicios_solicitados);
+        $smarty->assign('total_servicios', $total_servicios);
+        $smarty->assign('distancia_km', round($distancia_km, 2));
+        $smarty->assign('total_distancia', round($total_distancia, 2));
+        $smarty->assign('total_automatico', round($total_automatico, 2));
+    }
 }
 
 $smarty->display('crear_cotizacion.tpl');

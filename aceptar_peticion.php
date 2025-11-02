@@ -36,9 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['peticion_id'])) {
 
     // 4. Actualizar la notificación existente para este cliente y afiliado
     $mensaje_actualizado = "El afiliado ($nombre_completo_afiliado) aceptó el trabajo.";
-    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND mensaje LIKE ?");
-    $like = "%Has contratado a este afiliado ($nombre_completo_afiliado)%";
-    $stmt->bind_param("sis", $mensaje_actualizado, $id_usuario_cliente, $like);
+    $stmt = $conexion->prepare("UPDATE notificaciones SET mensaje = ? WHERE id_usuario = ? AND (mensaje LIKE ? OR mensaje LIKE ?)");
+    $like_contratado = "%Has contratado a este afiliado ($nombre_completo_afiliado)%";
+    $like_por_hora = "%Has solicitado cotización por hora a este afiliado ($nombre_completo_afiliado)%";
+    $stmt->bind_param("siss", $mensaje_actualizado, $id_usuario_cliente, $like_contratado, $like_por_hora);
     $stmt->execute();
     $stmt->close();
 }

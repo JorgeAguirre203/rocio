@@ -156,6 +156,30 @@
 <body>
     <div class="form-container">
         <h2>{if $cotizacion.id}Editar Cotización{else}Crear Nueva Cotización{/if}</h2>
+        {* Mostrar desglose automático de cotización *}
+        {if $servicios_solicitados|@count > 0}
+            <div class="form-group">
+                <label>Servicios solicitados:</label>
+                <ul>
+                    {foreach $servicios_solicitados as $serv}
+                        <li>{$serv.nombre_servicio} - $ {$serv.precio}</li>
+                    {/foreach}
+                </ul>
+                <p><strong>Total servicios:</strong> $ {$total_servicios}</p>
+            </div>
+        {/if}
+        {if $distancia_km > 0}
+            <div class="form-group">
+                <label>Distancia estimada:</label>
+                <p>{$distancia_km} km x $20 = <strong>$ {$total_distancia}</strong></p>
+            </div>
+        {/if}
+        {if $total_automatico > 0}
+            <div class="form-group">
+                <label>Total sugerido:</label>
+                <p style="font-size:1.2em;"><strong>$ {$total_automatico}</strong></p>
+            </div>
+        {/if}
         
         <form method="post">
             <input type="hidden" name="peticion_id" value="{$peticion_id}">
@@ -167,25 +191,26 @@
                 <input type="hidden" name="servicio" value="{$servicio_afiliado|escape}">
             </div>
             
-            <div class="form-group">
-                <label for="horas">Horas estimadas:</label>
-                <input type="number" step="0.1" min="0.1" name="horas" id="horas" 
-                       value="{$cotizacion.horas|default:''}" required>
-                <div class="input-hint">Ejemplo: 2.5 (para 2 horas y media)</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="precio_hora">Precio por hora ($):</label>
-                <input type="number" step="0.01" min="0.01" name="precio_hora" id="precio_hora" 
-                       value="{$cotizacion.precio_hora|default:''}" required>
-                <div class="input-hint">Ingrese el precio por hora en pesos mexicanos</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="detalles">Detalles del servicio:</label>
-                <textarea name="detalles" id="detalles">{$cotizacion.detalles|default:''}</textarea>
-                <div class="input-hint">Describa los detalles del trabajo a realizar</div>
-            </div>
+            {* SOLO SE MUESTRAN SI ES POR HORA *}
+            {if $es_por_hora}
+                <div class="form-group">
+                    <label for="horas">Horas estimadas:</label>
+                    <input type="number" step="0.1" min="0.1" name="horas" id="horas" 
+                        value="{$cotizacion.horas|default:''}" required>
+                    <div class="input-hint">Ejemplo: 2.5 (para 2 horas y media)</div>
+                </div>
+                <div class="form-group">
+                    <label for="precio_hora">Precio por hora ($):</label>
+                    <input type="number" step="0.01" min="0.01" name="precio_hora" id="precio_hora" 
+                        value="{$precio_hora_especialidad|default:$cotizacion.precio_hora}" readonly>
+                    <div class="input-hint">Precio por hora según especialidad</div>
+                </div>
+                <div class="form-group">
+                    <label for="detalles">Detalles del servicio:</label>
+                    <textarea name="detalles" id="detalles">{$cotizacion.detalles|default:''}</textarea>
+                    <div class="input-hint">Describa los detalles del trabajo a realizar</div>
+                </div>
+            {/if}
             
             <button type="submit">{if $cotizacion.id}Actualizar cotización{else}Guardar y continuar a pago{/if}</button>
         </form>
