@@ -67,9 +67,14 @@
   <div class="auth-container">
     <h2>{$page_title}</h2>
 
-    {if isset($error)}
-      <div class="error-message">{$error}</div>
-    {/if}
+{if $error}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        alert('{$error|escape:"javascript"}');
+    });
+</script>
+{/if}
+
 
     <form action="{$form_action}" method="POST">
       <label for="email">Correo Electrónico:</label>

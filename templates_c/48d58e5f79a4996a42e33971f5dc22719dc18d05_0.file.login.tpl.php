@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-28 00:51:18
+/* Smarty version 3.1.39, created on 2025-11-03 22:28:09
   from '/var/www/html/rocio/templates/login.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_69001386d8b364_56480684',
+  'unifunc' => 'content_69092c79a02ce6_80757650',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '48d58e5f79a4996a42e33971f5dc22719dc18d05' => 
     array (
       0 => '/var/www/html/rocio/templates/login.tpl',
-      1 => 1761612677,
+      1 => 1762208887,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69001386d8b364_56480684 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69092c79a02ce6_80757650 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -94,10 +94,17 @@ function content_69001386d8b364_56480684 (Smarty_Internal_Template $_smarty_tpl)
     <h2><?php echo $_smarty_tpl->tpl_vars['page_title']->value;?>
 </h2>
 
-    <?php if ((isset($_smarty_tpl->tpl_vars['error']->value))) {?>
-      <div class="error-message"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
-</div>
-    <?php }?>
+<?php if ($_smarty_tpl->tpl_vars['error']->value) {
+echo '<script'; ?>
+>
+    document.addEventListener('DOMContentLoaded', function() {
+        alert('<?php echo strtr($_smarty_tpl->tpl_vars['error']->value, array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" ));?>
+');
+    });
+<?php echo '</script'; ?>
+>
+<?php }?>
+
 
     <form action="<?php echo $_smarty_tpl->tpl_vars['form_action']->value;?>
 " method="POST">

@@ -400,6 +400,12 @@
                         <input type="hidden" name="id_afiliado" value="{$servicio.id}">
                         <a href="seleccionar_servicio.php?id_afiliado={$servicio.id}&id_usuario={$id_usuario}" class="servicio-btn">Contratar</a>
                     </form>
+                    {* Botón para iniciar el chat *}
+                    <button class="servicio-btn" style="background-color: #16a34a; margin-top: 5px;"
+                            onclick="abrirChat({$smarty.session.usuario.id}, {$servicio.id}, '{$servicio.nombre|escape:'javascript'}', 0)">
+                        Chatear con Afiliado
+                    </button>
+
                     <button onclick="mostrarDetalles('afiliado_{$servicio.id|escape:'javascript'}')">
                         Ver detalles
                     </button> 
@@ -527,5 +533,69 @@
         // document.getElementById('noti-badge').style.display = 'inline';
     });
     </script>
+
+    {* --- INICIO DEL CÓDIGO DEL CHAT --- *}
+    <style>
+    /* Estilos para la ventana de chat flotante */
+    #chat-container {
+      position: fixed;
+      bottom: 0;
+      right: 20px;
+      width: 320px;
+      max-height: 450px;
+      border: 1px solid #ccc;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: none; /* Oculto por defecto */
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      border-radius: 10px 10px 0 0;
+      z-index: 1500;
+    }
+    #chat-header {
+      background: #0078ff;
+      color: white;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chat-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+    #mensajes { flex: 1; padding: 10px; overflow-y: auto; background: #f1f0f0; display: flex; flex-direction: column; }
+    #formChat { display: flex; border-top: 1px solid #ccc; }
+    #formChat input { flex: 1; padding: 10px; border: none; }
+    #formChat button { padding: 10px 15px; border: none; background: #0078ff; color: white; cursor: pointer; }
+    .mensaje-mio { background: #dcf8c6; padding: 8px 12px; border-radius: 15px 15px 0 15px; margin-bottom: 8px; max-width: 80%; align-self: flex-end; word-wrap: break-word; }
+    .mensaje-otro { background: #fff; padding: 8px 12px; border-radius: 15px 15px 15px 0; margin-bottom: 8px; max-width: 80%; align-self: flex-start; word-wrap: break-word; }
+    .hora { font-size: 0.7em; color: gray; margin-left: 8px; display: block; text-align: right; }
+    </style>
+
+    <div id="chat-container">
+      <div id="chat-header">
+        <span id="chat-con-nombre">Chat</span>
+        <button onclick="cerrarChat()">×</button>
+      </div>
+      <div id="mensajes"></div>
+      <form id="formChat">
+        <input type="hidden" id="remitente_id">
+        <input type="hidden" id="receptor_id">
+        <input type="hidden" id="remitente_es_afiliado">
+        <input type="text" id="mensaje" placeholder="Escribe un mensaje..." required autocomplete="off">
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <script>
+    {literal}
+    let chatInterval;
+    function abrirChat(remitenteId, receptorId, receptorNombre, esAfiliado) { document.getElementById('chat-container').style.display = 'flex'; document.getElementById('chat-con-nombre').innerText = 'Chat con ' + receptorNombre; document.getElementById('remitente_id').value = remitenteId; document.getElementById('receptor_id').value = receptorId; document.getElementById('remitente_es_afiliado').value = esAfiliado; cargarMensajes(); if (chatInterval) clearInterval(chatInterval); chatInterval = setInterval(cargarMensajes, 3000); }
+    function cerrarChat() { document.getElementById('chat-container').style.display = 'none'; if (chatInterval) clearInterval(chatInterval); }
+    function cargarMensajes() { const r = document.getElementById('remitente_id').value, t = document.getElementById('receptor_id').value, e = document.getElementById('remitente_es_afiliado').value, n = document.getElementById('mensajes'); if (!r || !t) return; fetch(`obtener_mensajes.php?usuario_actual_id=${r}&otro_usuario_id=${t}&usuario_actual_es_afiliado=${e}`).then(e => e.text()).then(e => { n.innerHTML = e, n.scrollTop = n.scrollHeight }) }
+    document.getElementById('formChat').addEventListener('submit', e => { e.preventDefault(); const t = new FormData; t.append('remitente_id', document.getElementById('remitente_id').value), t.append('receptor_id', document.getElementById('receptor_id').value), t.append('mensaje', document.getElementById('mensaje').value), t.append('remitente_es_afiliado', document.getElementById('remitente_es_afiliado').value), fetch('enviar_mensaje.php', { method: 'POST', body: t }).then(() => { document.getElementById('mensaje').value = '', cargarMensajes() }) });
+    {/literal}
+    </script>
+    {* --- FIN DEL CÓDIGO DEL CHAT --- *}
 </body>
 </html>

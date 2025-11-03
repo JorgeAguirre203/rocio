@@ -26,6 +26,12 @@ try {
 
     require_once('conexion_jorge.php');
 
+    // Si es un cliente, redirigir a su dashboard
+    if (isset($_SESSION['usuario'])) {
+        header("Location: dashboard_servicios.php");
+        exit;
+    }
+
     // Solo mostrar el afiliado logueado
     if (!isset($_SESSION['afiliado'])) {
         header("Location: login.php");
@@ -93,23 +99,18 @@ try {
             p.id_usuario,
             u.nombre, u.nickname, u.telefono, u.email, 
             u.calle, u.numero_casa, u.codigo_postal, u.estado as estado_dir, u.municipio, u.indicaciones,
-            c.estado as estado_cotizacion,
-            c.id as id_cotizacion,
+            MAX(c.estado) as estado_cotizacion,
+            MAX(c.id) as id_cotizacion,
             GROUP_CONCAT(DISTINCT s.nombre_servicio SEPARATOR ', ') as servicios_contratados,
             MAX(ct.tipo_cobro) as tipo_cobro
         FROM peticiones p
         INNER JOIN usuarios2 u ON p.id_usuario = u.id
-        LEFT JOIN cotizaciones c ON p.id_cotizacion = c.id
         LEFT JOIN contrataciones ct ON ct.id_peticion = p.id
         LEFT JOIN servicios s ON ct.id_servicio = s.id
+        LEFT JOIN cotizaciones c ON p.id = c.id_peticion
         WHERE p.id_afiliado = ? 
         AND p.estado = 'aceptada'
-        AND (
-            c.id IS NULL OR NOT EXISTS (
-                SELECT 1 FROM pagos pg 
-                WHERE pg.id_cotizacion = c.id AND pg.estado = 'completado'
-            )
-        )
+        AND (c.estado IS NULL OR c.estado != 'completada')
         GROUP BY p.id";
     $stmt3 = $conexion->prepare($sql_aceptadas);
     if (!$stmt3) {
@@ -149,6 +150,15 @@ try {
 
 } catch (Exception $e) {
     error_log("Error: " . $e->getMessage());
-    die("<h2>Error</h2><p>Ocurrió un problema al cargar el afiliado</p>");
+    // --- CAMBIO PARA DEPURACIÓN ---
+    // Muestra el error detallado en lugar del mensaje genérico.
+    echo "<h2>Error Detallado</h2>";
+    echo "<p>Ocurrió un problema al cargar el afiliado. El error real es:</p>";
+    echo "<pre style='background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; border: 1px solid #f5c6cb;'>";
+    echo "<strong>Mensaje:</strong> " . htmlspecialchars($e->getMessage()) . "\n";
+    echo "<strong>Archivo:</strong> " . htmlspecialchars($e->getFile()) . "\n";
+    echo "<strong>Línea:</strong> " . htmlspecialchars($e->getLine()) . "\n";
+    echo "</pre>";
+    die();
 }
 ?>

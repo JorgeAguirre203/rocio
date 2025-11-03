@@ -6,6 +6,12 @@ try {
         session_start();
     }
 
+    // Redirigir si es un afiliado
+    if (isset($_SESSION['afiliado'])) {
+        header("Location: afiliados.php");
+        exit;
+    }
+
     // Cargar Smarty
     require_once __DIR__.'/libs/Smarty.class.php';
     $smarty = new Smarty();

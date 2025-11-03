@@ -14,13 +14,17 @@ if (isset($_SESSION['usuario'])) {
     exit;
 }
 
+$error = null;
+$email_value = '';
+
 // Procesar formulario de login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $email_value = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 
     if (empty($email) || empty($password)) {
-        $smarty->assign('error', 'Por favor ingresa ambos campos');
+        $error = 'Por favor ingresa ambos campos';
     } else {
         // 1. Verificar si es admin
         $stmt_admin = $conexion->prepare("SELECT id, nombre, contrasena FROM admins WHERE nombre = ?");
@@ -41,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: loginAfiliados.php");
                 exit;
             } else {
-                $smarty->assign('error', 'Contraseña incorrecta');
+                $error = 'Correo o contraseña no coinciden';
             }
         } else {
             // 2. Si no es admin, buscar en usuarios2
@@ -63,11 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: dashboard_servicios.php");
                     exit;
                 } else {
-                    $smarty->assign('error', 'Contraseña incorrecta');
+                    $error = 'Correo o contraseña no coinciden';
                 }
             } else {
                 // 3. Si no está en usuarios2, buscar en usuarios (afiliados)
-                $stmt_afiliado = $conexion->prepare("SELECT id, nombre, apellido_paterno, apellido_materno, email, password, nickname FROM usuarios WHERE email = ?");
+                $stmt_afiliado = $conexion->prepare("SELECT id, nombre, apellido_paterno, apellido_materno, email, password, nickname, foto_perfil FROM usuarios WHERE email = ?");
                 $stmt_afiliado->bind_param("s", $email);
                 $stmt_afiliado->execute();
                 $resultado_afiliado = $stmt_afiliado->get_result();
@@ -82,29 +86,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             'apellido_paterno' => $afiliado['apellido_paterno'],
                             'apellido_materno' => $afiliado['apellido_materno'],
                             'nickname' => $afiliado['nickname'],
-                            'email' => $afiliado['email']
+                            'email' => $afiliado['email'],
+                            'foto_perfil' => $afiliado['foto_perfil']
                         ];
                         // Depuración: loguea el id del afiliado
                         error_log("Login afiliado: id=" . $afiliado['id']);
                         header("Location: afiliados.php");
                         exit;
                     } else {
-                        $smarty->assign('error', 'Contraseña incorrecta');
+                        $error = 'Correo o contraseña no coinciden';
                     }
                 } else {
-                    $smarty->assign('error', 'Usuario no encontrado');
+                    $error = 'Correo o contraseña no coinciden';
                 }
             }
         }
     }
-    // Mantener el correo en el campo si hay error
-    $smarty->assign('email_value', htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'));
 }
 
 // Asignar variables para la plantilla
-$smarty->assign('email_value', htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'));
-
 $smarty->assign([
+    'error' => $error,
+    'email_value' => $email_value,
     'page_title' => 'Iniciar Sesión',
     'logo_text' => 'Servi Now',
     'form_action' => 'login.php',
