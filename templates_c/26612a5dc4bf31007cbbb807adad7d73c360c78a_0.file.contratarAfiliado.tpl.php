@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-28 00:40:29
+/* Smarty version 3.1.39, created on 2025-11-03 21:00:01
   from '/var/www/html/rocio/templates/contratarAfiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690010fd864793_34855345',
+  'unifunc' => 'content_690917d1352374_92578822',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '26612a5dc4bf31007cbbb807adad7d73c360c78a' => 
     array (
       0 => '/var/www/html/rocio/templates/contratarAfiliado.tpl',
-      1 => 1761612027,
+      1 => 1762203599,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690010fd864793_34855345 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690917d1352374_92578822 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -67,28 +67,7 @@ function content_690010fd864793_34855345 (Smarty_Internal_Template $_smarty_tpl)
             .info-grid { grid-template-columns: 1fr; }
         }
 /* Encabezado y menú lateral afiliado */
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #222;
-        color: #fff;
-        padding: 15px 30px;
-    }
-    .header h1 {
-        margin: 0;
-        font-size: 1.5em;
-        margin-left: 40px;
-    }
-    .menu-button {
-        background: #444;
-        color: #fff;
-        border: none;
-        font-size: 1.5em;
-        border-radius: 5px;
-        padding: 5px 12px;
-        cursor: pointer;
-    }
+
     .sidebar {
         position: fixed;
         top: 0;

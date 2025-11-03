@@ -257,10 +257,8 @@
                                         </form>
                                     {elseif $peticion.estado_cotizacion == 'pendiente'}
                                         <span style="color: orange; font-weight: bold;">Pago pendiente</span>
-                                        <form method="get" action="crear_cotizacion.php" style="display:inline;">
-                                            <input type="hidden" name="id_cotizacion" value="{$peticion.id_cotizacion|default:''}">
-                                            <button type="submit">Editar cotización</button>
-                                        </form>
+                                        {* El botón de editar solo aparece si es un cobro por hora *}
+
                                     {/if}
                                 </li>
                             {/if}

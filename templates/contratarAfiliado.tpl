@@ -44,28 +44,7 @@
             .info-grid { grid-template-columns: 1fr; }
         }
 /* Encabezado y menú lateral afiliado */
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #222;
-        color: #fff;
-        padding: 15px 30px;
-    }
-    .header h1 {
-        margin: 0;
-        font-size: 1.5em;
-        margin-left: 40px;
-    }
-    .menu-button {
-        background: #444;
-        color: #fff;
-        border: none;
-        font-size: 1.5em;
-        border-radius: 5px;
-        padding: 5px 12px;
-        cursor: pointer;
-    }
+
     .sidebar {
         position: fixed;
         top: 0;

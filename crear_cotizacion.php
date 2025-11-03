@@ -64,11 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->fetch();
     $stmt->close();
     
+    $total = 0; // Inicializar el total
+
     if ($tipo_cobro === 'por_hora') {
         $es_por_hora = true;
         $total = $horas * $precio_hora;
     } else {
-        // Calcular total automático para servicios fijos
         $sql = "SELECT s.nombre_servicio, s.precio
                 FROM contrataciones c
                 INNER JOIN servicios s ON c.id_servicio = s.id
@@ -76,48 +77,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("i", $peticion_id);
         $stmt->execute();
-        $result = $stmt->get_result();
-        $total_servicios = 0;
-        while ($row = $result->fetch_assoc()) {
-            $total_servicios += $row['precio'];
+        $result_servicios = $stmt->get_result();
+        while ($row_servicio = $result_servicios->fetch_assoc()) {
+            $total += $row_servicio['precio'];
         }
         $stmt->close();
-
-        // Calcular distancia
-        $sql = "SELECT u2.latitud as lat_cliente, u2.longitud as lon_cliente, u.latitud as lat_afiliado, u.longitud as lon_afiliado
-                FROM peticiones p
-                INNER JOIN usuarios2 u2 ON p.id_usuario = u2.id
-                INNER JOIN usuarios u ON p.id_afiliado = u.id
-                WHERE p.id = ?";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("i", $peticion_id);
-        $stmt->execute();
-        $stmt->bind_result($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
-        $stmt->fetch();
-        $stmt->close();
-
-        // Función Haversine
-        function haversine($lat1, $lon1, $lat2, $lon2) {
-            $R = 6371;
-            $dLat = deg2rad($lat2 - $lat1);
-            $dLon = deg2rad($lon2 - $lon1);
-            $a = sin($dLat/2) * sin($dLat/2) +
-                 cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
-                 sin($dLon/2) * sin($dLon/2);
-            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-            return $R * $c;
-        }
-
-        $distancia_km = 0;
-        if ($lat_cliente && $lon_cliente && $lat_afiliado && $lon_afiliado) {
-            $distancia_km = haversine($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
-        }
-        $costo_km = 20;
-        $total_distancia = $distancia_km * $costo_km;
-
-        // Total final para servicios fijos
-        $total = $total_servicios + $total_distancia;
     }
+
+    // --- CÁLCULO DE DISTANCIA (se ejecuta para ambos tipos de cobro) ---
+    $sql_dist = "SELECT u2.latitud as lat_cliente, u2.longitud as lon_cliente, u.latitud as lat_afiliado, u.longitud as lon_afiliado
+            FROM peticiones p
+            INNER JOIN usuarios2 u2 ON p.id_usuario = u2.id
+            INNER JOIN usuarios u ON p.id_afiliado = u.id
+            WHERE p.id = ?";
+    $stmt_dist = $conexion->prepare($sql_dist);
+    $stmt_dist->bind_param("i", $peticion_id);
+    $stmt_dist->execute();
+    $stmt_dist->bind_result($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
+    $stmt_dist->fetch();
+    $stmt_dist->close();
+
+    // Función Haversine para calcular distancia
+    function haversine($lat1, $lon1, $lat2, $lon2) {
+        $R = 6371; // Radio de la Tierra en km
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+        $a = sin($dLat/2) * sin($dLat/2) +
+             cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+             sin($dLon/2) * sin($dLon/2);
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        return $R * $c;
+    }
+
+    $distancia_km = 0;
+    if ($lat_cliente && $lon_cliente && $lat_afiliado && $lon_afiliado) {
+        $distancia_km = haversine($lat_cliente, $lon_cliente, $lat_afiliado, $lon_afiliado);
+    }
+    $costo_km = 20; // Costo por kilómetro
+    $total_distancia = $distancia_km * $costo_km;
+
+    // Sumar el costo de la distancia al total
+    $total += $total_distancia;
 
     // --- Si es edición, actualiza la cotización ---
     if (isset($_POST['id_cotizacion']) && $_POST['id_cotizacion']) {
@@ -141,8 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     // Insertar cotización
-    $stmt = $conexion->prepare("INSERT INTO cotizaciones (id_usuario, id_afiliado, servicio, horas, detalles, precio_hora, total, estado) VALUES (?, ?, ?, ?, ?, ?, ?, 'pendiente')");
-    $stmt->bind_param("iisdsdd", $id_usuario, $id_afiliado, $servicio, $horas, $detalles, $precio_hora, $total);
+    $stmt = $conexion->prepare("INSERT INTO cotizaciones (id_usuario, id_afiliado, id_peticion, servicio, horas, detalles, precio_hora, total, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')");
+    $stmt->bind_param("iiisdsdd", $id_usuario, $id_afiliado, $peticion_id, $servicio, $horas, $detalles, $precio_hora, $total);
     $stmt->execute();
     if ($stmt->error) {
         die("Error MySQL: " . $stmt->error);
@@ -175,49 +175,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $stmt->close();
     
-    // También es buena idea corregir aceptar_peticion.php para que sea consistente
-    // Aunque el cambio principal es el de arriba, esto hace el sistema más robusto.
-    // (Este cambio se aplicaría en aceptar_peticion.php)
 
     header("Location: afiliados.php");
     exit;
 }
 
-// Si no es edición, asigna peticion_id desde GET
-if (!$editando) {
+// --- LÓGICA PARA MOSTRAR EL FORMULARIO (GET REQUEST) ---
+
+$peticion_id = 0;
+if ($editando) {
+    // Si estamos editando, el peticion_id viene de la cotización guardada
+    $peticion_id = $datos_cotizacion['id_peticion'] ?? 0;
+} else {
+    // Si es nuevo, viene del URL
     $peticion_id = isset($_GET['peticion_id']) ? intval($_GET['peticion_id']) : 0;
-    $smarty->assign('peticion_id', $peticion_id);
-    $es_por_hora = false;
-    $stmt = $conexion->prepare("SELECT tipo_cobro FROM contrataciones WHERE id_peticion = ? LIMIT 1");
-    $stmt->bind_param("i", $peticion_id);
-    $stmt->execute();
-    $stmt->bind_result($tipo_cobro);
-    $stmt->fetch();
-    $stmt->close();
-    if ($tipo_cobro === 'por_hora') {
+}
+$smarty->assign('peticion_id', $peticion_id);
+
+// --- LÓGICA PARA MOSTRAR EL FORMULARIO (GET REQUEST) ---
+
+$es_por_hora = false; // Por defecto, no es por hora
+
+if ($editando) {
+    // Si estamos editando, es por hora si la cotización tiene un precio_hora > 0
+    if (isset($datos_cotizacion['precio_hora']) && $datos_cotizacion['precio_hora'] > 0) {
         $es_por_hora = true;
     }
-    $smarty->assign('es_por_hora', $es_por_hora);
-
-    // Si es por hora, obtener el precio por hora de la especialidad
-    if ($es_por_hora) {
-        $stmt = $conexion->prepare("SELECT ph.precio_hora 
-            FROM precios_hora ph
-            INNER JOIN especialidades e ON ph.id_especialidad = e.id
-            WHERE e.nombre = ?");
-        $stmt->bind_param("s", $servicio_afiliado);
-        $stmt->execute();
-        $stmt->bind_result($precio_hora_especialidad);
-        $stmt->fetch();
-        $stmt->close();
-        $smarty->assign('precio_hora_especialidad', $precio_hora_especialidad);
+} elseif ($peticion_id > 0) {
+    // Si es una nueva cotización, verificamos el tipo de cobro de la petición
+    $stmt_tipo = $conexion->prepare("SELECT tipo_cobro FROM contrataciones WHERE id_peticion = ? LIMIT 1");
+    $stmt_tipo->bind_param("i", $peticion_id);
+    $stmt_tipo->execute();
+    $stmt_tipo->bind_result($tipo_cobro);
+    if ($stmt_tipo->fetch() && $tipo_cobro === 'por_hora') {
+        $es_por_hora = true;
     }
+    $stmt_tipo->close();
+}
 
-    // --- PON AQUÍ EL CÓDIGO DE COTIZACIÓN AUTOMÁTICA ---
+// Si es por hora (nuevo o editando), obtenemos el precio de la especialidad
+if ($es_por_hora && !$editando) {
+    $stmt_precio = $conexion->prepare("SELECT ph.precio_hora FROM precios_hora ph JOIN especialidades e ON ph.id_especialidad = e.id WHERE e.nombre = ?");
+    $stmt_precio->bind_param("s", $servicio_afiliado);
+    $stmt_precio->execute();
+    $stmt_precio->bind_result($precio_hora_especialidad);
+    $stmt_precio->fetch();
+    $stmt_precio->close();
+    $smarty->assign('precio_hora_especialidad', $precio_hora_especialidad);
+}
 
-    if ($peticion_id) {
-        // 1. Obtener los servicios solicitados en la petición
-        $sql = "SELECT s.nombre_servicio, s.precio
+// Si NO es por hora, calculamos el desglose automático
+if (!$es_por_hora && $peticion_id > 0) {
+    $sql = "SELECT s.nombre_servicio, s.precio
                 FROM contrataciones c
                 INNER JOIN servicios s ON c.id_servicio = s.id
                 WHERE c.id_peticion = ?";
@@ -274,7 +283,7 @@ if (!$editando) {
         $smarty->assign('distancia_km', round($distancia_km, 2));
         $smarty->assign('total_distancia', round($total_distancia, 2));
         $smarty->assign('total_automatico', round($total_automatico, 2));
-    }
 }
+$smarty->assign('es_por_hora', $es_por_hora);
 
 $smarty->display('crear_cotizacion.tpl');

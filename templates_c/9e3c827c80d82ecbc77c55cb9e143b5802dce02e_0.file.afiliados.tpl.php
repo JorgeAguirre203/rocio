@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-30 03:54:17
+/* Smarty version 3.1.39, created on 2025-11-03 20:55:18
   from '/var/www/html/rocio/templates/afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6902e169231d56_55636527',
+  'unifunc' => 'content_690916b6b54164_63382628',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
     array (
       0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1761796450,
+      1 => 1762203316,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6902e169231d56_55636527 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690916b6b54164_63382628 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -338,11 +338,7 @@ echo (($tmp = @$_smarty_tpl->tpl_vars['peticion']->value['estado_dir'])===null||
                                         </form>
                                     <?php } elseif ($_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion'] == 'pendiente') {?>
                                         <span style="color: orange; font-weight: bold;">Pago pendiente</span>
-                                        <form method="get" action="crear_cotizacion.php" style="display:inline;">
-                                            <input type="hidden" name="id_cotizacion" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['peticion']->value['id_cotizacion'])===null||$tmp==='' ? '' : $tmp);?>
-">
-                                            <button type="submit">Editar cotización</button>
-                                        </form>
+                                        
                                     <?php }?>
                                 </li>
                             <?php }?>

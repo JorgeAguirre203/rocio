@@ -223,7 +223,30 @@
             width: 100%;
             text-decoration: none;
         }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
+        .btn-home-inicio {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #000000;
+            padding: 24px 50px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            font-size: 2.2em;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-home-inicio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
     </style>
 </head>
 <body>
@@ -242,7 +265,10 @@
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Afiliados Verificados</h1>
         <div class="header-actions">
-            <a href="index.php"><button>Inicio</button></a>
+            <a href="index.php" class="btn-home-inicio">
+                <span>🏠</span>
+                Inicio
+            </a>
             <!-- Campanita de notificaciones -->
             <div class="notificaciones-icono" onclick="toggleNotificaciones()" title="Notificaciones">
                 <span class="bell">&#128276;</span>

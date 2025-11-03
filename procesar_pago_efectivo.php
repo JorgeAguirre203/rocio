@@ -23,7 +23,7 @@ try {
     $stmt_pago->execute();
     
     // Actualizar estado de la cotización
-    $stmt_cot = $conexion->prepare("UPDATE cotizaciones SET estado = 'completada' WHERE id = ?");
+    $stmt_cot = $conexion->prepare("UPDATE cotizaciones SET estado = 'completado' WHERE id = ?");
     $stmt_cot->bind_param("i", $id_cotizacion);
     $stmt_cot->execute();
 

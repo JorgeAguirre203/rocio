@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-28 01:13:58
+/* Smarty version 3.1.39, created on 2025-11-03 20:41:11
   from '/var/www/html/rocio/templates/direccion_afiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690018d67fdf56_68422490',
+  'unifunc' => 'content_690913673a20a2_30703750',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8c11d293294600aa4d0e671f31269f3fe7a26642' => 
     array (
       0 => '/var/www/html/rocio/templates/direccion_afiliado.tpl',
-      1 => 1761614036,
+      1 => 1762202469,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690018d67fdf56_68422490 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690913673a20a2_30703750 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,7 +84,7 @@ function content_690018d67fdf56_68422490 (Smarty_Internal_Template $_smarty_tpl)
             </div>
             
             <button type="submit">Guardar dirección</button>
-            <a href="dashboard_servicios.php">
+            <a href="afiliados.php">
                 <button type="button" class="button-secondary">Cancelar y salir</button>
             </a>
         </form>

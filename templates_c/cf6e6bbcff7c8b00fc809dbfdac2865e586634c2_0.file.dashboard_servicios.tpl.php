@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-28 21:29:41
+/* Smarty version 3.1.39, created on 2025-11-03 20:29:11
   from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690135c5b07389_78916106',
+  'unifunc' => 'content_690910971aa700_58749862',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
     array (
       0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1761686979,
+      1 => 1762201749,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690135c5b07389_78916106 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690910971aa700_58749862 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -249,7 +249,30 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
             width: 100%;
             text-decoration: none;
         }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
+        .btn-home-inicio {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #000000;
+            padding: 24px 50px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            font-size: 2.2em;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-home-inicio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
     </style>
 </head>
 <body>
@@ -268,7 +291,10 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plu
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Afiliados Verificados</h1>
         <div class="header-actions">
-            <a href="index.php"><button>Inicio</button></a>
+            <a href="index.php" class="btn-home-inicio">
+                <span>🏠</span>
+                Inicio
+            </a>
             <!-- Campanita de notificaciones -->
             <div class="notificaciones-icono" onclick="toggleNotificaciones()" title="Notificaciones">
                 <span class="bell">&#128276;</span>

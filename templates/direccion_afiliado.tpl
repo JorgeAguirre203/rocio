@@ -54,7 +54,7 @@
             </div>
             
             <button type="submit">Guardar dirección</button>
-            <a href="dashboard_servicios.php">
+            <a href="afiliados.php">
                 <button type="button" class="button-secondary">Cancelar y salir</button>
             </a>
         </form>
