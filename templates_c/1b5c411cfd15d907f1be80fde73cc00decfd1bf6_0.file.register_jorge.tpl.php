@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-06-11 23:57:29
-  from '/var/www/html/rocio/templates/register_jorge.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 23:45:25
+  from 'C:\xampp\htdocs\rocio\templates\register_jorge.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_684a17e9a82372_80956535',
+  'unifunc' => 'content_690fc805cf8700_70550560',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '1b2d37f10f75de8d40a5bf09ecd37f227c3fba5b' => 
+    '1b5c411cfd15d907f1be80fde73cc00decfd1bf6' => 
     array (
-      0 => '/var/www/html/rocio/templates/register_jorge.tpl',
-      1 => 1749686198,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\register_jorge.tpl',
+      1 => 1762641910,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_684a17e9a82372_80956535 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690fc805cf8700_70550560 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -202,18 +202,19 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 " required>
 
       <label for="telefono">Teléfono:</label>
-
-      <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['form_data']->value['telefono'], ENT_QUOTES, 'UTF-8', true);?>
-" required>
-      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
+      <input type="text" id="telefono" name="telefono" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['telefono'])===null||$tmp==='' ? '' : $tmp);?>
+" maxlength="10" required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten 10 dígitos</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['email'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
+      <div id="email-error" class="error-message">Formato de correo electrónico inválido</div>
 
       <label for="email_confirm">Confirmar Correo electrónico:</label>
       <input type="email" id="email_confirm" name="email_confirm" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['email_confirm'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
+      <div id="email-confirm-error" class="error-message">Los correos electrónicos no coinciden</div>
 
       <label for="password">Contraseña:</label>
       <div class="password-container">
@@ -310,7 +311,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       });
     });
 
-    // Validación en tiempo real para teléfono (solo números)
+    // Validación en tiempo real para teléfono (solo números y máximo 10 dígitos)
     const telInput = document.getElementById('telefono');
     const telError = document.getElementById('telefono-error');
     telInput.addEventListener('input', function() {
@@ -319,10 +320,65 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         this.classList.add('input-error');
         telError.style.display = 'block';
         this.value = this.value.replace(/[^0-9]/g, '');
+      } else if (this.value.length > 10) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.slice(0, 10);
       } else {
         this.classList.remove('input-error');
         telError.style.display = 'none';
       }
+    });
+
+    // Validación de formato de email
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    emailInput.addEventListener('blur', function() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (this.value && !emailRegex.test(this.value)) {
+        this.classList.add('input-error');
+        emailError.style.display = 'block';
+      } else {
+        this.classList.remove('input-error');
+        emailError.style.display = 'none';
+      }
+    });
+
+    // Validación en tiempo real para confirmación de email
+    const emailConfirmInput = document.getElementById('email_confirm');
+    const emailConfirmError = document.getElementById('email-confirm-error');
+    emailConfirmInput.addEventListener('input', function() {
+      if (this.value !== emailInput.value) {
+        this.classList.add('input-error');
+        emailConfirmError.style.display = 'block';
+      } else {
+        this.classList.remove('input-error');
+        emailConfirmError.style.display = 'none';
+      }
+    });
+
+    // Función para verificar si el email está completo
+    function isEmailComplete() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailInput.value && emailRegex.test(emailInput.value) && emailInput.value === emailConfirmInput.value;
+    }
+
+    // Prevenir avanzar a campos posteriores si email no está completo
+    const fieldsAfterEmail = ['password', 'confirm-password', 'especialidad', 'foto_perfil', 'ine_frente', 'ine_reverso'];
+    fieldsAfterEmail.forEach(fieldId => {
+      document.getElementById(fieldId).addEventListener('focus', function() {
+        if (!isEmailComplete()) {
+          if (emailInput.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailInput.value)) {
+            emailInput.focus();
+            emailInput.classList.add('input-error');
+            emailError.style.display = 'block';
+          } else {
+            emailConfirmInput.focus();
+            emailConfirmInput.classList.add('input-error');
+            emailConfirmError.style.display = 'block';
+          }
+        }
+      });
     });
 
     // Función para mostrar vista previa de imágenes
@@ -348,10 +404,31 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     document.getElementById('ine_reverso').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'ine_reverso_preview');
     });
+
+    // Validación en submit del formulario
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput.value && !emailRegex.test(emailInput.value)) {
+        e.preventDefault();
+        emailInput.classList.add('input-error');
+        emailError.style.display = 'block';
+      }
+      if (emailInput.value !== emailConfirmInput.value) {
+        e.preventDefault();
+        emailConfirmInput.classList.add('input-error');
+        emailConfirmError.style.display = 'block';
+      }
+      if (telInput.value.length !== 10) {
+        e.preventDefault();
+        telInput.classList.add('input-error');
+        telError.style.display = 'block';
+      }
+    });
   });
   <?php echo '</script'; ?>
 >
   
 </body>
-</html><?php }
+</html>
+<?php }
 }

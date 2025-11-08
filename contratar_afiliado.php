@@ -26,6 +26,7 @@ if ($id_afiliado > 0) {
         $stmt = $conexion->prepare("INSERT INTO peticiones (id_usuario, id_afiliado, estado) VALUES (?, ?, 'pendiente')");
         $stmt->bind_param("ii", $id_usuario, $id_afiliado);
         $stmt->execute();
+        $peticion_id = $stmt->insert_id; // <-- OBTENER EL ID DE LA PETICIÓN
         $stmt->close();
 
         // Obtener el nombre del afiliado
@@ -41,8 +42,8 @@ if ($id_afiliado > 0) {
         $stmt->close();
         // Insertar notificación para el cliente
         $mensaje = "Has contratado a este afiliado ($nombre_completo_afiliado), esperando a que el afiliado le cotice.";
-        $stmt = $conexion->prepare("INSERT INTO notificaciones (id_usuario, mensaje, leida) VALUES (?, ?, 0)");
-        $stmt->bind_param("is", $id_usuario, $mensaje);
+        $stmt = $conexion->prepare("INSERT INTO notificaciones (id_usuario, mensaje, leida, id_peticion) VALUES (?, ?, 0, ?)");
+        $stmt->bind_param("isi", $id_usuario, $mensaje, $peticion_id); // <-- AÑADIR EL ID DE LA PETICIÓN
         $stmt->execute();
         if ($stmt->affected_rows > 0) {
             error_log("Notificación insertada correctamente para usuario $id_usuario");

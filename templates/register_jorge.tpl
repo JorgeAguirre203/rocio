@@ -162,15 +162,16 @@
       <input type="text" id="nickname" name="nickname" value="{$form_data.nickname|default:''}" required>
 
       <label for="telefono">Teléfono:</label>
-
-      <input type="text" id="telefono" name="telefono" value="{$form_data.telefono|escape:'html'}" required>
-      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
+      <input type="text" id="telefono" name="telefono" value="{$form_data.telefono|default:''}" maxlength="10" required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten 10 dígitos</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="{$form_data.email|default:''}" required>
+      <div id="email-error" class="error-message">Formato de correo electrónico inválido</div>
 
       <label for="email_confirm">Confirmar Correo electrónico:</label>
       <input type="email" id="email_confirm" name="email_confirm" value="{$form_data.email_confirm|default:''}" required>
+      <div id="email-confirm-error" class="error-message">Los correos electrónicos no coinciden</div>
 
       <label for="password">Contraseña:</label>
       <div class="password-container">
@@ -256,7 +257,7 @@
       });
     });
 
-    // Validación en tiempo real para teléfono (solo números)
+    // Validación en tiempo real para teléfono (solo números y máximo 10 dígitos)
     const telInput = document.getElementById('telefono');
     const telError = document.getElementById('telefono-error');
     telInput.addEventListener('input', function() {
@@ -265,10 +266,66 @@
         this.classList.add('input-error');
         telError.style.display = 'block';
         this.value = this.value.replace(/[^0-9]/g, '');
+      } else if (this.value.length > 10) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.slice(0, 10);
       } else {
         this.classList.remove('input-error');
         telError.style.display = 'none';
       }
+    });
+
+    // Validación de formato de email
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    emailInput.addEventListener('blur', function() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (this.value && !emailRegex.test(this.value)) {
+        this.classList.add('input-error');
+        emailError.style.display = 'block';
+      } else {
+        this.classList.remove('input-error');
+        emailError.style.display = 'none';
+      }
+    });
+
+    // Validación en tiempo real para confirmación de email
+    const emailConfirmInput = document.getElementById('email_confirm');
+    const emailConfirmError = document.getElementById('email-confirm-error');
+    emailConfirmInput.addEventListener('input', function() {
+      if (this.value !== emailInput.value) {
+        this.classList.add('input-error');
+        emailConfirmError.style.display = 'block';
+      } else {
+        this.classList.remove('input-error');
+        emailConfirmError.style.display = 'none';
+      }
+    });
+
+    // Función para verificar si el email está completo
+    function isEmailComplete() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailInput.value && emailRegex.test(emailInput.value) && emailInput.value === emailConfirmInput.value;
+    }
+
+    // Prevenir avanzar a campos posteriores si email no está completo
+    const fieldsAfterEmail = ['password', 'confirm-password', 'especialidad', 'foto_perfil', 'ine_frente', 'ine_reverso'];
+    fieldsAfterEmail.forEach(fieldId => {
+      document.getElementById(fieldId).addEventListener('focus', function() {
+        if (!isEmailComplete()) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (emailInput.value && !emailRegex.test(emailInput.value)) {
+            emailInput.focus();
+            emailInput.classList.add('input-error');
+            emailError.style.display = 'block';
+          } else {
+            emailConfirmInput.focus();
+            emailConfirmInput.classList.add('input-error');
+            emailConfirmError.style.display = 'block';
+          }
+        }
+      });
     });
 
     // Función para mostrar vista previa de imágenes
@@ -293,6 +350,26 @@
     });
     document.getElementById('ine_reverso').addEventListener('change', function() {
       mostrarVistaPrevia(this, 'ine_reverso_preview');
+    });
+
+    // Validación en submit del formulario
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput.value && !emailRegex.test(emailInput.value)) {
+        e.preventDefault();
+        emailInput.classList.add('input-error');
+        emailError.style.display = 'block';
+      }
+      if (emailInput.value !== emailConfirmInput.value) {
+        e.preventDefault();
+        emailConfirmInput.classList.add('input-error');
+        emailConfirmError.style.display = 'block';
+      }
+      if (telInput.value.length !== 10) {
+        e.preventDefault();
+        telInput.classList.add('input-error');
+        telError.style.display = 'block';
+      }
     });
   });
   </script>

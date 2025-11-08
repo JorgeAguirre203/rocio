@@ -112,6 +112,7 @@ try {
         'page_title' => 'Afiliados Verificados',
         'nombre' => htmlspecialchars($_SESSION['usuario']['nombre'] ?? 'Usuario'),
         'nickname' => htmlspecialchars($_SESSION['usuario']['nickname'] ?? 'Invitado'),
+        'id_usuario' => $id_usuario,
         'servicios' => $servicios,
         'categorias' => [
             ['id' => 'albanileria', 'nombre' => 'Albañilería', 'checked' => true],
@@ -124,16 +125,6 @@ try {
             3 => '3 estrellas o más',
             4 => '4 estrellas o más',
             5 => 'Solo 5 estrellas'
-        ],
-        'opciones_precio' => [
-            0 => 'Cualquier precio',
-            1 => '$ - Económico',
-            2 => '$$ - Medio',
-            3 => '$$$ - Alto'
-        ],
-        'disponibilidades' => [
-            ['id' => 'hoy', 'nombre' => 'Disponible hoy', 'checked' => false],
-            ['id' => 'semana', 'nombre' => 'Esta semana', 'checked' => false]
         ]
     ]);
 

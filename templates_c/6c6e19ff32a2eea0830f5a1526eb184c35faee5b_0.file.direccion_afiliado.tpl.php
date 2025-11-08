@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-03 20:41:11
-  from '/var/www/html/rocio/templates/direccion_afiliado.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 05:01:55
+  from 'C:\xampp\htdocs\rocio\templates\direccion_afiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690913673a20a2_30703750',
+  'unifunc' => 'content_690ec0b3212308_64440087',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '8c11d293294600aa4d0e671f31269f3fe7a26642' => 
+    '6c6e19ff32a2eea0830f5a1526eb184c35faee5b' => 
     array (
-      0 => '/var/www/html/rocio/templates/direccion_afiliado.tpl',
-      1 => 1762202469,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\direccion_afiliado.tpl',
+      1 => 1762469278,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690913673a20a2_30703750 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690ec0b3212308_64440087 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>

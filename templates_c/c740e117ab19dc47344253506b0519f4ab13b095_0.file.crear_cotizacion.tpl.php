@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-10-30 04:23:50
-  from '/var/www/html/rocio/templates/crear_cotizacion.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 06:11:42
+  from 'C:\xampp\htdocs\rocio\templates\crear_cotizacion.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6902e856f1d137_19766738',
+  'unifunc' => 'content_690ed10ea343e4_06997479',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'af44e86e58be907a9c98030948d3534e367d1b6d' => 
+    'c740e117ab19dc47344253506b0519f4ab13b095' => 
     array (
-      0 => '/var/www/html/rocio/templates/crear_cotizacion.tpl',
-      1 => 1761798229,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\crear_cotizacion.tpl',
+      1 => 1762578620,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6902e856f1d137_19766738 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690ed10ea343e4_06997479 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -178,7 +178,7 @@ function content_6902e856f1d137_19766738 (Smarty_Internal_Template $_smarty_tpl)
 </head>
 <body>
     <div class="form-container">
-        <h2><?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['id']) {?>Editar Cotización<?php } else { ?>Crear Nueva Cotización<?php }?></h2>
+        <h2><?php if ((($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['id'])===null||$tmp==='' ? '' : $tmp)) {?>Editar Cotización<?php } else { ?>Crear Nueva Cotización<?php }?></h2>
                 <?php if (count($_smarty_tpl->tpl_vars['servicios_solicitados']->value) > 0) {?>
             <div class="form-group">
                 <label>Servicios solicitados:</label>
@@ -253,7 +253,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                 </div>
             <?php }?>
             
-            <button type="submit"><?php if ($_smarty_tpl->tpl_vars['cotizacion']->value['id']) {?>Actualizar cotización<?php } else { ?>Guardar y continuar a pago<?php }?></button>
+            <button type="submit"><?php if ((($tmp = @$_smarty_tpl->tpl_vars['cotizacion']->value['id'])===null||$tmp==='' ? '' : $tmp)) {?>Actualizar cotización<?php } else { ?>Guardar y continuar a pago<?php }?></button>
         </form>
     </div>
 

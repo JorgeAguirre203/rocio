@@ -804,28 +804,6 @@
                 {html_options options=$opciones_estrellas}
             </select>
         </div>
-        
-        <div class="filtro-bloque">
-            <h4>Precio estimado</h4>
-            <select id="filtro-precio" class="filtro-select">
-                {html_options options=$opciones_precio}
-            </select>
-        </div>
-        
-        <div class="filtro-bloque">
-            <h4>Disponibilidad</h4>
-            <ul>
-                {foreach $disponibilidades as $disp}
-                <li>
-                    <input type="checkbox" id="disp_{$disp.id|escape:'html'}" 
-                           class="filtro-disponibilidad"
-                           data-dia="{$disp.id|escape:'html'}"
-                           {if $disp.checked}checked{/if}>
-                    <label for="disp_{$disp.id|escape:'html'}">{$disp.nombre|escape:'html'}</label>
-                </li>
-                {/foreach}
-            </ul>
-        </div>
     </div>
 
     <!-- Contenido principal -->
@@ -935,36 +913,26 @@
         // Sistema de filtros
         document.addEventListener('DOMContentLoaded', function() {
             // Configurar eventos para los filtros
-            document.querySelectorAll('.filtro-categoria, .filtro-disponibilidad').forEach(checkbox => {
+            document.querySelectorAll('.filtro-categoria').forEach(checkbox => {
                 checkbox.addEventListener('change', aplicarFiltros);
             });
             
             document.getElementById('filtro-estrellas').addEventListener('change', aplicarFiltros);
-            document.getElementById('filtro-precio').addEventListener('change', aplicarFiltros);
         });
         
         function aplicarFiltros() {
             const categoriasActivas = Array.from(document.querySelectorAll('.filtro-categoria:checked'))
                 .map(cb => cb.dataset.categoria);
             const estrellasMin = parseInt(document.getElementById('filtro-estrellas').value);
-            const precioNivel = parseInt(document.getElementById('filtro-precio').value);
-            const disponibilidadDias = Array.from(document.querySelectorAll('.filtro-disponibilidad:checked'))
-                .map(cb => cb.dataset.dia);
-            
             
             document.querySelectorAll('.client-card').forEach(servicio => {
                 const especialidad = servicio.dataset.especialidad;
                 const estrellas = parseInt(servicio.dataset.estrellas);
-                const precio = parseInt(servicio.dataset.precio);
-                const disponibilidad = servicio.dataset.disponibilidad;
                 
                 const cumpleCategoria = categoriasActivas.length === 0 || categoriasActivas.includes(especialidad);
                 const cumpleEstrellas = estrellas >= estrellasMin;
-                const cumplePrecio = precioNivel === 0 || precio === precioNivel;
-                const cumpleDisponibilidad = disponibilidadDias.length === 0 || 
-                    disponibilidadDias.some(d => disponibilidad.includes(d));
                 
-                servicio.style.display = (cumpleCategoria && cumpleEstrellas && cumplePrecio && cumpleDisponibilidad) 
+                servicio.style.display = (cumpleCategoria && cumpleEstrellas) 
                     ? 'block' : 'none';
             });
         }

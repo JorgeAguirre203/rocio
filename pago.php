@@ -232,22 +232,34 @@ $nombre_usuario = $_SESSION['usuario']['nombre'] ?? 'Usuario';
             <p><strong>Total:</strong> $<?= number_format($cotizacion['total'], 2) ?> MXN</p>
         </div>
 
-       <div class="payment-option">
-         <h3>Pago con PayPal</h3>
-         <div class="form-group">
-        <label for="comentario_paypal">Comentarios adicionales:</label>
-        <label for="comentario_paypal">(Es necesario ingresar un comentario para poder continuar)</label>
-        <textarea id="comentario_paypal" placeholder="Ej. Horario preferido, instrucciones, etc."></textarea>
-        <small id="comentario_paypal_aviso" style="color: #dc3545; display: none;">
-            * Debes escribir un comentario para continuar con el pago.
-        </small>
+        <?php if (!isset($_GET['metodo'])): ?>
+        <div class="payment-method-choice">
+            <h2>Selecciona Método de Pago</h2>
+            <form action="pago.php" method="get">
+                <input type="hidden" name="id_cotizacion" value="<?= $id_cotizacion ?>">
+                <div class="form-group">
+                    <label><input type="radio" name="metodo" value="efectivo" required> Pago en Efectivo</label><br>
+                    <label><input type="radio" name="metodo" value="tarjeta" required> Pago con Tarjeta (PayPal)</label><br>
+                </div>
+                <button type="submit" class="btn">Proceder Pago</button>
+            </form>
         </div>
-        <div id="paypal-button-container">
-        <p>Metodos de pago...</p>
-         </div>
+        <?php elseif ($_GET['metodo'] == 'tarjeta'): ?>
+        <div class="payment-option">
+            <h3>Pago con PayPal</h3>
+            <div class="form-group">
+                <label for="comentario_paypal">Comentarios adicionales:</label>
+                <label for="comentario_paypal">(Es necesario ingresar un comentario para poder continuar)</label>
+                <textarea id="comentario_paypal" placeholder="Ej. Horario preferido, instrucciones, etc."></textarea>
+                <small id="comentario_paypal_aviso" style="color: #dc3545; display: none;">
+                    * Debes escribir un comentario para continuar con el pago.
+                </small>
+            </div>
+            <div id="paypal-button-container">
+                <p>Metodos de pago...</p>
+            </div>
         </div>
-
-
+        <?php elseif ($_GET['metodo'] == 'efectivo'): ?>
         <div class="payment-option">
             <h3>Pago en efectivo</h3>
             <div class="cash-form">
@@ -273,11 +285,15 @@ $nombre_usuario = $_SESSION['usuario']['nombre'] ?? 'Usuario';
                 <strong>Nota:</strong> Al seleccionar pago en efectivo, deberás coordinar directamente con el prestador del servicio la forma y momento del pago.
             </div>
         </div>
+        <?php endif; ?>
 
         <div id="payment-status" class="status-message"></div>
     </div>
 
     <script>
+    if (!document.getElementById('paypal-button-container')) {
+        // No PayPal section, skip initialization
+    } else {
     function initPayPal() {
         try {
             if (typeof paypal === 'undefined') {
@@ -403,6 +419,7 @@ $nombre_usuario = $_SESSION['usuario']['nombre'] ?? 'Usuario';
             }
             paypalRetries++;
         }, 500);
+    }
     }
     </script>
 </body>

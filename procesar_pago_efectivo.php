@@ -22,10 +22,7 @@ try {
     $stmt_pago->bind_param("isds", $id_cotizacion, $idOrden, $total, $detalle);
     $stmt_pago->execute();
     
-    // Actualizar estado de la cotización
-    $stmt_cot = $conexion->prepare("UPDATE cotizaciones SET estado = 'completado' WHERE id = ?");
-    $stmt_cot->bind_param("i", $id_cotizacion);
-    $stmt_cot->execute();
+
 
     // Obtener id_usuario e id_afiliado de la cotización
     $stmt = $conexion->prepare("SELECT id_usuario, id_afiliado FROM cotizaciones WHERE id = ?");

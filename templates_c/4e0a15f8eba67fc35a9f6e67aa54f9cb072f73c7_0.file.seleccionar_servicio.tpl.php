@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-03 20:35:13
-  from '/var/www/html/rocio/templates/seleccionar_servicio.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 04:37:59
+  from 'C:\xampp\htdocs\rocio\templates\seleccionar_servicio.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690912018b7208_59056985',
+  'unifunc' => 'content_690ebb175326b5_85617393',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd676b5f018976b06e4111ffdd5a22521b6e98e3a' => 
+    '4e0a15f8eba67fc35a9f6e67aa54f9cb072f73c7' => 
     array (
-      0 => '/var/www/html/rocio/templates/seleccionar_servicio.tpl',
-      1 => 1762202110,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\seleccionar_servicio.tpl',
+      1 => 1762469278,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690912018b7208_59056985 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/modifier.capitalize.php','function'=>'smarty_modifier_capitalize',),));
+function content_690ebb175326b5_85617393 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\rocio\\libs\\plugins\\modifier.capitalize.php','function'=>'smarty_modifier_capitalize',),));
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-04 18:59:03
-  from '/var/www/html/rocio/templates/dashboard_servicios.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 23:16:28
+  from 'C:\xampp\htdocs\rocio\templates\dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690a4cf7828750_32661714',
+  'unifunc' => 'content_690fc13cd35956_80364135',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'cf6e6bbcff7c8b00fc809dbfdac2865e586634c2' => 
+    '6c69ced53b71c67d7d6c36a0a5bf42ff59479fa7' => 
     array (
-      0 => '/var/www/html/rocio/templates/dashboard_servicios.tpl',
-      1 => 1762282740,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\dashboard_servicios.tpl',
+      1 => 1762640184,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690a4cf7828750_32661714 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/var/www/html/rocio/libs/plugins/function.html_options.php','function'=>'smarty_function_html_options',),));
+function content_690fc13cd35956_80364135 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\rocio\\libs\\plugins\\function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -854,40 +854,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
             </select>
         </div>
-        
-        <div class="filtro-bloque">
-            <h4>Precio estimado</h4>
-            <select id="filtro-precio" class="filtro-select">
-                <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['opciones_precio']->value),$_smarty_tpl);?>
-
-            </select>
-        </div>
-        
-        <div class="filtro-bloque">
-            <h4>Disponibilidad</h4>
-            <ul>
-                <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['disponibilidades']->value, 'disp');
-$_smarty_tpl->tpl_vars['disp']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['disp']->value) {
-$_smarty_tpl->tpl_vars['disp']->do_else = false;
-?>
-                <li>
-                    <input type="checkbox" id="disp_<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'UTF-8', true);?>
-" 
-                           class="filtro-disponibilidad"
-                           data-dia="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'UTF-8', true);?>
-"
-                           <?php if ($_smarty_tpl->tpl_vars['disp']->value['checked']) {?>checked<?php }?>>
-                    <label for="disp_<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['id'], ENT_QUOTES, 'UTF-8', true);?>
-"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['disp']->value['nombre'], ENT_QUOTES, 'UTF-8', true);?>
-</label>
-                </li>
-                <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-            </ul>
-        </div>
     </div>
 
     <!-- Contenido principal -->
@@ -1019,36 +985,26 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         // Sistema de filtros
         document.addEventListener('DOMContentLoaded', function() {
             // Configurar eventos para los filtros
-            document.querySelectorAll('.filtro-categoria, .filtro-disponibilidad').forEach(checkbox => {
+            document.querySelectorAll('.filtro-categoria').forEach(checkbox => {
                 checkbox.addEventListener('change', aplicarFiltros);
             });
             
             document.getElementById('filtro-estrellas').addEventListener('change', aplicarFiltros);
-            document.getElementById('filtro-precio').addEventListener('change', aplicarFiltros);
         });
         
         function aplicarFiltros() {
             const categoriasActivas = Array.from(document.querySelectorAll('.filtro-categoria:checked'))
                 .map(cb => cb.dataset.categoria);
             const estrellasMin = parseInt(document.getElementById('filtro-estrellas').value);
-            const precioNivel = parseInt(document.getElementById('filtro-precio').value);
-            const disponibilidadDias = Array.from(document.querySelectorAll('.filtro-disponibilidad:checked'))
-                .map(cb => cb.dataset.dia);
-            
             
             document.querySelectorAll('.client-card').forEach(servicio => {
                 const especialidad = servicio.dataset.especialidad;
                 const estrellas = parseInt(servicio.dataset.estrellas);
-                const precio = parseInt(servicio.dataset.precio);
-                const disponibilidad = servicio.dataset.disponibilidad;
                 
                 const cumpleCategoria = categoriasActivas.length === 0 || categoriasActivas.includes(especialidad);
                 const cumpleEstrellas = estrellas >= estrellasMin;
-                const cumplePrecio = precioNivel === 0 || precio === precioNivel;
-                const cumpleDisponibilidad = disponibilidadDias.length === 0 || 
-                    disponibilidadDias.some(d => disponibilidad.includes(d));
                 
-                servicio.style.display = (cumpleCategoria && cumpleEstrellas && cumplePrecio && cumpleDisponibilidad) 
+                servicio.style.display = (cumpleCategoria && cumpleEstrellas) 
                     ? 'block' : 'none';
             });
         }
@@ -1085,5 +1041,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         }
     </style>
 </body>
-</html><?php }
+</html>
+<?php }
 }

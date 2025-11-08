@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-04 17:49:18
-  from '/var/www/html/rocio/templates/afiliados.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 04:38:20
+  from 'C:\xampp\htdocs\rocio\templates\afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690a3c9ef25788_18830464',
+  'unifunc' => 'content_690ebb2c3b6cb8_87284278',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '9e3c827c80d82ecbc77c55cb9e143b5802dce02e' => 
+    'a341e352fb3afae230b9df93089246cb81eec798' => 
     array (
-      0 => '/var/www/html/rocio/templates/afiliados.tpl',
-      1 => 1762277772,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\afiliados.tpl',
+      1 => 1762469278,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690a3c9ef25788_18830464 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690ebb2c3b6cb8_87284278 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>

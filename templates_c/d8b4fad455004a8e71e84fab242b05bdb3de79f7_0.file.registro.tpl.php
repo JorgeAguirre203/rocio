@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-06-12 00:21:06
-  from '/var/www/html/rocio/templates/registro.tpl' */
+/* Smarty version 3.1.39, created on 2025-11-08 23:58:47
+  from 'C:\xampp\htdocs\rocio\templates\registro.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_684a1d7216a5f1_08823273',
+  'unifunc' => 'content_690fcb273156e0_28099247',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '080c066fb008db83217617e101b8d1bf3ba2b632' => 
+    'd8b4fad455004a8e71e84fab242b05bdb3de79f7' => 
     array (
-      0 => '/var/www/html/rocio/templates/registro.tpl',
-      1 => 1749687664,
+      0 => 'C:\\xampp\\htdocs\\rocio\\templates\\registro.tpl',
+      1 => 1762642704,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_684a1d7216a5f1_08823273 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690fcb273156e0_28099247 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -171,12 +171,13 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
       <label for="telefono">Teléfono:</label>
       <input type="text" id="telefono" name="telefono" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['telefono'])===null||$tmp==='' ? '' : $tmp);?>
-" required>
-      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten números</div>
+" maxlength="10" required>
+      <div id="telefono-error" class="error-message" style="display:none;color:red;font-size:0.9em;">Solo se permiten 10 dígitos</div>
 
       <label for="email">Correo electrónico:</label>
       <input type="email" id="email" name="email" value="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['form_data']->value['email'])===null||$tmp==='' ? '' : $tmp);?>
 " required>
+      <div id="email-error" class="error-message">Formato de correo electrónico inválido</div>
 
       <label for="password">Contraseña:</label>
       <div class="password-container">
@@ -241,7 +242,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       }
     });
 
-    // Validación en tiempo real para teléfono (solo números)
+    // Validación en tiempo real para teléfono (solo números y máximo 10 dígitos)
     const telInput = document.getElementById('telefono');
     const telError = document.getElementById('telefono-error');
     telInput.addEventListener('input', function() {
@@ -250,9 +251,60 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         this.classList.add('input-error');
         telError.style.display = 'block';
         this.value = this.value.replace(/[^0-9]/g, '');
+      } else if (this.value.length > 10) {
+        this.classList.add('input-error');
+        telError.style.display = 'block';
+        this.value = this.value.slice(0, 10);
       } else {
         this.classList.remove('input-error');
         telError.style.display = 'none';
+      }
+    });
+
+    // Validación de formato de email
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emailInput.addEventListener('blur', function() {
+      if (this.value && !emailRegex.test(this.value)) {
+        this.classList.add('input-error');
+        emailError.style.display = 'block';
+      } else {
+        this.classList.remove('input-error');
+        emailError.style.display = 'none';
+      }
+    });
+
+    // Prevenir tabulación si email no es válido
+    emailInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab' && this.value && !emailRegex.test(this.value)) {
+        e.preventDefault();
+      }
+    });
+
+    // Prevenir avanzar a campos posteriores si email no es válido
+    const fieldsAfterEmail = ['password', 'confirm-password'];
+    fieldsAfterEmail.forEach(fieldId => {
+      document.getElementById(fieldId).addEventListener('focus', function() {
+        if (emailInput.value && !emailRegex.test(emailInput.value)) {
+          emailInput.focus();
+          emailInput.classList.add('input-error');
+          emailError.style.display = 'block';
+        }
+      });
+    });
+
+    // Validación en submit del formulario
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+      if (emailInput.value && !emailRegex.test(emailInput.value)) {
+        e.preventDefault();
+        emailInput.classList.add('input-error');
+        emailError.style.display = 'block';
+      }
+      if (telInput.value.length !== 10) {
+        e.preventDefault();
+        telInput.classList.add('input-error');
+        telError.style.display = 'block';
       }
     });
   });

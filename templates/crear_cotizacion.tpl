@@ -155,7 +155,7 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>{if $cotizacion.id}Editar Cotización{else}Crear Nueva Cotización{/if}</h2>
+        <h2>{if $cotizacion.id|default:''}Editar Cotización{else}Crear Nueva Cotización{/if}</h2>
         {* Mostrar desglose automático de cotización *}
         {if $servicios_solicitados|@count > 0}
             <div class="form-group">
@@ -212,7 +212,7 @@
                 </div>
             {/if}
             
-            <button type="submit">{if $cotizacion.id}Actualizar cotización{else}Guardar y continuar a pago{/if}</button>
+            <button type="submit">{if $cotizacion.id|default:''}Actualizar cotización{else}Guardar y continuar a pago{/if}</button>
         </form>
     </div>
 
