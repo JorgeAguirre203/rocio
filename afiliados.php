@@ -32,6 +32,11 @@ try {
         exit;
     }
 
+    // Ejecutar mensajes automáticos cuando el afiliado accede al panel
+    if (isset($_SESSION['afiliado'])) {
+        include 'enviar_mensajes_automaticos.php';
+    }
+
     // Solo mostrar el afiliado logueado
     if (!isset($_SESSION['afiliado'])) {
         header("Location: login.php");
@@ -127,8 +132,24 @@ try {
     $stmt3->close();
     error_log("Peticiones encontradas: " . print_r($peticiones, true));
 
-    // Agrega el enlace de dirección visible siempre en el array
+    // Obtener mensajes no leídos de clientes para el afiliado actual
+    $unread_messages = [];
+    $sql_unread = "SELECT remitente_id, COUNT(*) as count FROM mensajes WHERE receptor_id = ? AND remitente_es_afiliado = 0 AND leido = 0 GROUP BY remitente_id";
+    $stmt_unread = $conexion->prepare($sql_unread);
+    $stmt_unread->bind_param("i", $afiliado_id);
+    $stmt_unread->execute();
+    $result_unread = $stmt_unread->get_result();
+    while ($row = $result_unread->fetch_assoc()) {
+        $unread_messages[$row['remitente_id']] = $row['count'];
+    }
+    $stmt_unread->close();
+
+    // Agregar conteo de mensajes no leídos a cada petición
+    foreach ($peticiones as &$peticion) {
+        $peticion['unread_messages'] = $unread_messages[$peticion['id_usuario']] ?? 0;
+    }
     foreach ($peticiones_aceptadas as &$peticion) {
+        $peticion['unread_messages'] = $unread_messages[$peticion['id_usuario']] ?? 0;
         $peticion['link_direccion'] = "direccion.php?id=" . $peticion['id_usuario'];
     }
 

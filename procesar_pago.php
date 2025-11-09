@@ -48,6 +48,12 @@ try {
 
     $nombre_completo_afiliado = $nombre_afiliado . ' ' . $apellido_afiliado;
 
+    // Actualizar el estado de la cotización a 'completada'
+    $stmt = $conexion->prepare("UPDATE cotizaciones SET estado = 'completada' WHERE id = ?");
+    $stmt->bind_param("i", $input['id_cotizacion']);
+    $stmt->execute();
+    $stmt->close();
+
     // Actualizar la notificación
     $mensaje_pagado = "Has pagado el servicio del afiliado ($nombre_completo_afiliado).";
     // Corrección: Actualizar solo la notificación que contiene el id_cotizacion específico.

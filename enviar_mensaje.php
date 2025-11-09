@@ -16,6 +16,9 @@ if ($remitente_id > 0 && $receptor_id > 0 && !empty($mensaje)) {
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("iisi", $remitente_id, $receptor_id, $mensaje, $remitente_es_afiliado);
     $stmt->execute();
+
+
+
     echo "ok";
 }
 ?>

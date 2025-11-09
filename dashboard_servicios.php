@@ -74,6 +74,25 @@ try {
 
     // --- BLOQUE DE NOTIFICACIONES ---
     $id_usuario = $_SESSION['usuario']['id'] ?? null;
+
+    // Obtener mensajes no leídos de afiliados para el usuario actual
+    $unread_messages = [];
+    if ($id_usuario) {
+        $sql_unread = "SELECT remitente_id, COUNT(*) as count FROM mensajes WHERE receptor_id = ? AND remitente_es_afiliado = 1 AND leido = 0 GROUP BY remitente_id";
+        $stmt_unread = $conexion->prepare($sql_unread);
+        $stmt_unread->bind_param("i", $id_usuario);
+        $stmt_unread->execute();
+        $result_unread = $stmt_unread->get_result();
+        while ($row = $result_unread->fetch_assoc()) {
+            $unread_messages[$row['remitente_id']] = $row['count'];
+        }
+        $stmt_unread->close();
+    }
+
+    // Agregar conteo de mensajes no leídos a cada servicio
+    foreach ($servicios as &$servicio) {
+        $servicio['unread_messages'] = $unread_messages[$servicio['id']] ?? 0;
+    }
     $notificaciones = [];
     $noti_count = 0;
 

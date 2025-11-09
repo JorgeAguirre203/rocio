@@ -473,6 +473,16 @@
         .nav-btn:hover {
             background-color: #1d4ed8;
         }
+        .chat-badge {
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            padding: 2px 6px;
+            margin-left: 5px;
+            position: relative;
+            top: -2px;
+        }
     </style>
     <script>
         // Funciones definidas en el head para estar disponibles inmediatamente
@@ -645,10 +655,11 @@
                                             Dirección
                                         </button>
                                     </form>
-                                    <button class="action-btn btn-secondary" 
+                                    <button class="action-btn btn-secondary"
                                             onclick="abrirChat({$afiliado_log.id}, {$peticion.id_usuario}, '{$peticion.nombre|escape:'javascript'}', 1)">
                                         <i class="fas fa-comments btn-icon"></i>
                                         Chatear
+                                        {if $peticion.unread_messages > 0}<span class="chat-badge">{$peticion.unread_messages}</span>{/if}
                                     </button>
                                 </div>
                             </div>
@@ -736,6 +747,7 @@
                                                 onclick="abrirChat({$afiliado_log.id}, {$peticion.id_usuario}, '{$peticion.nombre|default:''|escape:'javascript'}', 1)">
                                             <i class="fas fa-comments btn-icon"></i>
                                             Chatear
+                                            {if $peticion.unread_messages > 0}<span class="chat-badge">{$peticion.unread_messages}</span>{/if}
                                         </button>
                                         {if !$peticion.estado_cotizacion}
                                             <form method="get" action="crear_cotizacion.php" style="display:inline;">
@@ -845,10 +857,12 @@
             document.getElementById('remitente_id').value = remitenteId;
             document.getElementById('receptor_id').value = receptorId;
             document.getElementById('remitente_es_afiliado').value = esAfiliado;
+            marcarLeido();
             cargarMensajes();
             if (chatInterval) clearInterval(chatInterval);
             chatInterval = setInterval(cargarMensajes, 3000);
         }
+        function marcarLeido() { const r = document.getElementById('remitente_id').value, t = document.getElementById('receptor_id').value, e = document.getElementById('remitente_es_afiliado').value; if (!r || !t) return; fetch('marcar_leido.php', { method: 'POST', body: new URLSearchParams({ usuario_actual_id: r, otro_usuario_id: t, usuario_actual_es_afiliado: e }) }); }
         function cerrarChat() { 
             document.getElementById('chat-container').style.display = 'none'; 
             if (chatInterval) clearInterval(chatInterval); 

@@ -437,14 +437,10 @@
         /* estilo de la bara lateral de la campanita*/
         /* Campanita de notificaciones */
         .notificaciones-icono {
-            position: absolute;
-            top: 18px;
-            right: 30px;
+            position: relative;
             cursor: pointer;
-            z-index: 1100;
             font-size: 28px;
-            display: flex;
-            align-items: center;
+            display: inline-block;
         }
         .bell {
             font-size: 28px;
@@ -454,14 +450,27 @@
             background: #e74c3c;
             color: #fff;
             border-radius: 50%;
-            font-size: 13px;
-            padding: 2px 7px;
-            margin-left: -10px;
-            margin-top: -15px;
+            font-size: 12px;
+            padding: 3px 6px;
             position: absolute;
+            top: -8px;
             right: -8px;
-            top: -5px;
-            z-index: 1101;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .chat-badge {
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            padding: 2px 6px;
+            margin-left: 5px;
+            position: relative;
+            top: -2px;
         }
         /* Barra lateral de notificaciones */
         .notificaciones-barra {
@@ -847,6 +856,7 @@
                                 onclick="abrirChat({$smarty.session.usuario.id}, {$servicio.id}, '{$servicio.nombre|escape:'javascript'}', 0)">
                             <i class="fas fa-comments btn-icon"></i>
                             Chatear
+                            {if $servicio.unread_messages > 0}<span class="chat-badge">{$servicio.unread_messages}</span>{/if}
                         </button>
                     </div>
                 </div>
@@ -951,7 +961,8 @@
         // Funciones del chat
         {literal}
         let chatInterval;
-        function abrirChat(remitenteId, receptorId, receptorNombre, esAfiliado) { document.getElementById('chat-container').style.display = 'flex'; document.getElementById('chat-con-nombre').innerText = 'Chat con ' + receptorNombre; document.getElementById('remitente_id').value = remitenteId; document.getElementById('receptor_id').value = receptorId; document.getElementById('remitente_es_afiliado').value = esAfiliado; cargarMensajes(); if (chatInterval) clearInterval(chatInterval); chatInterval = setInterval(cargarMensajes, 3000); }
+        function abrirChat(remitenteId, receptorId, receptorNombre, esAfiliado) { document.getElementById('chat-container').style.display = 'flex'; document.getElementById('chat-con-nombre').innerText = 'Chat con ' + receptorNombre; document.getElementById('remitente_id').value = remitenteId; document.getElementById('receptor_id').value = receptorId; document.getElementById('remitente_es_afiliado').value = esAfiliado; marcarLeido(); cargarMensajes(); if (chatInterval) clearInterval(chatInterval); chatInterval = setInterval(cargarMensajes, 3000); }
+        function marcarLeido() { const r = document.getElementById('remitente_id').value, t = document.getElementById('receptor_id').value, e = document.getElementById('remitente_es_afiliado').value; if (!r || !t) return; fetch('marcar_leido.php', { method: 'POST', body: new URLSearchParams({ usuario_actual_id: r, otro_usuario_id: t, usuario_actual_es_afiliado: e }) }); }
         function cerrarChat() { document.getElementById('chat-container').style.display = 'none'; if (chatInterval) clearInterval(chatInterval); }
         function cargarMensajes() { const r = document.getElementById('remitente_id').value, t = document.getElementById('receptor_id').value, e = document.getElementById('remitente_es_afiliado').value, n = document.getElementById('mensajes'); if (!r || !t) return; fetch(`obtener_mensajes.php?usuario_actual_id=${r}&otro_usuario_id=${t}&usuario_actual_es_afiliado=${e}`).then(e => e.text()).then(e => { n.innerHTML = e, n.scrollTop = n.scrollHeight }) }
         document.getElementById('formChat').addEventListener('submit', e => { e.preventDefault(); const t = new FormData; t.append('remitente_id', document.getElementById('remitente_id').value), t.append('receptor_id', document.getElementById('receptor_id').value), t.append('mensaje', document.getElementById('mensaje').value), t.append('remitente_es_afiliado', document.getElementById('remitente_es_afiliado').value), fetch('enviar_mensaje.php', { method: 'POST', body: t }).then(() => { document.getElementById('mensaje').value = '', cargarMensajes() }) });

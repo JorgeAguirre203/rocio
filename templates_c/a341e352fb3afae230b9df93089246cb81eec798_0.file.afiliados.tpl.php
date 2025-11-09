@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-08 04:38:20
+/* Smarty version 3.1.39, created on 2025-11-09 21:28:43
   from 'C:\xampp\htdocs\rocio\templates\afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690ebb2c3b6cb8_87284278',
+  'unifunc' => 'content_6910f97b945db8_15953724',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a341e352fb3afae230b9df93089246cb81eec798' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\afiliados.tpl',
-      1 => 1762469278,
+      1 => 1762720052,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690ebb2c3b6cb8_87284278 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6910f97b945db8_15953724 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -497,6 +497,16 @@ function content_690ebb2c3b6cb8_87284278 (Smarty_Internal_Template $_smarty_tpl)
         .nav-btn:hover {
             background-color: #1d4ed8;
         }
+        .chat-badge {
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            padding: 2px 6px;
+            margin-left: 5px;
+            position: relative;
+            top: -2px;
+        }
     </style>
     <?php echo '<script'; ?>
 >
@@ -704,13 +714,15 @@ echo $_smarty_tpl->tpl_vars['peticion']->value['estado_dir'];
                                             Dirección
                                         </button>
                                     </form>
-                                    <button class="action-btn btn-secondary" 
+                                    <button class="action-btn btn-secondary"
                                             onclick="abrirChat(<?php echo $_smarty_tpl->tpl_vars['afiliado_log']->value['id'];?>
 , <?php echo $_smarty_tpl->tpl_vars['peticion']->value['id_usuario'];?>
 , '<?php echo strtr($_smarty_tpl->tpl_vars['peticion']->value['nombre'], array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" ));?>
 ', 1)">
                                         <i class="fas fa-comments btn-icon"></i>
                                         Chatear
+                                        <?php if ($_smarty_tpl->tpl_vars['peticion']->value['unread_messages'] > 0) {?><span class="chat-badge"><?php echo $_smarty_tpl->tpl_vars['peticion']->value['unread_messages'];?>
+</span><?php }?>
                                     </button>
                                 </div>
                             </div>
@@ -823,6 +835,8 @@ echo (($tmp = @$_smarty_tpl->tpl_vars['peticion']->value['estado_dir'])===null||
 ', 1)">
                                             <i class="fas fa-comments btn-icon"></i>
                                             Chatear
+                                            <?php if ($_smarty_tpl->tpl_vars['peticion']->value['unread_messages'] > 0) {?><span class="chat-badge"><?php echo $_smarty_tpl->tpl_vars['peticion']->value['unread_messages'];?>
+</span><?php }?>
                                         </button>
                                         <?php if (!$_smarty_tpl->tpl_vars['peticion']->value['estado_cotizacion']) {?>
                                             <form method="get" action="crear_cotizacion.php" style="display:inline;">
@@ -946,10 +960,12 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             document.getElementById('remitente_id').value = remitenteId;
             document.getElementById('receptor_id').value = receptorId;
             document.getElementById('remitente_es_afiliado').value = esAfiliado;
+            marcarLeido();
             cargarMensajes();
             if (chatInterval) clearInterval(chatInterval);
             chatInterval = setInterval(cargarMensajes, 3000);
         }
+        function marcarLeido() { const r = document.getElementById('remitente_id').value, t = document.getElementById('receptor_id').value, e = document.getElementById('remitente_es_afiliado').value; if (!r || !t) return; fetch('marcar_leido.php', { method: 'POST', body: new URLSearchParams({ usuario_actual_id: r, otro_usuario_id: t, usuario_actual_es_afiliado: e }) }); }
         function cerrarChat() { 
             document.getElementById('chat-container').style.display = 'none'; 
             if (chatInterval) clearInterval(chatInterval); 
@@ -984,5 +1000,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php echo '</script'; ?>
 >
 </body>
-</html><?php }
+</html>
+<?php }
 }
