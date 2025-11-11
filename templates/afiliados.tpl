@@ -529,6 +529,7 @@
                 <p><strong>Nombre:</strong> {$afiliado_log.nombre} {$afiliado_log.apellido_paterno} {$afiliado_log.apellido_materno}</p>
                 <p><strong>Nickname:</strong> {$afiliado_log.nickname}</p>
                 <a href="editar_perfil_afiliado.php" class="nav-btn">Editar perfil</a>
+                <a href="cambiar_contrasena.php?tipo=afiliado" class="nav-btn">Editar contraseña</a>
                 <a href="historial_afiliado.php" class="nav-btn">Historial de trabajos</a>
                 <a href="direccion_afiliado.php" class="nav-btn">Agregar dirección</a>
                 <a href="eliminar_afiliado.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>

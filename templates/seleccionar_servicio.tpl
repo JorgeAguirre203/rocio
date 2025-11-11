@@ -452,10 +452,16 @@
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Seleccionar Servicio</h1>
-        <a href="index.php" class="btn-home-inicio">
-            <span>🏠</span>
-            Inicio
-        </a>
+        <div class="header-actions">
+            <a href="dashboard_servicios.php" class="btn-home-inicio">
+                <span>↩</span>
+                Volver
+            </a>
+            <a href="index.php" class="btn-home-inicio">
+                <span>🏠</span>
+                Inicio
+            </a>
+        </div>
     </div>
 
     <!-- Sidebar de perfil -->

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-09 22:16:09
+/* Smarty version 3.1.39, created on 2025-11-11 01:06:31
   from 'C:\xampp\htdocs\rocio\templates\dashboard_servicios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_69110499df65b5_93967859',
+  'unifunc' => 'content_69127e07cdf629_44232576',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6c69ced53b71c67d7d6c36a0a5bf42ff59479fa7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\dashboard_servicios.tpl',
-      1 => 1762722962,
+      1 => 1762819586,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69110499df65b5_93967859 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69127e07cdf629_44232576 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\rocio\\libs\\plugins\\function.html_options.php','function'=>'smarty_function_html_options',),));
 ?>
 <!DOCTYPE html>
@@ -819,6 +819,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             <p><strong>Nickname:</strong> <?php echo $_smarty_tpl->tpl_vars['nickname']->value;?>
 </p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+            <a href="cambiar_contrasena.php?tipo=usuario" class="nav-btn">Editar contraseña</a>
             <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
             <a href="direccion_usuario.php" class="nav-btn">Agregar dirección</a>
             <a href="logout.php" class="nav-btn">Cerrar sesión</a>
@@ -912,6 +913,7 @@ $_smarty_tpl->tpl_vars['servicio']->do_else = false;
                         </div>
                     </div>
                     <div class="client-actions">
+                        <?php if ($_smarty_tpl->tpl_vars['id_usuario']->value) {?>
                         <a href="seleccionar_servicio.php?id_afiliado=<?php echo $_smarty_tpl->tpl_vars['servicio']->value['id'];?>
 &id_usuario=<?php echo $_smarty_tpl->tpl_vars['id_usuario']->value;?>
 " class="action-btn btn-primary">
@@ -919,7 +921,7 @@ $_smarty_tpl->tpl_vars['servicio']->do_else = false;
                             Contratar
                         </a>
                         <button class="action-btn btn-secondary"
-                                onclick="abrirChat(<?php echo $_SESSION['usuario']['id'];?>
+                                onclick="abrirChat(<?php echo $_smarty_tpl->tpl_vars['id_usuario']->value;?>
 , <?php echo $_smarty_tpl->tpl_vars['servicio']->value['id'];?>
 , '<?php echo strtr($_smarty_tpl->tpl_vars['servicio']->value['nombre'], array("\\" => "\\\\", "'" => "\\'", "\"" => "\\\"", "\r" => "\\r", "\n" => "\\n", "</" => "<\/" ));?>
 ', 0)">
@@ -928,6 +930,16 @@ $_smarty_tpl->tpl_vars['servicio']->do_else = false;
                             <?php if ($_smarty_tpl->tpl_vars['servicio']->value['unread_messages'] > 0) {?><span class="chat-badge"><?php echo $_smarty_tpl->tpl_vars['servicio']->value['unread_messages'];?>
 </span><?php }?>
                         </button>
+                        <?php } else { ?>
+                        <a href="login.php" class="action-btn btn-primary">
+                            <i class="fas fa-handshake btn-icon"></i>
+                            Contratar
+                        </a>
+                        <a href="login.php" class="action-btn btn-secondary">
+                            <i class="fas fa-comments btn-icon"></i>
+                            Chatear
+                        </a>
+                        <?php }?>
                     </div>
                 </div>
                 <?php

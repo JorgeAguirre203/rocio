@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-08 23:45:25
+/* Smarty version 3.1.39, created on 2025-11-11 01:29:21
   from 'C:\xampp\htdocs\rocio\templates\register_jorge.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690fc805cf8700_70550560',
+  'unifunc' => 'content_69128361ccd4a5_74871620',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1b5c411cfd15d907f1be80fde73cc00decfd1bf6' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\register_jorge.tpl',
-      1 => 1762641910,
+      1 => 1762641931,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690fc805cf8700_70550560 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69128361ccd4a5_74871620 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -368,7 +368,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     fieldsAfterEmail.forEach(fieldId => {
       document.getElementById(fieldId).addEventListener('focus', function() {
         if (!isEmailComplete()) {
-          if (emailInput.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailInput.value)) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (emailInput.value && !emailRegex.test(emailInput.value)) {
             emailInput.focus();
             emailInput.classList.add('input-error');
             emailError.style.display = 'block';

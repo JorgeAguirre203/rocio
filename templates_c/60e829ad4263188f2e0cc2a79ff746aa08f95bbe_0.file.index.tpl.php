@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-08 04:38:07
+/* Smarty version 3.1.39, created on 2025-11-11 01:02:14
   from 'C:\xampp\htdocs\rocio\templates\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690ebb1f6a8d50_58906296',
+  'unifunc' => 'content_69127d0638abf7_85317330',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '60e829ad4263188f2e0cc2a79ff746aa08f95bbe' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\index.tpl',
-      1 => 1762469278,
+      1 => 1762819316,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690ebb1f6a8d50_58906296 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69127d0638abf7_85317330 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -57,7 +57,7 @@ function content_690ebb1f6a8d50_58906296 (Smarty_Internal_Template $_smarty_tpl)
       <a href="dashboard_servicios.php" class="btn-negro">Ver Servicios</a>
     </div>
     <div class="imagen-hero">
-      <img src="palacio.jpg" alt="Servicios en acción">
+      <img src="castor.png" alt="Servicios en acción">
     </div>
   </div>
 </section>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-09 22:26:31
+/* Smarty version 3.1.39, created on 2025-11-11 01:14:53
   from 'C:\xampp\htdocs\rocio\templates\contratarAfiliado.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_691107073f7e93_07286421',
+  'unifunc' => 'content_69127ffd350240_27260251',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e5948503c08fd8656ac38ef10e73d382b9edf5dc' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\contratarAfiliado.tpl',
-      1 => 1762469278,
+      1 => 1762820090,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_691107073f7e93_07286421 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69127ffd350240_27260251 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -154,10 +154,16 @@ function content_691107073f7e93_07286421 (Smarty_Internal_Template $_smarty_tpl)
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Direccion del Cliente</h1>
-        <a href="index.php" class="btn-home-inicio">
-            <span>🏠</span>
-            Inicio
-        </a>
+        <div class="header-actions">
+            <a href="afiliados.php" class="btn-home-inicio">
+                <span>↩</span>
+                Volver
+            </a>
+            <a href="index.php" class="btn-home-inicio">
+                <span>🏠</span>
+                Inicio
+            </a>
+        </div>
     </div>
     <div id="sidebar" class="sidebar">
         <div class="sidebar-content" onclick="event.stopPropagation();">
@@ -403,5 +409,6 @@ function content_691107073f7e93_07286421 (Smarty_Internal_Template $_smarty_tpl)
         </div>
     </div>
 </body>
-</html><?php }
+</html>
+<?php }
 }

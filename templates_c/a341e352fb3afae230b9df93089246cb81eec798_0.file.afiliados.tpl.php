@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-09 21:28:43
+/* Smarty version 3.1.39, created on 2025-11-11 00:53:07
   from 'C:\xampp\htdocs\rocio\templates\afiliados.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_6910f97b945db8_15953724',
+  'unifunc' => 'content_69127ae3296640_56969376',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a341e352fb3afae230b9df93089246cb81eec798' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\afiliados.tpl',
-      1 => 1762720052,
+      1 => 1762812420,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6910f97b945db8_15953724 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69127ae3296640_56969376 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
@@ -559,6 +559,7 @@ function content_6910f97b945db8_15953724 (Smarty_Internal_Template $_smarty_tpl)
                 <p><strong>Nickname:</strong> <?php echo $_smarty_tpl->tpl_vars['afiliado_log']->value['nickname'];?>
 </p>
                 <a href="editar_perfil_afiliado.php" class="nav-btn">Editar perfil</a>
+                <a href="cambiar_contrasena.php?tipo=afiliado" class="nav-btn">Editar contraseña</a>
                 <a href="historial_afiliado.php" class="nav-btn">Historial de trabajos</a>
                 <a href="direccion_afiliado.php" class="nav-btn">Agregar dirección</a>
                 <a href="eliminar_afiliado.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>

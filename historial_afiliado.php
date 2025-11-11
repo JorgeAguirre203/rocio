@@ -81,7 +81,7 @@ $conexion->close();
         }
 
         .work-table th {
-            background-color: #4a4a4a;
+            background-color: #000;
             color: white;
             padding: 12px 15px;
             text-align: left;
@@ -171,7 +171,7 @@ $conexion->close();
             display: inline-block;
             margin-bottom: 20px;
             padding: 8px 15px;
-            background-color: #6c757d;
+            background-color: #000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -196,6 +196,7 @@ $conexion->close();
 </head>
 <body>
     <div class="container">
+        <a href="afiliados.php" class="back-button">← Volver</a>
         <h2>Historial de Trabajos Realizados</h2>
         
         <table class="work-table">

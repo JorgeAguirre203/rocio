@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2025-11-08 04:37:59
+/* Smarty version 3.1.39, created on 2025-11-11 01:12:07
   from 'C:\xampp\htdocs\rocio\templates\seleccionar_servicio.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_690ebb175326b5_85617393',
+  'unifunc' => 'content_69127f57538638_07980717',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4e0a15f8eba67fc35a9f6e67aa54f9cb072f73c7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rocio\\templates\\seleccionar_servicio.tpl',
-      1 => 1762469278,
+      1 => 1762819918,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690ebb175326b5_85617393 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69127f57538638_07980717 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\rocio\\libs\\plugins\\modifier.capitalize.php','function'=>'smarty_modifier_capitalize',),));
 ?>
 <!DOCTYPE html>
@@ -477,10 +477,16 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\rocio\\li
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Seleccionar Servicio</h1>
-        <a href="index.php" class="btn-home-inicio">
-            <span>🏠</span>
-            Inicio
-        </a>
+        <div class="header-actions">
+            <a href="dashboard_servicios.php" class="btn-home-inicio">
+                <span>↩</span>
+                Volver
+            </a>
+            <a href="index.php" class="btn-home-inicio">
+                <span>🏠</span>
+                Inicio
+            </a>
+        </div>
     </div>
 
     <!-- Sidebar de perfil -->
@@ -753,5 +759,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php echo '</script'; ?>
 >
 </body>
-</html><?php }
+</html>
+<?php }
 }

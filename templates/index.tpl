@@ -30,7 +30,7 @@
       <a href="dashboard_servicios.php" class="btn-negro">Ver Servicios</a>
     </div>
     <div class="imagen-hero">
-      <img src="palacio.jpg" alt="Servicios en acción">
+      <img src="castor.png" alt="Servicios en acción">
     </div>
   </div>
 </section>

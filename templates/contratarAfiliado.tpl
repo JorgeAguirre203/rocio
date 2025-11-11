@@ -129,10 +129,16 @@
     <div class="header">
         <button class="menu-button" onclick="toggleSidebar()">☰</button>
         <h1>Direccion del Cliente</h1>
-        <a href="index.php" class="btn-home-inicio">
-            <span>🏠</span>
-            Inicio
-        </a>
+        <div class="header-actions">
+            <a href="afiliados.php" class="btn-home-inicio">
+                <span>↩</span>
+                Volver
+            </a>
+            <a href="index.php" class="btn-home-inicio">
+                <span>🏠</span>
+                Inicio
+            </a>
+        </div>
     </div>
     <div id="sidebar" class="sidebar">
         <div class="sidebar-content" onclick="event.stopPropagation();">

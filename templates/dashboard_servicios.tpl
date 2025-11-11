@@ -781,6 +781,7 @@
             <p><strong>Nombre:</strong> {$nombre}</p>
             <p><strong>Nickname:</strong> {$nickname}</p>
             <a href="Editar_perfil.php" class="nav-btn">Editar perfil</a>
+            <a href="cambiar_contrasena.php?tipo=usuario" class="nav-btn">Editar contraseña</a>
             <a href="ELiminar_perfiles.php" class="nav-btn" onclick="return confirmarEliminacion()">Eliminar cuenta</a>
             <a href="direccion_usuario.php" class="nav-btn">Agregar dirección</a>
             <a href="logout.php" class="nav-btn">Cerrar sesión</a>
@@ -848,16 +849,27 @@
                         </div>
                     </div>
                     <div class="client-actions">
+                        {if $id_usuario}
                         <a href="seleccionar_servicio.php?id_afiliado={$servicio.id}&id_usuario={$id_usuario}" class="action-btn btn-primary">
                             <i class="fas fa-handshake btn-icon"></i>
                             Contratar
                         </a>
                         <button class="action-btn btn-secondary"
-                                onclick="abrirChat({$smarty.session.usuario.id}, {$servicio.id}, '{$servicio.nombre|escape:'javascript'}', 0)">
+                                onclick="abrirChat({$id_usuario}, {$servicio.id}, '{$servicio.nombre|escape:'javascript'}', 0)">
                             <i class="fas fa-comments btn-icon"></i>
                             Chatear
                             {if $servicio.unread_messages > 0}<span class="chat-badge">{$servicio.unread_messages}</span>{/if}
                         </button>
+                        {else}
+                        <a href="login.php" class="action-btn btn-primary">
+                            <i class="fas fa-handshake btn-icon"></i>
+                            Contratar
+                        </a>
+                        <a href="login.php" class="action-btn btn-secondary">
+                            <i class="fas fa-comments btn-icon"></i>
+                            Chatear
+                        </a>
+                        {/if}
                     </div>
                 </div>
                 {/foreach}
